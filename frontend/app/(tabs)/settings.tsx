@@ -332,6 +332,31 @@ export default function SettingsScreen() {
           </TouchableOpacity>
         </View>
 
+        {__DEV__ && (
+          <>
+            <Text style={[styles.sectionTitle, { color: theme.textSecondary }]}>
+              Geliştirici
+            </Text>
+            <View style={[styles.settingsGroup, { backgroundColor: theme.surface }]}>
+              <TouchableOpacity
+                style={styles.settingsItem}
+                onPress={() => router.push('/ocr-test')}
+              >
+                <View style={[styles.iconContainer, { backgroundColor: colors.accent + '15' }]}>
+                  <MaterialIcons name="text-snippet" size={22} color={colors.accent} />
+                </View>
+                <View style={styles.itemContent}>
+                  <Text style={[styles.itemTitle, { color: theme.text }]}>OCR Test</Text>
+                  <Text style={[styles.itemSubtitle, { color: theme.textSecondary }]}>
+                    ML Kit metin tanıma çıktısını incele
+                  </Text>
+                </View>
+                <MaterialIcons name="chevron-right" size={24} color={theme.textSecondary} />
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
+
         <View style={{ height: 100 }} />
       </ScrollView>
     </SafeAreaView>

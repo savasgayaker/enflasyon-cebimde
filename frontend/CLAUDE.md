@@ -12,6 +12,16 @@ All commands run from `frontend/` (this directory).
 - `npm run lint` — ESLint via `eslint-config-expo`
 - There is **no test runner configured**. Do not invent `npm test`.
 
+### Dev Client workflow (after ML Kit)
+
+This project uses **`expo-dev-client`** — ML Kit ships native frameworks that the stock Expo Go app cannot load. The dev loop:
+
+1. **One-time native build per platform:** `npx expo run:ios` (Mac + Xcode required) or `npx expo run:android` (Android Studio). First build is 5–15 min; subsequent native builds when `app.json` plugins/permissions change or new native modules are added.
+2. **Daily JS work:** `npx expo start` → open the **custom dev client** binary on the device (not Expo Go) → JS hot reload is instant, same as before.
+3. **EAS Build** is not configured. Do not run `eas build` without explicit approval — it consumes build credits.
+
+Plain `npx expo start` with the **Expo Go** app will fail to load the JS bundle once you import `@infinitered/react-native-mlkit-text-recognition`. That's expected; use the dev client build.
+
 ### `npm run reset-project` — destructive
 
 `scripts/reset-project.js` was written for the default Expo template (`app/`, `components/`, `hooks/`, `constants/`, `scripts/` at the repo root). This project's source layout is different (real code lives in `src/`, plus `app/` for routing). Running the reset script will move/delete the real `app/` and `scripts/` directories. Do not run it unless the user explicitly asks.
@@ -48,9 +58,30 @@ Schema changes are breaking for existing users (data is local-only with no migra
 
 Returns rates as percentages already (×100 happens inside).
 
-### OCR (`src/utils/mockOCR.ts`)
+### OCR — two layers, intentionally separated
 
-`processReceipt(imageUri)` is a **mock** that ignores the image and returns randomized store/items after a 1.5s delay. Real ML Kit / camera-OCR integration is the planned replacement; the function signature is the integration seam — keep `Promise<OCRResult>` stable.
+Two functions exist; they do different jobs and **must not be confused**:
+
+| Function | File | Returns | Used by |
+|---|---|---|---|
+| `extractTextFromImage(uri)` | `src/services/ocrService.ts` | `OCRRawResult` — raw text, lines, blocks | `app/ocr-test.tsx` (debug screen) |
+| `processReceipt(uri)` | `src/utils/mockOCR.ts` | `OCRResult` — pre-parsed store/items/total | `app/(tabs)/scan.tsx` (production flow) |
+
+**Phase 1 (current):** Real on-device OCR via Google ML Kit lives in `ocrService.ts` using `@infinitered/react-native-mlkit-text-recognition`. It runs entirely on-device, no network. The `scan.tsx` → `receipt-preview.tsx` flow still calls the **mock** `processReceipt` — we have not wired the real OCR into the production path yet. Both files coexist on purpose.
+
+**Phase 2 (planned):** Write a Turkish receipt parser that converts `OCRRawResult` → `OCRResult` (store name detection, line-item extraction with quantity/price regex, total amount, date). Then `scan.tsx` will call `extractTextFromImage` + parser, and `mockOCR.ts` can be deleted.
+
+**Do not change the existing scan flow or `receipt-preview.tsx`** until the parser exists — the mock is the fallback that lets the rest of the app stay testable.
+
+#### Testing OCR
+
+Settings tab → **Geliştirici → OCR Test** (only visible when `__DEV__` is true). Pick from gallery or take a photo, see `fullText` / lines / blocks, copy raw text to clipboard. The screen runs the real ML Kit pipeline against a single image — useful for prompt-tuning the upcoming parser.
+
+#### ML Kit constraints
+
+- **iOS Simulator is unsupported** by Google ML Kit's iOS framework — test OCR on a physical iPhone or an Android emulator/device. UI work without OCR still runs in the simulator.
+- Confidence per-element is not exposed by the JS binding; `OCRRawResult.confidence` is always `1` until ML Kit surfaces it.
+- Latin script (Turkish characters Ç Ş İ Ğ Ü Ö) is the default — no per-language config needed.
 
 ### i18n
 

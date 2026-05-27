@@ -11,8 +11,8 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSCameraUsageDescription": "Fiş taramak için kameranıza erişim gerekli",
-        "NSPhotoLibraryUsageDescription": "Galeriden fiş fotoğrafı seçebilmek için"
+        "NSCameraUsageDescription": "Fişlerinizi okuyabilmek için kameraya erişim gerekiyor.",
+        "NSPhotoLibraryUsageDescription": "Galerinizden fiş fotoğrafı seçebilmek için izin gerekiyor."
       }
     },
     "android": {
@@ -38,13 +38,13 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Fiş taramak için kameranıza erişim gerekli"
+          "cameraPermission": "Fişlerinizi okuyabilmek için kameraya erişim gerekiyor."
         }
       ],
       [
         "expo-image-picker",
         {
-          "photosPermission": "Galeriden fiş fotoğrafı seçebilmek için"
+          "photosPermission": "Galerinizden fiş fotoğrafı seçebilmek için izin gerekiyor."
         }
       ],
       [

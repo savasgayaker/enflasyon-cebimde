@@ -45,6 +45,12 @@ export default function RootLayout() {
             title: 'Fiş Detayı',
           }}
         />
+        <Stack.Screen
+          name="ocr-test"
+          options={{
+            title: 'OCR Test',
+          }}
+        />
       </Stack>
     </>
   );
