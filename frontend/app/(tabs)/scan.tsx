@@ -141,11 +141,20 @@ export default function ScanScreen() {
 
   return (
     <View style={styles.container}>
+      {/*
+        expo-camera v17+ CameraView, çocuk JSX'i desteklemiyor; New Architecture +
+        iOS 26 kombinasyonunda children render edilirse native taraf kilitleniyor.
+        Bu yüzden CameraView absolute fill ile arka plana alındı; header / frame /
+        controls / processing overlay sibling olarak absolute katmanda durur.
+      */}
       <CameraView
         ref={cameraRef}
-        style={styles.camera}
+        style={StyleSheet.absoluteFill}
         facing={facing}
-      >
+      />
+
+      {/* Overlay katmanı — dokunma olayları sadece çocuklara iletilir */}
+      <View style={styles.overlayLayer} pointerEvents="box-none">
         {/* Header */}
         <SafeAreaView style={styles.header}>
           <TouchableOpacity
@@ -163,8 +172,8 @@ export default function ScanScreen() {
           </TouchableOpacity>
         </SafeAreaView>
 
-        {/* Frame Guide Overlay */}
-        <View style={styles.frameOverlay}>
+        {/* Frame Guide Overlay — sadece görsel, dokunma yutmasın */}
+        <View style={styles.frameOverlay} pointerEvents="none">
           <View style={styles.frameGuide}>
             <View style={[styles.frameCorner, styles.topLeft]} />
             <View style={[styles.frameCorner, styles.topRight]} />
@@ -201,15 +210,15 @@ export default function ScanScreen() {
             <Text style={styles.controlText}>{tr.scanner.manualEntry}</Text>
           </TouchableOpacity>
         </SafeAreaView>
+      </View>
 
-        {/* Processing overlay */}
-        {isProcessing && (
-          <View style={styles.processingOverlay}>
-            <MaterialIcons name="receipt-long" size={48} color={colors.white} />
-            <Text style={styles.processingText}>{tr.scanner.processing}</Text>
-          </View>
-        )}
-      </CameraView>
+      {/* Processing overlay — overlayLayer'ın dışında, tüm ekranı kapatabilsin */}
+      {isProcessing && (
+        <View style={styles.processingOverlay}>
+          <MaterialIcons name="receipt-long" size={48} color={colors.white} />
+          <Text style={styles.processingText}>{tr.scanner.processing}</Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -221,6 +230,11 @@ const styles = StyleSheet.create({
   },
   camera: {
     flex: 1,
+  },
+  overlayLayer: {
+    ...StyleSheet.absoluteFillObject,
+    // Default flexDirection 'column' + flex-start ile orijinal dikey dizilim
+    // korunur: header üstte, frameOverlay (flex:1) ortayı doldurur, controls altta.
   },
   header: {
     flexDirection: 'row',
