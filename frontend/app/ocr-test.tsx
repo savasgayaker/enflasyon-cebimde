@@ -25,6 +25,10 @@ import {
   extractTextFromImage,
   type OCRRawResult,
 } from '../src/services/ocrService';
+import {
+  parseReceipt,
+  type ParsedReceipt,
+} from '../src/services/receiptParser';
 
 export default function OcrTestScreen() {
   const { darkMode } = useAppStore((state) => state.settings);
@@ -32,6 +36,7 @@ export default function OcrTestScreen() {
 
   const [imageUri, setImageUri] = useState<string | null>(null);
   const [result, setResult] = useState<OCRRawResult | null>(null);
+  const [parsed, setParsed] = useState<ParsedReceipt | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -39,9 +44,11 @@ export default function OcrTestScreen() {
     setIsProcessing(true);
     setError(null);
     setResult(null);
+    setParsed(null);
     try {
       const ocr = await extractTextFromImage(uri);
       setResult(ocr);
+      setParsed(parseReceipt(ocr));
     } catch (e) {
       const message = e instanceof Error ? e.message : 'Bilinmeyen hata';
       setError(`OCR başarısız: ${message}`);
@@ -83,9 +90,33 @@ export default function OcrTestScreen() {
     Alert.alert('Kopyalandı', 'Ham metin panoya kopyalandı.');
   };
 
+  const handleCopyFixture = async () => {
+    if (!result) return;
+    // parser-fixtures/<isim>.json formatına uygun şablon — kullanıcı `name` ve
+    // `expected` alanlarını gerekirse düzenler. expected, parser'ın çıktısıyla
+    // önceden doldurulur ki kullanıcı sadece yanlışları düzeltmek zorunda kalsın.
+    const fixture = {
+      name: 'TODO-mağaza-tarih',
+      raw: result,
+      expected: parsed
+        ? {
+            storeName: parsed.storeName,
+            date: parsed.date,
+            totalAmount: parsed.totalAmount,
+          }
+        : {},
+    };
+    await Clipboard.setStringAsync(JSON.stringify(fixture, null, 2));
+    Alert.alert(
+      'Kopyalandı',
+      'Fixture JSON panoda. parser-fixtures/<isim>.json olarak kaydet.',
+    );
+  };
+
   const handleReset = () => {
     setImageUri(null);
     setResult(null);
+    setParsed(null);
     setError(null);
     setIsProcessing(false);
   };
@@ -219,9 +250,22 @@ export default function OcrTestScreen() {
                     >
                       {idx + 1}
                     </Text>
-                    <Text style={[styles.lineText, { color: theme.text }]}>
-                      {line}
-                    </Text>
+                    <View style={{ flex: 1 }}>
+                      <Text style={[styles.lineText, { color: theme.text }]}>
+                        {line.text}
+                      </Text>
+                      <Text
+                        style={[
+                          styles.lineFrame,
+                          { color: theme.textTertiary },
+                        ]}
+                      >
+                        y:{Math.round(line.frame.top)}–
+                        {Math.round(line.frame.bottom)} · x:
+                        {Math.round(line.frame.left)}–
+                        {Math.round(line.frame.right)}
+                      </Text>
+                    </View>
                   </View>
                 ))
               )}
@@ -250,33 +294,134 @@ export default function OcrTestScreen() {
                 </View>
               ))}
             </View>
+
+            {parsed && (
+              <View
+                style={[
+                  styles.card,
+                  {
+                    backgroundColor: theme.surface,
+                    borderColor: colors.primary,
+                  },
+                ]}
+              >
+                <Text style={[styles.cardTitle, { color: theme.text }]}>
+                  Parser Çıktısı
+                </Text>
+                <View style={styles.parsedRow}>
+                  <Text
+                    style={[
+                      styles.parsedLabel,
+                      { color: theme.textSecondary },
+                    ]}
+                  >
+                    Mağaza
+                  </Text>
+                  <Text style={[styles.parsedValue, { color: theme.text }]}>
+                    {parsed.storeName || '(bulunamadı)'}
+                  </Text>
+                </View>
+                <View style={styles.parsedRow}>
+                  <Text
+                    style={[
+                      styles.parsedLabel,
+                      { color: theme.textSecondary },
+                    ]}
+                  >
+                    Tarih
+                  </Text>
+                  <Text style={[styles.parsedValue, { color: theme.text }]}>
+                    {parsed.date}
+                  </Text>
+                </View>
+                <View style={styles.parsedRow}>
+                  <Text
+                    style={[
+                      styles.parsedLabel,
+                      { color: theme.textSecondary },
+                    ]}
+                  >
+                    Toplam
+                  </Text>
+                  <Text
+                    style={[styles.parsedValue, { color: colors.primary }]}
+                  >
+                    ₺{parsed.totalAmount.toFixed(2)}
+                  </Text>
+                </View>
+                <View style={styles.parsedRow}>
+                  <Text
+                    style={[
+                      styles.parsedLabel,
+                      { color: theme.textSecondary },
+                    ]}
+                  >
+                    Ürün sayısı
+                  </Text>
+                  <Text style={[styles.parsedValue, { color: theme.text }]}>
+                    {parsed.items.length}{' '}
+                    <Text
+                      style={[
+                        styles.parsedHint,
+                        { color: theme.textTertiary },
+                      ]}
+                    >
+                      {"(M4'te eklenecek)"}
+                    </Text>
+                  </Text>
+                </View>
+              </View>
+            )}
           </>
         )}
 
         {(result || error || imageUri) && (
           <View style={styles.footerActions}>
             {result && (
-              <TouchableOpacity
-                style={[
-                  styles.secondaryButton,
-                  { borderColor: colors.primary },
-                ]}
-                onPress={handleCopy}
-              >
-                <MaterialIcons
-                  name="content-copy"
-                  size={20}
-                  color={colors.primary}
-                />
-                <Text
+              <>
+                <TouchableOpacity
                   style={[
-                    styles.secondaryButtonText,
-                    { color: colors.primary },
+                    styles.secondaryButton,
+                    { borderColor: colors.primary },
                   ]}
+                  onPress={handleCopy}
                 >
-                  Ham Metni Kopyala
-                </Text>
-              </TouchableOpacity>
+                  <MaterialIcons
+                    name="content-copy"
+                    size={20}
+                    color={colors.primary}
+                  />
+                  <Text
+                    style={[
+                      styles.secondaryButtonText,
+                      { color: colors.primary },
+                    ]}
+                  >
+                    Ham Metni Kopyala
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    styles.secondaryButton,
+                    { borderColor: colors.accent },
+                  ]}
+                  onPress={handleCopyFixture}
+                >
+                  <MaterialIcons
+                    name="data-object"
+                    size={20}
+                    color={colors.accent}
+                  />
+                  <Text
+                    style={[
+                      styles.secondaryButtonText,
+                      { color: colors.accent },
+                    ]}
+                  >
+                    {"OCR JSON'u Kopyala"}
+                  </Text>
+                </TouchableOpacity>
+              </>
             )}
             <TouchableOpacity
               style={[
@@ -408,7 +553,11 @@ const styles = StyleSheet.create({
   },
   lineText: {
     ...typography.bodySmall,
-    flex: 1,
+  },
+  lineFrame: {
+    ...typography.caption,
+    fontFamily: 'Courier',
+    marginTop: 2,
   },
   blockBox: {
     padding: spacing.sm,
@@ -423,8 +572,26 @@ const styles = StyleSheet.create({
   blockText: {
     ...typography.bodySmall,
   },
+  parsedRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: spacing.xs,
+  },
+  parsedLabel: {
+    ...typography.bodySmall,
+  },
+  parsedValue: {
+    ...typography.body,
+    fontWeight: '600',
+  },
+  parsedHint: {
+    ...typography.caption,
+    fontWeight: '400',
+  },
   footerActions: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: spacing.sm,
     marginTop: spacing.sm,
   },
