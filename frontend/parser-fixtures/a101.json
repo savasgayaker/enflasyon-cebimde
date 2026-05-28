@@ -1,0 +1,186 @@
+{
+  "name": "a101",
+  "raw": {
+    "fullText": "Mgz Adi:Ağridağ Etimesgu / Mgz Kodu:0778\nA101 YENI MAGAZACILIKA.S.\nSeyh Şamil Mh.\n9 602. Sk\nUSKODAR/9480423762\nTARIH\nSAAT\n:05.04.2026\n16:29\nFiŞ NO :\n0209",
+    "lines": [
+      {
+        "text": "Mgz Adi:Ağridağ Etimesgu / Mgz Kodu:0778",
+        "frame": {
+          "left": 633,
+          "top": 805,
+          "right": 2178,
+          "bottom": 915
+        }
+      },
+      {
+        "text": "A101 YENI MAGAZACILIKA.S.",
+        "frame": {
+          "left": 634,
+          "top": 867,
+          "right": 1640,
+          "bottom": 972
+        }
+      },
+      {
+        "text": "Seyh Şamil Mh.",
+        "frame": {
+          "left": 634,
+          "top": 958,
+          "right": 1165,
+          "bottom": 1031
+        }
+      },
+      {
+        "text": "9 602. Sk",
+        "frame": {
+          "left": 632,
+          "top": 1034,
+          "right": 984,
+          "bottom": 1096
+        }
+      },
+      {
+        "text": "USKODAR/9480423762",
+        "frame": {
+          "left": 631,
+          "top": 1113,
+          "right": 1336,
+          "bottom": 1187
+        }
+      },
+      {
+        "text": "TARIH",
+        "frame": {
+          "left": 671,
+          "top": 1267,
+          "right": 863,
+          "bottom": 1328
+        }
+      },
+      {
+        "text": "SAAT",
+        "frame": {
+          "left": 670,
+          "top": 1346,
+          "right": 821,
+          "bottom": 1400
+        }
+      },
+      {
+        "text": ":05.04.2026",
+        "frame": {
+          "left": 963,
+          "top": 1276,
+          "right": 1414,
+          "bottom": 1341
+        }
+      },
+      {
+        "text": "16:29",
+        "frame": {
+          "left": 1033,
+          "top": 1353,
+          "right": 1220,
+          "bottom": 1416
+        }
+      },
+      {
+        "text": "FiŞ NO :",
+        "frame": {
+          "left": 667,
+          "top": 1422,
+          "right": 969,
+          "bottom": 1488
+        }
+      },
+      {
+        "text": "0209",
+        "frame": {
+          "left": 1029,
+          "top": 1431,
+          "right": 1181,
+          "bottom": 1488
+        }
+      },
+      {
+        "text": "TOPKDV",
+        "frame": {
+          "left": 650,
+          "top": 2774,
+          "right": 889,
+          "bottom": 2840
+        }
+      },
+      {
+        "text": "TOPLAM",
+        "frame": {
+          "left": 647,
+          "top": 2858,
+          "right": 882,
+          "bottom": 2920
+        }
+      },
+      {
+        "text": "NAKIT",
+        "frame": {
+          "left": 686,
+          "top": 3021,
+          "right": 882,
+          "bottom": 3077
+        }
+      },
+      {
+        "text": "PARA 0STO",
+        "frame": {
+          "left": 689,
+          "top": 3100,
+          "right": 1049,
+          "bottom": 3154
+        }
+      },
+      {
+        "text": "*0,84",
+        "frame": {
+          "left": 2171,
+          "top": 2754,
+          "right": 2354,
+          "bottom": 2822
+        }
+      },
+      {
+        "text": "*84,85",
+        "frame": {
+          "left": 2142,
+          "top": 2831,
+          "right": 2363,
+          "bottom": 2899
+        }
+      },
+      {
+        "text": "*90,00",
+        "frame": {
+          "left": 2076,
+          "top": 2990,
+          "right": 2307,
+          "bottom": 3063
+        }
+      },
+      {
+        "text": "*5,15",
+        "frame": {
+          "left": 2121,
+          "top": 3072,
+          "right": 2312,
+          "bottom": 3143
+        }
+      }
+    ],
+    "blocks": [],
+    "confidence": 1
+  },
+  "expected": {
+    "storeName": "A101",
+    "date": "2026-04-05",
+    "totalAmount": 84.85
+  }
+}

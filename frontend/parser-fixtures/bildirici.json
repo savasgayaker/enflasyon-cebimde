@@ -1,0 +1,186 @@
+{
+  "name": "bildirici",
+  "raw": {
+    "fullText": "TEŞEKKÜRLER\nBİLDİRICI GIDA SAN,VE TiC.LTD.ȘTi.\n$EYH ŞAMIL MH.13.CD NO:10/0-2-3\nERYAMAN/ANK. TEL: 0312 247 27 63\nVD: KAZAN -1700033421\nTARIH\nSAAT\n:28.04.2026\n: 18:32\nFİŞ NO: 0205",
+    "lines": [
+      {
+        "text": "TEŞEKKÜRLER",
+        "frame": {
+          "left": 729,
+          "top": 286,
+          "right": 1081,
+          "bottom": 336
+        }
+      },
+      {
+        "text": "BİLDİRICI GIDA SAN,VE TiC.LTD.ȘTi.",
+        "frame": {
+          "left": 661,
+          "top": 344,
+          "right": 1756,
+          "bottom": 404
+        }
+      },
+      {
+        "text": "$EYH ŞAMIL MH.13.CD NO:10/0-2-3",
+        "frame": {
+          "left": 693,
+          "top": 413,
+          "right": 1700,
+          "bottom": 475
+        }
+      },
+      {
+        "text": "ERYAMAN/ANK. TEL: 0312 247 27 63",
+        "frame": {
+          "left": 691,
+          "top": 475,
+          "right": 1701,
+          "bottom": 528
+        }
+      },
+      {
+        "text": "VD: KAZAN -1700033421",
+        "frame": {
+          "left": 857,
+          "top": 541,
+          "right": 1527,
+          "bottom": 589
+        }
+      },
+      {
+        "text": "TARIH",
+        "frame": {
+          "left": 622,
+          "top": 662,
+          "right": 781,
+          "bottom": 709
+        }
+      },
+      {
+        "text": "SAAT",
+        "frame": {
+          "left": 620,
+          "top": 724,
+          "right": 746,
+          "bottom": 769
+        }
+      },
+      {
+        "text": ":28.04.2026",
+        "frame": {
+          "left": 864,
+          "top": 669,
+          "right": 1243,
+          "bottom": 718
+        }
+      },
+      {
+        "text": ": 18:32",
+        "frame": {
+          "left": 863,
+          "top": 726,
+          "right": 1080,
+          "bottom": 780
+        }
+      },
+      {
+        "text": "FİŞ NO: 0205",
+        "frame": {
+          "left": 587,
+          "top": 782,
+          "right": 1044,
+          "bottom": 847
+        }
+      },
+      {
+        "text": "TOPKDV",
+        "frame": {
+          "left": 598,
+          "top": 2379,
+          "right": 796,
+          "bottom": 2433
+        }
+      },
+      {
+        "text": "TOPLAM",
+        "frame": {
+          "left": 567,
+          "top": 2436,
+          "right": 799,
+          "bottom": 2506
+        }
+      },
+      {
+        "text": "HALKBANK",
+        "frame": {
+          "left": 631,
+          "top": 2582,
+          "right": 898,
+          "bottom": 2632
+        }
+      },
+      {
+        "text": "KDV",
+        "frame": {
+          "left": 630,
+          "top": 2723,
+          "right": 727,
+          "bottom": 2771
+        }
+      },
+      {
+        "text": "*23,34",
+        "frame": {
+          "left": 1844,
+          "top": 2368,
+          "right": 2037,
+          "bottom": 2419
+        }
+      },
+      {
+        "text": "*874,45",
+        "frame": {
+          "left": 1811,
+          "top": 2434,
+          "right": 2039,
+          "bottom": 2485
+        }
+      },
+      {
+        "text": "*874,45",
+        "frame": {
+          "left": 1745,
+          "top": 2569,
+          "right": 1973,
+          "bottom": 2622
+        }
+      },
+      {
+        "text": "KDV'LI TOPLAM",
+        "frame": {
+          "left": 1344,
+          "top": 2707,
+          "right": 1772,
+          "bottom": 2757
+        }
+      },
+      {
+        "text": "KDV TUTARI",
+        "frame": {
+          "left": 903,
+          "top": 2713,
+          "right": 1233,
+          "bottom": 2769
+        }
+      }
+    ],
+    "blocks": [],
+    "confidence": 1
+  },
+  "expected": {
+    "storeName": "Bildirici",
+    "date": "2026-04-28",
+    "totalAmount": 874.45
+  }
+}

@@ -81,6 +81,20 @@ function normalizeForMatch(text: string): string {
     .trim();
 }
 
+/**
+ * Şirket unvanı → marka eşleme. KNOWN_STORES taramasından önce çalışır;
+ * e-arşiv fişlerinde marka adı yerine ticari unvan basıldığı için gereklidir
+ * (ör. BİM e-arşiv kâğıdında "BIY BIRLESIK MAĞAZALAR A.Ş." geçer).
+ */
+const STORE_ALIASES: { pattern: string; store: string }[] = [
+  { pattern: 'BIY BIRLESIK', store: 'BİM' },
+  { pattern: 'FILE MARKET', store: 'File' },
+  { pattern: 'CARREFOURSA', store: 'CarrefourSA' },
+];
+
+/** "E-Arsiv Fatura" / "E-Arşiv Fatura" / "E ARSIV" başlıkları fallback'te atılır. */
+const E_ARSIV_RE = /E[\s\-]?AR[SŞ]IV/i;
+
 export function extractStoreName(raw: OCRRawResult): string {
   // Üstteki satırlara öncelik ver (y-koordinatına göre küçükten büyüğe).
   // İlk 8 satır içinde tara — fiş başlığı genelde ilk 3-5 satırda olur.
@@ -88,6 +102,17 @@ export function extractStoreName(raw: OCRRawResult): string {
     .sort((a, b) => a.frame.top - b.frame.top)
     .slice(0, 8);
 
+  // 1) Unvan → marka eşleme (KNOWN_STORES'tan önce, çünkü e-arşivde unvan basılır)
+  for (const line of topLines) {
+    const normalized = normalizeForMatch(line.text);
+    for (const alias of STORE_ALIASES) {
+      if (normalized.includes(normalizeForMatch(alias.pattern))) {
+        return alias.store;
+      }
+    }
+  }
+
+  // 2) Bilinen marka eşleme
   for (const line of topLines) {
     const normalized = normalizeForMatch(line.text);
     for (const store of KNOWN_STORES) {
@@ -97,9 +122,14 @@ export function extractStoreName(raw: OCRRawResult): string {
     }
   }
 
-  // Fallback: ilk dolu satır
-  const firstNonEmpty = topLines.find((l) => l.text.trim().length > 0);
-  return firstNonEmpty?.text.trim() ?? '';
+  // 3) Fallback: ilk dolu satır — ama "E-Arsiv Fatura" başlığı geçilir
+  for (const line of topLines) {
+    const text = line.text.trim();
+    if (text.length === 0) continue;
+    if (E_ARSIV_RE.test(text)) continue;
+    return text;
+  }
+  return '';
 }
 
 // ---------------------------------------------------------------------------
@@ -156,50 +186,99 @@ function formatISO(y: number, m: number, d: number): string {
  */
 const PRICE_RE = /\*?\s*(\d{1,3}(?:\.\d{3})*(?:[,.]\d{1,2})|\d+[,.]\d{1,2}|\d+)\s*(?:TL|₺)?/i;
 
-const TOTAL_KEYWORDS = ['TOPLAM', 'TUTAR', 'GENEL TOPLAM', 'ÖDENECEK'];
+/**
+ * Anahtar kelimeler ÖNCELİK sırasında denenir. "ÖDENECEK" en başta, çünkü
+ * e-arşivde toplam tutar burada açıkça basılır; "TOPLAM" daha öncesi de
+ * geçtiği için ("TOPLAM KDV" gibi tuzaklar) öncelik düşürülür.
+ */
+const TOTAL_KEYWORDS = ['ÖDENECEK', 'GENEL TOPLAM', 'TOPLAM', 'TUTAR'] as const;
+
+/** TOPLAM ve TUTAR keyword'leri KDV/KOV satırlarına yanlışlıkla yapışabilir. */
+const KDV_SKIP_KEYWORDS = new Set<string>(['TOPLAM', 'TUTAR']);
+
+/** "TOPLAM KDV" / "TOPLAM KOV" / "KDV TUTARI" gibi tuzakları tespit eder. */
+const KDV_TRAP_RE = /K[DO]V/;
 
 export function extractTotal(raw: OCRRawResult): number {
-  // Strateji: TOPLAM/TUTAR anahtar kelimesi içeren satırlardaki sayıyı al.
-  // Aynı satırda yoksa, en yakın sağındaki (veya hemen altındaki) sayıya bak.
-  const candidates: { line: OCRLine; idx: number }[] = raw.lines.map(
-    (line, idx) => ({ line, idx }),
-  );
+  if (raw.lines.length === 0) return 0;
 
-  for (const { line, idx } of candidates) {
-    const upper = line.text.toUpperCase();
-    if (!TOTAL_KEYWORDS.some((kw) => upper.includes(kw))) continue;
+  // Sağ kolon eşiği: tüm satırların en sağındaki noktaların %50'sini geçen
+  // satırlar "değer kolonu" sayılır. Bu sayede "Banka Kredi Karti (1)" gibi
+  // sol kolon satırlarındaki sahte sayılar (parantez içindeki 1) elenir.
+  const allRight = Math.max(...raw.lines.map((l) => l.frame.right));
+  const rightColumnThreshold = allRight * 0.5;
 
-    // Önce aynı satırda sayı var mı?
-    const sameLine = parsePrice(line.text);
-    if (sameLine !== null) return sameLine;
+  // Dış döngü = keyword önceliği, iç döngü = satırlar. Eşleşen ilk
+  // (keyword, satır) çiftinden bir fiyat çıkartabilirsek anında dönülür.
+  for (const keyword of TOTAL_KEYWORDS) {
+    const normalizedKeyword = normalizeForMatch(keyword);
+    const skipKdv = KDV_SKIP_KEYWORDS.has(keyword);
 
-    // Aynı y-bandındaki başka satırlarda (sağdaki kolon)
-    const sameRow = findSameRowPrice(line, raw.lines);
-    if (sameRow !== null) return sameRow;
+    for (const line of raw.lines) {
+      const normalized = normalizeForMatch(line.text);
+      if (!normalized.includes(normalizedKeyword)) continue;
 
-    // Bir sonraki satıra bak (TOPLAM\n123,45 paterni)
-    const next = candidates[idx + 1];
-    if (next) {
-      const nextPrice = parsePrice(next.line.text);
-      if (nextPrice !== null) return nextPrice;
+      // KDV tuzağı: "TOPLAM KDV", "TOPLAN KDV", "TOPKDV", "KDV TUTARI" vb.
+      // ÖDENECEK ve GENEL TOPLAM için bu kontrol gerekmez.
+      if (skipKdv && KDV_TRAP_RE.test(line.text.toUpperCase())) continue;
+
+      const price = findPriceForLabel(line, raw.lines, rightColumnThreshold);
+      if (price !== null) return price;
     }
   }
 
   return 0;
 }
 
-function findSameRowPrice(target: OCRLine, all: OCRLine[]): number | null {
-  const yMid = (target.frame.top + target.frame.bottom) / 2;
-  const tolerance = (target.frame.bottom - target.frame.top) * 0.6;
-  for (const line of all) {
-    if (line === target) continue;
-    const otherMid = (line.frame.top + line.frame.bottom) / 2;
-    if (Math.abs(otherMid - yMid) <= tolerance) {
-      const p = parsePrice(line.text);
-      if (p !== null) return p;
-    }
+/**
+ * Bir etiket satırı için fiyatı bulur:
+ *  1. Önce aynı satırda fiyat var mı?
+ *  2. Etiketten itibaren ~3 satır yüksekliği kadar AŞAĞIYI tarar; sağ
+ *     kolon eşiğini geçen satırlardaki fiyatları toplar.
+ *  3. Adaylar arasında "*" önekli olanlar (kanonik POS işareti) tercih
+ *     edilir; aynı kategoride en üstteki (etikete en yakın) seçilir.
+ *
+ * Bu strateji "Odenecek KDV Dahil Tutar" satırının altındaki birden çok
+ * fiyat senaryosunu güvenle ele alır — örn. File fişinde aynı bantta hem
+ * OCR'ın "*"'ı 4'e dönüştürdüğü 4863.54 hem de payment satırındaki
+ * doğru *863.54 bulunur; * tercihi doğru olanı seçer.
+ */
+function findPriceForLabel(
+  label: OCRLine,
+  all: OCRLine[],
+  rightColumnThreshold: number,
+): number | null {
+  // 1) Aynı satırda
+  const sameLine = parsePrice(label.text);
+  if (sameLine !== null) return sameLine;
+
+  // 2) Aşağıdaki + aynı-satır penceresinde adayları topla
+  const labelHeight = label.frame.bottom - label.frame.top;
+  const yMin = label.frame.top;
+  const yMax = label.frame.bottom + labelHeight * 3;
+
+  const candidates: { price: number; y: number; hasStar: boolean }[] = [];
+  for (const other of all) {
+    if (other === label) continue;
+    if (other.frame.left < rightColumnThreshold) continue;
+    const mid = (other.frame.top + other.frame.bottom) / 2;
+    if (mid < yMin || mid > yMax) continue;
+    const price = parsePrice(other.text);
+    if (price === null) continue;
+    candidates.push({
+      price,
+      y: mid,
+      hasStar: other.text.includes('*'),
+    });
   }
-  return null;
+
+  if (candidates.length === 0) return null;
+
+  // 3) "*" önekli adaylar tercih edilir
+  const starred = candidates.filter((c) => c.hasStar);
+  const pool = starred.length > 0 ? starred : candidates;
+  pool.sort((a, b) => a.y - b.y);
+  return pool[0].price;
 }
 
 /**
