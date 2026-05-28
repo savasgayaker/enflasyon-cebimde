@@ -9,6 +9,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
+      "bundleIdentifier": "com.savasgayaker.enflasyoncebimde",
       "supportsTablet": true,
       "infoPlist": {
         "NSCameraUsageDescription": "Fişlerinizi okuyabilmek için kameraya erişim gerekiyor.",
@@ -16,6 +17,7 @@
       }
     },
     "android": {
+      "package": "com.savasgayaker.enflasyoncebimde",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#0D9488"
@@ -50,7 +52,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/splash-image.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#0D9488"
