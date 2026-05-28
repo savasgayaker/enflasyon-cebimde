@@ -2,9 +2,9 @@ import type { OCRRawResult, OCRLine } from './ocrService';
 import { suggestCategory } from '../constants/categories';
 
 /**
- * Parser çıktısı. Alanlar mock OCR'ın `OCRResult` şemasıyla birebir uyumludur,
- * böylece scan akışı M5'te tek satırlık import değişikliğiyle gerçek pipeline'a
- * bağlanabilir.
+ * Parser çıktısı. `scan.tsx` → `receipt-preview.tsx` üretim akışının veri
+ * şemasıdır; receipt-preview ekranındaki `UIItem` bu yapıdan map'lenir
+ * (`unitPrice/totalPrice` null'ları 0'a normalize edilir).
  */
 export interface ParsedReceipt {
   storeName: string;

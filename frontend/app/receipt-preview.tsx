@@ -18,7 +18,22 @@ import { useAppStore } from '../src/store/useAppStore';
 import { colors, spacing, borderRadius, typography, shadows } from '../src/constants/theme';
 import { tr } from '../src/i18n/tr';
 import { categories, suggestCategory } from '../src/constants/categories';
-import { OCRItem, OCRResult } from '../src/utils/mockOCR';
+import type { ParsedReceipt } from '../src/services/receiptParser';
+
+/**
+ * Ekran-içi kalem tipi. Parser `unitPrice/totalPrice: number | null` döner;
+ * form input'ları number bekler, bu yüzden burada null → 0 normalize edilir.
+ * `needsReview` parser'dan gelir; kullanıcı kalemi düzelttiğinde otomatik
+ * temizlenir (bkz. updateItem).
+ */
+type UIItem = {
+  name: string;
+  quantity: number;
+  unitPrice: number;
+  totalPrice: number;
+  categoryId: string;
+  needsReview: boolean;
+};
 
 export default function ReceiptPreview() {
   const router = useRouter();
@@ -27,31 +42,39 @@ export default function ReceiptPreview() {
   const { addReceipt, findOrCreateProduct, addPriceRecord } = useAppStore();
   const theme = darkMode ? colors.dark : colors.light;
 
-  // Parse OCR result from params
-  const initialData: OCRResult = useMemo(() => {
-    if (params.data) {
-      try {
-        return JSON.parse(params.data);
-      } catch {
-        return {
-          storeName: '',
-          date: new Date().toISOString().split('T')[0],
-          items: [],
-          totalAmount: 0,
-        };
-      }
-    }
-    return {
+  // Parse parser result from params
+  const initialData: ParsedReceipt = useMemo(() => {
+    const empty: ParsedReceipt = {
       storeName: '',
       date: new Date().toISOString().split('T')[0],
-      items: [],
       totalAmount: 0,
+      items: [],
     };
+    if (!params.data) return empty;
+    try {
+      return JSON.parse(params.data) as ParsedReceipt;
+    } catch {
+      return empty;
+    }
   }, [params.data]);
+
+  // Parser → UI sınır katmanı: null fiyatları 0'a normalize et, needsReview taşı.
+  const initialItems: UIItem[] = useMemo(
+    () =>
+      (initialData.items ?? []).map((it) => ({
+        name: it.name,
+        quantity: it.quantity,
+        unitPrice: it.unitPrice ?? 0,
+        totalPrice: it.totalPrice ?? 0,
+        categoryId: it.categoryId,
+        needsReview: it.needsReview,
+      })),
+    [initialData],
+  );
 
   const [storeName, setStoreName] = useState(initialData.storeName);
   const [date, setDate] = useState(initialData.date);
-  const [items, setItems] = useState<OCRItem[]>(initialData.items);
+  const [items, setItems] = useState<UIItem[]>(initialItems);
   const [isSaving, setIsSaving] = useState(false);
 
   // Calculate total
@@ -60,11 +83,15 @@ export default function ReceiptPreview() {
   }, [items]);
 
   // Update item
-  const updateItem = (index: number, field: keyof OCRItem, value: string | number) => {
+  const updateItem = (
+    index: number,
+    field: keyof UIItem,
+    value: string | number,
+  ) => {
     setItems((prev) => {
       const newItems = [...prev];
       const item = { ...newItems[index] };
-      
+
       if (field === 'name') {
         item.name = value as string;
         // Auto-suggest category
@@ -76,10 +103,12 @@ export default function ReceiptPreview() {
       } else if (field === 'unitPrice') {
         item.unitPrice = parseFloat(value as string) || 0;
         item.totalPrice = item.quantity * item.unitPrice;
+        // Kullanıcı fiyatı bizzat girdiğinde inceleme bayrağı düşer.
+        item.needsReview = false;
       } else if (field === 'categoryId') {
         item.categoryId = value as string;
       }
-      
+
       newItems[index] = item;
       return newItems;
     });
@@ -100,6 +129,7 @@ export default function ReceiptPreview() {
         unitPrice: 0,
         totalPrice: 0,
         categoryId: 'other',
+        needsReview: false,
       },
     ]);
   };
@@ -120,6 +150,27 @@ export default function ReceiptPreview() {
     if (invalidItems.length > 0) {
       Alert.alert(tr.error, 'Tüm ürünlerin adı ve fiyatı olmalıdır');
       return;
+    }
+
+    // Parser'ın "incele" bayrağı koyduğu kalemler varsa nazik uyarı.
+    const flagged = items.filter((it) => it.needsReview);
+    if (flagged.length > 0) {
+      const names = flagged
+        .map((it) => it.name.trim() || '(adsız)')
+        .slice(0, 3)
+        .join(', ');
+      const suffix = flagged.length > 3 ? ` (+${flagged.length - 3})` : '';
+      const proceed = await new Promise<boolean>((resolve) => {
+        Alert.alert(
+          'İnceleme gerekli',
+          `Şu kalemler incelenmek üzere işaretli: ${names}${suffix}. Yine de kaydetmek istiyor musunuz?`,
+          [
+            { text: 'İncele', style: 'cancel', onPress: () => resolve(false) },
+            { text: 'Kaydet', onPress: () => resolve(true) },
+          ],
+        );
+      });
+      if (!proceed) return;
     }
 
     setIsSaving(true);
@@ -169,13 +220,46 @@ export default function ReceiptPreview() {
     }
   };
 
-  const renderItem = (item: OCRItem, index: number) => {
-    const category = categories.find((c) => c.id === item.categoryId);
+  const renderItem = (item: UIItem, index: number) => {
+    // Parser bayrağına göre kart vurgusu:
+    //   needsReview && totalPrice === 0 → KIRMIZI (fiyat bulunamadı, manuel girilmeli)
+    //   needsReview && totalPrice > 0   → SARI (aritmetik kurtarma veya Düzen B; incele)
+    //   needsReview false               → vurgu yok
+    const reviewMissing = item.needsReview && item.totalPrice === 0;
+    const reviewSoft = item.needsReview && item.totalPrice > 0;
+    const reviewColor = reviewMissing
+      ? colors.error
+      : reviewSoft
+        ? colors.warning
+        : null;
+    const reviewLabel = reviewMissing
+      ? 'FİYAT GİRİN'
+      : reviewSoft
+        ? 'İNCELEYİN'
+        : null;
 
     return (
-      <View key={index} style={[styles.itemCard, { backgroundColor: theme.surfaceSecondary }]}>
+      <View
+        key={index}
+        style={[
+          styles.itemCard,
+          { backgroundColor: theme.surfaceSecondary },
+          reviewColor ? { borderLeftWidth: 4, borderLeftColor: reviewColor } : null,
+        ]}
+      >
         <View style={styles.itemHeader}>
-          <Text style={[styles.itemNumber, { color: theme.textSecondary }]}>#{index + 1}</Text>
+          <View style={styles.itemHeaderLeft}>
+            <Text style={[styles.itemNumber, { color: theme.textSecondary }]}>
+              #{index + 1}
+            </Text>
+            {reviewLabel && reviewColor && (
+              <View
+                style={[styles.reviewBadge, { backgroundColor: reviewColor }]}
+              >
+                <Text style={styles.reviewBadgeText}>{reviewLabel}</Text>
+              </View>
+            )}
+          </View>
           <TouchableOpacity onPress={() => removeItem(index)}>
             <MaterialIcons name="delete-outline" size={24} color={colors.error} />
           </TouchableOpacity>
@@ -452,8 +536,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: spacing.md,
   },
+  itemHeaderLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+  },
   itemNumber: {
     ...typography.label,
+  },
+  reviewBadge: {
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 2,
+    borderRadius: borderRadius.sm,
+  },
+  reviewBadgeText: {
+    ...typography.caption,
+    color: colors.white,
+    fontWeight: '700',
+    fontSize: 10,
+    letterSpacing: 0.5,
   },
   categoryRow: {
     flexDirection: 'row',

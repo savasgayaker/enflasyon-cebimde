@@ -15,7 +15,8 @@ import { CameraView, useCameraPermissions } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import { colors, spacing, borderRadius, typography, shadows } from '../../src/constants/theme';
 import { tr } from '../../src/i18n/tr';
-import { processReceipt } from '../../src/utils/mockOCR';
+import { extractTextFromImage } from '../../src/services/ocrService';
+import { parseReceipt, type ParsedReceipt } from '../../src/services/receiptParser';
 import { useAppStore } from '../../src/store/useAppStore';
 
 const { width, height } = Dimensions.get('window');
@@ -39,14 +40,14 @@ export default function ScanScreen() {
         });
         
         if (photo?.uri) {
-          // Process the receipt (mock OCR)
-          const result = await processReceipt(photo.uri);
-          
-          // Navigate to preview with the OCR result
+          // Gerçek pipeline: cihaz üstü ML Kit OCR → Türkçe fiş parser'ı.
+          const raw = await extractTextFromImage(photo.uri);
+          const parsed = parseReceipt(raw);
+
           router.push({
             pathname: '/receipt-preview',
             params: {
-              data: JSON.stringify(result),
+              data: JSON.stringify(parsed),
               imageUri: photo.uri,
             },
           });
@@ -70,12 +71,13 @@ export default function ScanScreen() {
 
       if (!result.canceled && result.assets[0]) {
         setIsProcessing(true);
-        const ocrResult = await processReceipt(result.assets[0].uri);
-        
+        const raw = await extractTextFromImage(result.assets[0].uri);
+        const parsed = parseReceipt(raw);
+
         router.push({
           pathname: '/receipt-preview',
           params: {
-            data: JSON.stringify(ocrResult),
+            data: JSON.stringify(parsed),
             imageUri: result.assets[0].uri,
           },
         });
@@ -88,13 +90,13 @@ export default function ScanScreen() {
   };
 
   const handleManualEntry = async () => {
-    const emptyResult = {
+    const emptyResult: ParsedReceipt = {
       storeName: '',
       date: new Date().toISOString().split('T')[0],
-      items: [],
       totalAmount: 0,
+      items: [],
     };
-    
+
     router.push({
       pathname: '/receipt-preview',
       params: {
