@@ -1,5 +1,5 @@
 {
-  "name": "migros",
+  "name": "Migros 2026-04-25",
   "raw": {
     "fullText": "N\nMIGROS\nMIGROS\nTİCARET A.S\nKASMIR CENTER ANKARA MM MIGROS\nGÖKSU MAH. 5352. CADDE F APT. NO:1 F/10\nBÜYỦK MÜKELLEFLER VD / 622 052 9513\nTEL:3507376863\nMERKEZ ADRESİ: ATATURK MAH. TURGUT ÖZAL\nBULVARI NO:7 ATAŞEHIR/İSTANBUL\nMERSIS NO:0622052951300016\nTarih: 25/04/2026\nSaat: 15:44\nETTN: cbf2a932-9d9c-44d5-b593-95672ddC6585\nFATURA NO: C012026018778708\nTÜR:E-ARSİV FATURASI\nMÜŞTERİ BÌLGILERÌ\nVERGİ / TC KÌMLİK NO:\n11111111111\nDAM A SU 500M!\nDAMLA SU 500ML\nMASTER POTATO ACILI\nTADA MOZARELLA PEYN.\nMIGROS PLASTIK POSET\nTOPKDV\nTOPLAM\nORTAK POS\nKDV\n%1\n%20\n%1\n61\n%1\n%1\n%20\n*18.00\n*lö,00\nx120,00\n*154,00\n*1,00\n3,24\n311, 00\n*311, 00\nKDV'Lİ TOPLAM\n*310,00\n*1,00\nKDV TUTARI\n*3,07\nx0,17\nTamBanaGore teklifin tek seferde 250TL\n6395********1033\nMÜŞTERI BILGİLERI:\nmusli, yulaf, grisini\nalimina 20Money=20TL hedi ve!\nYar arlanmak icin\nTAMBANAGORE vaz 5816e gonder\nveya Mi gros uygulamasInda gorebi lirsin\n051941061718260425",
     "lines": [
@@ -443,14 +443,1298 @@
           "right": 1475,
           "bottom": 3266
         }
+      },
+      {
+        "text": "TamBanaGore teklifin tek seferde 250TL",
+        "frame": {
+          "left": 655,
+          "top": 3390,
+          "right": 1895,
+          "bottom": 3462
+        }
+      },
+      {
+        "text": "6395********1033",
+        "frame": {
+          "left": 1445,
+          "top": 3334,
+          "right": 1965,
+          "bottom": 3395
+        }
+      },
+      {
+        "text": "MÜŞTERI BILGİLERI:",
+        "frame": {
+          "left": 648,
+          "top": 3312,
+          "right": 1247,
+          "bottom": 3413
+        }
+      },
+      {
+        "text": "musli, yulaf, grisini",
+        "frame": {
+          "left": 651,
+          "top": 3444,
+          "right": 1335,
+          "bottom": 3541
+        }
+      },
+      {
+        "text": "alimina 20Money=20TL hedi ve!",
+        "frame": {
+          "left": 654,
+          "top": 3502,
+          "right": 1563,
+          "bottom": 3603
+        }
+      },
+      {
+        "text": "Yar arlanmak icin",
+        "frame": {
+          "left": 639,
+          "top": 3587,
+          "right": 1183,
+          "bottom": 3662
+        }
+      },
+      {
+        "text": "TAMBANAGORE vaz 5816e gonder",
+        "frame": {
+          "left": 657,
+          "top": 3635,
+          "right": 1566,
+          "bottom": 3723
+        }
+      },
+      {
+        "text": "veya Mi gros uygulamasInda gorebi lirsin",
+        "frame": {
+          "left": 629,
+          "top": 3708,
+          "right": 1891,
+          "bottom": 3783
+        }
+      },
+      {
+        "text": "051941061718260425",
+        "frame": {
+          "left": 1056,
+          "top": 3872,
+          "right": 1637,
+          "bottom": 3954
+        }
       }
     ],
-    "blocks": [],
+    "blocks": [
+      {
+        "text": "N",
+        "frame": {
+          "left": 1364,
+          "top": 600,
+          "right": 1401,
+          "bottom": 631
+        },
+        "lines": [
+          {
+            "text": "N",
+            "frame": {
+              "left": 1364,
+              "top": 600,
+              "right": 1401,
+              "bottom": 631
+            }
+          }
+        ]
+      },
+      {
+        "text": "MIGROS",
+        "frame": {
+          "left": 1173,
+          "top": 1070,
+          "right": 1538,
+          "bottom": 1139
+        },
+        "lines": [
+          {
+            "text": "MIGROS",
+            "frame": {
+              "left": 1173,
+              "top": 1070,
+              "right": 1538,
+              "bottom": 1139
+            }
+          }
+        ]
+      },
+      {
+        "text": "MIGROS",
+        "frame": {
+          "left": 728,
+          "top": 1115,
+          "right": 1100,
+          "bottom": 1175
+        },
+        "lines": [
+          {
+            "text": "MIGROS",
+            "frame": {
+              "left": 728,
+              "top": 1115,
+              "right": 1100,
+              "bottom": 1175
+            }
+          }
+        ]
+      },
+      {
+        "text": "TİCARET A.S",
+        "frame": {
+          "left": 1172,
+          "top": 1124,
+          "right": 1853,
+          "bottom": 1202
+        },
+        "lines": [
+          {
+            "text": "TİCARET A.S",
+            "frame": {
+              "left": 1172,
+              "top": 1124,
+              "right": 1853,
+              "bottom": 1202
+            }
+          }
+        ]
+      },
+      {
+        "text": "KASMIR CENTER ANKARA MM MIGROS",
+        "frame": {
+          "left": 722,
+          "top": 1174,
+          "right": 1665,
+          "bottom": 1258
+        },
+        "lines": [
+          {
+            "text": "KASMIR CENTER ANKARA MM MIGROS",
+            "frame": {
+              "left": 722,
+              "top": 1174,
+              "right": 1665,
+              "bottom": 1258
+            }
+          }
+        ]
+      },
+      {
+        "text": "GÖKSU MAH. 5352. CADDE F APT. NO:1 F/10",
+        "frame": {
+          "left": 719,
+          "top": 1233,
+          "right": 1949,
+          "bottom": 1327
+        },
+        "lines": [
+          {
+            "text": "GÖKSU MAH. 5352. CADDE F APT. NO:1 F/10",
+            "frame": {
+              "left": 719,
+              "top": 1233,
+              "right": 1949,
+              "bottom": 1327
+            }
+          }
+        ]
+      },
+      {
+        "text": "BÜYỦK MÜKELLEFLER VD / 622 052 9513",
+        "frame": {
+          "left": 715,
+          "top": 1361,
+          "right": 1819,
+          "bottom": 1446
+        },
+        "lines": [
+          {
+            "text": "BÜYỦK MÜKELLEFLER VD / 622 052 9513",
+            "frame": {
+              "left": 715,
+              "top": 1361,
+              "right": 1819,
+              "bottom": 1446
+            }
+          }
+        ]
+      },
+      {
+        "text": "TEL:3507376863",
+        "frame": {
+          "left": 716,
+          "top": 1299,
+          "right": 1162,
+          "bottom": 1364
+        },
+        "lines": [
+          {
+            "text": "TEL:3507376863",
+            "frame": {
+              "left": 716,
+              "top": 1299,
+              "right": 1162,
+              "bottom": 1364
+            }
+          }
+        ]
+      },
+      {
+        "text": "MERKEZ ADRESİ: ATATURK MAH. TURGUT ÖZAL",
+        "frame": {
+          "left": 714,
+          "top": 1422,
+          "right": 1940,
+          "bottom": 1511
+        },
+        "lines": [
+          {
+            "text": "MERKEZ ADRESİ: ATATURK MAH. TURGUT ÖZAL",
+            "frame": {
+              "left": 714,
+              "top": 1422,
+              "right": 1940,
+              "bottom": 1511
+            }
+          }
+        ]
+      },
+      {
+        "text": "BULVARI NO:7 ATAŞEHIR/İSTANBUL",
+        "frame": {
+          "left": 715,
+          "top": 1485,
+          "right": 1660,
+          "bottom": 1573
+        },
+        "lines": [
+          {
+            "text": "BULVARI NO:7 ATAŞEHIR/İSTANBUL",
+            "frame": {
+              "left": 715,
+              "top": 1485,
+              "right": 1660,
+              "bottom": 1573
+            }
+          }
+        ]
+      },
+      {
+        "text": "MERSIS NO:0622052951300016",
+        "frame": {
+          "left": 709,
+          "top": 1546,
+          "right": 1534,
+          "bottom": 1626
+        },
+        "lines": [
+          {
+            "text": "MERSIS NO:0622052951300016",
+            "frame": {
+              "left": 709,
+              "top": 1546,
+              "right": 1534,
+              "bottom": 1626
+            }
+          }
+        ]
+      },
+      {
+        "text": "Tarih: 25/04/2026",
+        "frame": {
+          "left": 680,
+          "top": 1667,
+          "right": 1250,
+          "bottom": 1748
+        },
+        "lines": [
+          {
+            "text": "Tarih: 25/04/2026",
+            "frame": {
+              "left": 680,
+              "top": 1667,
+              "right": 1250,
+              "bottom": 1748
+            }
+          }
+        ]
+      },
+      {
+        "text": "Saat: 15:44",
+        "frame": {
+          "left": 1630,
+          "top": 1701,
+          "right": 1974,
+          "bottom": 1748
+        },
+        "lines": [
+          {
+            "text": "Saat: 15:44",
+            "frame": {
+              "left": 1630,
+              "top": 1701,
+              "right": 1974,
+              "bottom": 1748
+            }
+          }
+        ]
+      },
+      {
+        "text": "ETTN: cbf2a932-9d9c-44d5-b593-95672ddC6585",
+        "frame": {
+          "left": 698,
+          "top": 1798,
+          "right": 2040,
+          "bottom": 1878
+        },
+        "lines": [
+          {
+            "text": "ETTN: cbf2a932-9d9c-44d5-b593-95672ddC6585",
+            "frame": {
+              "left": 698,
+              "top": 1798,
+              "right": 2040,
+              "bottom": 1878
+            }
+          }
+        ]
+      },
+      {
+        "text": "FATURA NO: C012026018778708",
+        "frame": {
+          "left": 694,
+          "top": 1860,
+          "right": 1561,
+          "bottom": 1933
+        },
+        "lines": [
+          {
+            "text": "FATURA NO: C012026018778708",
+            "frame": {
+              "left": 694,
+              "top": 1860,
+              "right": 1561,
+              "bottom": 1933
+            }
+          }
+        ]
+      },
+      {
+        "text": "TÜR:E-ARSİV FATURASI",
+        "frame": {
+          "left": 646,
+          "top": 1971,
+          "right": 2030,
+          "bottom": 2074
+        },
+        "lines": [
+          {
+            "text": "TÜR:E-ARSİV FATURASI",
+            "frame": {
+              "left": 646,
+              "top": 1971,
+              "right": 2030,
+              "bottom": 2074
+            }
+          }
+        ]
+      },
+      {
+        "text": "MÜŞTERİ BÌLGILERÌ",
+        "frame": {
+          "left": 676,
+          "top": 2108,
+          "right": 1232,
+          "bottom": 2181
+        },
+        "lines": [
+          {
+            "text": "MÜŞTERİ BÌLGILERÌ",
+            "frame": {
+              "left": 676,
+              "top": 2108,
+              "right": 1232,
+              "bottom": 2181
+            }
+          }
+        ]
+      },
+      {
+        "text": "VERGİ / TC KÌMLİK NO:",
+        "frame": {
+          "left": 684,
+          "top": 2174,
+          "right": 1353,
+          "bottom": 2236
+        },
+        "lines": [
+          {
+            "text": "VERGİ / TC KÌMLİK NO:",
+            "frame": {
+              "left": 684,
+              "top": 2174,
+              "right": 1353,
+              "bottom": 2236
+            }
+          }
+        ]
+      },
+      {
+        "text": "11111111111",
+        "frame": {
+          "left": 672,
+          "top": 2236,
+          "right": 1032,
+          "bottom": 2304
+        },
+        "lines": [
+          {
+            "text": "11111111111",
+            "frame": {
+              "left": 672,
+              "top": 2236,
+              "right": 1032,
+              "bottom": 2304
+            }
+          }
+        ]
+      },
+      {
+        "text": "DAM A SU 500M!",
+        "frame": {
+          "left": 637,
+          "top": 2369,
+          "right": 1106,
+          "bottom": 2422
+        },
+        "lines": [
+          {
+            "text": "DAM A SU 500M!",
+            "frame": {
+              "left": 637,
+              "top": 2369,
+              "right": 1106,
+              "bottom": 2422
+            }
+          }
+        ]
+      },
+      {
+        "text": "DAMLA SU 500ML",
+        "frame": {
+          "left": 658,
+          "top": 2429,
+          "right": 1123,
+          "bottom": 2491
+        },
+        "lines": [
+          {
+            "text": "DAMLA SU 500ML",
+            "frame": {
+              "left": 658,
+              "top": 2429,
+              "right": 1123,
+              "bottom": 2491
+            }
+          }
+        ]
+      },
+      {
+        "text": "MASTER POTATO ACILI",
+        "frame": {
+          "left": 660,
+          "top": 2497,
+          "right": 1284,
+          "bottom": 2555
+        },
+        "lines": [
+          {
+            "text": "MASTER POTATO ACILI",
+            "frame": {
+              "left": 660,
+              "top": 2497,
+              "right": 1284,
+              "bottom": 2555
+            }
+          }
+        ]
+      },
+      {
+        "text": "TADA MOZARELLA PEYN.",
+        "frame": {
+          "left": 661,
+          "top": 2563,
+          "right": 1309,
+          "bottom": 2617
+        },
+        "lines": [
+          {
+            "text": "TADA MOZARELLA PEYN.",
+            "frame": {
+              "left": 661,
+              "top": 2563,
+              "right": 1309,
+              "bottom": 2617
+            }
+          }
+        ]
+      },
+      {
+        "text": "MIGROS PLASTIK POSET",
+        "frame": {
+          "left": 662,
+          "top": 2627,
+          "right": 1314,
+          "bottom": 2682
+        },
+        "lines": [
+          {
+            "text": "MIGROS PLASTIK POSET",
+            "frame": {
+              "left": 662,
+              "top": 2627,
+              "right": 1314,
+              "bottom": 2682
+            }
+          }
+        ]
+      },
+      {
+        "text": "TOPKDV",
+        "frame": {
+          "left": 665,
+          "top": 2754,
+          "right": 1044,
+          "bottom": 2812
+        },
+        "lines": [
+          {
+            "text": "TOPKDV",
+            "frame": {
+              "left": 665,
+              "top": 2754,
+              "right": 1044,
+              "bottom": 2812
+            }
+          }
+        ]
+      },
+      {
+        "text": "TOPLAM",
+        "frame": {
+          "left": 663,
+          "top": 2818,
+          "right": 1049,
+          "bottom": 2878
+        },
+        "lines": [
+          {
+            "text": "TOPLAM",
+            "frame": {
+              "left": 663,
+              "top": 2818,
+              "right": 1049,
+              "bottom": 2878
+            }
+          }
+        ]
+      },
+      {
+        "text": "ORTAK POS",
+        "frame": {
+          "left": 661,
+          "top": 2945,
+          "right": 986,
+          "bottom": 3005
+        },
+        "lines": [
+          {
+            "text": "ORTAK POS",
+            "frame": {
+              "left": 661,
+              "top": 2945,
+              "right": 986,
+              "bottom": 3005
+            }
+          }
+        ]
+      },
+      {
+        "text": "KDV",
+        "frame": {
+          "left": 655,
+          "top": 3085,
+          "right": 753,
+          "bottom": 3135
+        },
+        "lines": [
+          {
+            "text": "KDV",
+            "frame": {
+              "left": 655,
+              "top": 3085,
+              "right": 753,
+              "bottom": 3135
+            }
+          }
+        ]
+      },
+      {
+        "text": "%1",
+        "frame": {
+          "left": 657,
+          "top": 3151,
+          "right": 718,
+          "bottom": 3203
+        },
+        "lines": [
+          {
+            "text": "%1",
+            "frame": {
+              "left": 657,
+              "top": 3151,
+              "right": 718,
+              "bottom": 3203
+            }
+          }
+        ]
+      },
+      {
+        "text": "%20",
+        "frame": {
+          "left": 654,
+          "top": 3214,
+          "right": 757,
+          "bottom": 3270
+        },
+        "lines": [
+          {
+            "text": "%20",
+            "frame": {
+              "left": 654,
+              "top": 3214,
+              "right": 757,
+              "bottom": 3270
+            }
+          }
+        ]
+      },
+      {
+        "text": "%1",
+        "frame": {
+          "left": 1460,
+          "top": 2378,
+          "right": 1511,
+          "bottom": 2420
+        },
+        "lines": [
+          {
+            "text": "%1",
+            "frame": {
+              "left": 1460,
+              "top": 2378,
+              "right": 1511,
+              "bottom": 2420
+            }
+          }
+        ]
+      },
+      {
+        "text": "61",
+        "frame": {
+          "left": 1459,
+          "top": 2449,
+          "right": 1512,
+          "bottom": 2489
+        },
+        "lines": [
+          {
+            "text": "61",
+            "frame": {
+              "left": 1459,
+              "top": 2449,
+              "right": 1512,
+              "bottom": 2489
+            }
+          }
+        ]
+      },
+      {
+        "text": "%1",
+        "frame": {
+          "left": 1456,
+          "top": 2504,
+          "right": 1508,
+          "bottom": 2554
+        },
+        "lines": [
+          {
+            "text": "%1",
+            "frame": {
+              "left": 1456,
+              "top": 2504,
+              "right": 1508,
+              "bottom": 2554
+            }
+          }
+        ]
+      },
+      {
+        "text": "%1",
+        "frame": {
+          "left": 1457,
+          "top": 2567,
+          "right": 1507,
+          "bottom": 2618
+        },
+        "lines": [
+          {
+            "text": "%1",
+            "frame": {
+              "left": 1457,
+              "top": 2567,
+              "right": 1507,
+              "bottom": 2618
+            }
+          }
+        ]
+      },
+      {
+        "text": "%20",
+        "frame": {
+          "left": 1422,
+          "top": 2633,
+          "right": 1518,
+          "bottom": 2686
+        },
+        "lines": [
+          {
+            "text": "%20",
+            "frame": {
+              "left": 1422,
+              "top": 2633,
+              "right": 1518,
+              "bottom": 2686
+            }
+          }
+        ]
+      },
+      {
+        "text": "*18.00",
+        "frame": {
+          "left": 1791,
+          "top": 2386,
+          "right": 1982,
+          "bottom": 2433
+        },
+        "lines": [
+          {
+            "text": "*18.00",
+            "frame": {
+              "left": 1791,
+              "top": 2386,
+              "right": 1982,
+              "bottom": 2433
+            }
+          }
+        ]
+      },
+      {
+        "text": "*lö,00",
+        "frame": {
+          "left": 1773,
+          "top": 2441,
+          "right": 1987,
+          "bottom": 2504
+        },
+        "lines": [
+          {
+            "text": "*lö,00",
+            "frame": {
+              "left": 1773,
+              "top": 2441,
+              "right": 1987,
+              "bottom": 2504
+            }
+          }
+        ]
+      },
+      {
+        "text": "x120,00",
+        "frame": {
+          "left": 1756,
+          "top": 2509,
+          "right": 1982,
+          "bottom": 2569
+        },
+        "lines": [
+          {
+            "text": "x120,00",
+            "frame": {
+              "left": 1756,
+              "top": 2509,
+              "right": 1982,
+              "bottom": 2569
+            }
+          }
+        ]
+      },
+      {
+        "text": "*154,00",
+        "frame": {
+          "left": 1755,
+          "top": 2573,
+          "right": 1981,
+          "bottom": 2631
+        },
+        "lines": [
+          {
+            "text": "*154,00",
+            "frame": {
+              "left": 1755,
+              "top": 2573,
+              "right": 1981,
+              "bottom": 2631
+            }
+          }
+        ]
+      },
+      {
+        "text": "*1,00",
+        "frame": {
+          "left": 1819,
+          "top": 2637,
+          "right": 1979,
+          "bottom": 2694
+        },
+        "lines": [
+          {
+            "text": "*1,00",
+            "frame": {
+              "left": 1819,
+              "top": 2637,
+              "right": 1979,
+              "bottom": 2694
+            }
+          }
+        ]
+      },
+      {
+        "text": "3,24",
+        "frame": {
+          "left": 1655,
+          "top": 2764,
+          "right": 1974,
+          "bottom": 2825
+        },
+        "lines": [
+          {
+            "text": "3,24",
+            "frame": {
+              "left": 1655,
+              "top": 2764,
+              "right": 1974,
+              "bottom": 2825
+            }
+          }
+        ]
+      },
+      {
+        "text": "311, 00",
+        "frame": {
+          "left": 1522,
+          "top": 2828,
+          "right": 1973,
+          "bottom": 2891
+        },
+        "lines": [
+          {
+            "text": "311, 00",
+            "frame": {
+              "left": 1522,
+              "top": 2828,
+              "right": 1973,
+              "bottom": 2891
+            }
+          }
+        ]
+      },
+      {
+        "text": "*311, 00",
+        "frame": {
+          "left": 1750,
+          "top": 2963,
+          "right": 1973,
+          "bottom": 3020
+        },
+        "lines": [
+          {
+            "text": "*311, 00",
+            "frame": {
+              "left": 1750,
+              "top": 2963,
+              "right": 1973,
+              "bottom": 3020
+            }
+          }
+        ]
+      },
+      {
+        "text": "KDV'Lİ TOPLAM",
+        "frame": {
+          "left": 1549,
+          "top": 3084,
+          "right": 1970,
+          "bottom": 3142
+        },
+        "lines": [
+          {
+            "text": "KDV'Lİ TOPLAM",
+            "frame": {
+              "left": 1549,
+              "top": 3084,
+              "right": 1970,
+              "bottom": 3142
+            }
+          }
+        ]
+      },
+      {
+        "text": "*310,00",
+        "frame": {
+          "left": 1745,
+          "top": 3152,
+          "right": 1969,
+          "bottom": 3209
+        },
+        "lines": [
+          {
+            "text": "*310,00",
+            "frame": {
+              "left": 1745,
+              "top": 3152,
+              "right": 1969,
+              "bottom": 3209
+            }
+          }
+        ]
+      },
+      {
+        "text": "*1,00",
+        "frame": {
+          "left": 1809,
+          "top": 3215,
+          "right": 1968,
+          "bottom": 3271
+        },
+        "lines": [
+          {
+            "text": "*1,00",
+            "frame": {
+              "left": 1809,
+              "top": 3215,
+              "right": 1968,
+              "bottom": 3271
+            }
+          }
+        ]
+      },
+      {
+        "text": "KDV TUTARI",
+        "frame": {
+          "left": 1153,
+          "top": 3084,
+          "right": 1475,
+          "bottom": 3135
+        },
+        "lines": [
+          {
+            "text": "KDV TUTARI",
+            "frame": {
+              "left": 1153,
+              "top": 3084,
+              "right": 1475,
+              "bottom": 3135
+            }
+          }
+        ]
+      },
+      {
+        "text": "*3,07",
+        "frame": {
+          "left": 1319,
+          "top": 3149,
+          "right": 1477,
+          "bottom": 3203
+        },
+        "lines": [
+          {
+            "text": "*3,07",
+            "frame": {
+              "left": 1319,
+              "top": 3149,
+              "right": 1477,
+              "bottom": 3203
+            }
+          }
+        ]
+      },
+      {
+        "text": "x0,17",
+        "frame": {
+          "left": 1317,
+          "top": 3208,
+          "right": 1475,
+          "bottom": 3266
+        },
+        "lines": [
+          {
+            "text": "x0,17",
+            "frame": {
+              "left": 1317,
+              "top": 3208,
+              "right": 1475,
+              "bottom": 3266
+            }
+          }
+        ]
+      },
+      {
+        "text": "TamBanaGore teklifin tek seferde 250TL",
+        "frame": {
+          "left": 655,
+          "top": 3390,
+          "right": 1895,
+          "bottom": 3462
+        },
+        "lines": [
+          {
+            "text": "TamBanaGore teklifin tek seferde 250TL",
+            "frame": {
+              "left": 655,
+              "top": 3390,
+              "right": 1895,
+              "bottom": 3462
+            }
+          }
+        ]
+      },
+      {
+        "text": "6395********1033",
+        "frame": {
+          "left": 1445,
+          "top": 3334,
+          "right": 1965,
+          "bottom": 3395
+        },
+        "lines": [
+          {
+            "text": "6395********1033",
+            "frame": {
+              "left": 1445,
+              "top": 3334,
+              "right": 1965,
+              "bottom": 3395
+            }
+          }
+        ]
+      },
+      {
+        "text": "MÜŞTERI BILGİLERI:",
+        "frame": {
+          "left": 648,
+          "top": 3312,
+          "right": 1247,
+          "bottom": 3413
+        },
+        "lines": [
+          {
+            "text": "MÜŞTERI BILGİLERI:",
+            "frame": {
+              "left": 648,
+              "top": 3312,
+              "right": 1247,
+              "bottom": 3413
+            }
+          }
+        ]
+      },
+      {
+        "text": "musli, yulaf, grisini",
+        "frame": {
+          "left": 651,
+          "top": 3444,
+          "right": 1335,
+          "bottom": 3541
+        },
+        "lines": [
+          {
+            "text": "musli, yulaf, grisini",
+            "frame": {
+              "left": 651,
+              "top": 3444,
+              "right": 1335,
+              "bottom": 3541
+            }
+          }
+        ]
+      },
+      {
+        "text": "alimina 20Money=20TL hedi ve!",
+        "frame": {
+          "left": 654,
+          "top": 3502,
+          "right": 1563,
+          "bottom": 3603
+        },
+        "lines": [
+          {
+            "text": "alimina 20Money=20TL hedi ve!",
+            "frame": {
+              "left": 654,
+              "top": 3502,
+              "right": 1563,
+              "bottom": 3603
+            }
+          }
+        ]
+      },
+      {
+        "text": "Yar arlanmak icin",
+        "frame": {
+          "left": 639,
+          "top": 3587,
+          "right": 1183,
+          "bottom": 3662
+        },
+        "lines": [
+          {
+            "text": "Yar arlanmak icin",
+            "frame": {
+              "left": 639,
+              "top": 3587,
+              "right": 1183,
+              "bottom": 3662
+            }
+          }
+        ]
+      },
+      {
+        "text": "TAMBANAGORE vaz 5816e gonder",
+        "frame": {
+          "left": 657,
+          "top": 3635,
+          "right": 1566,
+          "bottom": 3723
+        },
+        "lines": [
+          {
+            "text": "TAMBANAGORE vaz 5816e gonder",
+            "frame": {
+              "left": 657,
+              "top": 3635,
+              "right": 1566,
+              "bottom": 3723
+            }
+          }
+        ]
+      },
+      {
+        "text": "veya Mi gros uygulamasInda gorebi lirsin",
+        "frame": {
+          "left": 629,
+          "top": 3708,
+          "right": 1891,
+          "bottom": 3783
+        },
+        "lines": [
+          {
+            "text": "veya Mi gros uygulamasInda gorebi lirsin",
+            "frame": {
+              "left": 629,
+              "top": 3708,
+              "right": 1891,
+              "bottom": 3783
+            }
+          }
+        ]
+      },
+      {
+        "text": "051941061718260425",
+        "frame": {
+          "left": 1056,
+          "top": 3872,
+          "right": 1637,
+          "bottom": 3954
+        },
+        "lines": [
+          {
+            "text": "051941061718260425",
+            "frame": {
+              "left": 1056,
+              "top": 3872,
+              "right": 1637,
+              "bottom": 3954
+            }
+          }
+        ]
+      }
+    ],
     "confidence": 1
   },
   "expected": {
     "storeName": "Migros",
     "date": "2026-04-25",
-    "totalAmount": 311
+    "totalAmount": 311,
+    "items": [
+      {
+        "name": "DAM A SU 500M!",
+        "quantity": 1,
+        "unitPrice": 18.0,
+        "totalPrice": 18.0,
+        "categoryId": "beverages",
+        "needsReview": false
+      },
+      {
+        "name": "DAMLA SU 500ML",
+        "quantity": 1,
+        "unitPrice": 18.0,
+        "totalPrice": 18.0,
+        "categoryId": "beverages",
+        "needsReview": true
+      },
+      {
+        "name": "MASTER POTATO ACILI",
+        "quantity": 1,
+        "unitPrice": 120.0,
+        "totalPrice": 120.0,
+        "categoryId": "other",
+        "needsReview": false
+      },
+      {
+        "name": "TADA MOZARELLA PEYN.",
+        "quantity": 1,
+        "unitPrice": 154.0,
+        "totalPrice": 154.0,
+        "categoryId": "other",
+        "needsReview": false
+      },
+      {
+        "name": "MIGROS PLASTIK POSET",
+        "quantity": 1,
+        "unitPrice": 1.0,
+        "totalPrice": 1.0,
+        "categoryId": "food",
+        "needsReview": false
+      }
+    ]
   }
 }

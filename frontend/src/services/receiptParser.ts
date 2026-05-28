@@ -1,4 +1,5 @@
 import type { OCRRawResult, OCRLine } from './ocrService';
+import { suggestCategory } from '../constants/categories';
 
 /**
  * Parser çıktısı. Alanlar mock OCR'ın `OCRResult` şemasıyla birebir uyumludur,
@@ -15,26 +16,37 @@ export interface ParsedReceipt {
 }
 
 export interface ParsedItem {
+  /** Ham OCR satırı; sadece baş/son boşluk trim'lendi. Düzeltme YAPILMAZ. */
   name: string;
+  /** Adım 2'de hep 1; Adım 3'te miktar parser'ı gelecek. */
   quantity: number;
-  unitPrice: number;
-  totalPrice: number;
+  /**
+   * Birim fiyat (Adım 2'de totalPrice'a eşit). Sağ kolonda fiyat eşleşmesi
+   * bulunamadıysa null; kullanıcı arayüzünde manuel girişe yönlendirilmeli.
+   */
+  unitPrice: number | null;
+  /**
+   * Satır toplamı. null ise: ne y-hizalı sağ kolonda fiyat bulundu, ne de
+   * aritmetik çapraz-kontrol kurtarabildi.
+   */
+  totalPrice: number | null;
+  /** `suggestCategory(name).id` — mevcut substring kuralları kullanılır. */
   categoryId: string;
+  /** Fiyat null ya da aritmetikle kurtarıldıysa true; ekranda işaretlenmeli. */
+  needsReview: boolean;
 }
 
 /**
  * ML Kit'ten gelen ham OCR sonucunu Türkçe market fişi olarak ayrıştırır.
  * Saf fonksiyon; aynı girdiye aynı çıktıyı verir, side-effect yok.
- *
- * Aşama 2 / M2 — storeName, date, total. Items M4'te eklenecek; şimdilik
- * boş dizi döner.
  */
 export function parseReceipt(raw: OCRRawResult): ParsedReceipt {
+  const totalAmount = extractTotal(raw);
   return {
     storeName: extractStoreName(raw),
     date: extractDate(raw),
-    totalAmount: extractTotal(raw),
-    items: [],
+    totalAmount,
+    items: extractItems(raw, totalAmount),
   };
 }
 
@@ -181,10 +193,15 @@ function formatISO(y: number, m: number, d: number): string {
 // ---------------------------------------------------------------------------
 
 /**
- * Türk para format: 1.234,56 veya 1234,56 veya 1234.56. Opsiyonel * öneki,
- * opsiyonel TL/₺ son eki. Yakalanan grupta sayı kısmı döner.
+ * Türk para format: 1.234,56 veya 1234,56 veya 1234.56. Opsiyonel `*` / `x`
+ * öneki (OCR bazen `*`'ı `x` olarak okuyor), decimal ayraçtan sonra opsiyonel
+ * tek boşluk ("311, 00" gibi), opsiyonel TL/₺ son eki. Anchor `^...$` ile
+ * tüm satırın fiyat olmasını şart koşar — bu sayede `%01`, `Banka ... (1)`,
+ * `*lö,00` gibi yarı-fiyat / fiyat-olmayan satırlar null döner. Loose mod
+ * geriye dönük olarak "fiyatın içindeki sayıyı kap" davranışı sağlıyordu;
+ * Düzen A'da bu yanıltıcı eşleşmelere yol açtığı için strict moda geçildi.
  */
-const PRICE_RE = /\*?\s*(\d{1,3}(?:\.\d{3})*(?:[,.]\d{1,2})|\d+[,.]\d{1,2}|\d+)\s*(?:TL|₺)?/i;
+const PRICE_RE = /^\s*[\*xX]?\s*(\d{1,3}(?:\.\d{3})*(?:[,.]\s?\d{1,2})|\d+[,.]\s?\d{1,2}|\d+)\s*(?:TL|₺)?\s*$/i;
 
 /**
  * Anahtar kelimeler ÖNCELİK sırasında denenir. "ÖDENECEK" en başta, çünkü
@@ -202,11 +219,7 @@ const KDV_TRAP_RE = /K[DO]V/;
 export function extractTotal(raw: OCRRawResult): number {
   if (raw.lines.length === 0) return 0;
 
-  // Sağ kolon eşiği: tüm satırların en sağındaki noktaların %50'sini geçen
-  // satırlar "değer kolonu" sayılır. Bu sayede "Banka Kredi Karti (1)" gibi
-  // sol kolon satırlarındaki sahte sayılar (parantez içindeki 1) elenir.
-  const allRight = Math.max(...raw.lines.map((l) => l.frame.right));
-  const rightColumnThreshold = allRight * 0.5;
+  const rightColumnThreshold = computeRightColumnThreshold(raw.lines);
 
   // Dış döngü = keyword önceliği, iç döngü = satırlar. Eşleşen ilk
   // (keyword, satır) çiftinden bir fiyat çıkartabilirsek anında dönülür.
@@ -296,11 +309,189 @@ export function parsePrice(text: string): number | null {
   if (raw.includes(',') && raw.includes('.')) {
     raw = raw.replace(/\./g, '').replace(',', '.');
   } else if (raw.includes(',')) {
-    // Sadece virgül: decimal ayraç
     raw = raw.replace(',', '.');
   }
-  // Sadece nokta veya hiçbiri: olduğu gibi parseFloat alır
+  // "311. 00" gibi ayraç sonrası boşlukları temizle
+  raw = raw.replace(/\s+/g, '');
 
   const n = parseFloat(raw);
   return Number.isFinite(n) ? n : null;
+}
+
+// ---------------------------------------------------------------------------
+// Ortak yardımcı: değer kolonu (fiyatların yaşadığı sağ şerit) eşiği
+// ---------------------------------------------------------------------------
+
+/**
+ * Sağ kolon eşiği = en sağdaki satırın .right * 0.8. Eşik 0.5 ile başlamıştı
+ * ama Migros'ta orta kolondaki "61" (KDV oranı, OCR'ın % işaretini düşürdüğü)
+ * fiyat sanılıyordu; 0.8'e çıkarınca KDV rate kolonu (left ~1380-1460)
+ * elenip yalnız gerçek fiyat kolonu (left ~1700+) kalıyor.
+ */
+function computeRightColumnThreshold(lines: OCRLine[]): number {
+  if (lines.length === 0) return 0;
+  const maxRight = Math.max(...lines.map((l) => l.frame.right));
+  return maxRight * 0.8;
+}
+
+// ---------------------------------------------------------------------------
+// Ürün — fiyat eşleştirme (Düzen A: iki gerçek kolon, y-hizalı)
+// ---------------------------------------------------------------------------
+
+/** Header bayrak kelimeleri — son y_bottom ürün zonunun ÜST sınırını verir. */
+const HEADER_ANCHOR_KEYWORDS = [
+  'TCKN', 'VKN', 'NIHAI', 'MUSTERI', 'MÜŞTERI', 'VERGI', 'VERGİ',
+  'TARIH', 'TARİH', 'SAAT', 'FIŞ NO', 'FİŞ NO', 'FATURA', 'BELGE',
+  'ETTN', 'SIRA NO', 'MERSIS', 'VD:', 'VD ', 'TEL:', 'TEL ',
+  'MERKEZ', 'TÜR ', 'TÜR:', 'BULVARI', 'MÜKELLEFLER',
+];
+
+/** Footer bayrak kelimeleri — ilk y_top ürün zonunun ALT sınırını verir. */
+const FOOTER_ANCHOR_KEYWORDS = [
+  'TOPKDV', 'TOPLAM', 'TOPLAN', 'TUTAR', 'ÖDENECEK', 'ODENECEK',
+];
+
+/**
+ * Bir satır "kesinlikle ürün değil" kalıplarından birine uyuyorsa true döner.
+ * Header/footer y-zonundan kaçanları da bu seviye temizler.
+ */
+const NON_PRODUCT_KEYWORDS = [
+  'TOPKDV', 'TOPLAM', 'TOPLAN', 'NAKIT', 'PARA OST', 'ORTAK POS', 'KDV',
+  'HALKBANK', 'YAPI KRED', 'GARANTI', 'BANKA', 'KREDI KART', 'ONAY',
+  'REF.NO', 'REF .NO', 'MATRAH', 'ODENECEK', 'ÖDENECEK', 'ETTN',
+  'FATURA', 'BELGE', 'SIRA', 'MERSIS', 'TEL:', 'TEL ',
+  'MERKEZ', 'TÜR:', 'TÜR ', 'MÜŞTERI', 'MUSTERI', 'TCKN', 'VKN',
+  'NIHAI', 'TÜKETICI', 'TUKETICI',
+  'TEŞEKKÜR', 'TESEKKUR', 'BANKACILIK', 'ALIŞVERIS', 'ALISVERIS',
+  'KART TIPI', 'KART NO', 'TERMINAL', 'IMZA', 'FATURAADRES', 'TESCILLI',
+  'GECER', 'KORIJYUNUZ', 'KASIYER', 'MÜKELLEFLER',
+  'BULVARI', 'CADDE', 'MAHALLESI', 'MAHALLES',
+];
+
+function isLikelyNotProduct(line: OCRLine): boolean {
+  const text = line.text.trim();
+  if (text.length === 0) return true;
+
+  // Tek harf bile olsa Türkçe/Latin alfabesinden bir karakter içermelidir;
+  // aksi halde saf sayı/işaret satırıdır ("18, 95", "%01", "120" gibi).
+  if (!/[A-Za-zÇŞĞÜÖİçşğüöı]/.test(text)) return true;
+
+  // Barkod
+  if (/^\d{8,}$/.test(text)) return true;
+
+  // Saf yüzde satırı
+  if (/^\s*%/.test(text)) return true;
+
+  // Miktar / birim satırları
+  // "3 ADx 1,00", "0.682 kg X 259.00" — unit hemen ardından 'x' gelir;
+  // \b kullanmıyoruz çünkü D ile x arasında word boundary yok.
+  if (/^\s*\d+([.,]\d+)?\s*(ad|adet|kg)\s*x/i.test(text)) return true;
+  // "2X" gibi saf "sayı + X" (sondan word boundary lazım)
+  if (/^\s*\d+\s*X\b/i.test(text)) return true;
+  // "1 X 259" (sayı X sayı) benzeri
+  if (/\b\d+\s*X\s*\d/.test(text)) return true;
+
+  // Blok keyword
+  const upper = text.toUpperCase();
+  for (const k of NON_PRODUCT_KEYWORDS) {
+    if (upper.includes(k)) return true;
+  }
+  return false;
+}
+
+/**
+ * Ürün satırlarını çıkartıp fiyatlarıyla eşler (Düzen A).
+ *
+ * 1) Header end y = HEADER_ANCHOR_KEYWORDS içeren satırların max y_bottom'u
+ *    (eşleşme yoksa -∞ — fişin tamamı ürün zonu sayılır, header yine de
+ *    NON_PRODUCT_KEYWORDS filtresine takılır).
+ * 2) Footer start y = FOOTER_ANCHOR_KEYWORDS içeren satırların min y_top'u
+ *    (eşleşme yoksa +∞).
+ * 3) Ürün adayı: sol kolon (left < rightColumnThreshold), y zonu içinde,
+ *    isLikelyNotProduct false. y'ye göre sıralanır.
+ * 4) Her ürün için y-hizalı (tolerance = h * 0.7) sağ kolon satırında
+ *    parsePrice null değilse → fiyat. İlk eşleşeni alır.
+ * 5) Aritmetik çapraz-kontrol: tam olarak BİR kalemin totalPrice'ı null ise,
+ *    eksik = totalAmount - diğerlerinin toplamı; makulse o kaleme atanır,
+ *    needsReview = true.
+ */
+function extractItems(raw: OCRRawResult, totalAmount: number): ParsedItem[] {
+  if (raw.lines.length === 0) return [];
+
+  const rightColumnThreshold = computeRightColumnThreshold(raw.lines);
+
+  // Önce footer'ı bul (FATURA/MERSIS gibi anchor'lar ÜRÜN ZONUNDA yok ama
+  // FOOTER'DA tekrar geçebilir — örn. "FaturaAdres" veya "Mersis No: xxx".
+  // Bu yüzden header taramasını yalnızca footer'ın üstünde yaparız.)
+  let footerStartY = Infinity;
+  for (const line of raw.lines) {
+    const upper = line.text.toUpperCase();
+    if (FOOTER_ANCHOR_KEYWORDS.some((k) => upper.includes(k))) {
+      if (line.frame.top < footerStartY) footerStartY = line.frame.top;
+    }
+  }
+
+  let headerEndY = -Infinity;
+  for (const line of raw.lines) {
+    if (line.frame.bottom >= footerStartY) continue;
+    const upper = line.text.toUpperCase();
+    if (HEADER_ANCHOR_KEYWORDS.some((k) => upper.includes(k))) {
+      if (line.frame.bottom > headerEndY) headerEndY = line.frame.bottom;
+    }
+  }
+
+  // Ürün adaylarını topla
+  const products: OCRLine[] = [];
+  for (const line of raw.lines) {
+    if (line.frame.left >= rightColumnThreshold) continue;
+    if (line.frame.top < headerEndY) continue;
+    if (line.frame.bottom > footerStartY) continue;
+    if (isLikelyNotProduct(line)) continue;
+    products.push(line);
+  }
+  products.sort((a, b) => a.frame.top - b.frame.top);
+
+  // Her ürüne fiyat eşle
+  const items: ParsedItem[] = products.map((prod) => {
+    const yMid = (prod.frame.top + prod.frame.bottom) / 2;
+    const tolerance = (prod.frame.bottom - prod.frame.top) * 0.7;
+    let price: number | null = null;
+    for (const candidate of raw.lines) {
+      if (candidate === prod) continue;
+      if (candidate.frame.left < rightColumnThreshold) continue;
+      const cMid = (candidate.frame.top + candidate.frame.bottom) / 2;
+      if (Math.abs(cMid - yMid) > tolerance) continue;
+      const p = parsePrice(candidate.text);
+      if (p === null) continue;
+      price = p;
+      break;
+    }
+    const cat = suggestCategory(prod.text);
+    return {
+      name: prod.text.trim(),
+      quantity: 1,
+      unitPrice: price,
+      totalPrice: price,
+      categoryId: cat.id,
+      needsReview: price === null,
+    };
+  });
+
+  // Aritmetik çapraz-kontrol: tek eksik kurtarma
+  const nullItems = items.filter((it) => it.totalPrice === null);
+  if (nullItems.length === 1 && totalAmount > 0) {
+    const sumOthers = items.reduce(
+      (s, it) => s + (it.totalPrice ?? 0),
+      0,
+    );
+    const missing = totalAmount - sumOthers;
+    if (missing > 0 && missing < totalAmount) {
+      const item = nullItems[0];
+      item.unitPrice = missing;
+      item.totalPrice = missing;
+      item.needsReview = true;
+    }
+  }
+
+  return items;
 }

@@ -1,7 +1,7 @@
 {
-  "name": "a101",
+  "name": "A101 2026-04-05",
   "raw": {
-    "fullText": "Mgz Adi:Ağridağ Etimesgu / Mgz Kodu:0778\nA101 YENI MAGAZACILIKA.S.\nSeyh Şamil Mh.\n9 602. Sk\nUSKODAR/9480423762\nTARIH\nSAAT\n:05.04.2026\n16:29\nFiŞ NO :\n0209",
+    "fullText": "Mgz Adi:Ağridağ Etimesgu / Mgz Kodu:0778\nA101 YENI MAGAZACILIKA.S.\n9 602. Sk\nSeyh Şamil Mh.\nUSKODAR/9480423762\nTARIH\nSAAT\nFiŞ NO :\n:05.04.2026\n:\n16:29\n0209\nBtLGt FiSt\nTÜR : E-ARSIV FATURA\nMUSTERi TCKN: 11111111111\nBelge No:07780010504608550209\nETTN N0:67da26b9-fbd6-4392-b83a-227f9c05554f\nDANONE180MLKAK.SÚT\nBIRŞAH 200MLKAKAO SÜ\n18, 95\n2X\nDANONE 180ML ÇiL SUT\nBIRŞAH 200ML CiL. SUT\nTOPKDV\nTOPLAM\nNAKIT\nPARA 0STO\n%01\n%01\n%01\n%.01\n*18,95\n*14,00\n*37,90\n*14,00\n*0,84\n*84,85\n*90,00\n*5,15\n0778001 0504608550209\nFaturaAdres https://fatura.al01.com. tr\nMersis No: 0948042376200016\nTescilli infernet Adresi: www.al01 . com. tr\ntRSALt YE YERINE GECER\n<< IMZA >>",
     "lines": [
       {
         "text": "Mgz Adi:Ağridağ Etimesgu / Mgz Kodu:0778",
@@ -22,21 +22,21 @@
         }
       },
       {
-        "text": "Seyh Şamil Mh.",
-        "frame": {
-          "left": 634,
-          "top": 958,
-          "right": 1165,
-          "bottom": 1031
-        }
-      },
-      {
         "text": "9 602. Sk",
         "frame": {
           "left": 632,
           "top": 1034,
           "right": 984,
           "bottom": 1096
+        }
+      },
+      {
+        "text": "Seyh Şamil Mh.",
+        "frame": {
+          "left": 634,
+          "top": 958,
+          "right": 1165,
+          "bottom": 1031
         }
       },
       {
@@ -67,12 +67,30 @@
         }
       },
       {
+        "text": "FiŞ NO :",
+        "frame": {
+          "left": 667,
+          "top": 1422,
+          "right": 969,
+          "bottom": 1488
+        }
+      },
+      {
         "text": ":05.04.2026",
         "frame": {
           "left": 963,
           "top": 1276,
           "right": 1414,
           "bottom": 1341
+        }
+      },
+      {
+        "text": ":",
+        "frame": {
+          "left": 961,
+          "top": 1367,
+          "right": 969,
+          "bottom": 1400
         }
       },
       {
@@ -85,21 +103,111 @@
         }
       },
       {
-        "text": "FiŞ NO :",
-        "frame": {
-          "left": 667,
-          "top": 1422,
-          "right": 969,
-          "bottom": 1488
-        }
-      },
-      {
         "text": "0209",
         "frame": {
           "left": 1029,
           "top": 1431,
           "right": 1181,
           "bottom": 1488
+        }
+      },
+      {
+        "text": "BtLGt FiSt",
+        "frame": {
+          "left": 1254,
+          "top": 1582,
+          "right": 1744,
+          "bottom": 1661
+        }
+      },
+      {
+        "text": "TÜR : E-ARSIV FATURA",
+        "frame": {
+          "left": 587,
+          "top": 1721,
+          "right": 1648,
+          "bottom": 1820
+        }
+      },
+      {
+        "text": "MUSTERi TCKN: 11111111111",
+        "frame": {
+          "left": 626,
+          "top": 1791,
+          "right": 1996,
+          "bottom": 1902
+        }
+      },
+      {
+        "text": "Belge No:07780010504608550209",
+        "frame": {
+          "left": 625,
+          "top": 2062,
+          "right": 1758,
+          "bottom": 2121
+        }
+      },
+      {
+        "text": "ETTN N0:67da26b9-fbd6-4392-b83a-227f9c05554f",
+        "frame": {
+          "left": 623,
+          "top": 2141,
+          "right": 2324,
+          "bottom": 2196
+        }
+      },
+      {
+        "text": "DANONE180MLKAK.SÚT",
+        "frame": {
+          "left": 620,
+          "top": 2299,
+          "right": 1334,
+          "bottom": 2357
+        }
+      },
+      {
+        "text": "BIRŞAH 200MLKAKAO SÜ",
+        "frame": {
+          "left": 624,
+          "top": 2372,
+          "right": 1412,
+          "bottom": 2439
+        }
+      },
+      {
+        "text": "18, 95",
+        "frame": {
+          "left": 775,
+          "top": 2439,
+          "right": 979,
+          "bottom": 2520
+        }
+      },
+      {
+        "text": "2X",
+        "frame": {
+          "left": 621,
+          "top": 2458,
+          "right": 736,
+          "bottom": 2519
+        }
+      },
+      {
+        "text": "DANONE 180ML ÇiL SUT",
+        "frame": {
+          "left": 622,
+          "top": 2530,
+          "right": 1410,
+          "bottom": 2600
+        }
+      },
+      {
+        "text": "BIRŞAH 200ML CiL. SUT",
+        "frame": {
+          "left": 615,
+          "top": 2613,
+          "right": 1412,
+          "bottom": 2685
         }
       },
       {
@@ -139,6 +247,78 @@
         }
       },
       {
+        "text": "%01",
+        "frame": {
+          "left": 1575,
+          "top": 2298,
+          "right": 1671,
+          "bottom": 2351
+        }
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1575,
+          "top": 2372,
+          "right": 1671,
+          "bottom": 2427
+        }
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1576,
+          "top": 2529,
+          "right": 1671,
+          "bottom": 2582
+        }
+      },
+      {
+        "text": "%.01",
+        "frame": {
+          "left": 1578,
+          "top": 2612,
+          "right": 1673,
+          "bottom": 2664
+        }
+      },
+      {
+        "text": "*18,95",
+        "frame": {
+          "left": 2036,
+          "top": 2299,
+          "right": 2253,
+          "bottom": 2356
+        }
+      },
+      {
+        "text": "*14,00",
+        "frame": {
+          "left": 2035,
+          "top": 2372,
+          "right": 2256,
+          "bottom": 2430
+        }
+      },
+      {
+        "text": "*37,90",
+        "frame": {
+          "left": 2037,
+          "top": 2528,
+          "right": 2255,
+          "bottom": 2585
+        }
+      },
+      {
+        "text": "*14,00",
+        "frame": {
+          "left": 2044,
+          "top": 2608,
+          "right": 2260,
+          "bottom": 2667
+        }
+      },
+      {
         "text": "*0,84",
         "frame": {
           "left": 2171,
@@ -173,14 +353,1003 @@
           "right": 2312,
           "bottom": 3143
         }
+      },
+      {
+        "text": "0778001 0504608550209",
+        "frame": {
+          "left": 725,
+          "top": 3371,
+          "right": 1535,
+          "bottom": 3434
+        }
+      },
+      {
+        "text": "FaturaAdres https://fatura.al01.com. tr",
+        "frame": {
+          "left": 629,
+          "top": 3439,
+          "right": 2134,
+          "bottom": 3520
+        }
+      },
+      {
+        "text": "Mersis No: 0948042376200016",
+        "frame": {
+          "left": 630,
+          "top": 3506,
+          "right": 1705,
+          "bottom": 3593
+        }
+      },
+      {
+        "text": "Tescilli infernet Adresi: www.al01 . com. tr",
+        "frame": {
+          "left": 635,
+          "top": 3569,
+          "right": 2250,
+          "bottom": 3662
+        }
+      },
+      {
+        "text": "tRSALt YE YERINE GECER",
+        "frame": {
+          "left": 973,
+          "top": 3627,
+          "right": 2079,
+          "bottom": 3728
+        }
+      },
+      {
+        "text": "<< IMZA >>",
+        "frame": {
+          "left": 1217,
+          "top": 3774,
+          "right": 1823,
+          "bottom": 3868
+        }
       }
     ],
-    "blocks": [],
+    "blocks": [
+      {
+        "text": "Mgz Adi:Ağridağ Etimesgu / Mgz Kodu:0778",
+        "frame": {
+          "left": 633,
+          "top": 805,
+          "right": 2178,
+          "bottom": 915
+        },
+        "lines": [
+          {
+            "text": "Mgz Adi:Ağridağ Etimesgu / Mgz Kodu:0778",
+            "frame": {
+              "left": 633,
+              "top": 805,
+              "right": 2178,
+              "bottom": 915
+            }
+          }
+        ]
+      },
+      {
+        "text": "A101 YENI MAGAZACILIKA.S.",
+        "frame": {
+          "left": 634,
+          "top": 867,
+          "right": 1640,
+          "bottom": 972
+        },
+        "lines": [
+          {
+            "text": "A101 YENI MAGAZACILIKA.S.",
+            "frame": {
+              "left": 634,
+              "top": 867,
+              "right": 1640,
+              "bottom": 972
+            }
+          }
+        ]
+      },
+      {
+        "text": "9 602. Sk",
+        "frame": {
+          "left": 632,
+          "top": 1034,
+          "right": 984,
+          "bottom": 1096
+        },
+        "lines": [
+          {
+            "text": "9 602. Sk",
+            "frame": {
+              "left": 632,
+              "top": 1034,
+              "right": 984,
+              "bottom": 1096
+            }
+          }
+        ]
+      },
+      {
+        "text": "Seyh Şamil Mh.",
+        "frame": {
+          "left": 634,
+          "top": 958,
+          "right": 1165,
+          "bottom": 1031
+        },
+        "lines": [
+          {
+            "text": "Seyh Şamil Mh.",
+            "frame": {
+              "left": 634,
+              "top": 958,
+              "right": 1165,
+              "bottom": 1031
+            }
+          }
+        ]
+      },
+      {
+        "text": "USKODAR/9480423762",
+        "frame": {
+          "left": 631,
+          "top": 1113,
+          "right": 1336,
+          "bottom": 1187
+        },
+        "lines": [
+          {
+            "text": "USKODAR/9480423762",
+            "frame": {
+              "left": 631,
+              "top": 1113,
+              "right": 1336,
+              "bottom": 1187
+            }
+          }
+        ]
+      },
+      {
+        "text": "TARIH",
+        "frame": {
+          "left": 671,
+          "top": 1267,
+          "right": 863,
+          "bottom": 1328
+        },
+        "lines": [
+          {
+            "text": "TARIH",
+            "frame": {
+              "left": 671,
+              "top": 1267,
+              "right": 863,
+              "bottom": 1328
+            }
+          }
+        ]
+      },
+      {
+        "text": "SAAT",
+        "frame": {
+          "left": 670,
+          "top": 1346,
+          "right": 821,
+          "bottom": 1400
+        },
+        "lines": [
+          {
+            "text": "SAAT",
+            "frame": {
+              "left": 670,
+              "top": 1346,
+              "right": 821,
+              "bottom": 1400
+            }
+          }
+        ]
+      },
+      {
+        "text": "FiŞ NO :",
+        "frame": {
+          "left": 667,
+          "top": 1422,
+          "right": 969,
+          "bottom": 1488
+        },
+        "lines": [
+          {
+            "text": "FiŞ NO :",
+            "frame": {
+              "left": 667,
+              "top": 1422,
+              "right": 969,
+              "bottom": 1488
+            }
+          }
+        ]
+      },
+      {
+        "text": ":05.04.2026",
+        "frame": {
+          "left": 963,
+          "top": 1276,
+          "right": 1414,
+          "bottom": 1341
+        },
+        "lines": [
+          {
+            "text": ":05.04.2026",
+            "frame": {
+              "left": 963,
+              "top": 1276,
+              "right": 1414,
+              "bottom": 1341
+            }
+          }
+        ]
+      },
+      {
+        "text": ":",
+        "frame": {
+          "left": 961,
+          "top": 1367,
+          "right": 969,
+          "bottom": 1400
+        },
+        "lines": [
+          {
+            "text": ":",
+            "frame": {
+              "left": 961,
+              "top": 1367,
+              "right": 969,
+              "bottom": 1400
+            }
+          }
+        ]
+      },
+      {
+        "text": "16:29",
+        "frame": {
+          "left": 1033,
+          "top": 1353,
+          "right": 1220,
+          "bottom": 1416
+        },
+        "lines": [
+          {
+            "text": "16:29",
+            "frame": {
+              "left": 1033,
+              "top": 1353,
+              "right": 1220,
+              "bottom": 1416
+            }
+          }
+        ]
+      },
+      {
+        "text": "0209",
+        "frame": {
+          "left": 1029,
+          "top": 1431,
+          "right": 1181,
+          "bottom": 1488
+        },
+        "lines": [
+          {
+            "text": "0209",
+            "frame": {
+              "left": 1029,
+              "top": 1431,
+              "right": 1181,
+              "bottom": 1488
+            }
+          }
+        ]
+      },
+      {
+        "text": "BtLGt FiSt",
+        "frame": {
+          "left": 1254,
+          "top": 1582,
+          "right": 1744,
+          "bottom": 1661
+        },
+        "lines": [
+          {
+            "text": "BtLGt FiSt",
+            "frame": {
+              "left": 1254,
+              "top": 1582,
+              "right": 1744,
+              "bottom": 1661
+            }
+          }
+        ]
+      },
+      {
+        "text": "TÜR : E-ARSIV FATURA",
+        "frame": {
+          "left": 587,
+          "top": 1721,
+          "right": 1648,
+          "bottom": 1820
+        },
+        "lines": [
+          {
+            "text": "TÜR : E-ARSIV FATURA",
+            "frame": {
+              "left": 587,
+              "top": 1721,
+              "right": 1648,
+              "bottom": 1820
+            }
+          }
+        ]
+      },
+      {
+        "text": "MUSTERi TCKN: 11111111111",
+        "frame": {
+          "left": 626,
+          "top": 1791,
+          "right": 1996,
+          "bottom": 1902
+        },
+        "lines": [
+          {
+            "text": "MUSTERi TCKN: 11111111111",
+            "frame": {
+              "left": 626,
+              "top": 1791,
+              "right": 1996,
+              "bottom": 1902
+            }
+          }
+        ]
+      },
+      {
+        "text": "Belge No:07780010504608550209",
+        "frame": {
+          "left": 625,
+          "top": 2062,
+          "right": 1758,
+          "bottom": 2121
+        },
+        "lines": [
+          {
+            "text": "Belge No:07780010504608550209",
+            "frame": {
+              "left": 625,
+              "top": 2062,
+              "right": 1758,
+              "bottom": 2121
+            }
+          }
+        ]
+      },
+      {
+        "text": "ETTN N0:67da26b9-fbd6-4392-b83a-227f9c05554f",
+        "frame": {
+          "left": 623,
+          "top": 2141,
+          "right": 2324,
+          "bottom": 2196
+        },
+        "lines": [
+          {
+            "text": "ETTN N0:67da26b9-fbd6-4392-b83a-227f9c05554f",
+            "frame": {
+              "left": 623,
+              "top": 2141,
+              "right": 2324,
+              "bottom": 2196
+            }
+          }
+        ]
+      },
+      {
+        "text": "DANONE180MLKAK.SÚT",
+        "frame": {
+          "left": 620,
+          "top": 2299,
+          "right": 1334,
+          "bottom": 2357
+        },
+        "lines": [
+          {
+            "text": "DANONE180MLKAK.SÚT",
+            "frame": {
+              "left": 620,
+              "top": 2299,
+              "right": 1334,
+              "bottom": 2357
+            }
+          }
+        ]
+      },
+      {
+        "text": "BIRŞAH 200MLKAKAO SÜ",
+        "frame": {
+          "left": 624,
+          "top": 2372,
+          "right": 1412,
+          "bottom": 2439
+        },
+        "lines": [
+          {
+            "text": "BIRŞAH 200MLKAKAO SÜ",
+            "frame": {
+              "left": 624,
+              "top": 2372,
+              "right": 1412,
+              "bottom": 2439
+            }
+          }
+        ]
+      },
+      {
+        "text": "18, 95",
+        "frame": {
+          "left": 775,
+          "top": 2439,
+          "right": 979,
+          "bottom": 2520
+        },
+        "lines": [
+          {
+            "text": "18, 95",
+            "frame": {
+              "left": 775,
+              "top": 2439,
+              "right": 979,
+              "bottom": 2520
+            }
+          }
+        ]
+      },
+      {
+        "text": "2X",
+        "frame": {
+          "left": 621,
+          "top": 2458,
+          "right": 736,
+          "bottom": 2519
+        },
+        "lines": [
+          {
+            "text": "2X",
+            "frame": {
+              "left": 621,
+              "top": 2458,
+              "right": 736,
+              "bottom": 2519
+            }
+          }
+        ]
+      },
+      {
+        "text": "DANONE 180ML ÇiL SUT",
+        "frame": {
+          "left": 622,
+          "top": 2530,
+          "right": 1410,
+          "bottom": 2600
+        },
+        "lines": [
+          {
+            "text": "DANONE 180ML ÇiL SUT",
+            "frame": {
+              "left": 622,
+              "top": 2530,
+              "right": 1410,
+              "bottom": 2600
+            }
+          }
+        ]
+      },
+      {
+        "text": "BIRŞAH 200ML CiL. SUT",
+        "frame": {
+          "left": 615,
+          "top": 2613,
+          "right": 1412,
+          "bottom": 2685
+        },
+        "lines": [
+          {
+            "text": "BIRŞAH 200ML CiL. SUT",
+            "frame": {
+              "left": 615,
+              "top": 2613,
+              "right": 1412,
+              "bottom": 2685
+            }
+          }
+        ]
+      },
+      {
+        "text": "TOPKDV",
+        "frame": {
+          "left": 650,
+          "top": 2774,
+          "right": 889,
+          "bottom": 2840
+        },
+        "lines": [
+          {
+            "text": "TOPKDV",
+            "frame": {
+              "left": 650,
+              "top": 2774,
+              "right": 889,
+              "bottom": 2840
+            }
+          }
+        ]
+      },
+      {
+        "text": "TOPLAM",
+        "frame": {
+          "left": 647,
+          "top": 2858,
+          "right": 882,
+          "bottom": 2920
+        },
+        "lines": [
+          {
+            "text": "TOPLAM",
+            "frame": {
+              "left": 647,
+              "top": 2858,
+              "right": 882,
+              "bottom": 2920
+            }
+          }
+        ]
+      },
+      {
+        "text": "NAKIT",
+        "frame": {
+          "left": 686,
+          "top": 3021,
+          "right": 882,
+          "bottom": 3077
+        },
+        "lines": [
+          {
+            "text": "NAKIT",
+            "frame": {
+              "left": 686,
+              "top": 3021,
+              "right": 882,
+              "bottom": 3077
+            }
+          }
+        ]
+      },
+      {
+        "text": "PARA 0STO",
+        "frame": {
+          "left": 689,
+          "top": 3100,
+          "right": 1049,
+          "bottom": 3154
+        },
+        "lines": [
+          {
+            "text": "PARA 0STO",
+            "frame": {
+              "left": 689,
+              "top": 3100,
+              "right": 1049,
+              "bottom": 3154
+            }
+          }
+        ]
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1575,
+          "top": 2298,
+          "right": 1671,
+          "bottom": 2351
+        },
+        "lines": [
+          {
+            "text": "%01",
+            "frame": {
+              "left": 1575,
+              "top": 2298,
+              "right": 1671,
+              "bottom": 2351
+            }
+          }
+        ]
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1575,
+          "top": 2372,
+          "right": 1671,
+          "bottom": 2427
+        },
+        "lines": [
+          {
+            "text": "%01",
+            "frame": {
+              "left": 1575,
+              "top": 2372,
+              "right": 1671,
+              "bottom": 2427
+            }
+          }
+        ]
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1576,
+          "top": 2529,
+          "right": 1671,
+          "bottom": 2582
+        },
+        "lines": [
+          {
+            "text": "%01",
+            "frame": {
+              "left": 1576,
+              "top": 2529,
+              "right": 1671,
+              "bottom": 2582
+            }
+          }
+        ]
+      },
+      {
+        "text": "%.01",
+        "frame": {
+          "left": 1578,
+          "top": 2612,
+          "right": 1673,
+          "bottom": 2664
+        },
+        "lines": [
+          {
+            "text": "%.01",
+            "frame": {
+              "left": 1578,
+              "top": 2612,
+              "right": 1673,
+              "bottom": 2664
+            }
+          }
+        ]
+      },
+      {
+        "text": "*18,95",
+        "frame": {
+          "left": 2036,
+          "top": 2299,
+          "right": 2253,
+          "bottom": 2356
+        },
+        "lines": [
+          {
+            "text": "*18,95",
+            "frame": {
+              "left": 2036,
+              "top": 2299,
+              "right": 2253,
+              "bottom": 2356
+            }
+          }
+        ]
+      },
+      {
+        "text": "*14,00",
+        "frame": {
+          "left": 2035,
+          "top": 2372,
+          "right": 2256,
+          "bottom": 2430
+        },
+        "lines": [
+          {
+            "text": "*14,00",
+            "frame": {
+              "left": 2035,
+              "top": 2372,
+              "right": 2256,
+              "bottom": 2430
+            }
+          }
+        ]
+      },
+      {
+        "text": "*37,90",
+        "frame": {
+          "left": 2037,
+          "top": 2528,
+          "right": 2255,
+          "bottom": 2585
+        },
+        "lines": [
+          {
+            "text": "*37,90",
+            "frame": {
+              "left": 2037,
+              "top": 2528,
+              "right": 2255,
+              "bottom": 2585
+            }
+          }
+        ]
+      },
+      {
+        "text": "*14,00",
+        "frame": {
+          "left": 2044,
+          "top": 2608,
+          "right": 2260,
+          "bottom": 2667
+        },
+        "lines": [
+          {
+            "text": "*14,00",
+            "frame": {
+              "left": 2044,
+              "top": 2608,
+              "right": 2260,
+              "bottom": 2667
+            }
+          }
+        ]
+      },
+      {
+        "text": "*0,84",
+        "frame": {
+          "left": 2171,
+          "top": 2754,
+          "right": 2354,
+          "bottom": 2822
+        },
+        "lines": [
+          {
+            "text": "*0,84",
+            "frame": {
+              "left": 2171,
+              "top": 2754,
+              "right": 2354,
+              "bottom": 2822
+            }
+          }
+        ]
+      },
+      {
+        "text": "*84,85",
+        "frame": {
+          "left": 2142,
+          "top": 2831,
+          "right": 2363,
+          "bottom": 2899
+        },
+        "lines": [
+          {
+            "text": "*84,85",
+            "frame": {
+              "left": 2142,
+              "top": 2831,
+              "right": 2363,
+              "bottom": 2899
+            }
+          }
+        ]
+      },
+      {
+        "text": "*90,00",
+        "frame": {
+          "left": 2076,
+          "top": 2990,
+          "right": 2307,
+          "bottom": 3063
+        },
+        "lines": [
+          {
+            "text": "*90,00",
+            "frame": {
+              "left": 2076,
+              "top": 2990,
+              "right": 2307,
+              "bottom": 3063
+            }
+          }
+        ]
+      },
+      {
+        "text": "*5,15",
+        "frame": {
+          "left": 2121,
+          "top": 3072,
+          "right": 2312,
+          "bottom": 3143
+        },
+        "lines": [
+          {
+            "text": "*5,15",
+            "frame": {
+              "left": 2121,
+              "top": 3072,
+              "right": 2312,
+              "bottom": 3143
+            }
+          }
+        ]
+      },
+      {
+        "text": "0778001 0504608550209",
+        "frame": {
+          "left": 725,
+          "top": 3371,
+          "right": 1535,
+          "bottom": 3434
+        },
+        "lines": [
+          {
+            "text": "0778001 0504608550209",
+            "frame": {
+              "left": 725,
+              "top": 3371,
+              "right": 1535,
+              "bottom": 3434
+            }
+          }
+        ]
+      },
+      {
+        "text": "FaturaAdres https://fatura.al01.com. tr",
+        "frame": {
+          "left": 629,
+          "top": 3439,
+          "right": 2134,
+          "bottom": 3520
+        },
+        "lines": [
+          {
+            "text": "FaturaAdres https://fatura.al01.com. tr",
+            "frame": {
+              "left": 629,
+              "top": 3439,
+              "right": 2134,
+              "bottom": 3520
+            }
+          }
+        ]
+      },
+      {
+        "text": "Mersis No: 0948042376200016",
+        "frame": {
+          "left": 630,
+          "top": 3506,
+          "right": 1705,
+          "bottom": 3593
+        },
+        "lines": [
+          {
+            "text": "Mersis No: 0948042376200016",
+            "frame": {
+              "left": 630,
+              "top": 3506,
+              "right": 1705,
+              "bottom": 3593
+            }
+          }
+        ]
+      },
+      {
+        "text": "Tescilli infernet Adresi: www.al01 . com. tr",
+        "frame": {
+          "left": 635,
+          "top": 3569,
+          "right": 2250,
+          "bottom": 3662
+        },
+        "lines": [
+          {
+            "text": "Tescilli infernet Adresi: www.al01 . com. tr",
+            "frame": {
+              "left": 635,
+              "top": 3569,
+              "right": 2250,
+              "bottom": 3662
+            }
+          }
+        ]
+      },
+      {
+        "text": "tRSALt YE YERINE GECER",
+        "frame": {
+          "left": 973,
+          "top": 3627,
+          "right": 2079,
+          "bottom": 3728
+        },
+        "lines": [
+          {
+            "text": "tRSALt YE YERINE GECER",
+            "frame": {
+              "left": 973,
+              "top": 3627,
+              "right": 2079,
+              "bottom": 3728
+            }
+          }
+        ]
+      },
+      {
+        "text": "<< IMZA >>",
+        "frame": {
+          "left": 1217,
+          "top": 3774,
+          "right": 1823,
+          "bottom": 3868
+        },
+        "lines": [
+          {
+            "text": "<< IMZA >>",
+            "frame": {
+              "left": 1217,
+              "top": 3774,
+              "right": 1823,
+              "bottom": 3868
+            }
+          }
+        ]
+      }
+    ],
     "confidence": 1
   },
   "expected": {
     "storeName": "A101",
     "date": "2026-04-05",
-    "totalAmount": 84.85
+    "totalAmount": 84.85,
+    "items": [
+      {
+        "name": "DANONE180MLKAK.SÚT",
+        "quantity": 1,
+        "unitPrice": 18.95,
+        "totalPrice": 18.95,
+        "categoryId": "other",
+        "needsReview": false
+      },
+      {
+        "name": "BIRŞAH 200MLKAKAO SÜ",
+        "quantity": 1,
+        "unitPrice": 14.0,
+        "totalPrice": 14.0,
+        "categoryId": "other",
+        "needsReview": false
+      },
+      {
+        "name": "DANONE 180ML ÇiL SUT",
+        "quantity": 1,
+        "unitPrice": 37.9,
+        "totalPrice": 37.9,
+        "categoryId": "beverages",
+        "needsReview": false
+      },
+      {
+        "name": "BIRŞAH 200ML CiL. SUT",
+        "quantity": 1,
+        "unitPrice": 14.0,
+        "totalPrice": 14.0,
+        "categoryId": "beverages",
+        "needsReview": false
+      }
+    ]
   }
 }

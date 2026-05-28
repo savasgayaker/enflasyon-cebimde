@@ -1,7 +1,7 @@
 {
-  "name": "bim",
+  "name": "BİM 2026-04-14",
   "raw": {
-    "fullText": "E-Arsiv Fatura\nBIY BIRLESIK WAGAZALAR A.S.\n3. ETAP, $ ŞANİL CAD. NO:10 DÜKAN 1-2\nETINESGUT ANKARA\nBüyük Mükellefler VDH 175005 1846\nFATURA NO:T042026088258590\n14.04.2026 17:32\nETTN42893768-84db-4919-9774-53ac78e9830f\nSira No : 359\n61410021404610970359\nTCKN /VKN: 11111111fff-NIHAI TOKETICI\n0.682 ka X 259.00\nPILICPAŘVAKBONFILE 1.\n2 ad X 76.00\nCIKOL. SKR ILAVSZ 1006 51.\nÄLIŞVERIŞ POŞETİ BÍY K20\n4\nad X 18.60\nWEYVELI IÇECEK 200ML &10\nTOPLAN KDV\nOdenecek KDV Dahil Tutar\nBanka Kredi Karti (1)\nYAPI KREDI\n176.64\n150.00\n*1.00\n74.00\n10.13\n*401.64\n*401.64",
+    "fullText": "E-Arsiv Fatura\nBIY BIRLESIK WAGAZALAR A.S.\n3. ETAP, $ ŞANİL CAD. NO:10 DÜKAN 1-2\nETINESGUT ANKARA\nBüyük Mükellefler VDH 175005 1846\nFATURA NO:T042026088258590\n14.04.2026 17:32\nETTN42893768-84db-4919-9774-53ac78e9830f\nSira No : 359\n61410021404610970359\nTCKN /VKN: 11111111fff-NIHAI TOKETICI\n0.682 ka X 259.00\nPILICPAŘVAKBONFILE 1.\n2 ad X 76.00\nCIKOL. SKR ILAVSZ 1006 51.\nÄLIŞVERIŞ POŞETİ BÍY K20\n4\nad X 18.60\nWEYVELI IÇECEK 200ML &10\nTOPLAN KDV\nOdenecek KDV Dahil Tutar\nBanka Kredi Karti (1)\nYAPI KREDI\n176.64\n150.00\n*1.00\n74.00\n10.13\n*401.64\n*401.64\nI:2600251976 T:00096031 423091******796\n14.04.2026 17:33 B:86 S:131\nnay\nKDV\nNo:136405\nWATRAH\n81. 323.41\n810 67.27\nK20 0.83\nRef.No: 3968897858\nKDV TUTAR\n3.23\n*6.73\n*0.17\nKDV DAHIL\n326.64\n74.00\n1.00\nDNC.9 A760 *X* TXX OS9084A40",
     "lines": [
       {
         "text": "E-Arsiv Fatura",
@@ -272,9 +272,1161 @@
           "right": 1921,
           "bottom": 2763
         }
+      },
+      {
+        "text": "I:2600251976 T:00096031 423091******796",
+        "frame": {
+          "left": 804,
+          "top": 2811,
+          "right": 1948,
+          "bottom": 2906
+        }
+      },
+      {
+        "text": "14.04.2026 17:33 B:86 S:131",
+        "frame": {
+          "left": 785,
+          "top": 2886,
+          "right": 1600,
+          "bottom": 2975
+        }
+      },
+      {
+        "text": "nay",
+        "frame": {
+          "left": 841,
+          "top": 2987,
+          "right": 915,
+          "bottom": 3042
+        }
+      },
+      {
+        "text": "KDV",
+        "frame": {
+          "left": 772,
+          "top": 3038,
+          "right": 892,
+          "bottom": 3127
+        }
+      },
+      {
+        "text": "No:136405",
+        "frame": {
+          "left": 952,
+          "top": 2972,
+          "right": 1196,
+          "bottom": 3042
+        }
+      },
+      {
+        "text": "WATRAH",
+        "frame": {
+          "left": 978,
+          "top": 3052,
+          "right": 1142,
+          "bottom": 3123
+        }
+      },
+      {
+        "text": "81. 323.41",
+        "frame": {
+          "left": 807,
+          "top": 3125,
+          "right": 1137,
+          "bottom": 3212
+        }
+      },
+      {
+        "text": "810 67.27",
+        "frame": {
+          "left": 804,
+          "top": 3202,
+          "right": 1114,
+          "bottom": 3285
+        }
+      },
+      {
+        "text": "K20 0.83",
+        "frame": {
+          "left": 804,
+          "top": 3277,
+          "right": 1084,
+          "bottom": 3363
+        }
+      },
+      {
+        "text": "Ref.No: 3968897858",
+        "frame": {
+          "left": 1318,
+          "top": 2977,
+          "right": 1797,
+          "bottom": 3070
+        }
+      },
+      {
+        "text": "KDV TUTAR",
+        "frame": {
+          "left": 1315,
+          "top": 3058,
+          "right": 1569,
+          "bottom": 3145
+        }
+      },
+      {
+        "text": "3.23",
+        "frame": {
+          "left": 1402,
+          "top": 3136,
+          "right": 1540,
+          "bottom": 3213
+        }
+      },
+      {
+        "text": "*6.73",
+        "frame": {
+          "left": 1396,
+          "top": 3208,
+          "right": 1543,
+          "bottom": 3302
+        }
+      },
+      {
+        "text": "*0.17",
+        "frame": {
+          "left": 1397,
+          "top": 3287,
+          "right": 1535,
+          "bottom": 3370
+        }
+      },
+      {
+        "text": "KDV DAHIL",
+        "frame": {
+          "left": 1655,
+          "top": 3067,
+          "right": 1911,
+          "bottom": 3153
+        }
+      },
+      {
+        "text": "326.64",
+        "frame": {
+          "left": 1685,
+          "top": 3147,
+          "right": 1882,
+          "bottom": 3230
+        }
+      },
+      {
+        "text": "74.00",
+        "frame": {
+          "left": 1712,
+          "top": 3228,
+          "right": 1883,
+          "bottom": 3305
+        }
+      },
+      {
+        "text": "1.00",
+        "frame": {
+          "left": 1741,
+          "top": 3302,
+          "right": 1877,
+          "bottom": 3376
+        }
+      },
+      {
+        "text": "DNC.9 A760 *X* TXX OS9084A40",
+        "frame": {
+          "left": 755,
+          "top": 3982,
+          "right": 1924,
+          "bottom": 4031
+        }
       }
     ],
-    "blocks": [],
+    "blocks": [
+      {
+        "text": "E-Arsiv Fatura",
+        "frame": {
+          "left": 1225,
+          "top": 1038,
+          "right": 1622,
+          "bottom": 1122
+        },
+        "lines": [
+          {
+            "text": "E-Arsiv Fatura",
+            "frame": {
+              "left": 1225,
+              "top": 1038,
+              "right": 1622,
+              "bottom": 1122
+            }
+          }
+        ]
+      },
+      {
+        "text": "BIY BIRLESIK WAGAZALAR A.S.",
+        "frame": {
+          "left": 1020,
+          "top": 1103,
+          "right": 1781,
+          "bottom": 1206
+        },
+        "lines": [
+          {
+            "text": "BIY BIRLESIK WAGAZALAR A.S.",
+            "frame": {
+              "left": 1020,
+              "top": 1103,
+              "right": 1781,
+              "bottom": 1206
+            }
+          }
+        ]
+      },
+      {
+        "text": "3. ETAP, $ ŞANİL CAD. NO:10 DÜKAN 1-2",
+        "frame": {
+          "left": 877,
+          "top": 1183,
+          "right": 1932,
+          "bottom": 1283
+        },
+        "lines": [
+          {
+            "text": "3. ETAP, $ ŞANİL CAD. NO:10 DÜKAN 1-2",
+            "frame": {
+              "left": 877,
+              "top": 1183,
+              "right": 1932,
+              "bottom": 1283
+            }
+          }
+        ]
+      },
+      {
+        "text": "ETINESGUT ANKARA",
+        "frame": {
+          "left": 1139,
+          "top": 1259,
+          "right": 1670,
+          "bottom": 1361
+        },
+        "lines": [
+          {
+            "text": "ETINESGUT ANKARA",
+            "frame": {
+              "left": 1139,
+              "top": 1259,
+              "right": 1670,
+              "bottom": 1361
+            }
+          }
+        ]
+      },
+      {
+        "text": "Büyük Mükellefler VDH 175005 1846",
+        "frame": {
+          "left": 960,
+          "top": 1336,
+          "right": 1872,
+          "bottom": 1442
+        },
+        "lines": [
+          {
+            "text": "Büyük Mükellefler VDH 175005 1846",
+            "frame": {
+              "left": 960,
+              "top": 1336,
+              "right": 1872,
+              "bottom": 1442
+            }
+          }
+        ]
+      },
+      {
+        "text": "FATURA NO:T042026088258590",
+        "frame": {
+          "left": 810,
+          "top": 1413,
+          "right": 1580,
+          "bottom": 1511
+        },
+        "lines": [
+          {
+            "text": "FATURA NO:T042026088258590",
+            "frame": {
+              "left": 810,
+              "top": 1413,
+              "right": 1580,
+              "bottom": 1511
+            }
+          }
+        ]
+      },
+      {
+        "text": "14.04.2026 17:32",
+        "frame": {
+          "left": 813,
+          "top": 1484,
+          "right": 1293,
+          "bottom": 1576
+        },
+        "lines": [
+          {
+            "text": "14.04.2026 17:32",
+            "frame": {
+              "left": 813,
+              "top": 1484,
+              "right": 1293,
+              "bottom": 1576
+            }
+          }
+        ]
+      },
+      {
+        "text": "ETTN42893768-84db-4919-9774-53ac78e9830f",
+        "frame": {
+          "left": 836,
+          "top": 1571,
+          "right": 1979,
+          "bottom": 1678
+        },
+        "lines": [
+          {
+            "text": "ETTN42893768-84db-4919-9774-53ac78e9830f",
+            "frame": {
+              "left": 836,
+              "top": 1571,
+              "right": 1979,
+              "bottom": 1678
+            }
+          }
+        ]
+      },
+      {
+        "text": "Sira No : 359",
+        "frame": {
+          "left": 1609,
+          "top": 1512,
+          "right": 1981,
+          "bottom": 1601
+        },
+        "lines": [
+          {
+            "text": "Sira No : 359",
+            "frame": {
+              "left": 1609,
+              "top": 1512,
+              "right": 1981,
+              "bottom": 1601
+            }
+          }
+        ]
+      },
+      {
+        "text": "61410021404610970359",
+        "frame": {
+          "left": 1067,
+          "top": 1776,
+          "right": 1805,
+          "bottom": 1864
+        },
+        "lines": [
+          {
+            "text": "61410021404610970359",
+            "frame": {
+              "left": 1067,
+              "top": 1776,
+              "right": 1805,
+              "bottom": 1864
+            }
+          }
+        ]
+      },
+      {
+        "text": "TCKN /VKN: 11111111fff-NIHAI TOKETICI",
+        "frame": {
+          "left": 796,
+          "top": 1866,
+          "right": 1817,
+          "bottom": 1974
+        },
+        "lines": [
+          {
+            "text": "TCKN /VKN: 11111111fff-NIHAI TOKETICI",
+            "frame": {
+              "left": 796,
+              "top": 1866,
+              "right": 1817,
+              "bottom": 1974
+            }
+          }
+        ]
+      },
+      {
+        "text": "0.682 ka X 259.00",
+        "frame": {
+          "left": 832,
+          "top": 1945,
+          "right": 1301,
+          "bottom": 2036
+        },
+        "lines": [
+          {
+            "text": "0.682 ka X 259.00",
+            "frame": {
+              "left": 832,
+              "top": 1945,
+              "right": 1301,
+              "bottom": 2036
+            }
+          }
+        ]
+      },
+      {
+        "text": "PILICPAŘVAKBONFILE 1.",
+        "frame": {
+          "left": 827,
+          "top": 2019,
+          "right": 1494,
+          "bottom": 2125
+        },
+        "lines": [
+          {
+            "text": "PILICPAŘVAKBONFILE 1.",
+            "frame": {
+              "left": 827,
+              "top": 2019,
+              "right": 1494,
+              "bottom": 2125
+            }
+          }
+        ]
+      },
+      {
+        "text": "2 ad X 76.00",
+        "frame": {
+          "left": 823,
+          "top": 2105,
+          "right": 1169,
+          "bottom": 2198
+        },
+        "lines": [
+          {
+            "text": "2 ad X 76.00",
+            "frame": {
+              "left": 823,
+              "top": 2105,
+              "right": 1169,
+              "bottom": 2198
+            }
+          }
+        ]
+      },
+      {
+        "text": "CIKOL. SKR ILAVSZ 1006 51.",
+        "frame": {
+          "left": 795,
+          "top": 2180,
+          "right": 1496,
+          "bottom": 2286
+        },
+        "lines": [
+          {
+            "text": "CIKOL. SKR ILAVSZ 1006 51.",
+            "frame": {
+              "left": 795,
+              "top": 2180,
+              "right": 1496,
+              "bottom": 2286
+            }
+          }
+        ]
+      },
+      {
+        "text": "ÄLIŞVERIŞ POŞETİ BÍY K20",
+        "frame": {
+          "left": 819,
+          "top": 2261,
+          "right": 1499,
+          "bottom": 2374
+        },
+        "lines": [
+          {
+            "text": "ÄLIŞVERIŞ POŞETİ BÍY K20",
+            "frame": {
+              "left": 819,
+              "top": 2261,
+              "right": 1499,
+              "bottom": 2374
+            }
+          }
+        ]
+      },
+      {
+        "text": "4",
+        "frame": {
+          "left": 817,
+          "top": 2354,
+          "right": 838,
+          "bottom": 2419
+        },
+        "lines": [
+          {
+            "text": "4",
+            "frame": {
+              "left": 817,
+              "top": 2354,
+              "right": 838,
+              "bottom": 2419
+            }
+          }
+        ]
+      },
+      {
+        "text": "ad X 18.60",
+        "frame": {
+          "left": 874,
+          "top": 2343,
+          "right": 1153,
+          "bottom": 2431
+        },
+        "lines": [
+          {
+            "text": "ad X 18.60",
+            "frame": {
+              "left": 874,
+              "top": 2343,
+              "right": 1153,
+              "bottom": 2431
+            }
+          }
+        ]
+      },
+      {
+        "text": "WEYVELI IÇECEK 200ML &10",
+        "frame": {
+          "left": 814,
+          "top": 2427,
+          "right": 1496,
+          "bottom": 2533
+        },
+        "lines": [
+          {
+            "text": "WEYVELI IÇECEK 200ML &10",
+            "frame": {
+              "left": 814,
+              "top": 2427,
+              "right": 1496,
+              "bottom": 2533
+            }
+          }
+        ]
+      },
+      {
+        "text": "TOPLAN KDV",
+        "frame": {
+          "left": 814,
+          "top": 2501,
+          "right": 1098,
+          "bottom": 2591
+        },
+        "lines": [
+          {
+            "text": "TOPLAN KDV",
+            "frame": {
+              "left": 814,
+              "top": 2501,
+              "right": 1098,
+              "bottom": 2591
+            }
+          }
+        ]
+      },
+      {
+        "text": "Odenecek KDV Dahil Tutar",
+        "frame": {
+          "left": 814,
+          "top": 2590,
+          "right": 1493,
+          "bottom": 2668
+        },
+        "lines": [
+          {
+            "text": "Odenecek KDV Dahil Tutar",
+            "frame": {
+              "left": 814,
+              "top": 2590,
+              "right": 1493,
+              "bottom": 2668
+            }
+          }
+        ]
+      },
+      {
+        "text": "Banka Kredi Karti (1)",
+        "frame": {
+          "left": 808,
+          "top": 2669,
+          "right": 1398,
+          "bottom": 2759
+        },
+        "lines": [
+          {
+            "text": "Banka Kredi Karti (1)",
+            "frame": {
+              "left": 808,
+              "top": 2669,
+              "right": 1398,
+              "bottom": 2759
+            }
+          }
+        ]
+      },
+      {
+        "text": "YAPI KREDI",
+        "frame": {
+          "left": 803,
+          "top": 2740,
+          "right": 1090,
+          "bottom": 2825
+        },
+        "lines": [
+          {
+            "text": "YAPI KREDI",
+            "frame": {
+              "left": 803,
+              "top": 2740,
+              "right": 1090,
+              "bottom": 2825
+            }
+          }
+        ]
+      },
+      {
+        "text": "176.64",
+        "frame": {
+          "left": 1741,
+          "top": 2055,
+          "right": 1940,
+          "bottom": 2132
+        },
+        "lines": [
+          {
+            "text": "176.64",
+            "frame": {
+              "left": 1741,
+              "top": 2055,
+              "right": 1940,
+              "bottom": 2132
+            }
+          }
+        ]
+      },
+      {
+        "text": "150.00",
+        "frame": {
+          "left": 1738,
+          "top": 2213,
+          "right": 1937,
+          "bottom": 2291
+        },
+        "lines": [
+          {
+            "text": "150.00",
+            "frame": {
+              "left": 1738,
+              "top": 2213,
+              "right": 1937,
+              "bottom": 2291
+            }
+          }
+        ]
+      },
+      {
+        "text": "*1.00",
+        "frame": {
+          "left": 1795,
+          "top": 2283,
+          "right": 1932,
+          "bottom": 2365
+        },
+        "lines": [
+          {
+            "text": "*1.00",
+            "frame": {
+              "left": 1795,
+              "top": 2283,
+              "right": 1932,
+              "bottom": 2365
+            }
+          }
+        ]
+      },
+      {
+        "text": "74.00",
+        "frame": {
+          "left": 1763,
+          "top": 2456,
+          "right": 1928,
+          "bottom": 2531
+        },
+        "lines": [
+          {
+            "text": "74.00",
+            "frame": {
+              "left": 1763,
+              "top": 2456,
+              "right": 1928,
+              "bottom": 2531
+            }
+          }
+        ]
+      },
+      {
+        "text": "10.13",
+        "frame": {
+          "left": 1762,
+          "top": 2538,
+          "right": 1929,
+          "bottom": 2616
+        },
+        "lines": [
+          {
+            "text": "10.13",
+            "frame": {
+              "left": 1762,
+              "top": 2538,
+              "right": 1929,
+              "bottom": 2616
+            }
+          }
+        ]
+      },
+      {
+        "text": "*401.64",
+        "frame": {
+          "left": 1728,
+          "top": 2611,
+          "right": 1925,
+          "bottom": 2690
+        },
+        "lines": [
+          {
+            "text": "*401.64",
+            "frame": {
+              "left": 1728,
+              "top": 2611,
+              "right": 1925,
+              "bottom": 2690
+            }
+          }
+        ]
+      },
+      {
+        "text": "*401.64",
+        "frame": {
+          "left": 1726,
+          "top": 2688,
+          "right": 1921,
+          "bottom": 2763
+        },
+        "lines": [
+          {
+            "text": "*401.64",
+            "frame": {
+              "left": 1726,
+              "top": 2688,
+              "right": 1921,
+              "bottom": 2763
+            }
+          }
+        ]
+      },
+      {
+        "text": "I:2600251976 T:00096031 423091******796",
+        "frame": {
+          "left": 804,
+          "top": 2811,
+          "right": 1948,
+          "bottom": 2906
+        },
+        "lines": [
+          {
+            "text": "I:2600251976 T:00096031 423091******796",
+            "frame": {
+              "left": 804,
+              "top": 2811,
+              "right": 1948,
+              "bottom": 2906
+            }
+          }
+        ]
+      },
+      {
+        "text": "14.04.2026 17:33 B:86 S:131",
+        "frame": {
+          "left": 785,
+          "top": 2886,
+          "right": 1600,
+          "bottom": 2975
+        },
+        "lines": [
+          {
+            "text": "14.04.2026 17:33 B:86 S:131",
+            "frame": {
+              "left": 785,
+              "top": 2886,
+              "right": 1600,
+              "bottom": 2975
+            }
+          }
+        ]
+      },
+      {
+        "text": "nay",
+        "frame": {
+          "left": 841,
+          "top": 2987,
+          "right": 915,
+          "bottom": 3042
+        },
+        "lines": [
+          {
+            "text": "nay",
+            "frame": {
+              "left": 841,
+              "top": 2987,
+              "right": 915,
+              "bottom": 3042
+            }
+          }
+        ]
+      },
+      {
+        "text": "KDV",
+        "frame": {
+          "left": 772,
+          "top": 3038,
+          "right": 892,
+          "bottom": 3127
+        },
+        "lines": [
+          {
+            "text": "KDV",
+            "frame": {
+              "left": 772,
+              "top": 3038,
+              "right": 892,
+              "bottom": 3127
+            }
+          }
+        ]
+      },
+      {
+        "text": "No:136405",
+        "frame": {
+          "left": 952,
+          "top": 2972,
+          "right": 1196,
+          "bottom": 3042
+        },
+        "lines": [
+          {
+            "text": "No:136405",
+            "frame": {
+              "left": 952,
+              "top": 2972,
+              "right": 1196,
+              "bottom": 3042
+            }
+          }
+        ]
+      },
+      {
+        "text": "WATRAH",
+        "frame": {
+          "left": 978,
+          "top": 3052,
+          "right": 1142,
+          "bottom": 3123
+        },
+        "lines": [
+          {
+            "text": "WATRAH",
+            "frame": {
+              "left": 978,
+              "top": 3052,
+              "right": 1142,
+              "bottom": 3123
+            }
+          }
+        ]
+      },
+      {
+        "text": "81. 323.41",
+        "frame": {
+          "left": 807,
+          "top": 3125,
+          "right": 1137,
+          "bottom": 3212
+        },
+        "lines": [
+          {
+            "text": "81. 323.41",
+            "frame": {
+              "left": 807,
+              "top": 3125,
+              "right": 1137,
+              "bottom": 3212
+            }
+          }
+        ]
+      },
+      {
+        "text": "810 67.27",
+        "frame": {
+          "left": 804,
+          "top": 3202,
+          "right": 1114,
+          "bottom": 3285
+        },
+        "lines": [
+          {
+            "text": "810 67.27",
+            "frame": {
+              "left": 804,
+              "top": 3202,
+              "right": 1114,
+              "bottom": 3285
+            }
+          }
+        ]
+      },
+      {
+        "text": "K20 0.83",
+        "frame": {
+          "left": 804,
+          "top": 3277,
+          "right": 1084,
+          "bottom": 3363
+        },
+        "lines": [
+          {
+            "text": "K20 0.83",
+            "frame": {
+              "left": 804,
+              "top": 3277,
+              "right": 1084,
+              "bottom": 3363
+            }
+          }
+        ]
+      },
+      {
+        "text": "Ref.No: 3968897858",
+        "frame": {
+          "left": 1318,
+          "top": 2977,
+          "right": 1797,
+          "bottom": 3070
+        },
+        "lines": [
+          {
+            "text": "Ref.No: 3968897858",
+            "frame": {
+              "left": 1318,
+              "top": 2977,
+              "right": 1797,
+              "bottom": 3070
+            }
+          }
+        ]
+      },
+      {
+        "text": "KDV TUTAR",
+        "frame": {
+          "left": 1315,
+          "top": 3058,
+          "right": 1569,
+          "bottom": 3145
+        },
+        "lines": [
+          {
+            "text": "KDV TUTAR",
+            "frame": {
+              "left": 1315,
+              "top": 3058,
+              "right": 1569,
+              "bottom": 3145
+            }
+          }
+        ]
+      },
+      {
+        "text": "3.23",
+        "frame": {
+          "left": 1402,
+          "top": 3136,
+          "right": 1540,
+          "bottom": 3213
+        },
+        "lines": [
+          {
+            "text": "3.23",
+            "frame": {
+              "left": 1402,
+              "top": 3136,
+              "right": 1540,
+              "bottom": 3213
+            }
+          }
+        ]
+      },
+      {
+        "text": "*6.73",
+        "frame": {
+          "left": 1396,
+          "top": 3208,
+          "right": 1543,
+          "bottom": 3302
+        },
+        "lines": [
+          {
+            "text": "*6.73",
+            "frame": {
+              "left": 1396,
+              "top": 3208,
+              "right": 1543,
+              "bottom": 3302
+            }
+          }
+        ]
+      },
+      {
+        "text": "*0.17",
+        "frame": {
+          "left": 1397,
+          "top": 3287,
+          "right": 1535,
+          "bottom": 3370
+        },
+        "lines": [
+          {
+            "text": "*0.17",
+            "frame": {
+              "left": 1397,
+              "top": 3287,
+              "right": 1535,
+              "bottom": 3370
+            }
+          }
+        ]
+      },
+      {
+        "text": "KDV DAHIL",
+        "frame": {
+          "left": 1655,
+          "top": 3067,
+          "right": 1911,
+          "bottom": 3153
+        },
+        "lines": [
+          {
+            "text": "KDV DAHIL",
+            "frame": {
+              "left": 1655,
+              "top": 3067,
+              "right": 1911,
+              "bottom": 3153
+            }
+          }
+        ]
+      },
+      {
+        "text": "326.64",
+        "frame": {
+          "left": 1685,
+          "top": 3147,
+          "right": 1882,
+          "bottom": 3230
+        },
+        "lines": [
+          {
+            "text": "326.64",
+            "frame": {
+              "left": 1685,
+              "top": 3147,
+              "right": 1882,
+              "bottom": 3230
+            }
+          }
+        ]
+      },
+      {
+        "text": "74.00",
+        "frame": {
+          "left": 1712,
+          "top": 3228,
+          "right": 1883,
+          "bottom": 3305
+        },
+        "lines": [
+          {
+            "text": "74.00",
+            "frame": {
+              "left": 1712,
+              "top": 3228,
+              "right": 1883,
+              "bottom": 3305
+            }
+          }
+        ]
+      },
+      {
+        "text": "1.00",
+        "frame": {
+          "left": 1741,
+          "top": 3302,
+          "right": 1877,
+          "bottom": 3376
+        },
+        "lines": [
+          {
+            "text": "1.00",
+            "frame": {
+              "left": 1741,
+              "top": 3302,
+              "right": 1877,
+              "bottom": 3376
+            }
+          }
+        ]
+      },
+      {
+        "text": "DNC.9 A760 *X* TXX OS9084A40",
+        "frame": {
+          "left": 755,
+          "top": 3982,
+          "right": 1924,
+          "bottom": 4031
+        },
+        "lines": [
+          {
+            "text": "DNC.9 A760 *X* TXX OS9084A40",
+            "frame": {
+              "left": 755,
+              "top": 3982,
+              "right": 1924,
+              "bottom": 4031
+            }
+          }
+        ]
+      }
+    ],
     "confidence": 1
   },
   "expected": {

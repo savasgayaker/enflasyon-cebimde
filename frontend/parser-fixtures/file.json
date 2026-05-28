@@ -1,7 +1,7 @@
 {
-  "name": "file",
+  "name": "File 2026-04-12",
   "raw": {
-    "fullText": "v9Mee\n(a\nE-Arsiv Fatura\nFILE SUSUZ7 VENIMAHALLE / ANKARA\nFILE MARKET MAĞAZACILIK ANONIM ŞIRKETI\nSUSUZ MAHALLESI, AKINCILAR CADDESI, PARA\nDISE GÖKSU SITESI 21/C ENIMAHALLE / ANK\nSar igazi VOM 3671427056\nFATURA NO:Y042026003627091\n12.04.2026 12:15\nETTNC66c5lel-0b66-408d-a65e-36acâb6b3d8c\nSira No : 177\n22990021204600640177\nTCKN/VKN:1 1111111111-NIHAI TUKETICi\nCOCA COLA ZERO 1L\n210\nGLUTENSIZ KöZ BIBERL 21.\nHARRAS SEC PAS 120 G 21I.\nGLUTENSZ BAHR.HUMUS %A.\n*GLUTENSIZ ÜRÜN#\n0.144 kg X 690.00\nKRUVASAN+ KG\n0.244 kg X 295.00\nBÖREK KG\n0.116 kg X 450.00\n21.\n21.\nKURABI VE KG\nEKŞ.M.ARTIZAN ZEVTIN 1.\n21.\n220\nALIŞVERIS POŞETİ\nTOPLAM KOV\nOdenecek KDV Dahil Tutar\nIppos Kredi Kartı (1)\nGARANTI BANKASI\n*60.00\n*79.50\n*345.00\n*79.50\n*99.36\n*71.98\n*52.20\n*75.00\n*1.00\n*13.57\n4863.54\n*863.54",
+    "fullText": "v9Mee\n(a\nE-Arsiv Fatura\nFILE SUSUZ7 VENIMAHALLE / ANKARA\nFILE MARKET MAĞAZACILIK ANONIM ŞIRKETI\nSUSUZ MAHALLESI, AKINCILAR CADDESI, PARA\nDISE GÖKSU SITESI 21/C ENIMAHALLE / ANK\nSar igazi VOM 3671427056\nFATURA NO:Y042026003627091\n12.04.2026 12:15\nETTNC66c5lel-0b66-408d-a65e-36acâb6b3d8c\nSira No : 177\n22990021204600640177\nTCKN/VKN:1 1111111111-NIHAI TUKETICi\nCOCA COLA ZERO 1L\n210\nGLUTENSIZ KöZ BIBERL 21.\nHARRAS SEC PAS 120 G 21I.\nGLUTENSZ BAHR.HUMUS %A.\n*GLUTENSIZ ÜRÜN#\n0.144 kg X 690.00\nKRUVASAN+ KG\n0.244 kg X 295.00\nBÖREK KG\n0.116 kg X 450.00\n21.\n21.\nKURABI VE KG\nEKŞ.M.ARTIZAN ZEVTIN 1.\n21.\n220\nALIŞVERIS POŞETİ\nTOPLAM KOV\nOdenecek KDV Dahil Tutar\nIppos Kredi Kartı (1)\nGARANTI BANKASI\n*60.00\n*79.50\n*345.00\n*79.50\n*99.36\n*71.98\n*52.20\n*75.00\n*1.00\n*13.57\n4863.54\n*863.54\nI:2936924 T04284260 423091 ******7968\n12.04.2026 12:15 B:845 S:5792\nOnay No:079154\nKDV\nX1.\n%10\n20\nMATRAH\n794.69\n54.55\n0.83\nRef .No :610258644814\nKDV TUTAR\n*7.95\n*5.45\n*0.17\nKDV DAHIL\n*802.54\n*60.00\n*1.00",
     "lines": [
       {
         "text": "v9Mee",
@@ -434,9 +434,1550 @@
           "right": 1892,
           "bottom": 2992
         }
+      },
+      {
+        "text": "I:2936924 T04284260 423091 ******7968",
+        "frame": {
+          "left": 961,
+          "top": 3132,
+          "right": 1874,
+          "bottom": 3205
+        }
+      },
+      {
+        "text": "12.04.2026 12:15 B:845 S:5792",
+        "frame": {
+          "left": 958,
+          "top": 3202,
+          "right": 1675,
+          "bottom": 3267
+        }
+      },
+      {
+        "text": "Onay No:079154",
+        "frame": {
+          "left": 952,
+          "top": 3272,
+          "right": 1285,
+          "bottom": 3332
+        }
+      },
+      {
+        "text": "KDV",
+        "frame": {
+          "left": 951,
+          "top": 3483,
+          "right": 1021,
+          "bottom": 3537
+        }
+      },
+      {
+        "text": "X1.",
+        "frame": {
+          "left": 952,
+          "top": 3551,
+          "right": 1016,
+          "bottom": 3609
+        }
+      },
+      {
+        "text": "%10",
+        "frame": {
+          "left": 951,
+          "top": 3621,
+          "right": 1022,
+          "bottom": 3677
+        }
+      },
+      {
+        "text": "20",
+        "frame": {
+          "left": 949,
+          "top": 3689,
+          "right": 1022,
+          "bottom": 3749
+        }
+      },
+      {
+        "text": "MATRAH",
+        "frame": {
+          "left": 1096,
+          "top": 3483,
+          "right": 1239,
+          "bottom": 3539
+        }
+      },
+      {
+        "text": "794.69",
+        "frame": {
+          "left": 1096,
+          "top": 3553,
+          "right": 1239,
+          "bottom": 3610
+        }
+      },
+      {
+        "text": "54.55",
+        "frame": {
+          "left": 1094,
+          "top": 3624,
+          "right": 1215,
+          "bottom": 3683
+        }
+      },
+      {
+        "text": "0.83",
+        "frame": {
+          "left": 1093,
+          "top": 3694,
+          "right": 1190,
+          "bottom": 3754
+        }
+      },
+      {
+        "text": "Ref .No :610258644814",
+        "frame": {
+          "left": 1385,
+          "top": 3279,
+          "right": 1844,
+          "bottom": 3339
+        }
+      },
+      {
+        "text": "KDV TUTAR",
+        "frame": {
+          "left": 1385,
+          "top": 3488,
+          "right": 1602,
+          "bottom": 3551
+        }
+      },
+      {
+        "text": "*7.95",
+        "frame": {
+          "left": 1459,
+          "top": 3563,
+          "right": 1577,
+          "bottom": 3618
+        }
+      },
+      {
+        "text": "*5.45",
+        "frame": {
+          "left": 1459,
+          "top": 3634,
+          "right": 1577,
+          "bottom": 3693
+        }
+      },
+      {
+        "text": "*0.17",
+        "frame": {
+          "left": 1459,
+          "top": 3708,
+          "right": 1574,
+          "bottom": 3766
+        }
+      },
+      {
+        "text": "KDV DAHIL",
+        "frame": {
+          "left": 1675,
+          "top": 3495,
+          "right": 1896,
+          "bottom": 3558
+        }
+      },
+      {
+        "text": "*802.54",
+        "frame": {
+          "left": 1703,
+          "top": 3567,
+          "right": 1870,
+          "bottom": 3633
+        }
+      },
+      {
+        "text": "*60.00",
+        "frame": {
+          "left": 1727,
+          "top": 3640,
+          "right": 1873,
+          "bottom": 3706
+        }
+      },
+      {
+        "text": "*1.00",
+        "frame": {
+          "left": 1752,
+          "top": 3719,
+          "right": 1873,
+          "bottom": 3775
+        }
       }
     ],
-    "blocks": [],
+    "blocks": [
+      {
+        "text": "v9Mee",
+        "frame": {
+          "left": 1241,
+          "top": 284,
+          "right": 1366,
+          "bottom": 331
+        },
+        "lines": [
+          {
+            "text": "v9Mee",
+            "frame": {
+              "left": 1241,
+              "top": 284,
+              "right": 1366,
+              "bottom": 331
+            }
+          }
+        ]
+      },
+      {
+        "text": "(a",
+        "frame": {
+          "left": 1015,
+          "top": 328,
+          "right": 1378,
+          "bottom": 547
+        },
+        "lines": [
+          {
+            "text": "(a",
+            "frame": {
+              "left": 1015,
+              "top": 328,
+              "right": 1378,
+              "bottom": 547
+            }
+          }
+        ]
+      },
+      {
+        "text": "E-Arsiv Fatura",
+        "frame": {
+          "left": 1263,
+          "top": 701,
+          "right": 1602,
+          "bottom": 763
+        },
+        "lines": [
+          {
+            "text": "E-Arsiv Fatura",
+            "frame": {
+              "left": 1263,
+              "top": 701,
+              "right": 1602,
+              "bottom": 763
+            }
+          }
+        ]
+      },
+      {
+        "text": "FILE SUSUZ7 VENIMAHALLE / ANKARA",
+        "frame": {
+          "left": 993,
+          "top": 827,
+          "right": 1821,
+          "bottom": 906
+        },
+        "lines": [
+          {
+            "text": "FILE SUSUZ7 VENIMAHALLE / ANKARA",
+            "frame": {
+              "left": 993,
+              "top": 827,
+              "right": 1821,
+              "bottom": 906
+            }
+          }
+        ]
+      },
+      {
+        "text": "FILE MARKET MAĞAZACILIK ANONIM ŞIRKETI",
+        "frame": {
+          "left": 974,
+          "top": 900,
+          "right": 1892,
+          "bottom": 972
+        },
+        "lines": [
+          {
+            "text": "FILE MARKET MAĞAZACILIK ANONIM ŞIRKETI",
+            "frame": {
+              "left": 974,
+              "top": 900,
+              "right": 1892,
+              "bottom": 972
+            }
+          }
+        ]
+      },
+      {
+        "text": "SUSUZ MAHALLESI, AKINCILAR CADDESI, PARA",
+        "frame": {
+          "left": 949,
+          "top": 971,
+          "right": 1920,
+          "bottom": 1042
+        },
+        "lines": [
+          {
+            "text": "SUSUZ MAHALLESI, AKINCILAR CADDESI, PARA",
+            "frame": {
+              "left": 949,
+              "top": 971,
+              "right": 1920,
+              "bottom": 1042
+            }
+          }
+        ]
+      },
+      {
+        "text": "DISE GÖKSU SITESI 21/C ENIMAHALLE / ANK",
+        "frame": {
+          "left": 951,
+          "top": 1045,
+          "right": 1896,
+          "bottom": 1103
+        },
+        "lines": [
+          {
+            "text": "DISE GÖKSU SITESI 21/C ENIMAHALLE / ANK",
+            "frame": {
+              "left": 951,
+              "top": 1045,
+              "right": 1896,
+              "bottom": 1103
+            }
+          }
+        ]
+      },
+      {
+        "text": "Sar igazi VOM 3671427056",
+        "frame": {
+          "left": 1141,
+          "top": 1118,
+          "right": 1697,
+          "bottom": 1175
+        },
+        "lines": [
+          {
+            "text": "Sar igazi VOM 3671427056",
+            "frame": {
+              "left": 1141,
+              "top": 1118,
+              "right": 1697,
+              "bottom": 1175
+            }
+          }
+        ]
+      },
+      {
+        "text": "FATURA NO:Y042026003627091",
+        "frame": {
+          "left": 956,
+          "top": 1257,
+          "right": 1565,
+          "bottom": 1320
+        },
+        "lines": [
+          {
+            "text": "FATURA NO:Y042026003627091",
+            "frame": {
+              "left": 956,
+              "top": 1257,
+              "right": 1565,
+              "bottom": 1320
+            }
+          }
+        ]
+      },
+      {
+        "text": "12.04.2026 12:15",
+        "frame": {
+          "left": 960,
+          "top": 1332,
+          "right": 1335,
+          "bottom": 1384
+        },
+        "lines": [
+          {
+            "text": "12.04.2026 12:15",
+            "frame": {
+              "left": 960,
+              "top": 1332,
+              "right": 1335,
+              "bottom": 1384
+            }
+          }
+        ]
+      },
+      {
+        "text": "ETTNC66c5lel-0b66-408d-a65e-36acâb6b3d8c",
+        "frame": {
+          "left": 954,
+          "top": 1400,
+          "right": 1913,
+          "bottom": 1455
+        },
+        "lines": [
+          {
+            "text": "ETTNC66c5lel-0b66-408d-a65e-36acâb6b3d8c",
+            "frame": {
+              "left": 954,
+              "top": 1400,
+              "right": 1913,
+              "bottom": 1455
+            }
+          }
+        ]
+      },
+      {
+        "text": "Sira No : 177",
+        "frame": {
+          "left": 1600,
+          "top": 1330,
+          "right": 1915,
+          "bottom": 1385
+        },
+        "lines": [
+          {
+            "text": "Sira No : 177",
+            "frame": {
+              "left": 1600,
+              "top": 1330,
+              "right": 1915,
+              "bottom": 1385
+            }
+          }
+        ]
+      },
+      {
+        "text": "22990021204600640177",
+        "frame": {
+          "left": 1153,
+          "top": 1565,
+          "right": 1836,
+          "bottom": 1623
+        },
+        "lines": [
+          {
+            "text": "22990021204600640177",
+            "frame": {
+              "left": 1153,
+              "top": 1565,
+              "right": 1836,
+              "bottom": 1623
+            }
+          }
+        ]
+      },
+      {
+        "text": "TCKN/VKN:1 1111111111-NIHAI TUKETICi",
+        "frame": {
+          "left": 957,
+          "top": 1638,
+          "right": 1785,
+          "bottom": 1692
+        },
+        "lines": [
+          {
+            "text": "TCKN/VKN:1 1111111111-NIHAI TUKETICi",
+            "frame": {
+              "left": 957,
+              "top": 1638,
+              "right": 1785,
+              "bottom": 1692
+            }
+          }
+        ]
+      },
+      {
+        "text": "COCA COLA ZERO 1L",
+        "frame": {
+          "left": 951,
+          "top": 1773,
+          "right": 1356,
+          "bottom": 1827
+        },
+        "lines": [
+          {
+            "text": "COCA COLA ZERO 1L",
+            "frame": {
+              "left": 951,
+              "top": 1773,
+              "right": 1356,
+              "bottom": 1827
+            }
+          }
+        ]
+      },
+      {
+        "text": "210",
+        "frame": {
+          "left": 1459,
+          "top": 1776,
+          "right": 1529,
+          "bottom": 1828
+        },
+        "lines": [
+          {
+            "text": "210",
+            "frame": {
+              "left": 1459,
+              "top": 1776,
+              "right": 1529,
+              "bottom": 1828
+            }
+          }
+        ]
+      },
+      {
+        "text": "GLUTENSIZ KöZ BIBERL 21.",
+        "frame": {
+          "left": 951,
+          "top": 1842,
+          "right": 1523,
+          "bottom": 1896
+        },
+        "lines": [
+          {
+            "text": "GLUTENSIZ KöZ BIBERL 21.",
+            "frame": {
+              "left": 951,
+              "top": 1842,
+              "right": 1523,
+              "bottom": 1896
+            }
+          }
+        ]
+      },
+      {
+        "text": "HARRAS SEC PAS 120 G 21I.",
+        "frame": {
+          "left": 950,
+          "top": 1911,
+          "right": 1524,
+          "bottom": 1968
+        },
+        "lines": [
+          {
+            "text": "HARRAS SEC PAS 120 G 21I.",
+            "frame": {
+              "left": 950,
+              "top": 1911,
+              "right": 1524,
+              "bottom": 1968
+            }
+          }
+        ]
+      },
+      {
+        "text": "GLUTENSZ BAHR.HUMUS %A.",
+        "frame": {
+          "left": 950,
+          "top": 1980,
+          "right": 1524,
+          "bottom": 2034
+        },
+        "lines": [
+          {
+            "text": "GLUTENSZ BAHR.HUMUS %A.",
+            "frame": {
+              "left": 950,
+              "top": 1980,
+              "right": 1524,
+              "bottom": 2034
+            }
+          }
+        ]
+      },
+      {
+        "text": "*GLUTENSIZ ÜRÜN#",
+        "frame": {
+          "left": 950,
+          "top": 2049,
+          "right": 1337,
+          "bottom": 2103
+        },
+        "lines": [
+          {
+            "text": "*GLUTENSIZ ÜRÜN#",
+            "frame": {
+              "left": 950,
+              "top": 2049,
+              "right": 1337,
+              "bottom": 2103
+            }
+          }
+        ]
+      },
+      {
+        "text": "0.144 kg X 690.00",
+        "frame": {
+          "left": 949,
+          "top": 2119,
+          "right": 1361,
+          "bottom": 2176
+        },
+        "lines": [
+          {
+            "text": "0.144 kg X 690.00",
+            "frame": {
+              "left": 949,
+              "top": 2119,
+              "right": 1361,
+              "bottom": 2176
+            }
+          }
+        ]
+      },
+      {
+        "text": "KRUVASAN+ KG",
+        "frame": {
+          "left": 949,
+          "top": 2187,
+          "right": 1240,
+          "bottom": 2240
+        },
+        "lines": [
+          {
+            "text": "KRUVASAN+ KG",
+            "frame": {
+              "left": 949,
+              "top": 2187,
+              "right": 1240,
+              "bottom": 2240
+            }
+          }
+        ]
+      },
+      {
+        "text": "0.244 kg X 295.00",
+        "frame": {
+          "left": 949,
+          "top": 2257,
+          "right": 1361,
+          "bottom": 2312
+        },
+        "lines": [
+          {
+            "text": "0.244 kg X 295.00",
+            "frame": {
+              "left": 949,
+              "top": 2257,
+              "right": 1361,
+              "bottom": 2312
+            }
+          }
+        ]
+      },
+      {
+        "text": "BÖREK KG",
+        "frame": {
+          "left": 950,
+          "top": 2325,
+          "right": 1142,
+          "bottom": 2377
+        },
+        "lines": [
+          {
+            "text": "BÖREK KG",
+            "frame": {
+              "left": 950,
+              "top": 2325,
+              "right": 1142,
+              "bottom": 2377
+            }
+          }
+        ]
+      },
+      {
+        "text": "0.116 kg X 450.00",
+        "frame": {
+          "left": 951,
+          "top": 2392,
+          "right": 1361,
+          "bottom": 2449
+        },
+        "lines": [
+          {
+            "text": "0.116 kg X 450.00",
+            "frame": {
+              "left": 951,
+              "top": 2392,
+              "right": 1361,
+              "bottom": 2449
+            }
+          }
+        ]
+      },
+      {
+        "text": "21.",
+        "frame": {
+          "left": 1461,
+          "top": 2187,
+          "right": 1526,
+          "bottom": 2238
+        },
+        "lines": [
+          {
+            "text": "21.",
+            "frame": {
+              "left": 1461,
+              "top": 2187,
+              "right": 1526,
+              "bottom": 2238
+            }
+          }
+        ]
+      },
+      {
+        "text": "21.",
+        "frame": {
+          "left": 1461,
+          "top": 2324,
+          "right": 1525,
+          "bottom": 2376
+        },
+        "lines": [
+          {
+            "text": "21.",
+            "frame": {
+              "left": 1461,
+              "top": 2324,
+              "right": 1525,
+              "bottom": 2376
+            }
+          }
+        ]
+      },
+      {
+        "text": "KURABI VE KG",
+        "frame": {
+          "left": 952,
+          "top": 2460,
+          "right": 1215,
+          "bottom": 2514
+        },
+        "lines": [
+          {
+            "text": "KURABI VE KG",
+            "frame": {
+              "left": 952,
+              "top": 2460,
+              "right": 1215,
+              "bottom": 2514
+            }
+          }
+        ]
+      },
+      {
+        "text": "EKŞ.M.ARTIZAN ZEVTIN 1.",
+        "frame": {
+          "left": 954,
+          "top": 2526,
+          "right": 1524,
+          "bottom": 2583
+        },
+        "lines": [
+          {
+            "text": "EKŞ.M.ARTIZAN ZEVTIN 1.",
+            "frame": {
+              "left": 954,
+              "top": 2526,
+              "right": 1524,
+              "bottom": 2583
+            }
+          }
+        ]
+      },
+      {
+        "text": "21.",
+        "frame": {
+          "left": 1461,
+          "top": 2460,
+          "right": 1524,
+          "bottom": 2510
+        },
+        "lines": [
+          {
+            "text": "21.",
+            "frame": {
+              "left": 1461,
+              "top": 2460,
+              "right": 1524,
+              "bottom": 2510
+            }
+          }
+        ]
+      },
+      {
+        "text": "220",
+        "frame": {
+          "left": 1461,
+          "top": 2597,
+          "right": 1531,
+          "bottom": 2648
+        },
+        "lines": [
+          {
+            "text": "220",
+            "frame": {
+              "left": 1461,
+              "top": 2597,
+              "right": 1531,
+              "bottom": 2648
+            }
+          }
+        ]
+      },
+      {
+        "text": "ALIŞVERIS POŞETİ",
+        "frame": {
+          "left": 955,
+          "top": 2593,
+          "right": 1332,
+          "bottom": 2655
+        },
+        "lines": [
+          {
+            "text": "ALIŞVERIS POŞETİ",
+            "frame": {
+              "left": 955,
+              "top": 2593,
+              "right": 1332,
+              "bottom": 2655
+            }
+          }
+        ]
+      },
+      {
+        "text": "TOPLAM KOV",
+        "frame": {
+          "left": 960,
+          "top": 2724,
+          "right": 1196,
+          "bottom": 2774
+        },
+        "lines": [
+          {
+            "text": "TOPLAM KOV",
+            "frame": {
+              "left": 960,
+              "top": 2724,
+              "right": 1196,
+              "bottom": 2774
+            }
+          }
+        ]
+      },
+      {
+        "text": "Odenecek KDV Dahil Tutar",
+        "frame": {
+          "left": 958,
+          "top": 2790,
+          "right": 1530,
+          "bottom": 2850
+        },
+        "lines": [
+          {
+            "text": "Odenecek KDV Dahil Tutar",
+            "frame": {
+              "left": 958,
+              "top": 2790,
+              "right": 1530,
+              "bottom": 2850
+            }
+          }
+        ]
+      },
+      {
+        "text": "Ippos Kredi Kartı (1)",
+        "frame": {
+          "left": 962,
+          "top": 2933,
+          "right": 1458,
+          "bottom": 2990
+        },
+        "lines": [
+          {
+            "text": "Ippos Kredi Kartı (1)",
+            "frame": {
+              "left": 962,
+              "top": 2933,
+              "right": 1458,
+              "bottom": 2990
+            }
+          }
+        ]
+      },
+      {
+        "text": "GARANTI BANKASI",
+        "frame": {
+          "left": 954,
+          "top": 3067,
+          "right": 1307,
+          "bottom": 3129
+        },
+        "lines": [
+          {
+            "text": "GARANTI BANKASI",
+            "frame": {
+              "left": 954,
+              "top": 3067,
+              "right": 1307,
+              "bottom": 3129
+            }
+          }
+        ]
+      },
+      {
+        "text": "*60.00",
+        "frame": {
+          "left": 1746,
+          "top": 1774,
+          "right": 1888,
+          "bottom": 1829
+        },
+        "lines": [
+          {
+            "text": "*60.00",
+            "frame": {
+              "left": 1746,
+              "top": 1774,
+              "right": 1888,
+              "bottom": 1829
+            }
+          }
+        ]
+      },
+      {
+        "text": "*79.50",
+        "frame": {
+          "left": 1747,
+          "top": 1842,
+          "right": 1889,
+          "bottom": 1897
+        },
+        "lines": [
+          {
+            "text": "*79.50",
+            "frame": {
+              "left": 1747,
+              "top": 1842,
+              "right": 1889,
+              "bottom": 1897
+            }
+          }
+        ]
+      },
+      {
+        "text": "*345.00",
+        "frame": {
+          "left": 1724,
+          "top": 1909,
+          "right": 1890,
+          "bottom": 1965
+        },
+        "lines": [
+          {
+            "text": "*345.00",
+            "frame": {
+              "left": 1724,
+              "top": 1909,
+              "right": 1890,
+              "bottom": 1965
+            }
+          }
+        ]
+      },
+      {
+        "text": "*79.50",
+        "frame": {
+          "left": 1749,
+          "top": 1978,
+          "right": 1892,
+          "bottom": 2033
+        },
+        "lines": [
+          {
+            "text": "*79.50",
+            "frame": {
+              "left": 1749,
+              "top": 1978,
+              "right": 1892,
+              "bottom": 2033
+            }
+          }
+        ]
+      },
+      {
+        "text": "*99.36",
+        "frame": {
+          "left": 1751,
+          "top": 2188,
+          "right": 1892,
+          "bottom": 2237
+        },
+        "lines": [
+          {
+            "text": "*99.36",
+            "frame": {
+              "left": 1751,
+              "top": 2188,
+              "right": 1892,
+              "bottom": 2237
+            }
+          }
+        ]
+      },
+      {
+        "text": "*71.98",
+        "frame": {
+          "left": 1752,
+          "top": 2324,
+          "right": 1892,
+          "bottom": 2375
+        },
+        "lines": [
+          {
+            "text": "*71.98",
+            "frame": {
+              "left": 1752,
+              "top": 2324,
+              "right": 1892,
+              "bottom": 2375
+            }
+          }
+        ]
+      },
+      {
+        "text": "*52.20",
+        "frame": {
+          "left": 1751,
+          "top": 2460,
+          "right": 1893,
+          "bottom": 2512
+        },
+        "lines": [
+          {
+            "text": "*52.20",
+            "frame": {
+              "left": 1751,
+              "top": 2460,
+              "right": 1893,
+              "bottom": 2512
+            }
+          }
+        ]
+      },
+      {
+        "text": "*75.00",
+        "frame": {
+          "left": 1751,
+          "top": 2527,
+          "right": 1895,
+          "bottom": 2583
+        },
+        "lines": [
+          {
+            "text": "*75.00",
+            "frame": {
+              "left": 1751,
+              "top": 2527,
+              "right": 1895,
+              "bottom": 2583
+            }
+          }
+        ]
+      },
+      {
+        "text": "*1.00",
+        "frame": {
+          "left": 1776,
+          "top": 2599,
+          "right": 1895,
+          "bottom": 2653
+        },
+        "lines": [
+          {
+            "text": "*1.00",
+            "frame": {
+              "left": 1776,
+              "top": 2599,
+              "right": 1895,
+              "bottom": 2653
+            }
+          }
+        ]
+      },
+      {
+        "text": "*13.57",
+        "frame": {
+          "left": 1751,
+          "top": 2734,
+          "right": 1891,
+          "bottom": 2786
+        },
+        "lines": [
+          {
+            "text": "*13.57",
+            "frame": {
+              "left": 1751,
+              "top": 2734,
+              "right": 1891,
+              "bottom": 2786
+            }
+          }
+        ]
+      },
+      {
+        "text": "4863.54",
+        "frame": {
+          "left": 1727,
+          "top": 2795,
+          "right": 1891,
+          "bottom": 2853
+        },
+        "lines": [
+          {
+            "text": "4863.54",
+            "frame": {
+              "left": 1727,
+              "top": 2795,
+              "right": 1891,
+              "bottom": 2853
+            }
+          }
+        ]
+      },
+      {
+        "text": "*863.54",
+        "frame": {
+          "left": 1727,
+          "top": 2937,
+          "right": 1892,
+          "bottom": 2992
+        },
+        "lines": [
+          {
+            "text": "*863.54",
+            "frame": {
+              "left": 1727,
+              "top": 2937,
+              "right": 1892,
+              "bottom": 2992
+            }
+          }
+        ]
+      },
+      {
+        "text": "I:2936924 T04284260 423091 ******7968",
+        "frame": {
+          "left": 961,
+          "top": 3132,
+          "right": 1874,
+          "bottom": 3205
+        },
+        "lines": [
+          {
+            "text": "I:2936924 T04284260 423091 ******7968",
+            "frame": {
+              "left": 961,
+              "top": 3132,
+              "right": 1874,
+              "bottom": 3205
+            }
+          }
+        ]
+      },
+      {
+        "text": "12.04.2026 12:15 B:845 S:5792",
+        "frame": {
+          "left": 958,
+          "top": 3202,
+          "right": 1675,
+          "bottom": 3267
+        },
+        "lines": [
+          {
+            "text": "12.04.2026 12:15 B:845 S:5792",
+            "frame": {
+              "left": 958,
+              "top": 3202,
+              "right": 1675,
+              "bottom": 3267
+            }
+          }
+        ]
+      },
+      {
+        "text": "Onay No:079154",
+        "frame": {
+          "left": 952,
+          "top": 3272,
+          "right": 1285,
+          "bottom": 3332
+        },
+        "lines": [
+          {
+            "text": "Onay No:079154",
+            "frame": {
+              "left": 952,
+              "top": 3272,
+              "right": 1285,
+              "bottom": 3332
+            }
+          }
+        ]
+      },
+      {
+        "text": "KDV",
+        "frame": {
+          "left": 951,
+          "top": 3483,
+          "right": 1021,
+          "bottom": 3537
+        },
+        "lines": [
+          {
+            "text": "KDV",
+            "frame": {
+              "left": 951,
+              "top": 3483,
+              "right": 1021,
+              "bottom": 3537
+            }
+          }
+        ]
+      },
+      {
+        "text": "X1.",
+        "frame": {
+          "left": 952,
+          "top": 3551,
+          "right": 1016,
+          "bottom": 3609
+        },
+        "lines": [
+          {
+            "text": "X1.",
+            "frame": {
+              "left": 952,
+              "top": 3551,
+              "right": 1016,
+              "bottom": 3609
+            }
+          }
+        ]
+      },
+      {
+        "text": "%10",
+        "frame": {
+          "left": 951,
+          "top": 3621,
+          "right": 1022,
+          "bottom": 3677
+        },
+        "lines": [
+          {
+            "text": "%10",
+            "frame": {
+              "left": 951,
+              "top": 3621,
+              "right": 1022,
+              "bottom": 3677
+            }
+          }
+        ]
+      },
+      {
+        "text": "20",
+        "frame": {
+          "left": 949,
+          "top": 3689,
+          "right": 1022,
+          "bottom": 3749
+        },
+        "lines": [
+          {
+            "text": "20",
+            "frame": {
+              "left": 949,
+              "top": 3689,
+              "right": 1022,
+              "bottom": 3749
+            }
+          }
+        ]
+      },
+      {
+        "text": "MATRAH",
+        "frame": {
+          "left": 1096,
+          "top": 3483,
+          "right": 1239,
+          "bottom": 3539
+        },
+        "lines": [
+          {
+            "text": "MATRAH",
+            "frame": {
+              "left": 1096,
+              "top": 3483,
+              "right": 1239,
+              "bottom": 3539
+            }
+          }
+        ]
+      },
+      {
+        "text": "794.69",
+        "frame": {
+          "left": 1096,
+          "top": 3553,
+          "right": 1239,
+          "bottom": 3610
+        },
+        "lines": [
+          {
+            "text": "794.69",
+            "frame": {
+              "left": 1096,
+              "top": 3553,
+              "right": 1239,
+              "bottom": 3610
+            }
+          }
+        ]
+      },
+      {
+        "text": "54.55",
+        "frame": {
+          "left": 1094,
+          "top": 3624,
+          "right": 1215,
+          "bottom": 3683
+        },
+        "lines": [
+          {
+            "text": "54.55",
+            "frame": {
+              "left": 1094,
+              "top": 3624,
+              "right": 1215,
+              "bottom": 3683
+            }
+          }
+        ]
+      },
+      {
+        "text": "0.83",
+        "frame": {
+          "left": 1093,
+          "top": 3694,
+          "right": 1190,
+          "bottom": 3754
+        },
+        "lines": [
+          {
+            "text": "0.83",
+            "frame": {
+              "left": 1093,
+              "top": 3694,
+              "right": 1190,
+              "bottom": 3754
+            }
+          }
+        ]
+      },
+      {
+        "text": "Ref .No :610258644814",
+        "frame": {
+          "left": 1385,
+          "top": 3279,
+          "right": 1844,
+          "bottom": 3339
+        },
+        "lines": [
+          {
+            "text": "Ref .No :610258644814",
+            "frame": {
+              "left": 1385,
+              "top": 3279,
+              "right": 1844,
+              "bottom": 3339
+            }
+          }
+        ]
+      },
+      {
+        "text": "KDV TUTAR",
+        "frame": {
+          "left": 1385,
+          "top": 3488,
+          "right": 1602,
+          "bottom": 3551
+        },
+        "lines": [
+          {
+            "text": "KDV TUTAR",
+            "frame": {
+              "left": 1385,
+              "top": 3488,
+              "right": 1602,
+              "bottom": 3551
+            }
+          }
+        ]
+      },
+      {
+        "text": "*7.95",
+        "frame": {
+          "left": 1459,
+          "top": 3563,
+          "right": 1577,
+          "bottom": 3618
+        },
+        "lines": [
+          {
+            "text": "*7.95",
+            "frame": {
+              "left": 1459,
+              "top": 3563,
+              "right": 1577,
+              "bottom": 3618
+            }
+          }
+        ]
+      },
+      {
+        "text": "*5.45",
+        "frame": {
+          "left": 1459,
+          "top": 3634,
+          "right": 1577,
+          "bottom": 3693
+        },
+        "lines": [
+          {
+            "text": "*5.45",
+            "frame": {
+              "left": 1459,
+              "top": 3634,
+              "right": 1577,
+              "bottom": 3693
+            }
+          }
+        ]
+      },
+      {
+        "text": "*0.17",
+        "frame": {
+          "left": 1459,
+          "top": 3708,
+          "right": 1574,
+          "bottom": 3766
+        },
+        "lines": [
+          {
+            "text": "*0.17",
+            "frame": {
+              "left": 1459,
+              "top": 3708,
+              "right": 1574,
+              "bottom": 3766
+            }
+          }
+        ]
+      },
+      {
+        "text": "KDV DAHIL",
+        "frame": {
+          "left": 1675,
+          "top": 3495,
+          "right": 1896,
+          "bottom": 3558
+        },
+        "lines": [
+          {
+            "text": "KDV DAHIL",
+            "frame": {
+              "left": 1675,
+              "top": 3495,
+              "right": 1896,
+              "bottom": 3558
+            }
+          }
+        ]
+      },
+      {
+        "text": "*802.54",
+        "frame": {
+          "left": 1703,
+          "top": 3567,
+          "right": 1870,
+          "bottom": 3633
+        },
+        "lines": [
+          {
+            "text": "*802.54",
+            "frame": {
+              "left": 1703,
+              "top": 3567,
+              "right": 1870,
+              "bottom": 3633
+            }
+          }
+        ]
+      },
+      {
+        "text": "*60.00",
+        "frame": {
+          "left": 1727,
+          "top": 3640,
+          "right": 1873,
+          "bottom": 3706
+        },
+        "lines": [
+          {
+            "text": "*60.00",
+            "frame": {
+              "left": 1727,
+              "top": 3640,
+              "right": 1873,
+              "bottom": 3706
+            }
+          }
+        ]
+      },
+      {
+        "text": "*1.00",
+        "frame": {
+          "left": 1752,
+          "top": 3719,
+          "right": 1873,
+          "bottom": 3775
+        },
+        "lines": [
+          {
+            "text": "*1.00",
+            "frame": {
+              "left": 1752,
+              "top": 3719,
+              "right": 1873,
+              "bottom": 3775
+            }
+          }
+        ]
+      }
+    ],
     "confidence": 1
   },
   "expected": {

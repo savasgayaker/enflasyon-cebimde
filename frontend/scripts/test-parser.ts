@@ -51,6 +51,8 @@ interface CheckResult {
   pass: boolean;
   expected: unknown;
   actual: unknown;
+  /** items karşılaştırması için kalem bazlı diff satırları */
+  itemMessages?: string[];
 }
 
 function checkFixture(fx: Fixture): CheckResult[] {
@@ -59,10 +61,85 @@ function checkFixture(fx: Fixture): CheckResult[] {
   for (const key of Object.keys(fx.expected) as (keyof ParsedReceipt)[]) {
     const expected = fx.expected[key];
     const actualValue = actual[key];
-    const pass = deepEqual(actualValue, expected);
-    checks.push({ field: key, pass, expected, actual: actualValue });
+    if (key === 'items') {
+      const cmp = compareItems(
+        (expected as ParsedReceipt['items']) ?? [],
+        (actualValue as ParsedReceipt['items']) ?? [],
+      );
+      checks.push({
+        field: key,
+        pass: cmp.pass,
+        expected,
+        actual: actualValue,
+        itemMessages: cmp.messages,
+      });
+    } else {
+      const pass = deepEqual(actualValue, expected);
+      checks.push({ field: key, pass, expected, actual: actualValue });
+    }
   }
   return checks;
+}
+
+/**
+ * Kalem bazlı karşılaştırma — name'leri trim edip karşılaştırır, diğer
+ * alanları birebir kontrol eder. JSON.stringify diff'i okunamadığı için
+ * her uyuşmazlığı tek satır mesajla raporlar.
+ */
+function compareItems(
+  expected: ParsedReceipt['items'],
+  actual: ParsedReceipt['items'],
+): { pass: boolean; messages: string[] } {
+  const messages: string[] = [];
+  if (expected.length !== actual.length) {
+    messages.push(
+      `kalem sayısı uyuşmuyor: beklenen ${expected.length}, alınan ${actual.length}`,
+    );
+    // En azından ortak indislerin diff'ini de yaz ki ne çıktığı görünsün
+    const limit = Math.max(expected.length, actual.length);
+    for (let i = 0; i < limit; i++) {
+      const e = expected[i];
+      const a = actual[i];
+      messages.push(
+        `      [${i}] expected=${e ? JSON.stringify(e.name) : '∅'}  actual=${a ? JSON.stringify(a.name) : '∅'}`,
+      );
+    }
+    return { pass: false, messages };
+  }
+  let pass = true;
+  for (let i = 0; i < expected.length; i++) {
+    const e = expected[i];
+    const a = actual[i];
+    const eName = (e.name ?? '').trim();
+    const aName = (a.name ?? '').trim();
+    const fields: string[] = [];
+    if (eName !== aName) {
+      fields.push(`name: ${JSON.stringify(eName)} ≠ ${JSON.stringify(aName)}`);
+    }
+    if (e.quantity !== a.quantity) {
+      fields.push(`quantity: ${e.quantity} ≠ ${a.quantity}`);
+    }
+    if (e.unitPrice !== a.unitPrice) {
+      fields.push(`unitPrice: ${e.unitPrice} ≠ ${a.unitPrice}`);
+    }
+    if (e.totalPrice !== a.totalPrice) {
+      fields.push(`totalPrice: ${e.totalPrice} ≠ ${a.totalPrice}`);
+    }
+    if (e.categoryId !== a.categoryId) {
+      fields.push(
+        `categoryId: ${JSON.stringify(e.categoryId)} ≠ ${JSON.stringify(a.categoryId)}`,
+      );
+    }
+    if (e.needsReview !== a.needsReview) {
+      fields.push(`needsReview: ${e.needsReview} ≠ ${a.needsReview}`);
+    }
+    if (fields.length > 0) {
+      pass = false;
+      messages.push(`      [${i}] ${JSON.stringify(eName)}`);
+      for (const f of fields) messages.push(`         ${f}`);
+    }
+  }
+  return { pass, messages };
 }
 
 function deepEqual(a: unknown, b: unknown): boolean {
@@ -76,6 +153,7 @@ function deepEqual(a: unknown, b: unknown): boolean {
 
 function fmt(v: unknown): string {
   if (typeof v === 'string') return JSON.stringify(v);
+  if (Array.isArray(v)) return `Array(${v.length})`;
   return String(v);
 }
 
@@ -106,6 +184,11 @@ for (const fx of fixtures) {
       console.log(
         `    ✗ ${c.field}: expected ${fmt(c.expected)}, got ${fmt(c.actual)}`,
       );
+      if (c.itemMessages) {
+        for (const m of c.itemMessages) {
+          console.log(`    ${m}`);
+        }
+      }
     }
   }
   if (!allPass) failedFixtures++;

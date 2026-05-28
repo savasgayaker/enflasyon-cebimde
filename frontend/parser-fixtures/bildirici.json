@@ -1,7 +1,7 @@
 {
-  "name": "bildirici",
+  "name": "Bildirici 2026-04-28",
   "raw": {
-    "fullText": "TEŞEKKÜRLER\nBİLDİRICI GIDA SAN,VE TiC.LTD.ȘTi.\n$EYH ŞAMIL MH.13.CD NO:10/0-2-3\nERYAMAN/ANK. TEL: 0312 247 27 63\nVD: KAZAN -1700033421\nTARIH\nSAAT\n:28.04.2026\n: 18:32\nFİŞ NO: 0205",
+    "fullText": "TEŞEKKÜRLER\nBİLDİRİCİ GIDA SAN,VE TiC.LTD.ȘTi.\n$EYH ŞAMIL MH.13.CD NO:10/0-2-3\nERYAMAN/ANK. TEL: 0312 247 27 63\nVD: KAZAN -1700033421\nTARIH\nSAAT\n:28.04.2026\n: 18:32\nFİŞ NO: 0205\n4250366827506\n3 ADx 1,00\nMARKET POSET\n8690504142980\nULKER 6OGR CIKO. KARE\n8690504142980\nULKER 60GR CIK0.KARE\n8699270023585\nKAHVE DUNYASI 77GR B\n8699270023585\nKAHVE DUNYASI 77GR B\n8699522005598\nSENSODYNE 75ML DIS M\n8691316523523\nEKER 500GR SUZME YOG\n15000163\n8693027016035\nULUDAG 1LT GAZ0Z SEK\n8697409145634\nKUHNE 670GR TURK TIP\nTUKAS 1700GR ZEYTI\nTOPKDV\nTOPLAM\nHALKBANK\nKDV\n%01\n%10\n120\n%20\n%01\n%01\n%01\n%01\n%10\n%01\n%10\n%01\n%01\n*3,00\n*73,40\n*73,40\n*49,90\n*49,90\n*131,95\n*110,60\n*43,50\n*119,90\n*218,90\n*23,34\n*874,45\n*874,45\nKDV'LI TOPLAM\n*696,00\n*175,45\n*3,00\nKDV TUTARI\n*6,89\n*15,95\n*0,50\nFiŞ RINIZI T$IK VE\nNEHDEN KORIJYUNUZ.\nKASIYER : YONETICI\n000024/002/0002 1 0/621 5//205/\nBANKACILIK ISLEM BILGILERI\nAlisveris tutari :\nKart Tipi:\n874.45 TL\n60 Islem Tipi:\nUnay Numar as i : 574871\nTerminal: 02493254\nKart No: 401049XXXXXXXXXX\n34",
     "lines": [
       {
         "text": "TEŞEKKÜRLER",
@@ -13,7 +13,7 @@
         }
       },
       {
-        "text": "BİLDİRICI GIDA SAN,VE TiC.LTD.ȘTi.",
+        "text": "BİLDİRİCİ GIDA SAN,VE TiC.LTD.ȘTi.",
         "frame": {
           "left": 661,
           "top": 344,
@@ -94,6 +94,195 @@
         }
       },
       {
+        "text": "4250366827506",
+        "frame": {
+          "left": 613,
+          "top": 916,
+          "right": 1041,
+          "bottom": 971
+        }
+      },
+      {
+        "text": "3 ADx 1,00",
+        "frame": {
+          "left": 577,
+          "top": 979,
+          "right": 907,
+          "bottom": 1036
+        }
+      },
+      {
+        "text": "MARKET POSET",
+        "frame": {
+          "left": 578,
+          "top": 1048,
+          "right": 971,
+          "bottom": 1095
+        }
+      },
+      {
+        "text": "8690504142980",
+        "frame": {
+          "left": 610,
+          "top": 1112,
+          "right": 1039,
+          "bottom": 1161
+        }
+      },
+      {
+        "text": "ULKER 6OGR CIKO. KARE",
+        "frame": {
+          "left": 578,
+          "top": 1175,
+          "right": 1244,
+          "bottom": 1241
+        }
+      },
+      {
+        "text": "8690504142980",
+        "frame": {
+          "left": 609,
+          "top": 1246,
+          "right": 1042,
+          "bottom": 1303
+        }
+      },
+      {
+        "text": "ULKER 60GR CIK0.KARE",
+        "frame": {
+          "left": 575,
+          "top": 1305,
+          "right": 1237,
+          "bottom": 1366
+        }
+      },
+      {
+        "text": "8699270023585",
+        "frame": {
+          "left": 608,
+          "top": 1367,
+          "right": 1038,
+          "bottom": 1432
+        }
+      },
+      {
+        "text": "KAHVE DUNYASI 77GR B",
+        "frame": {
+          "left": 543,
+          "top": 1437,
+          "right": 1235,
+          "bottom": 1503
+        }
+      },
+      {
+        "text": "8699270023585",
+        "frame": {
+          "left": 603,
+          "top": 1504,
+          "right": 1036,
+          "bottom": 1567
+        }
+      },
+      {
+        "text": "KAHVE DUNYASI 77GR B",
+        "frame": {
+          "left": 543,
+          "top": 1569,
+          "right": 1225,
+          "bottom": 1628
+        }
+      },
+      {
+        "text": "8699522005598",
+        "frame": {
+          "left": 600,
+          "top": 1632,
+          "right": 1039,
+          "bottom": 1698
+        }
+      },
+      {
+        "text": "SENSODYNE 75ML DIS M",
+        "frame": {
+          "left": 567,
+          "top": 1709,
+          "right": 1237,
+          "bottom": 1756
+        }
+      },
+      {
+        "text": "8691316523523",
+        "frame": {
+          "left": 598,
+          "top": 1765,
+          "right": 1039,
+          "bottom": 1830
+        }
+      },
+      {
+        "text": "EKER 500GR SUZME YOG",
+        "frame": {
+          "left": 530,
+          "top": 1829,
+          "right": 1238,
+          "bottom": 1894
+        }
+      },
+      {
+        "text": "15000163",
+        "frame": {
+          "left": 577,
+          "top": 1897,
+          "right": 862,
+          "bottom": 1962
+        }
+      },
+      {
+        "text": "8693027016035",
+        "frame": {
+          "left": 567,
+          "top": 2031,
+          "right": 1037,
+          "bottom": 2101
+        }
+      },
+      {
+        "text": "ULUDAG 1LT GAZ0Z SEK",
+        "frame": {
+          "left": 544,
+          "top": 1966,
+          "right": 1238,
+          "bottom": 2028
+        }
+      },
+      {
+        "text": "8697409145634",
+        "frame": {
+          "left": 597,
+          "top": 2165,
+          "right": 1044,
+          "bottom": 2231
+        }
+      },
+      {
+        "text": "KUHNE 670GR TURK TIP",
+        "frame": {
+          "left": 535,
+          "top": 2096,
+          "right": 1230,
+          "bottom": 2167
+        }
+      },
+      {
+        "text": "TUKAS 1700GR ZEYTI",
+        "frame": {
+          "left": 634,
+          "top": 2233,
+          "right": 1238,
+          "bottom": 2302
+        }
+      },
+      {
         "text": "TOPKDV",
         "frame": {
           "left": 598,
@@ -127,6 +316,213 @@
           "top": 2723,
           "right": 727,
           "bottom": 2771
+        }
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 630,
+          "top": 2787,
+          "right": 718,
+          "bottom": 2837
+        }
+      },
+      {
+        "text": "%10",
+        "frame": {
+          "left": 634,
+          "top": 2853,
+          "right": 729,
+          "bottom": 2901
+        }
+      },
+      {
+        "text": "120",
+        "frame": {
+          "left": 634,
+          "top": 2919,
+          "right": 729,
+          "bottom": 2970
+        }
+      },
+      {
+        "text": "%20",
+        "frame": {
+          "left": 1379,
+          "top": 1052,
+          "right": 1470,
+          "bottom": 1098
+        }
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1378,
+          "top": 1187,
+          "right": 1461,
+          "bottom": 1235
+        }
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1379,
+          "top": 1317,
+          "right": 1459,
+          "bottom": 1361
+        }
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1379,
+          "top": 1449,
+          "right": 1460,
+          "bottom": 1493
+        }
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1379,
+          "top": 1579,
+          "right": 1461,
+          "bottom": 1621
+        }
+      },
+      {
+        "text": "%10",
+        "frame": {
+          "left": 1378,
+          "top": 1710,
+          "right": 1472,
+          "bottom": 1757
+        }
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1379,
+          "top": 1839,
+          "right": 1461,
+          "bottom": 1886
+        }
+      },
+      {
+        "text": "%10",
+        "frame": {
+          "left": 1379,
+          "top": 1974,
+          "right": 1471,
+          "bottom": 2019
+        }
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1378,
+          "top": 2103,
+          "right": 1462,
+          "bottom": 2149
+        }
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1379,
+          "top": 2239,
+          "right": 1462,
+          "bottom": 2285
+        }
+      },
+      {
+        "text": "*3,00",
+        "frame": {
+          "left": 1810,
+          "top": 1054,
+          "right": 1966,
+          "bottom": 1105
+        }
+      },
+      {
+        "text": "*73,40",
+        "frame": {
+          "left": 1775,
+          "top": 1188,
+          "right": 1966,
+          "bottom": 1242
+        }
+      },
+      {
+        "text": "*73,40",
+        "frame": {
+          "left": 1775,
+          "top": 1320,
+          "right": 1964,
+          "bottom": 1369
+        }
+      },
+      {
+        "text": "*49,90",
+        "frame": {
+          "left": 1775,
+          "top": 1450,
+          "right": 1965,
+          "bottom": 1504
+        }
+      },
+      {
+        "text": "*49,90",
+        "frame": {
+          "left": 1777,
+          "top": 1578,
+          "right": 1967,
+          "bottom": 1628
+        }
+      },
+      {
+        "text": "*131,95",
+        "frame": {
+          "left": 1745,
+          "top": 1710,
+          "right": 1970,
+          "bottom": 1759
+        }
+      },
+      {
+        "text": "*110,60",
+        "frame": {
+          "left": 1744,
+          "top": 1839,
+          "right": 1969,
+          "bottom": 1889
+        }
+      },
+      {
+        "text": "*43,50",
+        "frame": {
+          "left": 1777,
+          "top": 1972,
+          "right": 1969,
+          "bottom": 2023
+        }
+      },
+      {
+        "text": "*119,90",
+        "frame": {
+          "left": 1744,
+          "top": 2101,
+          "right": 1969,
+          "bottom": 2153
+        }
+      },
+      {
+        "text": "*218,90",
+        "frame": {
+          "left": 1744,
+          "top": 2239,
+          "right": 1969,
+          "bottom": 2286
         }
       },
       {
@@ -166,6 +562,33 @@
         }
       },
       {
+        "text": "*696,00",
+        "frame": {
+          "left": 1546,
+          "top": 2771,
+          "right": 1772,
+          "bottom": 2825
+        }
+      },
+      {
+        "text": "*175,45",
+        "frame": {
+          "left": 1546,
+          "top": 2838,
+          "right": 1774,
+          "bottom": 2892
+        }
+      },
+      {
+        "text": "*3,00",
+        "frame": {
+          "left": 1615,
+          "top": 2905,
+          "right": 1775,
+          "bottom": 2962
+        }
+      },
+      {
         "text": "KDV TUTARI",
         "frame": {
           "left": 903,
@@ -173,14 +596,1881 @@
           "right": 1233,
           "bottom": 2769
         }
+      },
+      {
+        "text": "*6,89",
+        "frame": {
+          "left": 1073,
+          "top": 2779,
+          "right": 1236,
+          "bottom": 2837
+        }
+      },
+      {
+        "text": "*15,95",
+        "frame": {
+          "left": 1040,
+          "top": 2846,
+          "right": 1235,
+          "bottom": 2902
+        }
+      },
+      {
+        "text": "*0,50",
+        "frame": {
+          "left": 1073,
+          "top": 2912,
+          "right": 1237,
+          "bottom": 2971
+        }
+      },
+      {
+        "text": "FiŞ RINIZI T$IK VE",
+        "frame": {
+          "left": 629,
+          "top": 3051,
+          "right": 1271,
+          "bottom": 3115
+        }
+      },
+      {
+        "text": "NEHDEN KORIJYUNUZ.",
+        "frame": {
+          "left": 662,
+          "top": 3120,
+          "right": 1225,
+          "bottom": 3185
+        }
+      },
+      {
+        "text": "KASIYER : YONETICI",
+        "frame": {
+          "left": 634,
+          "top": 3262,
+          "right": 1234,
+          "bottom": 3322
+        }
+      },
+      {
+        "text": "000024/002/0002 1 0/621 5//205/",
+        "frame": {
+          "left": 633,
+          "top": 3394,
+          "right": 1562,
+          "bottom": 3460
+        }
+      },
+      {
+        "text": "BANKACILIK ISLEM BILGILERI",
+        "frame": {
+          "left": 566,
+          "top": 3535,
+          "right": 1440,
+          "bottom": 3594
+        }
+      },
+      {
+        "text": "Alisveris tutari :",
+        "frame": {
+          "left": 567,
+          "top": 3673,
+          "right": 1127,
+          "bottom": 3731
+        }
+      },
+      {
+        "text": "Kart Tipi:",
+        "frame": {
+          "left": 565,
+          "top": 3743,
+          "right": 888,
+          "bottom": 3804
+        }
+      },
+      {
+        "text": "874.45 TL",
+        "frame": {
+          "left": 1311,
+          "top": 3668,
+          "right": 1613,
+          "bottom": 3726
+        }
+      },
+      {
+        "text": "60 Islem Tipi:",
+        "frame": {
+          "left": 1075,
+          "top": 3747,
+          "right": 1535,
+          "bottom": 3800
+        }
+      },
+      {
+        "text": "Unay Numar as i : 574871",
+        "frame": {
+          "left": 568,
+          "top": 3815,
+          "right": 1264,
+          "bottom": 3873
+        }
+      },
+      {
+        "text": "Terminal: 02493254",
+        "frame": {
+          "left": 570,
+          "top": 3878,
+          "right": 1172,
+          "bottom": 3941
+        }
+      },
+      {
+        "text": "Kart No: 401049XXXXXXXXXX",
+        "frame": {
+          "left": 569,
+          "top": 3940,
+          "right": 1407,
+          "bottom": 4005
+        }
+      },
+      {
+        "text": "34",
+        "frame": {
+          "left": 1723,
+          "top": 3736,
+          "right": 1783,
+          "bottom": 3784
+        }
       }
     ],
-    "blocks": [],
+    "blocks": [
+      {
+        "text": "TEŞEKKÜRLER",
+        "frame": {
+          "left": 729,
+          "top": 286,
+          "right": 1081,
+          "bottom": 336
+        },
+        "lines": [
+          {
+            "text": "TEŞEKKÜRLER",
+            "frame": {
+              "left": 729,
+              "top": 286,
+              "right": 1081,
+              "bottom": 336
+            }
+          }
+        ]
+      },
+      {
+        "text": "BİLDİRİCİ GIDA SAN,VE TiC.LTD.ȘTi.",
+        "frame": {
+          "left": 661,
+          "top": 344,
+          "right": 1756,
+          "bottom": 404
+        },
+        "lines": [
+          {
+            "text": "BİLDİRİCİ GIDA SAN,VE TiC.LTD.ȘTi.",
+            "frame": {
+              "left": 661,
+              "top": 344,
+              "right": 1756,
+              "bottom": 404
+            }
+          }
+        ]
+      },
+      {
+        "text": "$EYH ŞAMIL MH.13.CD NO:10/0-2-3",
+        "frame": {
+          "left": 693,
+          "top": 413,
+          "right": 1700,
+          "bottom": 475
+        },
+        "lines": [
+          {
+            "text": "$EYH ŞAMIL MH.13.CD NO:10/0-2-3",
+            "frame": {
+              "left": 693,
+              "top": 413,
+              "right": 1700,
+              "bottom": 475
+            }
+          }
+        ]
+      },
+      {
+        "text": "ERYAMAN/ANK. TEL: 0312 247 27 63",
+        "frame": {
+          "left": 691,
+          "top": 475,
+          "right": 1701,
+          "bottom": 528
+        },
+        "lines": [
+          {
+            "text": "ERYAMAN/ANK. TEL: 0312 247 27 63",
+            "frame": {
+              "left": 691,
+              "top": 475,
+              "right": 1701,
+              "bottom": 528
+            }
+          }
+        ]
+      },
+      {
+        "text": "VD: KAZAN -1700033421",
+        "frame": {
+          "left": 857,
+          "top": 541,
+          "right": 1527,
+          "bottom": 589
+        },
+        "lines": [
+          {
+            "text": "VD: KAZAN -1700033421",
+            "frame": {
+              "left": 857,
+              "top": 541,
+              "right": 1527,
+              "bottom": 589
+            }
+          }
+        ]
+      },
+      {
+        "text": "TARIH",
+        "frame": {
+          "left": 622,
+          "top": 662,
+          "right": 781,
+          "bottom": 709
+        },
+        "lines": [
+          {
+            "text": "TARIH",
+            "frame": {
+              "left": 622,
+              "top": 662,
+              "right": 781,
+              "bottom": 709
+            }
+          }
+        ]
+      },
+      {
+        "text": "SAAT",
+        "frame": {
+          "left": 620,
+          "top": 724,
+          "right": 746,
+          "bottom": 769
+        },
+        "lines": [
+          {
+            "text": "SAAT",
+            "frame": {
+              "left": 620,
+              "top": 724,
+              "right": 746,
+              "bottom": 769
+            }
+          }
+        ]
+      },
+      {
+        "text": ":28.04.2026",
+        "frame": {
+          "left": 864,
+          "top": 669,
+          "right": 1243,
+          "bottom": 718
+        },
+        "lines": [
+          {
+            "text": ":28.04.2026",
+            "frame": {
+              "left": 864,
+              "top": 669,
+              "right": 1243,
+              "bottom": 718
+            }
+          }
+        ]
+      },
+      {
+        "text": ": 18:32",
+        "frame": {
+          "left": 863,
+          "top": 726,
+          "right": 1080,
+          "bottom": 780
+        },
+        "lines": [
+          {
+            "text": ": 18:32",
+            "frame": {
+              "left": 863,
+              "top": 726,
+              "right": 1080,
+              "bottom": 780
+            }
+          }
+        ]
+      },
+      {
+        "text": "FİŞ NO: 0205",
+        "frame": {
+          "left": 587,
+          "top": 782,
+          "right": 1044,
+          "bottom": 847
+        },
+        "lines": [
+          {
+            "text": "FİŞ NO: 0205",
+            "frame": {
+              "left": 587,
+              "top": 782,
+              "right": 1044,
+              "bottom": 847
+            }
+          }
+        ]
+      },
+      {
+        "text": "4250366827506",
+        "frame": {
+          "left": 613,
+          "top": 916,
+          "right": 1041,
+          "bottom": 971
+        },
+        "lines": [
+          {
+            "text": "4250366827506",
+            "frame": {
+              "left": 613,
+              "top": 916,
+              "right": 1041,
+              "bottom": 971
+            }
+          }
+        ]
+      },
+      {
+        "text": "3 ADx 1,00",
+        "frame": {
+          "left": 577,
+          "top": 979,
+          "right": 907,
+          "bottom": 1036
+        },
+        "lines": [
+          {
+            "text": "3 ADx 1,00",
+            "frame": {
+              "left": 577,
+              "top": 979,
+              "right": 907,
+              "bottom": 1036
+            }
+          }
+        ]
+      },
+      {
+        "text": "MARKET POSET",
+        "frame": {
+          "left": 578,
+          "top": 1048,
+          "right": 971,
+          "bottom": 1095
+        },
+        "lines": [
+          {
+            "text": "MARKET POSET",
+            "frame": {
+              "left": 578,
+              "top": 1048,
+              "right": 971,
+              "bottom": 1095
+            }
+          }
+        ]
+      },
+      {
+        "text": "8690504142980",
+        "frame": {
+          "left": 610,
+          "top": 1112,
+          "right": 1039,
+          "bottom": 1161
+        },
+        "lines": [
+          {
+            "text": "8690504142980",
+            "frame": {
+              "left": 610,
+              "top": 1112,
+              "right": 1039,
+              "bottom": 1161
+            }
+          }
+        ]
+      },
+      {
+        "text": "ULKER 6OGR CIKO. KARE",
+        "frame": {
+          "left": 578,
+          "top": 1175,
+          "right": 1244,
+          "bottom": 1241
+        },
+        "lines": [
+          {
+            "text": "ULKER 6OGR CIKO. KARE",
+            "frame": {
+              "left": 578,
+              "top": 1175,
+              "right": 1244,
+              "bottom": 1241
+            }
+          }
+        ]
+      },
+      {
+        "text": "8690504142980",
+        "frame": {
+          "left": 609,
+          "top": 1246,
+          "right": 1042,
+          "bottom": 1303
+        },
+        "lines": [
+          {
+            "text": "8690504142980",
+            "frame": {
+              "left": 609,
+              "top": 1246,
+              "right": 1042,
+              "bottom": 1303
+            }
+          }
+        ]
+      },
+      {
+        "text": "ULKER 60GR CIK0.KARE",
+        "frame": {
+          "left": 575,
+          "top": 1305,
+          "right": 1237,
+          "bottom": 1366
+        },
+        "lines": [
+          {
+            "text": "ULKER 60GR CIK0.KARE",
+            "frame": {
+              "left": 575,
+              "top": 1305,
+              "right": 1237,
+              "bottom": 1366
+            }
+          }
+        ]
+      },
+      {
+        "text": "8699270023585",
+        "frame": {
+          "left": 608,
+          "top": 1367,
+          "right": 1038,
+          "bottom": 1432
+        },
+        "lines": [
+          {
+            "text": "8699270023585",
+            "frame": {
+              "left": 608,
+              "top": 1367,
+              "right": 1038,
+              "bottom": 1432
+            }
+          }
+        ]
+      },
+      {
+        "text": "KAHVE DUNYASI 77GR B",
+        "frame": {
+          "left": 543,
+          "top": 1437,
+          "right": 1235,
+          "bottom": 1503
+        },
+        "lines": [
+          {
+            "text": "KAHVE DUNYASI 77GR B",
+            "frame": {
+              "left": 543,
+              "top": 1437,
+              "right": 1235,
+              "bottom": 1503
+            }
+          }
+        ]
+      },
+      {
+        "text": "8699270023585",
+        "frame": {
+          "left": 603,
+          "top": 1504,
+          "right": 1036,
+          "bottom": 1567
+        },
+        "lines": [
+          {
+            "text": "8699270023585",
+            "frame": {
+              "left": 603,
+              "top": 1504,
+              "right": 1036,
+              "bottom": 1567
+            }
+          }
+        ]
+      },
+      {
+        "text": "KAHVE DUNYASI 77GR B",
+        "frame": {
+          "left": 543,
+          "top": 1569,
+          "right": 1225,
+          "bottom": 1628
+        },
+        "lines": [
+          {
+            "text": "KAHVE DUNYASI 77GR B",
+            "frame": {
+              "left": 543,
+              "top": 1569,
+              "right": 1225,
+              "bottom": 1628
+            }
+          }
+        ]
+      },
+      {
+        "text": "8699522005598",
+        "frame": {
+          "left": 600,
+          "top": 1632,
+          "right": 1039,
+          "bottom": 1698
+        },
+        "lines": [
+          {
+            "text": "8699522005598",
+            "frame": {
+              "left": 600,
+              "top": 1632,
+              "right": 1039,
+              "bottom": 1698
+            }
+          }
+        ]
+      },
+      {
+        "text": "SENSODYNE 75ML DIS M",
+        "frame": {
+          "left": 567,
+          "top": 1709,
+          "right": 1237,
+          "bottom": 1756
+        },
+        "lines": [
+          {
+            "text": "SENSODYNE 75ML DIS M",
+            "frame": {
+              "left": 567,
+              "top": 1709,
+              "right": 1237,
+              "bottom": 1756
+            }
+          }
+        ]
+      },
+      {
+        "text": "8691316523523",
+        "frame": {
+          "left": 598,
+          "top": 1765,
+          "right": 1039,
+          "bottom": 1830
+        },
+        "lines": [
+          {
+            "text": "8691316523523",
+            "frame": {
+              "left": 598,
+              "top": 1765,
+              "right": 1039,
+              "bottom": 1830
+            }
+          }
+        ]
+      },
+      {
+        "text": "EKER 500GR SUZME YOG",
+        "frame": {
+          "left": 530,
+          "top": 1829,
+          "right": 1238,
+          "bottom": 1894
+        },
+        "lines": [
+          {
+            "text": "EKER 500GR SUZME YOG",
+            "frame": {
+              "left": 530,
+              "top": 1829,
+              "right": 1238,
+              "bottom": 1894
+            }
+          }
+        ]
+      },
+      {
+        "text": "15000163",
+        "frame": {
+          "left": 577,
+          "top": 1897,
+          "right": 862,
+          "bottom": 1962
+        },
+        "lines": [
+          {
+            "text": "15000163",
+            "frame": {
+              "left": 577,
+              "top": 1897,
+              "right": 862,
+              "bottom": 1962
+            }
+          }
+        ]
+      },
+      {
+        "text": "8693027016035",
+        "frame": {
+          "left": 567,
+          "top": 2031,
+          "right": 1037,
+          "bottom": 2101
+        },
+        "lines": [
+          {
+            "text": "8693027016035",
+            "frame": {
+              "left": 567,
+              "top": 2031,
+              "right": 1037,
+              "bottom": 2101
+            }
+          }
+        ]
+      },
+      {
+        "text": "ULUDAG 1LT GAZ0Z SEK",
+        "frame": {
+          "left": 544,
+          "top": 1966,
+          "right": 1238,
+          "bottom": 2028
+        },
+        "lines": [
+          {
+            "text": "ULUDAG 1LT GAZ0Z SEK",
+            "frame": {
+              "left": 544,
+              "top": 1966,
+              "right": 1238,
+              "bottom": 2028
+            }
+          }
+        ]
+      },
+      {
+        "text": "8697409145634",
+        "frame": {
+          "left": 597,
+          "top": 2165,
+          "right": 1044,
+          "bottom": 2231
+        },
+        "lines": [
+          {
+            "text": "8697409145634",
+            "frame": {
+              "left": 597,
+              "top": 2165,
+              "right": 1044,
+              "bottom": 2231
+            }
+          }
+        ]
+      },
+      {
+        "text": "KUHNE 670GR TURK TIP",
+        "frame": {
+          "left": 535,
+          "top": 2096,
+          "right": 1230,
+          "bottom": 2167
+        },
+        "lines": [
+          {
+            "text": "KUHNE 670GR TURK TIP",
+            "frame": {
+              "left": 535,
+              "top": 2096,
+              "right": 1230,
+              "bottom": 2167
+            }
+          }
+        ]
+      },
+      {
+        "text": "TUKAS 1700GR ZEYTI",
+        "frame": {
+          "left": 634,
+          "top": 2233,
+          "right": 1238,
+          "bottom": 2302
+        },
+        "lines": [
+          {
+            "text": "TUKAS 1700GR ZEYTI",
+            "frame": {
+              "left": 634,
+              "top": 2233,
+              "right": 1238,
+              "bottom": 2302
+            }
+          }
+        ]
+      },
+      {
+        "text": "TOPKDV",
+        "frame": {
+          "left": 598,
+          "top": 2379,
+          "right": 796,
+          "bottom": 2433
+        },
+        "lines": [
+          {
+            "text": "TOPKDV",
+            "frame": {
+              "left": 598,
+              "top": 2379,
+              "right": 796,
+              "bottom": 2433
+            }
+          }
+        ]
+      },
+      {
+        "text": "TOPLAM",
+        "frame": {
+          "left": 567,
+          "top": 2436,
+          "right": 799,
+          "bottom": 2506
+        },
+        "lines": [
+          {
+            "text": "TOPLAM",
+            "frame": {
+              "left": 567,
+              "top": 2436,
+              "right": 799,
+              "bottom": 2506
+            }
+          }
+        ]
+      },
+      {
+        "text": "HALKBANK",
+        "frame": {
+          "left": 631,
+          "top": 2582,
+          "right": 898,
+          "bottom": 2632
+        },
+        "lines": [
+          {
+            "text": "HALKBANK",
+            "frame": {
+              "left": 631,
+              "top": 2582,
+              "right": 898,
+              "bottom": 2632
+            }
+          }
+        ]
+      },
+      {
+        "text": "KDV",
+        "frame": {
+          "left": 630,
+          "top": 2723,
+          "right": 727,
+          "bottom": 2771
+        },
+        "lines": [
+          {
+            "text": "KDV",
+            "frame": {
+              "left": 630,
+              "top": 2723,
+              "right": 727,
+              "bottom": 2771
+            }
+          }
+        ]
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 630,
+          "top": 2787,
+          "right": 718,
+          "bottom": 2837
+        },
+        "lines": [
+          {
+            "text": "%01",
+            "frame": {
+              "left": 630,
+              "top": 2787,
+              "right": 718,
+              "bottom": 2837
+            }
+          }
+        ]
+      },
+      {
+        "text": "%10",
+        "frame": {
+          "left": 634,
+          "top": 2853,
+          "right": 729,
+          "bottom": 2901
+        },
+        "lines": [
+          {
+            "text": "%10",
+            "frame": {
+              "left": 634,
+              "top": 2853,
+              "right": 729,
+              "bottom": 2901
+            }
+          }
+        ]
+      },
+      {
+        "text": "120",
+        "frame": {
+          "left": 634,
+          "top": 2919,
+          "right": 729,
+          "bottom": 2970
+        },
+        "lines": [
+          {
+            "text": "120",
+            "frame": {
+              "left": 634,
+              "top": 2919,
+              "right": 729,
+              "bottom": 2970
+            }
+          }
+        ]
+      },
+      {
+        "text": "%20",
+        "frame": {
+          "left": 1379,
+          "top": 1052,
+          "right": 1470,
+          "bottom": 1098
+        },
+        "lines": [
+          {
+            "text": "%20",
+            "frame": {
+              "left": 1379,
+              "top": 1052,
+              "right": 1470,
+              "bottom": 1098
+            }
+          }
+        ]
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1378,
+          "top": 1187,
+          "right": 1461,
+          "bottom": 1235
+        },
+        "lines": [
+          {
+            "text": "%01",
+            "frame": {
+              "left": 1378,
+              "top": 1187,
+              "right": 1461,
+              "bottom": 1235
+            }
+          }
+        ]
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1379,
+          "top": 1317,
+          "right": 1459,
+          "bottom": 1361
+        },
+        "lines": [
+          {
+            "text": "%01",
+            "frame": {
+              "left": 1379,
+              "top": 1317,
+              "right": 1459,
+              "bottom": 1361
+            }
+          }
+        ]
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1379,
+          "top": 1449,
+          "right": 1460,
+          "bottom": 1493
+        },
+        "lines": [
+          {
+            "text": "%01",
+            "frame": {
+              "left": 1379,
+              "top": 1449,
+              "right": 1460,
+              "bottom": 1493
+            }
+          }
+        ]
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1379,
+          "top": 1579,
+          "right": 1461,
+          "bottom": 1621
+        },
+        "lines": [
+          {
+            "text": "%01",
+            "frame": {
+              "left": 1379,
+              "top": 1579,
+              "right": 1461,
+              "bottom": 1621
+            }
+          }
+        ]
+      },
+      {
+        "text": "%10",
+        "frame": {
+          "left": 1378,
+          "top": 1710,
+          "right": 1472,
+          "bottom": 1757
+        },
+        "lines": [
+          {
+            "text": "%10",
+            "frame": {
+              "left": 1378,
+              "top": 1710,
+              "right": 1472,
+              "bottom": 1757
+            }
+          }
+        ]
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1379,
+          "top": 1839,
+          "right": 1461,
+          "bottom": 1886
+        },
+        "lines": [
+          {
+            "text": "%01",
+            "frame": {
+              "left": 1379,
+              "top": 1839,
+              "right": 1461,
+              "bottom": 1886
+            }
+          }
+        ]
+      },
+      {
+        "text": "%10",
+        "frame": {
+          "left": 1379,
+          "top": 1974,
+          "right": 1471,
+          "bottom": 2019
+        },
+        "lines": [
+          {
+            "text": "%10",
+            "frame": {
+              "left": 1379,
+              "top": 1974,
+              "right": 1471,
+              "bottom": 2019
+            }
+          }
+        ]
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1378,
+          "top": 2103,
+          "right": 1462,
+          "bottom": 2149
+        },
+        "lines": [
+          {
+            "text": "%01",
+            "frame": {
+              "left": 1378,
+              "top": 2103,
+              "right": 1462,
+              "bottom": 2149
+            }
+          }
+        ]
+      },
+      {
+        "text": "%01",
+        "frame": {
+          "left": 1379,
+          "top": 2239,
+          "right": 1462,
+          "bottom": 2285
+        },
+        "lines": [
+          {
+            "text": "%01",
+            "frame": {
+              "left": 1379,
+              "top": 2239,
+              "right": 1462,
+              "bottom": 2285
+            }
+          }
+        ]
+      },
+      {
+        "text": "*3,00",
+        "frame": {
+          "left": 1810,
+          "top": 1054,
+          "right": 1966,
+          "bottom": 1105
+        },
+        "lines": [
+          {
+            "text": "*3,00",
+            "frame": {
+              "left": 1810,
+              "top": 1054,
+              "right": 1966,
+              "bottom": 1105
+            }
+          }
+        ]
+      },
+      {
+        "text": "*73,40",
+        "frame": {
+          "left": 1775,
+          "top": 1188,
+          "right": 1966,
+          "bottom": 1242
+        },
+        "lines": [
+          {
+            "text": "*73,40",
+            "frame": {
+              "left": 1775,
+              "top": 1188,
+              "right": 1966,
+              "bottom": 1242
+            }
+          }
+        ]
+      },
+      {
+        "text": "*73,40",
+        "frame": {
+          "left": 1775,
+          "top": 1320,
+          "right": 1964,
+          "bottom": 1369
+        },
+        "lines": [
+          {
+            "text": "*73,40",
+            "frame": {
+              "left": 1775,
+              "top": 1320,
+              "right": 1964,
+              "bottom": 1369
+            }
+          }
+        ]
+      },
+      {
+        "text": "*49,90",
+        "frame": {
+          "left": 1775,
+          "top": 1450,
+          "right": 1965,
+          "bottom": 1504
+        },
+        "lines": [
+          {
+            "text": "*49,90",
+            "frame": {
+              "left": 1775,
+              "top": 1450,
+              "right": 1965,
+              "bottom": 1504
+            }
+          }
+        ]
+      },
+      {
+        "text": "*49,90",
+        "frame": {
+          "left": 1777,
+          "top": 1578,
+          "right": 1967,
+          "bottom": 1628
+        },
+        "lines": [
+          {
+            "text": "*49,90",
+            "frame": {
+              "left": 1777,
+              "top": 1578,
+              "right": 1967,
+              "bottom": 1628
+            }
+          }
+        ]
+      },
+      {
+        "text": "*131,95",
+        "frame": {
+          "left": 1745,
+          "top": 1710,
+          "right": 1970,
+          "bottom": 1759
+        },
+        "lines": [
+          {
+            "text": "*131,95",
+            "frame": {
+              "left": 1745,
+              "top": 1710,
+              "right": 1970,
+              "bottom": 1759
+            }
+          }
+        ]
+      },
+      {
+        "text": "*110,60",
+        "frame": {
+          "left": 1744,
+          "top": 1839,
+          "right": 1969,
+          "bottom": 1889
+        },
+        "lines": [
+          {
+            "text": "*110,60",
+            "frame": {
+              "left": 1744,
+              "top": 1839,
+              "right": 1969,
+              "bottom": 1889
+            }
+          }
+        ]
+      },
+      {
+        "text": "*43,50",
+        "frame": {
+          "left": 1777,
+          "top": 1972,
+          "right": 1969,
+          "bottom": 2023
+        },
+        "lines": [
+          {
+            "text": "*43,50",
+            "frame": {
+              "left": 1777,
+              "top": 1972,
+              "right": 1969,
+              "bottom": 2023
+            }
+          }
+        ]
+      },
+      {
+        "text": "*119,90",
+        "frame": {
+          "left": 1744,
+          "top": 2101,
+          "right": 1969,
+          "bottom": 2153
+        },
+        "lines": [
+          {
+            "text": "*119,90",
+            "frame": {
+              "left": 1744,
+              "top": 2101,
+              "right": 1969,
+              "bottom": 2153
+            }
+          }
+        ]
+      },
+      {
+        "text": "*218,90",
+        "frame": {
+          "left": 1744,
+          "top": 2239,
+          "right": 1969,
+          "bottom": 2286
+        },
+        "lines": [
+          {
+            "text": "*218,90",
+            "frame": {
+              "left": 1744,
+              "top": 2239,
+              "right": 1969,
+              "bottom": 2286
+            }
+          }
+        ]
+      },
+      {
+        "text": "*23,34",
+        "frame": {
+          "left": 1844,
+          "top": 2368,
+          "right": 2037,
+          "bottom": 2419
+        },
+        "lines": [
+          {
+            "text": "*23,34",
+            "frame": {
+              "left": 1844,
+              "top": 2368,
+              "right": 2037,
+              "bottom": 2419
+            }
+          }
+        ]
+      },
+      {
+        "text": "*874,45",
+        "frame": {
+          "left": 1811,
+          "top": 2434,
+          "right": 2039,
+          "bottom": 2485
+        },
+        "lines": [
+          {
+            "text": "*874,45",
+            "frame": {
+              "left": 1811,
+              "top": 2434,
+              "right": 2039,
+              "bottom": 2485
+            }
+          }
+        ]
+      },
+      {
+        "text": "*874,45",
+        "frame": {
+          "left": 1745,
+          "top": 2569,
+          "right": 1973,
+          "bottom": 2622
+        },
+        "lines": [
+          {
+            "text": "*874,45",
+            "frame": {
+              "left": 1745,
+              "top": 2569,
+              "right": 1973,
+              "bottom": 2622
+            }
+          }
+        ]
+      },
+      {
+        "text": "KDV'LI TOPLAM",
+        "frame": {
+          "left": 1344,
+          "top": 2707,
+          "right": 1772,
+          "bottom": 2757
+        },
+        "lines": [
+          {
+            "text": "KDV'LI TOPLAM",
+            "frame": {
+              "left": 1344,
+              "top": 2707,
+              "right": 1772,
+              "bottom": 2757
+            }
+          }
+        ]
+      },
+      {
+        "text": "*696,00",
+        "frame": {
+          "left": 1546,
+          "top": 2771,
+          "right": 1772,
+          "bottom": 2825
+        },
+        "lines": [
+          {
+            "text": "*696,00",
+            "frame": {
+              "left": 1546,
+              "top": 2771,
+              "right": 1772,
+              "bottom": 2825
+            }
+          }
+        ]
+      },
+      {
+        "text": "*175,45",
+        "frame": {
+          "left": 1546,
+          "top": 2838,
+          "right": 1774,
+          "bottom": 2892
+        },
+        "lines": [
+          {
+            "text": "*175,45",
+            "frame": {
+              "left": 1546,
+              "top": 2838,
+              "right": 1774,
+              "bottom": 2892
+            }
+          }
+        ]
+      },
+      {
+        "text": "*3,00",
+        "frame": {
+          "left": 1615,
+          "top": 2905,
+          "right": 1775,
+          "bottom": 2962
+        },
+        "lines": [
+          {
+            "text": "*3,00",
+            "frame": {
+              "left": 1615,
+              "top": 2905,
+              "right": 1775,
+              "bottom": 2962
+            }
+          }
+        ]
+      },
+      {
+        "text": "KDV TUTARI",
+        "frame": {
+          "left": 903,
+          "top": 2713,
+          "right": 1233,
+          "bottom": 2769
+        },
+        "lines": [
+          {
+            "text": "KDV TUTARI",
+            "frame": {
+              "left": 903,
+              "top": 2713,
+              "right": 1233,
+              "bottom": 2769
+            }
+          }
+        ]
+      },
+      {
+        "text": "*6,89",
+        "frame": {
+          "left": 1073,
+          "top": 2779,
+          "right": 1236,
+          "bottom": 2837
+        },
+        "lines": [
+          {
+            "text": "*6,89",
+            "frame": {
+              "left": 1073,
+              "top": 2779,
+              "right": 1236,
+              "bottom": 2837
+            }
+          }
+        ]
+      },
+      {
+        "text": "*15,95",
+        "frame": {
+          "left": 1040,
+          "top": 2846,
+          "right": 1235,
+          "bottom": 2902
+        },
+        "lines": [
+          {
+            "text": "*15,95",
+            "frame": {
+              "left": 1040,
+              "top": 2846,
+              "right": 1235,
+              "bottom": 2902
+            }
+          }
+        ]
+      },
+      {
+        "text": "*0,50",
+        "frame": {
+          "left": 1073,
+          "top": 2912,
+          "right": 1237,
+          "bottom": 2971
+        },
+        "lines": [
+          {
+            "text": "*0,50",
+            "frame": {
+              "left": 1073,
+              "top": 2912,
+              "right": 1237,
+              "bottom": 2971
+            }
+          }
+        ]
+      },
+      {
+        "text": "FiŞ RINIZI T$IK VE",
+        "frame": {
+          "left": 629,
+          "top": 3051,
+          "right": 1271,
+          "bottom": 3115
+        },
+        "lines": [
+          {
+            "text": "FiŞ RINIZI T$IK VE",
+            "frame": {
+              "left": 629,
+              "top": 3051,
+              "right": 1271,
+              "bottom": 3115
+            }
+          }
+        ]
+      },
+      {
+        "text": "NEHDEN KORIJYUNUZ.",
+        "frame": {
+          "left": 662,
+          "top": 3120,
+          "right": 1225,
+          "bottom": 3185
+        },
+        "lines": [
+          {
+            "text": "NEHDEN KORIJYUNUZ.",
+            "frame": {
+              "left": 662,
+              "top": 3120,
+              "right": 1225,
+              "bottom": 3185
+            }
+          }
+        ]
+      },
+      {
+        "text": "KASIYER : YONETICI",
+        "frame": {
+          "left": 634,
+          "top": 3262,
+          "right": 1234,
+          "bottom": 3322
+        },
+        "lines": [
+          {
+            "text": "KASIYER : YONETICI",
+            "frame": {
+              "left": 634,
+              "top": 3262,
+              "right": 1234,
+              "bottom": 3322
+            }
+          }
+        ]
+      },
+      {
+        "text": "000024/002/0002 1 0/621 5//205/",
+        "frame": {
+          "left": 633,
+          "top": 3394,
+          "right": 1562,
+          "bottom": 3460
+        },
+        "lines": [
+          {
+            "text": "000024/002/0002 1 0/621 5//205/",
+            "frame": {
+              "left": 633,
+              "top": 3394,
+              "right": 1562,
+              "bottom": 3460
+            }
+          }
+        ]
+      },
+      {
+        "text": "BANKACILIK ISLEM BILGILERI",
+        "frame": {
+          "left": 566,
+          "top": 3535,
+          "right": 1440,
+          "bottom": 3594
+        },
+        "lines": [
+          {
+            "text": "BANKACILIK ISLEM BILGILERI",
+            "frame": {
+              "left": 566,
+              "top": 3535,
+              "right": 1440,
+              "bottom": 3594
+            }
+          }
+        ]
+      },
+      {
+        "text": "Alisveris tutari :",
+        "frame": {
+          "left": 567,
+          "top": 3673,
+          "right": 1127,
+          "bottom": 3731
+        },
+        "lines": [
+          {
+            "text": "Alisveris tutari :",
+            "frame": {
+              "left": 567,
+              "top": 3673,
+              "right": 1127,
+              "bottom": 3731
+            }
+          }
+        ]
+      },
+      {
+        "text": "Kart Tipi:",
+        "frame": {
+          "left": 565,
+          "top": 3743,
+          "right": 888,
+          "bottom": 3804
+        },
+        "lines": [
+          {
+            "text": "Kart Tipi:",
+            "frame": {
+              "left": 565,
+              "top": 3743,
+              "right": 888,
+              "bottom": 3804
+            }
+          }
+        ]
+      },
+      {
+        "text": "874.45 TL",
+        "frame": {
+          "left": 1311,
+          "top": 3668,
+          "right": 1613,
+          "bottom": 3726
+        },
+        "lines": [
+          {
+            "text": "874.45 TL",
+            "frame": {
+              "left": 1311,
+              "top": 3668,
+              "right": 1613,
+              "bottom": 3726
+            }
+          }
+        ]
+      },
+      {
+        "text": "60 Islem Tipi:",
+        "frame": {
+          "left": 1075,
+          "top": 3747,
+          "right": 1535,
+          "bottom": 3800
+        },
+        "lines": [
+          {
+            "text": "60 Islem Tipi:",
+            "frame": {
+              "left": 1075,
+              "top": 3747,
+              "right": 1535,
+              "bottom": 3800
+            }
+          }
+        ]
+      },
+      {
+        "text": "Unay Numar as i : 574871",
+        "frame": {
+          "left": 568,
+          "top": 3815,
+          "right": 1264,
+          "bottom": 3873
+        },
+        "lines": [
+          {
+            "text": "Unay Numar as i : 574871",
+            "frame": {
+              "left": 568,
+              "top": 3815,
+              "right": 1264,
+              "bottom": 3873
+            }
+          }
+        ]
+      },
+      {
+        "text": "Terminal: 02493254",
+        "frame": {
+          "left": 570,
+          "top": 3878,
+          "right": 1172,
+          "bottom": 3941
+        },
+        "lines": [
+          {
+            "text": "Terminal: 02493254",
+            "frame": {
+              "left": 570,
+              "top": 3878,
+              "right": 1172,
+              "bottom": 3941
+            }
+          }
+        ]
+      },
+      {
+        "text": "Kart No: 401049XXXXXXXXXX",
+        "frame": {
+          "left": 569,
+          "top": 3940,
+          "right": 1407,
+          "bottom": 4005
+        },
+        "lines": [
+          {
+            "text": "Kart No: 401049XXXXXXXXXX",
+            "frame": {
+              "left": 569,
+              "top": 3940,
+              "right": 1407,
+              "bottom": 4005
+            }
+          }
+        ]
+      },
+      {
+        "text": "34",
+        "frame": {
+          "left": 1723,
+          "top": 3736,
+          "right": 1783,
+          "bottom": 3784
+        },
+        "lines": [
+          {
+            "text": "34",
+            "frame": {
+              "left": 1723,
+              "top": 3736,
+              "right": 1783,
+              "bottom": 3784
+            }
+          }
+        ]
+      }
+    ],
     "confidence": 1
   },
   "expected": {
     "storeName": "Bildirici",
     "date": "2026-04-28",
-    "totalAmount": 874.45
+    "totalAmount": 874.45,
+    "items": [
+      {
+        "name": "MARKET POSET",
+        "quantity": 1,
+        "unitPrice": 3.0,
+        "totalPrice": 3.0,
+        "categoryId": "food",
+        "needsReview": false
+      },
+      {
+        "name": "ULKER 6OGR CIKO. KARE",
+        "quantity": 1,
+        "unitPrice": 73.4,
+        "totalPrice": 73.4,
+        "categoryId": "other",
+        "needsReview": false
+      },
+      {
+        "name": "ULKER 60GR CIK0.KARE",
+        "quantity": 1,
+        "unitPrice": 73.4,
+        "totalPrice": 73.4,
+        "categoryId": "other",
+        "needsReview": false
+      },
+      {
+        "name": "KAHVE DUNYASI 77GR B",
+        "quantity": 1,
+        "unitPrice": 49.9,
+        "totalPrice": 49.9,
+        "categoryId": "food",
+        "needsReview": false
+      },
+      {
+        "name": "KAHVE DUNYASI 77GR B",
+        "quantity": 1,
+        "unitPrice": 49.9,
+        "totalPrice": 49.9,
+        "categoryId": "food",
+        "needsReview": false
+      },
+      {
+        "name": "SENSODYNE 75ML DIS M",
+        "quantity": 1,
+        "unitPrice": 131.95,
+        "totalPrice": 131.95,
+        "categoryId": "other",
+        "needsReview": false
+      },
+      {
+        "name": "EKER 500GR SUZME YOG",
+        "quantity": 1,
+        "unitPrice": 110.6,
+        "totalPrice": 110.6,
+        "categoryId": "beverages",
+        "needsReview": false
+      },
+      {
+        "name": "ULUDAG 1LT GAZ0Z SEK",
+        "quantity": 1,
+        "unitPrice": 43.5,
+        "totalPrice": 43.5,
+        "categoryId": "other",
+        "needsReview": false
+      },
+      {
+        "name": "KUHNE 670GR TURK TIP",
+        "quantity": 1,
+        "unitPrice": 119.9,
+        "totalPrice": 119.9,
+        "categoryId": "other",
+        "needsReview": false
+      },
+      {
+        "name": "TUKAS 1700GR ZEYTI",
+        "quantity": 1,
+        "unitPrice": 218.9,
+        "totalPrice": 218.9,
+        "categoryId": "other",
+        "needsReview": false
+      }
+    ]
   }
 }
