@@ -340,7 +340,8 @@ function computeRightColumnThreshold(lines: OCRLine[]): number {
 
 /** Header bayrak kelimeleri — son y_bottom ürün zonunun ÜST sınırını verir. */
 const HEADER_ANCHOR_KEYWORDS = [
-  'TCKN', 'VKN', 'NIHAI', 'MUSTERI', 'MÜŞTERI', 'VERGI', 'VERGİ',
+  'TCKN', 'VKN', 'NIHAI', 'MUSTERI', 'MÜŞTERI', 'MÜŞTERİ',
+  'VERGI', 'VERGİ',
   'TARIH', 'TARİH', 'SAAT', 'FIŞ NO', 'FİŞ NO', 'FATURA', 'BELGE',
   'ETTN', 'SIRA NO', 'MERSIS', 'VD:', 'VD ', 'TEL:', 'TEL ',
   'MERKEZ', 'TÜR ', 'TÜR:', 'BULVARI', 'MÜKELLEFLER',
@@ -360,9 +361,13 @@ const NON_PRODUCT_KEYWORDS = [
   'HALKBANK', 'YAPI KRED', 'GARANTI', 'BANKA', 'KREDI KART', 'ONAY',
   'REF.NO', 'REF .NO', 'MATRAH', 'ODENECEK', 'ÖDENECEK', 'ETTN',
   'FATURA', 'BELGE', 'SIRA', 'MERSIS', 'TEL:', 'TEL ',
-  'MERKEZ', 'TÜR:', 'TÜR ', 'MÜŞTERI', 'MUSTERI', 'TCKN', 'VKN',
+  'MERKEZ', 'TÜR:', 'TÜR ', 'MÜŞTERI', 'MÜŞTERİ', 'MUSTERI',
+  'TCKN', 'VKN',
   'NIHAI', 'TÜKETICI', 'TUKETICI',
-  'TEŞEKKÜR', 'TESEKKUR', 'BANKACILIK', 'ALIŞVERIS', 'ALISVERIS',
+  'TEŞEKKÜR', 'TESEKKUR', 'BANKACILIK',
+  // 'ALIŞVERIS' / 'ALISVERIS' KASTEN listede DEĞİL: "ALIŞVERIS POŞETİ"
+  // / "ÄLIŞVERIŞ POŞETİ" gerçek kalem (poşet ücreti). Footer'daki
+  // "Alisveris tutari" zaten y-zonuyla eleniyor.
   'KART TIPI', 'KART NO', 'TERMINAL', 'IMZA', 'FATURAADRES', 'TESCILLI',
   'GECER', 'KORIJYUNUZ', 'KASIYER', 'MÜKELLEFLER',
   'BULVARI', 'CADDE', 'MAHALLESI', 'MAHALLES',
@@ -376,6 +381,10 @@ function isLikelyNotProduct(line: OCRLine): boolean {
   // aksi halde saf sayı/işaret satırıdır ("18, 95", "%01", "120" gibi).
   if (!/[A-Za-zÇŞĞÜÖİçşğüöı]/.test(text)) return true;
 
+  // "#" işareti içeren satırlar (File'daki "*GLUTENSIZ ÜRÜN#" gibi
+  // teknik / etiket satırları) ürün değil.
+  if (text.includes('#')) return true;
+
   // Barkod
   if (/^\d{8,}$/.test(text)) return true;
 
@@ -383,13 +392,17 @@ function isLikelyNotProduct(line: OCRLine): boolean {
   if (/^\s*%/.test(text)) return true;
 
   // Miktar / birim satırları
-  // "3 ADx 1,00", "0.682 kg X 259.00" — unit hemen ardından 'x' gelir;
-  // \b kullanmıyoruz çünkü D ile x arasında word boundary yok.
-  if (/^\s*\d+([.,]\d+)?\s*(ad|adet|kg)\s*x/i.test(text)) return true;
+  // "3 ADx 1,00", "0.682 kg X 259.00", "0.682 ka X 259.00" (OCR 'kg'→'ka').
+  // \b kullanmıyoruz çünkü D/g ile x arasında word boundary yok.
+  if (/^\s*\d+([.,]\d+)?\s*(ad|adet|kg|ka)\s*x/i.test(text)) return true;
   // "2X" gibi saf "sayı + X" (sondan word boundary lazım)
   if (/^\s*\d+\s*X\b/i.test(text)) return true;
   // "1 X 259" (sayı X sayı) benzeri
   if (/\b\d+\s*X\s*\d/.test(text)) return true;
+  // Birim adıyla başlayan yarım/orphan satırlar — BİM'de OCR "4" ile
+  // "ad X 18.60" satırlarını ayrı parçalara böler; ikincisi unit-prefix ile
+  // yakalanır. "ÄLIŞVERIŞ POŞETİ" gibi gerçek ürünler harfle başlar, geçer.
+  if (/^\s*(ad|adet|kg|ka|lt|gr|ml)\b/i.test(text)) return true;
 
   // Blok keyword
   const upper = text.toUpperCase();
@@ -441,31 +454,78 @@ function extractItems(raw: OCRRawResult, totalAmount: number): ParsedItem[] {
   }
 
   // Ürün adaylarını topla
+  // Header/footer y-zon kontrolü TOP tabanlıdır: bir satırın BAŞI header
+  // sonundan sonra ve footer başından önce ise ürün adayıdır. Bottom-tabanlı
+  // olsa BİM'de WEYVELI (y=2427-2533) "TOPLAN KDV" footer'ına (y_top=2501)
+  // kuyruğuyla taştığı için yanlışlıkla eleniyordu — oysa başı footer'dan
+  // önce, gerçek bir ürün.
   const products: OCRLine[] = [];
   for (const line of raw.lines) {
     if (line.frame.left >= rightColumnThreshold) continue;
     if (line.frame.top < headerEndY) continue;
-    if (line.frame.bottom > footerStartY) continue;
+    if (line.frame.top >= footerStartY) continue;
     if (isLikelyNotProduct(line)) continue;
     products.push(line);
   }
   products.sort((a, b) => a.frame.top - b.frame.top);
 
-  // Her ürüne fiyat eşle
-  const items: ParsedItem[] = products.map((prod) => {
-    const yMid = (prod.frame.top + prod.frame.bottom) / 2;
-    const tolerance = (prod.frame.bottom - prod.frame.top) * 0.7;
+  // Her ürüne fiyat eşle — iki aşamalı:
+  //
+  //   Düzen A — y_top dar bant (price.y_top, product.y_top'a ±20px yakın):
+  //     fiyat ürün adının hemen sağında, satıra "yapışık". A101/Migros/
+  //     Bildirici/File'da çalışır. Bulursa needsReview=false (güven yüksek).
+  //
+  //   Düzen B — bir ürünle bir sonraki ürün arasındaki şeritte ilk fiyat:
+  //     fiyat ürün adının altında, arasına tartı/miktar satırları girer
+  //     (BİM e-arşiv: PILICPAŘVAKBONFILE altında "0.682 ka X 259.00", sonra
+  //     yan sütunda 176.64). Sadece Düzen A başarısız olursa devreye girer.
+  //     Bulursa needsReview=true (güven düşük, kullanıcı doğrulamalı).
+  //
+  // Eşik sebebi: BİM'in tall lines'ı (h~106) için h*0.7 toleransı (~74 px)
+  // çok genişti; mid-bazlı pencere bu satırların fiyatlarını yanlışlıkla
+  // Düzen A'da yakalıyordu. Sabit ±20 eşiği A101/Migros/Bildirici/File'da
+  // (gerçek diff'ler ≤+17) çalışırken BİM'i (diff'ler ≥+22) Düzen B'ye
+  // düşürür.
+  const Y_ALIGNED_MIN = -10;
+  const Y_ALIGNED_MAX = 20;
+
+  const items: ParsedItem[] = products.map((prod, i) => {
+    const nextProd = i + 1 < products.length ? products[i + 1] : null;
     let price: number | null = null;
-    for (const candidate of raw.lines) {
-      if (candidate === prod) continue;
-      if (candidate.frame.left < rightColumnThreshold) continue;
-      const cMid = (candidate.frame.top + candidate.frame.bottom) / 2;
-      if (Math.abs(cMid - yMid) > tolerance) continue;
-      const p = parsePrice(candidate.text);
+    let needsReview = false;
+
+    // Düzen A: dar y_top eşiği
+    for (const cand of raw.lines) {
+      if (cand === prod) continue;
+      if (cand.frame.left < rightColumnThreshold) continue;
+      const yDiff = cand.frame.top - prod.frame.top;
+      if (yDiff < Y_ALIGNED_MIN || yDiff > Y_ALIGNED_MAX) continue;
+      const p = parsePrice(cand.text);
       if (p === null) continue;
       price = p;
       break;
     }
+
+    // Düzen B: ürünler arası şerit (yalnızca A bulamadıysa)
+    if (price === null) {
+      const yMin = prod.frame.top;
+      const yMax = nextProd ? nextProd.frame.top : footerStartY;
+      for (const cand of raw.lines) {
+        if (cand === prod) continue;
+        if (cand.frame.left < rightColumnThreshold) continue;
+        const cMid = (cand.frame.top + cand.frame.bottom) / 2;
+        if (cMid < yMin || cMid >= yMax) continue;
+        const p = parsePrice(cand.text);
+        if (p === null) continue;
+        price = p;
+        needsReview = true;
+        break;
+      }
+    }
+
+    // Hiçbiri bulmadı → kullanıcı incelemesine işaretle
+    if (price === null) needsReview = true;
+
     const cat = suggestCategory(prod.text);
     return {
       name: prod.text.trim(),
@@ -473,7 +533,7 @@ function extractItems(raw: OCRRawResult, totalAmount: number): ParsedItem[] {
       unitPrice: price,
       totalPrice: price,
       categoryId: cat.id,
-      needsReview: price === null,
+      needsReview,
     };
   });
 

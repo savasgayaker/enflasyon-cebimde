@@ -1983,6 +1983,80 @@
   "expected": {
     "storeName": "File",
     "date": "2026-04-12",
-    "totalAmount": 863.54
+    "totalAmount": 863.54,
+    "items": [
+      {
+        "name": "COCA COLA ZERO 1L",
+        "quantity": 1,
+        "unitPrice": 60.0,
+        "totalPrice": 60.0,
+        "categoryId": "beverages",
+        "needsReview": false
+      },
+      {
+        "name": "GLUTENSIZ KöZ BIBERL 21.",
+        "quantity": 1,
+        "unitPrice": 79.5,
+        "totalPrice": 79.5,
+        "categoryId": "other",
+        "needsReview": false
+      },
+      {
+        "name": "HARRAS SEC PAS 120 G 21I.",
+        "quantity": 1,
+        "unitPrice": 345.0,
+        "totalPrice": 345.0,
+        "categoryId": "other",
+        "needsReview": false
+      },
+      {
+        "name": "GLUTENSZ BAHR.HUMUS %A.",
+        "quantity": 1,
+        "unitPrice": 79.5,
+        "totalPrice": 79.5,
+        "categoryId": "other",
+        "needsReview": false
+      },
+      {
+        "name": "KRUVASAN+ KG",
+        "quantity": 1,
+        "unitPrice": 99.36,
+        "totalPrice": 99.36,
+        "categoryId": "other",
+        "needsReview": false
+      },
+      {
+        "name": "BÖREK KG",
+        "quantity": 1,
+        "unitPrice": 71.98,
+        "totalPrice": 71.98,
+        "categoryId": "other",
+        "needsReview": false
+      },
+      {
+        "name": "KURABI VE KG",
+        "quantity": 1,
+        "unitPrice": 52.2,
+        "totalPrice": 52.2,
+        "categoryId": "other",
+        "needsReview": false
+      },
+      {
+        "name": "EKŞ.M.ARTIZAN ZEVTIN 1.",
+        "quantity": 1,
+        "unitPrice": 75.0,
+        "totalPrice": 75.0,
+        "categoryId": "homeAndLiving",
+        "needsReview": false
+      },
+      {
+        "name": "ALIŞVERIS POŞETİ",
+        "quantity": 1,
+        "unitPrice": 1.0,
+        "totalPrice": 1.0,
+        "categoryId": "food",
+        "needsReview": false
+      }
+    ]
   }
 }

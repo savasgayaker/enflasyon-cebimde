@@ -1432,6 +1432,40 @@
   "expected": {
     "storeName": "BİM",
     "date": "2026-04-14",
-    "totalAmount": 401.64
+    "totalAmount": 401.64,
+    "items": [
+      {
+        "name": "PILICPAŘVAKBONFILE 1.",
+        "quantity": 1,
+        "unitPrice": 176.64,
+        "totalPrice": 176.64,
+        "categoryId": "homeAndLiving",
+        "needsReview": true
+      },
+      {
+        "name": "CIKOL. SKR ILAVSZ 1006 51.",
+        "quantity": 1,
+        "unitPrice": 150.0,
+        "totalPrice": 150.0,
+        "categoryId": "other",
+        "needsReview": true
+      },
+      {
+        "name": "ÄLIŞVERIŞ POŞETİ BÍY K20",
+        "quantity": 1,
+        "unitPrice": 1.0,
+        "totalPrice": 1.0,
+        "categoryId": "food",
+        "needsReview": true
+      },
+      {
+        "name": "WEYVELI IÇECEK 200ML &10",
+        "quantity": 1,
+        "unitPrice": 74.0,
+        "totalPrice": 74.0,
+        "categoryId": "beverages",
+        "needsReview": true
+      }
+    ]
   }
 }
