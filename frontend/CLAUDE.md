@@ -91,7 +91,7 @@ Turkish supermarket receipts come in two visual layouts; the parser handles both
 
 Fixtures live in `frontend/parser-fixtures/` — 5 JSON files capturing raw OCR output for each target chain (A101, Migros, Bildirici, File, BİM). Each fixture includes the raw `OCRRawResult` plus the expected `ParsedReceipt` (storeName / date / totalAmount / items[] with needsReview flags).
 
-Run with: `npm run test:parser` (alias for `frontend/scripts/test-parser.ts`). Current baseline: **18/18 item-level assertions + 5/5 storeName/date/total assertions** must pass.
+Run with: `npm run test:parser` (alias for `frontend/scripts/test-parser.ts`). Current baseline: **20/20 assertions across 5 fixtures (4 fields per fixture: `storeName`, `date`, `totalAmount`, `items[]`)** must pass. Per-item diffs are reported inside the items field.
 
 When a new receipt produces wrong output:
 1. Open OCR Test screen (Settings → Geliştirici → OCR Test), scan the receipt, copy the raw output.
