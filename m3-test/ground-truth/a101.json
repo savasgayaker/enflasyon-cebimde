@@ -1,0 +1,28 @@
+{
+  "storeName": "A101",
+  "date": "2026-05-31",
+  "totalAmount": 2164.50,
+  "items": [
+    {"name": "KOPUK SABUN 400 ML ZEYTINYAGLI", "quantity": 1, "unitPrice": 49.50, "totalPrice": 49.50},
+    {"name": "KOPUK SABUN 400 ML BEYAZSABUN", "quantity": 1, "unitPrice": 49.50, "totalPrice": 49.50},
+    {"name": "SAMPUAN 330ML MENTOL HEADSHOUL", "quantity": 1, "unitPrice": 149.00, "totalPrice": 149.00},
+    {"name": "KOPUK SABUN 400 ML MANOLYA AQU", "quantity": 1, "unitPrice": 49.50, "totalPrice": 49.50},
+    {"name": "TIRAS BICAGI 10LU 3 BIC. SAMUR", "quantity": 1, "unitPrice": 142.00, "totalPrice": 142.00},
+    {"name": "ALISVERIS POSETI", "quantity": 6, "unitPrice": 1.00, "totalPrice": 6.00},
+    {"name": "UN BUGDAY 2 KG SOKE GELENEK", "quantity": 1, "unitPrice": 82.50, "totalPrice": 82.50},
+    {"name": "PIRINC BALDO 1000 G OVADAN", "quantity": 1, "unitPrice": 83.50, "totalPrice": 83.50},
+    {"name": "CIKOLATA CUBUK 28 G NUTELLA GO", "quantity": 1, "unitPrice": 29.50, "totalPrice": 29.50},
+    {"name": "CIKOLATA CUBUK 28 G NUTELLA GO", "quantity": 1, "unitPrice": 29.50, "totalPrice": 29.50},
+    {"name": "KEK CIKOLATA SOSLU 9X20 G BROW", "quantity": 1, "unitPrice": 69.00, "totalPrice": 69.00},
+    {"name": "BUZGULU COP TORBASI 15LI SPON", "quantity": 1, "unitPrice": 89.50, "totalPrice": 89.50},
+    {"name": "KEK CILEKLI 35 G ULKER KEKSTRA", "quantity": 4, "unitPrice": 9.75, "totalPrice": 39.00},
+    {"name": "DOND. MAG MN 7LI BDM/DBL KDT 3", "quantity": 1, "unitPrice": 325.00, "totalPrice": 325.00},
+    {"name": "KEK FRAMBUAZLI 114 G ETI TARTI", "quantity": 1, "unitPrice": 43.00, "totalPrice": 43.00},
+    {"name": "SUT YAGLI 200 ML PINAR", "quantity": 1, "unitPrice": 26.00, "totalPrice": 26.00},
+    {"name": "SUT YAGLI 200 ML PINAR", "quantity": 1, "unitPrice": 26.00, "totalPrice": 26.00},
+    {"name": "GRISSINI TAMBUGDAYCIYATOHUMLU", "quantity": 1, "unitPrice": 77.50, "totalPrice": 77.50},
+    {"name": "ZEYTINYAGI SIZMA 1L YALIN EGEM", "quantity": 1, "unitPrice": 365.00, "totalPrice": 365.00},
+    {"name": "SIVI DET. RENKLI 2,97 L PERWOL", "quantity": 1, "unitPrice": 365.00, "totalPrice": 365.00},
+    {"name": "SU 1.5 L", "quantity": 6, "unitPrice": 11.50, "totalPrice": 69.00}
+  ]
+}

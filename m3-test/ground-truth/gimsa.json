@@ -1,0 +1,24 @@
+{
+  "storeName": "GİMSA",
+  "date": "2026-05-10",
+  "totalAmount": 1391.80,
+  "items": [
+    {"name": "POSET", "quantity": 3, "unitPrice": 1.00, "totalPrice": 3.00},
+    {"name": "COCA COLA ZERO 1 LT", "quantity": 1, "unitPrice": 49.50, "totalPrice": 49.50},
+    {"name": "NUTELLA GO", "quantity": 1, "unitPrice": 24.90, "totalPrice": 24.90},
+    {"name": "NUTELLA GO", "quantity": 1, "unitPrice": 24.90, "totalPrice": 24.90},
+    {"name": "NUTELLA GO", "quantity": 1, "unitPrice": 24.90, "totalPrice": 24.90},
+    {"name": "CIX BUBBLE TEA SEFTALI 300 ML", "quantity": 1, "unitPrice": 39.50, "totalPrice": 39.50},
+    {"name": "RAMAZAN PIDESI GIMSA 200 GR", "quantity": 1, "unitPrice": 17.50, "totalPrice": 17.50},
+    {"name": "EKER MEYVELI YOGURT 65 GR SEF-KAY.", "quantity": 1, "unitPrice": 25.00, "totalPrice": 25.00},
+    {"name": "NUTELLA GO", "quantity": 1, "unitPrice": 24.90, "totalPrice": 24.90},
+    {"name": "KURU PASTA NORMAL", "quantity": 0.542, "unitPrice": 199.00, "totalPrice": 107.86},
+    {"name": "EKER MEYVELI YOGURT 65 GR SEF-KAY.", "quantity": 1, "unitPrice": 25.00, "totalPrice": 25.00},
+    {"name": "ICLI KOFTE", "quantity": 1.034, "unitPrice": 599.50, "totalPrice": 619.88},
+    {"name": "KINDER PINGUI 4 LU 120 GR", "quantity": 1, "unitPrice": 99.00, "totalPrice": 99.00},
+    {"name": "TRILECE TATLISI", "quantity": 0.588, "unitPrice": 239.00, "totalPrice": 140.53},
+    {"name": "ATOM", "quantity": 0.21, "unitPrice": 315.00, "totalPrice": 66.15},
+    {"name": "ACUKA KAHVALTILIK", "quantity": 0.244, "unitPrice": 245.00, "totalPrice": 59.78},
+    {"name": "CIX BUBBLE TEA ANANAS 300 ML", "quantity": 1, "unitPrice": 39.50, "totalPrice": 39.50}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "storeName": "BİM",
+  "date": "2026-07-25",
+  "totalAmount": 249.00,
+  "items": [
+    {"name": "CBK-TOPTNEPEYNIR250G", "quantity": 1, "unitPrice": 125.00, "totalPrice": 125.00},
+    {"name": "TUVALET KAGIDI 16LI", "quantity": 1, "unitPrice": 123.00, "totalPrice": 123.00},
+    {"name": "ALISVERIS POSETI BIM", "quantity": 1, "unitPrice": 1.00, "totalPrice": 1.00}
+  ]
+}
