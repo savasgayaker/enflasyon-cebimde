@@ -58,20 +58,27 @@ Schema changes are breaking for existing users (data is local-only with no migra
 
 Returns rates as percentages already (×100 happens inside).
 
-### OCR + parser pipeline
+### Receipt parsing pipeline (Aşama 3 — vision-first)
 
-Production flow on the scan screen, post-Aşama 2 (commit `6dc28bc`):
+Production flow on the scan screen:
 
-`scan.tsx` (camera / gallery / manual) → `extractTextFromImage(uri)` → `parseReceipt(ocr)` → `receipt-preview.tsx` (review + edit + save).
+`scan.tsx` (camera / gallery) → `parseReceiptViaM3(imageUri)` → backend `/api/parse-receipt` → MiniMax M3 vision → `ParsedReceipt` → `receipt-preview.tsx` (review + edit + save).
 
-The previous `mockOCR.ts` / `processReceipt` shim has been **removed**. Two real services are wired in sequence:
+**Architecture decision (Aşama 3):** receipt reading moved from on-device ML Kit OCR + regex parser to **MiniMax M3 vision** via a backend proxy. Evidence and rationale live in **`../m3-test/results/RAPOR.md`** — vision read store/date/total 100% correct on 6/6 test receipts (item price accuracy 93.7%), while the ML Kit text → M3 route deterministically hung on Migros's fragmented OCR. The `m3-test/` folder at the repo root is the isolated test harness: `run_test.py` (reruns the comparison), `ground-truth/` (hand-verified answer keys), `results/RAPOR.md` (the decision record). Photos and `.env` in it are gitignored.
 
-| Function | File | Returns | Used by |
-|---|---|---|---|
-| `extractTextFromImage(uri)` | `src/services/ocrService.ts` | `OCRRawResult` — raw text + lines (with bounding boxes) + blocks | `app/(tabs)/scan.tsx`, `app/ocr-test.tsx` |
-| `parseReceipt(ocr)` | `src/services/receiptParser.ts` | `ParsedReceipt` — `{ storeName, date, totalAmount, items[] }` | `app/(tabs)/scan.tsx` |
+| Function | File | Notes |
+|---|---|---|
+| `parseReceiptViaM3(imageUri)` | `src/services/receiptParserM3.ts` | Uploads photo to backend, returns `ParsedReceipt`. Spreads receipt-level `needsReview` onto all items; adds `categoryId` via `suggestCategory`. |
+| `BACKEND_URL` | `src/constants/config.ts` | Single source of truth for the backend address (dev: Mac's LAN IP). |
+| `POST /api/parse-receipt` | `../backend/server.py` | Shrinks image (1400px / JPEG 80%, EXIF-corrected), calls MiniMax-M3 (60s timeout + 1 retry, max_tokens 24000), validates schema. API key only server-side (`backend/.env`, template in `.env.example`). |
 
-#### Parser internals (`src/services/receiptParser.ts`)
+**Arithmetic cross-check → needsReview:** the backend compares `sum(items.totalPrice)` against `totalAmount`; a gap > 0.01 TL (or any null price) marks the response `needsReview: true`. All 5 vision errors in testing were catchable by this check. The existing receipt-preview UI (yellow "İNCELEYİN" / red "FİYAT GİRİN" strips) renders these flags unchanged.
+
+#### Retired (but kept) regex parser
+
+`extractTextFromImage` (`src/services/ocrService.ts`) + `parseReceipt` (`src/services/receiptParser.ts`) are **retired from the production path but intentionally NOT deleted** — they are the offline fallback if the M3 route proves unreliable. `npm run test:parser` (20/20 baseline) and the OCR Test screen stay green as the insurance policy; don't break them in unrelated changes.
+
+#### Parser internals (`src/services/receiptParser.ts` — retired path)
 
 Turkish supermarket receipts come in two visual layouts; the parser handles both with a two-stage matching pass:
 
@@ -128,20 +135,22 @@ Turkish-only. `src/i18n/tr.ts` holds all strings; `t('a.b.c')` does dotted-path 
 
 - TypeScript `strict` is on; React 19 + React Native 0.81 + Expo SDK 54 with **New Architecture enabled** (`newArchEnabled: true`).
 - `metro.config.js` pins a stable on-disk cache at `.metro-cache/` and caps `maxWorkers: 2`. Don't bump workers without reason — this exists to keep the dev machine responsive.
-- The repo root (`../`) contains a separate FastAPI `backend/` and a `test_result.md` testing protocol. The Expo app does **not** call that backend — all data is local in AsyncStorage. Don't add network calls to the backend without explicit direction.
+- The repo root (`../`) contains the FastAPI `backend/` and a `test_result.md` testing protocol. Since Aşama 3 the app **does** call the backend for exactly one thing: `POST /api/parse-receipt` (receipt photo → MiniMax M3 vision → ParsedReceipt). All other data stays local in AsyncStorage — don't add further backend calls without explicit direction. Backend needs `MINIMAX_API_KEY` in `backend/.env` (see `.env.example`); MongoDB is optional (status endpoints return 503 without it, parse-receipt is unaffected).
 
-## Bilinen teknik borç (Aşama 2 sonrası)
+## Bilinen teknik borç (Aşama 3 sonrası)
 
-Aşama 2 (gerçek OCR + parser + needsReview UI + uçtan uca save akışı) tamamlandı (M5, commit `6dc28bc`, iPhone E2E doğrulandı). Aşağıdaki sorunlar bilinçli olarak Aşama 3'e bırakıldı:
+Aşama 3 (vision-first geçiş: backend proxy + `parseReceiptViaM3`) tamamlandı. Aşağıdaki maddeler biliniyor ve bilinçli olarak açık bırakıldı:
 
-### Parser
-- **DAMLA SU yinelenmesi (Migros):** OCR aynı kalemi iki farklı bozulmuş satır olarak ürettiğinde (`DAM A SU 50OMI` + `DAMLA SU 500ML`) parser ikisini iki ayrı ürün sanıyor. Aynı kalem mi sorusunu çözecek bir merge heuristic'i yok.
-- **BİM apostrof varyantı:** `2 ad'X 76.00` formundaki tartı/birim satırları unit-prefix regex'e takılmıyor (`\b` apostrofta kırılır) — ürün listesine sızıyor.
-- **Uzun barkod (≥15 hane)** salt sayısal satırlar bazen ürün adı sanılıyor.
-- **File footer y-zon:** `*13.57 KDV` ve `*863.54 TOPLAM` satırları bazı çekimlerde ürün listesine sızıyor.
+### M3 pipeline
+- **Süre değişkenliği:** M3 vision medyan ~14 sn ama kalabalık fişte 141 sn'ye çıkabiliyor (RAPOR.md, File 23 ürün). 60 sn timeout bu kuyruğu kesebilir — timeout'a takılan büyük fişler için strateji (chunk'lama / daha yüksek timeout / async job) henüz yok.
+- **`BACKEND_URL` elle yazılı** (`src/constants/config.ts`, Mac LAN IP'si). Ağ değişince elle güncellenmeli; üretim öncesi EAS env değişkenine taşınmalı.
+- **Fiş-seviyesi needsReview kalemlere yayılıyor** (`receiptParserM3.ts`): toplam tutmadığında hangi kalemin hatalı olduğu bilinemediği için hepsi işaretleniyor. Kalem bazlı daraltma (ör. modelden şüphe skoru istemek) gelecek iş.
+
+### Retired parser (düşük öncelik — üretim yolunda değil)
+- DAMLA SU yinelenmesi (Migros), BİM apostrof varyantı, uzun barkod, File footer y-zon sızıntısı — ayrıntılar git geçmişinde (Aşama 2 dönemi). Parser artık yalnızca fallback; bu bug'lar ancak fallback'e dönülürse önem kazanır.
 
 ### Categories (`src/constants/categories.ts`)
-- `suggestCategory` substring eşleme yapıyor: `POSET → Gıda` (çünkü "et"), `SUZME → İçecek` (çünkü "su"). Kelime-sınırlı eşleme (`\b` regex) ile düzeltilebilir. **Adım 2.5 olarak planlandı** — küçük, izole, yan-etkisiz.
+- `suggestCategory` substring eşleme yapıyor: `POSET → Gıda` (çünkü "et"), `SUZME → İçecek` (çünkü "su"). Kelime-sınırlı eşleme (`\b` regex) ile düzeltilebilir. **Adım 2.5 olarak planlandı** — küçük, izole, yan-etkisiz. M3 isimleri düzeltip Türkçe karakter getirdiği için (`PİLİÇ PARÇA BONFİLE`) keyword isabeti arttı ama substring bug'ı aynen geçerli.
 
 ### UI / receipt-preview
 - `handleSave` validation sırası: sert kontrol (`unitPrice <= 0` → "Tüm ürünlerin adı ve fiyatı olmalıdır") yumuşak needsReview Alert'inden ÖNCE çalışıyor. Beklenen davranış: önce "İncele / Yine de kaydet" Alert'i, sadece tüm fiyatlar gerçekten 0 ise sert hata.
@@ -149,5 +158,5 @@ Aşama 2 (gerçek OCR + parser + needsReview UI + uçtan uca save akışı) tama
 
 ### Sonraki olası adımlar
 - **Adım 2.5:** Kategori kelime-sınırlı eşleme — küçük, izole, hızlı kazanım.
-- **Adım 4:** Parser varyant bug'ları (DAMLA SU yinelenmesi, BİM apostrof, uzun barkod, File footer) — daha fazla gerçek fiş örneği topladıkça yeni fixture eklenir.
 - **M6:** Dashboard / Ürünler / Analitik ekranları kayıt sonrası nasıl davranıyor — uçtan uca veri akışını doğrula, gerekirse `inflation.ts` hesaplamasını gözden geçir.
+- **Üretim hazırlığı:** BACKEND_URL'in ortam değişkenine taşınması, backend'in gerçek bir sunucuya dağıtımı, rate limit / maliyet takibi.
