@@ -15,8 +15,8 @@ import { CameraView, useCameraPermissions } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import { colors, spacing, borderRadius, typography, shadows } from '../../src/constants/theme';
 import { tr } from '../../src/i18n/tr';
-import { extractTextFromImage } from '../../src/services/ocrService';
-import { parseReceipt, type ParsedReceipt } from '../../src/services/receiptParser';
+import { parseReceiptViaM3 } from '../../src/services/receiptParserM3';
+import { type ParsedReceipt } from '../../src/services/receiptParser';
 import { useAppStore } from '../../src/store/useAppStore';
 
 const { width, height } = Dimensions.get('window');
@@ -40,9 +40,9 @@ export default function ScanScreen() {
         });
         
         if (photo?.uri) {
-          // Gerçek pipeline: cihaz üstü ML Kit OCR → Türkçe fiş parser'ı.
-          const raw = await extractTextFromImage(photo.uri);
-          const parsed = parseReceipt(raw);
+          // Aşama 3 pipeline: fotoğraf → backend → MiniMax M3 vision.
+          // Karar kaydı: m3-test/results/RAPOR.md
+          const parsed = await parseReceiptViaM3(photo.uri);
 
           router.push({
             pathname: '/receipt-preview',
@@ -54,7 +54,11 @@ export default function ScanScreen() {
         }
       } catch (error) {
         console.error('Capture error:', error);
-        Alert.alert(tr.error, 'Fiş yakalanamadı. Lütfen tekrar deneyin.');
+        const message =
+          error instanceof Error
+            ? error.message
+            : 'Fiş yakalanamadı. Lütfen tekrar deneyin.';
+        Alert.alert(tr.error, message);
       } finally {
         setIsProcessing(false);
       }
@@ -71,8 +75,7 @@ export default function ScanScreen() {
 
       if (!result.canceled && result.assets[0]) {
         setIsProcessing(true);
-        const raw = await extractTextFromImage(result.assets[0].uri);
-        const parsed = parseReceipt(raw);
+        const parsed = await parseReceiptViaM3(result.assets[0].uri);
 
         router.push({
           pathname: '/receipt-preview',
@@ -85,6 +88,11 @@ export default function ScanScreen() {
       }
     } catch (error) {
       console.error('Gallery pick error:', error);
+      const message =
+        error instanceof Error
+          ? error.message
+          : 'Fiş okunamadı. Lütfen tekrar deneyin.';
+      Alert.alert(tr.error, message);
       setIsProcessing(false);
     }
   };
