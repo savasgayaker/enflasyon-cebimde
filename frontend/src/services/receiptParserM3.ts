@@ -70,14 +70,25 @@ export async function parseReceiptViaM3(imageUri: string): Promise<ParsedReceipt
   const data = (await response.json()) as M3Response;
 
   const spreadReview = data.needsReview === true;
-  const items: ParsedItem[] = (data.items ?? []).map((it) => ({
-    name: it.name,
-    quantity: typeof it.quantity === 'number' && it.quantity > 0 ? it.quantity : 1,
-    unitPrice: it.unitPrice ?? it.totalPrice ?? null,
-    totalPrice: it.totalPrice,
-    categoryId: suggestCategory(it.name).id,
-    needsReview: spreadReview || it.needsReview === true,
-  }));
+  const items: ParsedItem[] = (data.items ?? []).map((it) => {
+    const quantity =
+      typeof it.quantity === 'number' && it.quantity > 0 ? it.quantity : 1;
+    // unitPrice yoksa toplamdan türet (totalPrice / quantity) — toplamı
+    // doğrudan birim fiyata yazmak çok adetli üründe inflation.ts'in birim
+    // fiyat karşılaştırmasını bozar.
+    let unitPrice = it.unitPrice ?? null;
+    if (unitPrice === null && it.totalPrice !== null) {
+      unitPrice = Math.round((it.totalPrice / quantity) * 100) / 100;
+    }
+    return {
+      name: it.name,
+      quantity,
+      unitPrice,
+      totalPrice: it.totalPrice,
+      categoryId: suggestCategory(it.name).id,
+      needsReview: spreadReview || it.needsReview === true,
+    };
+  });
 
   return {
     storeName: data.storeName ?? '',
