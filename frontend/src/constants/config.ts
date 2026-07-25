@@ -9,4 +9,4 @@
  * Üretim dağıtımında burası gerçek sunucu adresiyle değiştirilecek
  * (veya EAS ortam değişkenine taşınacak).
  */
-export const BACKEND_URL = 'http://192.168.1.26:8000';
+export const BACKEND_URL = 'http://192.168.1.20:8000';

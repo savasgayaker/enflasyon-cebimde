@@ -67,7 +67,7 @@ export const tr = {
   // Receipt Scanner
   scanner: {
     title: 'Fiş Tara',
-    frameGuide: 'Fişi çerçeveye hizalayın',
+    frameGuide: 'Fişi çerçeveye hizalayın · Yakından çekin',
     capture: 'Çek',
     gallery: 'Galeri',
     manualEntry: 'Manuel Giriş',

@@ -70,7 +70,7 @@ Production flow on the scan screen:
 |---|---|---|
 | `parseReceiptViaM3(imageUri)` | `src/services/receiptParserM3.ts` | Uploads photo to backend, returns `ParsedReceipt`. Spreads receipt-level `needsReview` onto all items; adds `categoryId` via `suggestCategory`. |
 | `BACKEND_URL` | `src/constants/config.ts` | Single source of truth for the backend address (dev: Mac's LAN IP). |
-| `POST /api/parse-receipt` | `../backend/server.py` | Shrinks image (1400px / JPEG 80%, EXIF-corrected), calls MiniMax-M3 (60s timeout + 1 retry, max_tokens 24000), validates schema. API key only server-side (`backend/.env`, template in `.env.example`). |
+| `POST /api/parse-receipt` | `../backend/server.py` | Shrinks image (2000px / JPEG 80%, EXIF-corrected), calls MiniMax-M3 (60s timeout + 1 retry, max_tokens 24000), validates schema. API key only server-side (`backend/.env`, template in `.env.example`). Field finding: distant shots lose text detail after downscaling — the frame-guide hint and empty-result error push users to fill the frame. |
 
 **Arithmetic cross-check → needsReview:** the backend compares `sum(items.totalPrice)` against `totalAmount`; a gap > 0.01 TL (or any null price) marks the response `needsReview: true`. All 5 vision errors in testing were catchable by this check. The existing receipt-preview UI (yellow "İNCELEYİN" / red "FİYAT GİRİN" strips) renders these flags unchanged.
 

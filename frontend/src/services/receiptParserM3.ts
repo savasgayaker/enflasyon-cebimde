@@ -90,6 +90,14 @@ export async function parseReceiptViaM3(imageUri: string): Promise<ParsedReceipt
     };
   });
 
+  // Model geçerli JSON döndürüp hiç ürün bulamadıysa en olası sebep fişin
+  // kadrajda çok küçük/uzak kalması — kullanıcıyı tekrar çekime yönlendir.
+  if (items.length === 0) {
+    throw new Error(
+      'Fişte ürün okunamadı. Fişe daha yakından, çerçeveyi dolduracak şekilde tekrar çekmeyi deneyin.',
+    );
+  }
+
   return {
     storeName: data.storeName ?? '',
     date: data.date ?? new Date().toISOString().split('T')[0],
