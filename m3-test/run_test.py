@@ -55,6 +55,7 @@ Kurallar:
 - Türk fişlerinde fiyatlar "*18,00" veya "x120,00" gibi yazılabilir; virgül ondalık ayracıdır.
 - Tartılı/adetli ürünlerde (ör. "0,455 kg x 89,90") quantity ve unitPrice'ı ayrıştır; totalPrice satırın toplam tutarıdır.
 - Bir ürünün fiyatını fişte bulamıyorsan totalPrice değerini null yap.
+- Ürün adına KDV oranını (%1, %01, %10, %20 gibi) DAHİL ETME; ad KDV işaretinden önce biter.
 - Emin olamadığın alanları uydurma; null kullan."""
 
 

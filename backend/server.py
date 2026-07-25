@@ -99,6 +99,7 @@ Kurallar:
 - Türk fişlerinde fiyatlar "*18,00" veya "x120,00" gibi yazılabilir; virgül ondalık ayracıdır.
 - Tartılı/adetli ürünlerde (ör. "0,455 kg x 89,90") quantity ve unitPrice'ı ayrıştır; totalPrice satırın toplam tutarıdır.
 - Bir ürünün fiyatını fişte bulamıyorsan totalPrice değerini null yap.
+- Ürün adına KDV oranını (%1, %01, %10, %20 gibi) DAHİL ETME; ad KDV işaretinden önce biter.
 - Emin olamadığın alanları uydurma; null kullan."""
 
 
@@ -134,6 +135,17 @@ def extract_json(text: str) -> dict:
     return json.loads(text)
 
 
+KDV_SUFFIX_RE = re.compile(r"\s*%\s*0?\d{1,2}\s*$")
+
+def strip_kdv_suffix(name: str) -> str:
+    """Ürün adının SONUNDAKİ KDV oranını kırpar ("PEYNİR 250G %1" → "PEYNİR 250G").
+    Adın ortasındaki % işaretine dokunmaz ("DURU 4*150GR" güvende).
+    Prompt kuralına rağmen model KDV eklerse savunmacı temizlik."""
+    cleaned = KDV_SUFFIX_RE.sub("", name)
+    # artakalan kuyruk boşluğu/noktalama (ör. "ÜRÜN -" veya "ÜRÜN ,")
+    return cleaned.rstrip(" \t-.,;:").strip()
+
+
 def validate_and_flag(parsed: dict) -> dict:
     """Şemayı doğrular, aritmetik çapraz-kontrolü uygular.
 
@@ -164,7 +176,7 @@ def validate_and_flag(parsed: dict) -> dict:
         if total_price is None:
             any_null = True
         items.append({
-            "name": str(it["name"]),
+            "name": strip_kdv_suffix(str(it["name"])),
             "quantity": it.get("quantity") if isinstance(it.get("quantity"), (int, float)) else 1,
             "unitPrice": it.get("unitPrice"),
             "totalPrice": total_price,
