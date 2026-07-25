@@ -83,3 +83,5 @@ android-sdk/-e
 # Environment files
 *.env
 *.env.*
+# .env.example şablonları commit'lenir (gerçek anahtar içermez)
+!*.env.example
