@@ -19,6 +19,11 @@ from PIL import Image, ImageOps
 from pydantic import BaseModel, Field
 from starlette.middleware.cors import CORSMiddleware
 
+# Sunucu hangi klasörden başlatılırsa başlatılsın prompt import'u çalışsın.
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from receipt_prompt import RECEIPT_PROMPT
+
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
@@ -93,28 +98,6 @@ TRANSIENT_HTTP_STATUSES = {429, 500, 502, 503, 504}
 # Retry-After'a uyarken üst sınır — sync endpoint thread'ini dakikalarca
 # askıda tutmamak için (FastAPI threadpool'u sınırlı).
 RETRY_AFTER_CAP_S = 30.0
-
-# m3-test/run_test.py'deki PROMPT sabitiyle birebir aynı — test edilen davranış budur.
-RECEIPT_PROMPT = """Sen Türk market fişlerini okuyan bir asistansın. Sana verilen fişi analiz et ve SADECE aşağıdaki şemaya uyan geçerli bir JSON döndür. JSON dışında hiçbir açıklama, markdown, ``` bloğu yazma.
-
-{
-  "storeName": "mağaza adı (ör. Migros, A101, BİM, File, Bildirici, CarrefourSA)",
-  "date": "YYYY-MM-DD",
-  "totalAmount": 0.0,
-  "items": [
-    {"name": "ÜRÜN ADI", "quantity": 1, "unitPrice": 0.0, "totalPrice": 0.0}
-  ]
-}
-
-Kurallar:
-- items listesine SADECE satın alınan ürün/hizmet satırlarını koy. KDV satırları, TOPKDV, ara toplam, POS/banka satırları, kampanya mesajları, adres, vergi no gibi satırlar ürün DEĞİLDİR.
-- totalAmount fişin ödenecek genel toplamıdır (ÖDENECEK / GENEL TOPLAM / TOPLAM).
-- Türk fişlerinde fiyatlar "*18,00" veya "x120,00" gibi yazılabilir; virgül ondalık ayracıdır.
-- Tartılı/adetli ürünlerde (ör. "0,455 kg x 89,90") quantity ve unitPrice'ı ayrıştır; totalPrice satırın toplam tutarıdır.
-- Bir ürünün fiyatını fişte bulamıyorsan totalPrice değerini null yap.
-- Ürün adına KDV oranını (%1, %01, %10, %20 gibi) DAHİL ETME; ad KDV işaretinden önce biter.
-- storeName için şirket unvanını değil MARKA adını yaz (ör. "GİMSA PERAKENDE GIDA SANAYİ VE TİCARET A.Ş." → "GİMSA", "BIY BIRLESIK MAĞAZALAR A.Ş." → "BİM", "FILE MARKET MAĞAZACILIK A.Ş." → "File").
-- Emin olamadığın alanları uydurma; null kullan."""
 
 
 def shrink_image(data: bytes, max_edge: int = 1400, quality: int = 80) -> bytes:
