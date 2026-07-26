@@ -137,9 +137,9 @@ Turkish-only. `src/i18n/tr.ts` holds all strings; `t('a.b.c')` does dotted-path 
 - `metro.config.js` pins a stable on-disk cache at `.metro-cache/` and caps `maxWorkers: 2`. Don't bump workers without reason — this exists to keep the dev machine responsive.
 - The repo root (`../`) contains the FastAPI `backend/` and a `test_result.md` testing protocol. Since Aşama 3 the app **does** call the backend for exactly one thing: `POST /api/parse-receipt` (receipt photo → MiniMax M3 vision → ParsedReceipt). All other data stays local in AsyncStorage — don't add further backend calls without explicit direction. Backend needs `MINIMAX_API_KEY` in `backend/.env` (see `.env.example`); MongoDB is optional (status endpoints return 503 without it, parse-receipt is unaffected).
 
-## Bilinen teknik borç (Aşama 3 KAPANDI — 26 Tem 2026)
+## Bilinen teknik borç (Aşama 3 — kapanış reasoning kararına bağlı)
 
-**Aşama 3 kapalı.** Vision-first geçiş tamam: backend proxy (`/api/parse-receipt`, dört kovalı adaptif retry), `parseReceiptViaM3` + birim testli `mapM3Response` (`npm run test:m3-mapper`, 18/18), dinamik `BACKEND_URL`, iPhone saha testi doğrulandı. Aşağıdaki maddeler biliniyor ve bilinçli olarak açık bırakıldı:
+**Aşama 3'ün kapanışı, reasoning-uzunluğu kararının Savaş tarafından onaylanmasına bağlı.** Teknik iş tamam: backend proxy (`/api/parse-receipt`, dört kovalı adaptif retry), `parseReceiptViaM3` + birim testli `mapM3Response` (`npm run test:m3-mapper`, 18/18), dinamik `BACKEND_URL`, iPhone saha testi doğrulandı. **Yayın konfigürasyonu: thinking AÇIK (adaptif varsayılan)** — `thinking_off` 10-20× hızlı ama fiyat kaymaları kısmen sessiz (aritmetik kontrole yakalanmıyor, RAPOR.md Ek 3); hata deseni ölçümü sonuçlanana kadar doğruluk öncelikli. Aşağıdaki maddeler biliniyor ve bilinçli olarak açık:
 
 ### M3 pipeline
 - **Ürün adı normalizasyonu / dedup stratejisi:** M3 çıktısı koşudan koşuya deterministik değil (aynı fişte `KÖPÜK SABUN` ↔ `K*P*K SABUN`, Türkçe/ASCII savrulması). `findOrCreateProduct` ada göre eşleştirdiği için aynı ürünün fiyat serisi farklı kayıtlara bölünebilir — enflasyon hesabı ürünü izleyemez. Çözüm adayları: istemcide isim normalizasyonu, fuzzy eşleşme, veya prompt'a "Türkçe karakterleri koru" kuralı.

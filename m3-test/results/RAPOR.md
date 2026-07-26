@@ -86,8 +86,38 @@ File (23 ürün) ve A101 (21 ürün), 1400px ve 2000px'te 3'er kez, SERİ ve tek
    hatasında da retry ediyor — kova 4.)
 
 Sonuç: gerçek kaldıraç görüntü değil, modelin reasoning üretimini kısmak
-(thinking parametresi / sıcaklık) veya akışı yönetmek (streaming). Kontrollü
-varyant ölçümü ayrıca koşulmaktadır.
+(thinking parametresi / sıcaklık) veya akışı yönetmek (streaming).
+
+## Ek 3 — Varyant ölçümü: thinking kapalı vs temperature 0.3 (26 Tem 2026)
+
+A101 + File, 1400px, her varyantta 3'er koşu, SERİ. Karşılaştırma tabanı:
+temp 0.0 + thinking adaptif (Ek 2'deki 1400px koşuları).
+
+| Varyant | Fiş | Süre | completion_tokens | Başlık | Fiyat isabeti |
+|---|---|---|---|---|---|
+| thinking_off | A101 | 8,2–9,9 sn | 764–780 | 3/3 ×3 | 18/21 ×3 |
+| thinking_off | File | 6,2–8,7 sn | 727–754 | 3/3 ×3 | 18–21/23 |
+| temp 0.3 | A101 | 87,9–92,2 sn | 10 035–11 383 | 3/3 ×3 | 21/21 ×3 |
+| temp 0.3 | File | 149,5 sn; 2 koşu TIMEOUT | 20 605; — | 3/3; — | 19/23; — |
+
+**Çürüyen hipotez (kayda değer — yeniden denenmesin):** "24 000 token'a
+çarpan koşular tekrar döngüsüdür, sıcaklık artınca kaybolur" doğrulanMAdı.
+temp 0.3, File'da 3'er denemeli iki koşuyu üst üste timeout'a sürükledi;
+A101'de token ~10k'ya oturdu ama süre hâlâ ~90 sn. Sıcaklık çözüm değil.
+
+**thinking_off bulgusu:** süre 10-20× düşüyor (≈8 sn, timeout sıfır, token
+727–780 bandında neredeyse deterministik), başlıklar kusursuz — AMA fiyat
+isabeti %100 → %86-91. Kritik nüans (ek doğrulama çağrısıyla ölçüldü):
+
+- File'da hatalar toplamı bozuyor (fark 445,50) → aritmetik kontrol yakalar.
+- A101'de model fiyatları kalemler ARASINDA kaydırıp iç tutarlılığı koruyor
+  (sum = totalAmount = 2164,50) → **aritmetik kontrol kör; yanlış veri
+  sessizce enflasyon serisine girer.**
+
+Karar (Savaş): yayın konfigürasyonu değişmedi, thinking AÇIK kalıyor.
+thinking_off'un hata deseni (yanlış kalem kümesi koşular arasında sabit mi
+değişken mi) ve hizalama-kuralı prompt varyantı ölçülüyor; Aşama 3 kapanışı
+bu karara bağlı.
 
 ## Dosyalar
 
