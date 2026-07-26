@@ -165,6 +165,8 @@ Not: 10/30 koşuda fiş doğruyken kalem bayrağı çıktı (yanlış alarm) —
 kullanıcı birkaç doğru kalemi teyit etmek zorunda kalıyor; güvenliğin
 bilinçli bedeli.
 
+**AŞAMA 3 KAPANDI** — kriter (c=0) karşılandı, Savaş onayı verildi (26 Tem 2026).
+
 ## Dosyalar
 
 - `m3-test/run_test.py` — izole test aracı (sandbox'tan API'ye erişim olan ortamda `--mode both` ile aynı testi koşar)

@@ -403,9 +403,29 @@ def _pair_items(items_a: list, items_b: list):
     return mapping
 
 
+_TURKISH_CHARS = set("ÇĞİÖŞÜçğıöşü")
+
+
+def _pick_better_name(a: str, b: str) -> str:
+    """İki ad adayından daha iyisini seçer: Türkçe karakter içeren tercih
+    edilir (M3'ün ASCII'leştirdiği K*P*K yerine KÖPÜK); ikisi de eşitse
+    uzun olan; o da eşitse ilki (chosen'ınki)."""
+    a_tr = any(c in _TURKISH_CHARS for c in a)
+    b_tr = any(c in _TURKISH_CHARS for c in b)
+    if a_tr != b_tr:
+        return a if a_tr else b
+    if len(b) > len(a):
+        return b
+    return a
+
+
 def cross_check(chosen: dict, other: dict) -> None:
     """Seçilen yanıtın kalemlerini diğer yanıtla karşılaştırıp bayraklar.
-    chosen'ı yerinde işaretler (item.needsReview / fiş needsReview)."""
+    chosen'ı yerinde işaretler (item.needsReview / fiş needsReview).
+
+    Bayrak kuralı (RAPOR.md Ek 6 ayarı): quantity/totalPrice/unitPrice
+    uyuşmazlığı kalemi bayraklar; SADECE ad farklıysa bayrak YOK — iki
+    addan iyisi seçilir (yanlış alarmın ana kaynağı ad nondeterminizmiydi)."""
     ca, cb = chosen["items"], other["items"]
 
     if len(ca) != len(cb):
@@ -429,13 +449,21 @@ def cross_check(chosen: dict, other: dict) -> None:
         a = ca[ai]
         qty_differ = abs(float(a.get("quantity") or 0) - float(b.get("quantity") or 0)) > 0.001
         if (
-            _name_sim(a["name"], b["name"]) < NAME_SIM_THRESHOLD
-            or qty_differ
+            qty_differ
             or _prices_differ(a.get("totalPrice"), b.get("totalPrice"))
             or _prices_differ(a.get("unitPrice"), b.get("unitPrice"))
         ):
             a["needsReview"] = True
             flagged += 1
+        elif a["name"] != b["name"]:
+            # Miktar ve fiyatların hepsi aynı, yalnız ad farklı → bayrak yok;
+            # daha iyi adı seç (Türkçe karakterli / uzun olan) ve logla.
+            better = _pick_better_name(a["name"], b["name"])
+            if better != a["name"]:
+                logger.info("çapraz kontrol: ad seçimi %r → %r", a["name"], better)
+                a["name"] = better
+            else:
+                logger.info("çapraz kontrol: ad farkı bayraksız — %r korundu (aday: %r)", a["name"], b["name"])
     if flagged:
         logger.info("çapraz kontrol: %d kalem uyuşmadı, needsReview işaretlendi", flagged)
 
