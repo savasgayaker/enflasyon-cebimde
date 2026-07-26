@@ -12,7 +12,7 @@ RECEIPT_PROMPT = """Sen Türk market fişlerini okuyan bir asistansın. Sana ver
   "date": "YYYY-MM-DD",
   "totalAmount": 0.0,
   "items": [
-    {"name": "ÜRÜN ADI", "quantity": 1, "unitPrice": 0.0, "totalPrice": 0.0}
+    {"name": "ÜRÜN ADI", "quantity": 1, "unit": "adet", "unitPrice": 0.0, "totalPrice": 0.0, "vatRate": 20}
   ]
 }
 
@@ -24,4 +24,6 @@ Kurallar:
 - Bir ürünün fiyatını fişte bulamıyorsan totalPrice değerini null yap.
 - Ürün adına KDV oranını (%1, %01, %10, %20 gibi) DAHİL ETME; ad KDV işaretinden önce biter.
 - storeName için şirket unvanını değil MARKA adını yaz (ör. "GİMSA PERAKENDE GIDA SANAYİ VE TİCARET A.Ş." → "GİMSA", "BIY BIRLESIK MAĞAZALAR A.Ş." → "BİM", "FILE MARKET MAĞAZACILIK A.Ş." → "File").
+- unit, quantity'nin fişte hangi birimde yazıldığıdır. SADECE şunlardan biri olabilir: "adet", "kg", "gr", "lt", "ml", "paket". Ambalaj boyutu DEĞİLDİR: "SUT 1 L PINAR" bir adet karton süttür → "adet" (litre bilgisi ürünün adında kalır). Tartılı satırda ("0,455 kg x 89,90") → "kg". Emin değilsen null.
+- vatRate, o satırın KDV oranıdır; sayı olarak yaz (%1 → 1, %10 → 10, %20 → 20). Ürün adının sonundaki KDV işaretinden okunur. Fişte oran yoksa null.
 - Emin olamadığın alanları uydurma; null kullan."""
