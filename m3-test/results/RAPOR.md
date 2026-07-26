@@ -119,6 +119,27 @@ thinking_off'un hata deseni (yanlış kalem kümesi koşular arasında sabit mi
 değişken mi) ve hizalama-kuralı prompt varyantı ölçülüyor; Aşama 3 kapanışı
 bu karara bağlı.
 
+## Ek 4 — thinking_off hata deseni: küme değişken, hizalama kuralı elendi (26 Tem 2026)
+
+2 varyant × A101 + File × 5 koşu (thinking_off, 1400px, temp 0). Sorular ve cevaplar:
+
+**Yanlış kalem kümesi koşular arasında sabit mi?** DEĞİŞKEN — iki hata sınıfı ayrışıyor:
+- *Kayma hataları* (komşu satır fiyatının yazılması; enflasyonu bozan büyük sapmalar)
+  koşudan koşuya farklı kalemlerde. A101'de 5 koşunun 3'ü tamamen temiz.
+- *Tutarlı okuma hataları* (File: PINAR SÜT 158↔159 5/5, HARRAS 498↔499) her koşuda
+  aynı — görüntü okunaklılık sınırı, ±1 TL gürültü.
+- Sonuç: iki paralel thinking_off çağrısı + kalem karşılaştırması BÜYÜK hataları
+  yakalar (değişken taraf), tutarlı ±1 hatalarına kördür. Yol açık; karar bekliyor.
+
+**Hizalama kuralı ("fiyatı aynı satırdaki tutardan oku") işe yaradı mı?** HAYIR —
+elendi. A101'de fark yok; File'da kötüleşme: 13 kalemlik kayma zinciri (koşu 3),
+yeni null fiyatlar, aritmetik fark 302-778. Kural modeli düzeltmek yerine
+"göremiyorsan null yaz"a itti.
+
+**Bonus:** bu sette aritmetik kontrol hatalı 10 koşunun 10'unu yakaladı (fark
+2,0-778,0). Ek 3'teki "iç tutarlı sessiz kayma" tekrarlamadı — gerçek ama nadir
+(~11 hatalı koşuda 1 gözlem).
+
 ## Dosyalar
 
 - `m3-test/run_test.py` — izole test aracı (sandbox'tan API'ye erişim olan ortamda `--mode both` ile aynı testi koşar)
