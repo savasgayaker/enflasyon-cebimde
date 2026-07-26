@@ -78,8 +78,14 @@ async def get_status_checks():
 
 MINIMAX_API_URL = "https://api.minimax.io/v1/chat/completions"
 MINIMAX_MODEL = "MiniMax-M3"
-MINIMAX_TIMEOUT_S = 60
 MINIMAX_MAX_TOKENS = 24000  # reasoning payı yüksek; düşük değerde JSON yarım kalıyor
+
+# Adaptif deneme planı: (max_edge px, timeout sn).
+# 1. deneme 1400px/120sn; timeout veya ağ hatasında 2. deneme görüntüyü
+# 1000px'e küçültüp 90 sn dener (küçük görüntü → daha hızlı yanıt).
+# Ölçüm kanıtı: 2000px kalabalık fişlerde süreyi patlattı (File 23 ürün,
+# üretim 60 sn timeout'undan hiç geçemiyordu) — m3-test koşusu, 26 Tem 2026.
+MINIMAX_ATTEMPTS = [(1400, 120), (1000, 90)]
 
 # m3-test/run_test.py'deki PROMPT sabitiyle birebir aynı — test edilen davranış budur.
 RECEIPT_PROMPT = """Sen Türk market fişlerini okuyan bir asistansın. Sana verilen fişi analiz et ve SADECE aşağıdaki şemaya uyan geçerli bir JSON döndür. JSON dışında hiçbir açıklama, markdown, ``` bloğu yazma.
@@ -104,7 +110,7 @@ Kurallar:
 - Emin olamadığın alanları uydurma; null kullan."""
 
 
-def shrink_image(data: bytes, max_edge: int = 2000, quality: int = 80) -> bytes:
+def shrink_image(data: bytes, max_edge: int = 1400, quality: int = 80) -> bytes:
     """Fotoğrafı uzun kenar max_edge px / JPEG %quality'e küçültür.
     EXIF yön bilgisini uygular (telefon fotoğrafları yan gelmesin)."""
     img = Image.open(io.BytesIO(data))
@@ -199,46 +205,68 @@ def validate_and_flag(parsed: dict) -> dict:
     }
 
 
-def call_minimax(image_jpeg: bytes) -> str:
-    """MiniMax M3'e vision çağrısı; 60 sn timeout + 1 retry."""
+def call_minimax(raw_image: bytes) -> str:
+    """MiniMax M3'e adaptif vision çağrısı (MINIMAX_ATTEMPTS planı).
+
+    Timeout / ağ hatasında bir sonraki deneme görüntüyü daha küçük boyutta
+    gönderir. HTTP hata yanıtları (4xx/5xx) retry edilmez — sunucu yanıt
+    vermiştir, küçültme çare olmaz.
+    """
     api_key = os.environ.get("MINIMAX_API_KEY")
     if not api_key:
         raise HTTPException(
             status_code=500,
             detail="Sunucu yapılandırma hatası: MINIMAX_API_KEY tanımlı değil (backend/.env)",
         )
-    b64 = base64.b64encode(image_jpeg).decode()
-    body = {
-        "model": MINIMAX_MODEL,
-        "temperature": 0.0,
-        "max_tokens": MINIMAX_MAX_TOKENS,
-        "messages": [
-            {"role": "system", "content": RECEIPT_PROMPT},
-            {"role": "user", "content": [
-                {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{b64}"}},
-                {"type": "text", "text": "Bu fiş fotoğrafını analiz et ve şemaya uygun JSON döndür."},
-            ]},
-        ],
-    }
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
     last_err = None
-    for attempt in range(2):  # ilk deneme + 1 retry
+    for attempt_no, (max_edge, timeout_s) in enumerate(MINIMAX_ATTEMPTS, start=1):
+        jpeg = shrink_image(raw_image, max_edge=max_edge)
+        b64 = base64.b64encode(jpeg).decode()
+        body = {
+            "model": MINIMAX_MODEL,
+            "temperature": 0.0,
+            "max_tokens": MINIMAX_MAX_TOKENS,
+            "messages": [
+                {"role": "system", "content": RECEIPT_PROMPT},
+                {"role": "user", "content": [
+                    {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{b64}"}},
+                    {"type": "text", "text": "Bu fiş fotoğrafını analiz et ve şemaya uygun JSON döndür."},
+                ]},
+            ],
+        }
+        t0 = time.monotonic()
         try:
             resp = requests.post(
-                MINIMAX_API_URL, json=body, headers=headers, timeout=MINIMAX_TIMEOUT_S,
+                MINIMAX_API_URL, json=body, headers=headers, timeout=timeout_s,
             )
             resp.raise_for_status()
             data = resp.json()
+            elapsed = time.monotonic() - t0
+            logger.info(
+                "parse-receipt deneme %d BAŞARILI: %dpx, %.1f sn (timeout %d sn)",
+                attempt_no, max_edge, elapsed, timeout_s,
+            )
             return data["choices"][0]["message"].get("content") or ""
-        except (requests.RequestException, KeyError, IndexError, ValueError) as e:
+        except requests.HTTPError as e:
+            elapsed = time.monotonic() - t0
+            logger.error(
+                "parse-receipt deneme %d HTTP hatası: %dpx, %.1f sn — %s (retry edilmiyor)",
+                attempt_no, max_edge, elapsed, e,
+            )
             last_err = e
-            logger.warning("MiniMax çağrısı başarısız (deneme %d/2): %s", attempt + 1, e)
-            if attempt == 0:
-                time.sleep(2)
+            break  # sunucu yanıt verdi; küçültme çare olmaz
+        except (requests.RequestException, KeyError, IndexError, ValueError) as e:
+            elapsed = time.monotonic() - t0
+            logger.warning(
+                "parse-receipt deneme %d başarısız: %dpx, %.1f sn (timeout %d sn) — %s",
+                attempt_no, max_edge, elapsed, timeout_s, e,
+            )
+            last_err = e
     raise HTTPException(
         status_code=502,
-        detail=f"Fiş okuma servisi yanıt vermedi, lütfen tekrar deneyin. ({last_err})",
-    )
+        detail="Fiş okunamadı. Fişi düz bir zemine koyup çerçeveyi dolduracak şekilde tekrar çekmeyi deneyin.",
+    ) from last_err
 
 
 @api_router.post("/parse-receipt")
@@ -252,11 +280,12 @@ def parse_receipt(image: UploadFile = File(...)):
     if not raw_bytes:
         raise HTTPException(status_code=400, detail="Boş görüntü dosyası")
     try:
-        jpeg = shrink_image(raw_bytes)
+        # Format doğrulaması — shrink'ler call_minimax içinde deneme başına yapılır.
+        Image.open(io.BytesIO(raw_bytes)).verify()
     except Exception:
         raise HTTPException(status_code=400, detail="Görüntü okunamadı (bozuk veya desteklenmeyen format)")
 
-    raw_out = call_minimax(jpeg)
+    raw_out = call_minimax(raw_bytes)
     try:
         parsed = extract_json(raw_out)
         return validate_and_flag(parsed)

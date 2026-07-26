@@ -55,6 +55,16 @@ Not: M3, bozuk OCR adlarını kendiliğinden düzeltti (ör. `PILICPAŘVAKBONFIL
 3. Aritmetik kontrol + needsReview bağlantısı.
 4. Not: Bu sandbox'tan repoya push YAPILAMIYOR (GitHub vekil kısıtı) — kod değişiklikleri farklı bir yoldan repoya taşınacak.
 
+## Ek — 2000px denemesi ve süre kaydı düzeltmesi (26 Tem 2026)
+
+Uzak çekim toleransı için `max_edge` geçici olarak 2000px'e çıkarıldı ve 6 fişlik
+regresyonda geri alındı. O koşuda anılan **480,7 sn (File)** ve **246,5 sn (A101)**
+rakamları tek çağrı süresi DEĞİL, timeout'a takılan denemeler dahil retry'lı
+toplamlardır — yukarıdaki tablodaki tek-çağrı süreleriyle karşılaştırılamaz.
+Karar: 1400px'e dönüldü; backend'e adaptif plan eklendi (1. deneme 1400px/120 sn,
+timeout/ağ hatasında 2. deneme 1000px/90 sn). Boyut-mu-ürün-sayısı-mı sorusunun
+kontrollü ölçümü ayrıca yapılmaktadır.
+
 ## Dosyalar
 
 - `m3-test/run_test.py` — izole test aracı (sandbox'tan API'ye erişim olan ortamda `--mode both` ile aynı testi koşar)

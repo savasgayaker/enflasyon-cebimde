@@ -83,6 +83,7 @@ export const tr = {
     addItem: 'Ürün Ekle',
     confirmSave: 'Onayla ve Kaydet',
     processing: 'İşleniyor...',
+    processingSlow: 'Kalabalık fiş olabilir, işleniyor...',
   },
   
   // Products

@@ -25,10 +25,22 @@ export default function ScanScreen() {
   const router = useRouter();
   const [permission, requestPermission] = useCameraPermissions();
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isSlowProcessing, setIsSlowProcessing] = useState(false);
   const [facing, setFacing] = useState<'front' | 'back'>('back');
   const cameraRef = useRef<CameraView>(null);
   const { darkMode } = useAppStore((state) => state.settings);
   const theme = darkMode ? colors.dark : colors.light;
+
+  // İstek 20 sn'yi aşarsa "kalabalık fiş" metnine geç — kullanıcı donmuş sanmasın
+  // (M3, ürün sayısı arttıkça belirgin yavaşlıyor; büyük fişlerde 1-2 dk normal).
+  useEffect(() => {
+    if (!isProcessing) {
+      setIsSlowProcessing(false);
+      return;
+    }
+    const timer = setTimeout(() => setIsSlowProcessing(true), 20000);
+    return () => clearTimeout(timer);
+  }, [isProcessing]);
 
   const handleCapture = async () => {
     if (cameraRef.current && !isProcessing) {
@@ -226,7 +238,9 @@ export default function ScanScreen() {
       {isProcessing && (
         <View style={styles.processingOverlay}>
           <MaterialIcons name="receipt-long" size={48} color={colors.white} />
-          <Text style={styles.processingText}>{tr.scanner.processing}</Text>
+          <Text style={styles.processingText}>
+            {isSlowProcessing ? tr.scanner.processingSlow : tr.scanner.processing}
+          </Text>
         </View>
       )}
     </View>

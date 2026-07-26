@@ -193,10 +193,10 @@ def compare(expected: dict, got: dict) -> dict:
     return r
 
 
-def shrink_image(path: Path, max_edge: int = 2000):
+def shrink_image(path: Path, max_edge: int = 1400):
     """Fotoğrafı uzun kenar max_edge px olacak şekilde küçült (JPEG %80).
     backend/server.py shrink_image ile AYNI parametreler — test, üretim
-    proxy'sinin gönderdiği görüntüyle birebir aynı koşulda koşsun diye."""
+    proxy'sinin 1. deneme görüntüsüyle birebir aynı koşulda koşsun diye."""
     try:
         from PIL import Image, ImageOps
         img = Image.open(path)
