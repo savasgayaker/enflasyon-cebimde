@@ -1,4 +1,5 @@
 import base64
+import difflib
 import io
 import json
 import logging
@@ -6,6 +7,7 @@ import os
 import re
 import time
 import uuid
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
 from typing import List
@@ -81,11 +83,9 @@ MINIMAX_MODEL = "MiniMax-M3"
 MINIMAX_MAX_TOKENS = 24000  # reasoning payı yüksek; düşük değerde JSON yarım kalıyor
 
 # Adaptif deneme planı: (max_edge px, timeout sn).
-# 1. deneme 1400px/120sn; timeout veya ağ hatasında 2. deneme görüntüyü
-# 1000px'e küçültüp 90 sn dener (küçük görüntü → daha hızlı yanıt).
-# Ölçüm kanıtı: 2000px kalabalık fişlerde süreyi patlattı (File 23 ürün,
-# üretim 60 sn timeout'undan hiç geçemiyordu) — m3-test koşusu, 26 Tem 2026.
-MINIMAX_ATTEMPTS = [(1400, 120), (1000, 90)]
+# thinking_off ile tek çağrı ~8 sn (RAPOR.md Ek 3-4) — 45 sn fazlasıyla
+# yeter. Timeout/ağ hatasında 2. deneme görüntüyü 1000px'e küçültür.
+MINIMAX_ATTEMPTS = [(1400, 45), (1000, 45)]
 
 # Geçici sağlayıcı hataları: aynı boyutta tekrar denemeye değer (sorun bizde
 # değil; küçültme çare olmaz). 429'da Retry-After başlığına uyulur.
@@ -247,6 +247,10 @@ def call_minimax(raw_image: bytes) -> dict:
             "model": MINIMAX_MODEL,
             "temperature": 0.0,
             "max_tokens": MINIMAX_MAX_TOKENS,
+            # thinking kapalı: 10-20x hız (8 sn), token 727-780 bandında
+            # deterministik. Doğruluk açığı çift-paralel çağrı + çapraz
+            # kontrolle kapatılıyor (karar: RAPOR.md Ek 4-5).
+            "thinking": {"type": "disabled"},
             "messages": [
                 {"role": "system", "content": RECEIPT_PROMPT},
                 {"role": "user", "content": [
@@ -340,9 +344,111 @@ def call_minimax(raw_image: bytes) -> dict:
     ) from last_err
 
 
+# ---------------------------------------------------------------------------
+# Çift-paralel çağrı çapraz kontrolü (karar: RAPOR.md Ek 4-5)
+# thinking_off'un kayma hataları koşular arası DEĞİŞKEN → iki bağımsız
+# çağrının uyuşmayan kalemleri işaretlemesi büyük hataları yakalar.
+# Bilinen kör nokta: ±1 TL sınıfı tutarlı okuma hataları iki çağrıda da
+# aynı gelir (teknik borçta kayıtlı).
+# ---------------------------------------------------------------------------
+
+def _norm_name(s: str) -> str:
+    s = (s or "").upper()
+    for a, b in (("İ", "I"), ("Ö", "O"), ("Ü", "U"), ("Ş", "S"), ("Ğ", "G"), ("Ç", "C")):
+        s = s.replace(a, b)
+    return re.sub(r"[^A-Z0-9]", "", s)
+
+
+def _name_sim(a: str, b: str) -> float:
+    return difflib.SequenceMatcher(None, _norm_name(a), _norm_name(b)).ratio()
+
+
+NAME_SIM_THRESHOLD = 0.55  # run_test.py bulanık eşleştiricisiyle aynı eşik
+
+
+def _prices_differ(a, b) -> bool:
+    if a is None and b is None:
+        return False
+    if a is None or b is None:
+        return True
+    return abs(float(a) - float(b)) > 0.01
+
+
+def _pair_items(items_a: list, items_b: list):
+    """(a_index → b_index | None) eşlemesi. Önce sıraya göre; ad benzerliği
+    her indekste eşiği geçmiyorsa bulanık eşleştiriciye düşer (sıra değişebilir)."""
+    if len(items_a) == len(items_b) and all(
+        _name_sim(x["name"], y["name"]) >= NAME_SIM_THRESHOLD
+        for x, y in zip(items_a, items_b)
+    ):
+        return {i: i for i in range(len(items_a))}
+
+    # Bulanık: run_test.py mantığı — ad benzerliği + fiyat eşleşme bonusu
+    mapping = {}
+    unmatched_b = list(range(len(items_b)))
+    for ai, a in enumerate(items_a):
+        best, best_score = None, 0.0
+        for bi in unmatched_b:
+            b = items_b[bi]
+            score = _name_sim(a["name"], b["name"])
+            if not _prices_differ(a.get("totalPrice"), b.get("totalPrice")):
+                score += 0.5
+            if score > best_score:
+                best, best_score = bi, score
+        if best is not None and best_score >= NAME_SIM_THRESHOLD:
+            mapping[ai] = best
+            unmatched_b.remove(best)
+        else:
+            mapping[ai] = None
+    return mapping
+
+
+def cross_check(chosen: dict, other: dict) -> None:
+    """Seçilen yanıtın kalemlerini diğer yanıtla karşılaştırıp bayraklar.
+    chosen'ı yerinde işaretler (item.needsReview / fiş needsReview)."""
+    ca, cb = chosen["items"], other["items"]
+
+    if len(ca) != len(cb):
+        chosen["needsReview"] = True
+        logger.info("çapraz kontrol: kalem sayısı uyuşmuyor (%d vs %d) — fiş needsReview", len(ca), len(cb))
+    if _prices_differ(chosen.get("totalAmount"), other.get("totalAmount")):
+        chosen["needsReview"] = True
+        logger.info(
+            "çapraz kontrol: totalAmount uyuşmuyor (%s vs %s) — fiş needsReview",
+            chosen.get("totalAmount"), other.get("totalAmount"),
+        )
+
+    mapping = _pair_items(ca, cb)
+    flagged = 0
+    for ai, bi in mapping.items():
+        if bi is None:
+            ca[ai]["needsReview"] = True
+            flagged += 1
+            continue
+        b = cb[bi]
+        a = ca[ai]
+        qty_differ = abs(float(a.get("quantity") or 0) - float(b.get("quantity") or 0)) > 0.001
+        if (
+            _name_sim(a["name"], b["name"]) < NAME_SIM_THRESHOLD
+            or qty_differ
+            or _prices_differ(a.get("totalPrice"), b.get("totalPrice"))
+            or _prices_differ(a.get("unitPrice"), b.get("unitPrice"))
+        ):
+            a["needsReview"] = True
+            flagged += 1
+    if flagged:
+        logger.info("çapraz kontrol: %d kalem uyuşmadı, needsReview işaretlendi", flagged)
+
+
 @api_router.post("/parse-receipt")
 def parse_receipt(image: UploadFile = File(...)):
-    """Fiş fotoğrafını MiniMax M3 vision ile ParsedReceipt JSON'una çevirir.
+    """Fiş fotoğrafını İKİ paralel MiniMax M3 (thinking_off) çağrısıyla okur,
+    yanıtları çapraz kontrol eder, ParsedReceipt JSON'u döner.
+
+    Sunulacak yanıt: ürün toplamı totalAmount'a uyan; ikisi de uyuyorsa
+    veya ikisi de uymuyorsa İLK TAMAMLANAN. Aritmetik kontrol seçilen yanıt
+    üzerinde aynen çalışır. Çağrılardan biri düşerse diğeri kullanılır ama
+    çapraz kontrol yapılamadığı için fiş needsReview işaretlenir.
 
     Sync def bilinçli: requests bloklar; FastAPI sync endpoint'i threadpool'da
     çalıştırdığı için event loop tıkanmaz.
@@ -356,15 +462,47 @@ def parse_receipt(image: UploadFile = File(...)):
     except Exception:
         raise HTTPException(status_code=400, detail="Görüntü okunamadı (bozuk veya desteklenmeyen format)")
 
-    parsed = call_minimax(raw_bytes)  # JSON parse + finish_reason retry'ları içeride
-    try:
-        return validate_and_flag(parsed)
-    except ValueError as e:
-        logger.error("Model yanıtı şema doğrulamasından geçemedi: %s", e)
-        raise HTTPException(
-            status_code=502,
-            detail="Fiş okunamadı: model geçerli bir sonuç döndürmedi, lütfen tekrar deneyin.",
+    # İki bağımsız çağrı EŞZAMANLI — süre tek çağrı süresinde kalır.
+    validated = []  # tamamlanma sırasına göre başarılı + şeması geçerli yanıtlar
+    errors = []
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        futures = [pool.submit(call_minimax, raw_bytes) for _ in range(2)]
+        for fut in as_completed(futures):
+            try:
+                validated.append(validate_and_flag(fut.result()))
+            except HTTPException as e:
+                errors.append(e)
+            except ValueError as e:
+                logger.error("Model yanıtı şema doğrulamasından geçemedi: %s", e)
+                errors.append(HTTPException(
+                    status_code=502,
+                    detail="Fiş okunamadı: model geçerli bir sonuç döndürmedi, lütfen tekrar deneyin.",
+                ))
+
+    if not validated:
+        raise errors[0]
+
+    if len(validated) == 1:
+        # Zarif bozulma: tek yanıt var, çapraz kontrol yapılamadı.
+        logger.warning(
+            "çapraz kontrol YAPILAMADI: iki çağrıdan biri düştü (%s) — fiş needsReview",
+            errors[0].detail if errors else "bilinmeyen hata",
         )
+        result = validated[0]
+        result["needsReview"] = True
+        return result
+
+    first, second = validated[0], validated[1]
+    # validate_and_flag semantiği: needsReview == aritmetik tutmuyor
+    first_ok, second_ok = not first["needsReview"], not second["needsReview"]
+    if second_ok and not first_ok:
+        chosen, other = second, first
+    else:
+        # ikisi de uyuyor / ikisi de uymuyor / yalnız ilk uyuyor → ilk gelen
+        chosen, other = first, second
+
+    cross_check(chosen, other)
+    return chosen
 
 
 app.include_router(api_router)
