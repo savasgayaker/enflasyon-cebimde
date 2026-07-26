@@ -403,6 +403,21 @@ def _pair_items(items_a: list, items_b: list):
     return mapping
 
 
+def _effective_unit_price(item: dict):
+    """Etkin birim fiyat: unitPrice varsa o; yoksa geçerli quantity (> 0)
+    ile totalPrice/quantity; o da yoksa None. İki çağrının unitPrice
+    TEMSİLİ farklı olabiliyor (biri null, öteki dolu) — karşılaştırma
+    temsile değil değere yapılmalı (RAPOR.md Ek 6: A101 4'lü sahte bayrak)."""
+    up = item.get("unitPrice")
+    if isinstance(up, (int, float)):
+        return round(float(up), 2)
+    tp = item.get("totalPrice")
+    q = item.get("quantity")
+    if isinstance(tp, (int, float)) and isinstance(q, (int, float)) and q > 0:
+        return round(float(tp) / float(q), 2)
+    return None
+
+
 _TURKISH_CHARS = set("ÇĞİÖŞÜçğıöşü")
 
 
@@ -448,10 +463,15 @@ def cross_check(chosen: dict, other: dict) -> None:
         b = cb[bi]
         a = ca[ai]
         qty_differ = abs(float(a.get("quantity") or 0) - float(b.get("quantity") or 0)) > 0.001
+        # unitPrice: temsil değil DEĞER karşılaştırılır; iki taraftan biri
+        # hesaplanamıyorsa bu alandan bayrak çıkmaz (totalPrice zaten ayrıca
+        # karşılaştırılıyor).
+        ua, ub = _effective_unit_price(a), _effective_unit_price(b)
+        unit_differ = ua is not None and ub is not None and abs(ua - ub) > 0.01
         if (
             qty_differ
             or _prices_differ(a.get("totalPrice"), b.get("totalPrice"))
-            or _prices_differ(a.get("unitPrice"), b.get("unitPrice"))
+            or unit_differ
         ):
             a["needsReview"] = True
             flagged += 1
