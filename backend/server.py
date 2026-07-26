@@ -23,6 +23,10 @@ from starlette.middleware.cors import CORSMiddleware
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from receipt_prompt import RECEIPT_PROMPT
+from receipt_fields import (
+    strip_kdv_suffix, extract_kdv_rate, normalize_vat_rate,
+    normalize_unit, reconcile_optional,
+)
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -130,17 +134,6 @@ def extract_json(text: str) -> dict:
             raise ValueError(f"Çıktıda JSON bulunamadı: {text[:200]}")
         text = text[start:end + 1]
     return json.loads(text)
-
-
-KDV_SUFFIX_RE = re.compile(r"\s*%\s*0?\d{1,2}\s*$")
-
-def strip_kdv_suffix(name: str) -> str:
-    """Ürün adının SONUNDAKİ KDV oranını kırpar ("PEYNİR 250G %1" → "PEYNİR 250G").
-    Adın ortasındaki % işaretine dokunmaz ("DURU 4*150GR" güvende).
-    Prompt kuralına rağmen model KDV eklerse savunmacı temizlik."""
-    cleaned = KDV_SUFFIX_RE.sub("", name)
-    # artakalan kuyruk boşluğu/noktalama (ör. "ÜRÜN -" veya "ÜRÜN ,")
-    return cleaned.rstrip(" \t-.,;:").strip()
 
 
 def validate_and_flag(parsed: dict) -> dict:
