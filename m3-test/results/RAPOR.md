@@ -140,6 +140,31 @@ yeni null fiyatlar, aritmetik fark 302-778. Kural modeli düzeltmek yerine
 2,0-778,0). Ek 3'teki "iç tutarlı sessiz kayma" tekrarlamadı — gerçek ama nadir
 (~11 hatalı koşuda 1 gözlem).
 
+## Ek 5 — KARAR ve KABUL TESTİ: çift-paralel thinking_off (26 Tem 2026)
+
+**Karar (Savaş, A seçeneği):** yayın akışı çift-paralel thinking_off + iki
+katmanlı doğrulamaya geçti. Mimari: iki bağımsız M3 çağrısı eşzamanlı;
+kalemler sıra→bulanık eşleştirmeyle karşılaştırılır, ad/miktar/fiyat
+uyuşmazlığı kalemi, sayı/toplam uyuşmazlığı fişi needsReview yapar; sunulan
+yanıt aritmetiği tutan (yoksa ilk gelen); tek çağrı düşerse zarif bozulma
+(diğeri + fiş needsReview). Timeout planı (1400px, 45sn)+(1000px, 45sn).
+
+**Kabul testi:** 6 fiş × 5 koşu = 30 gerçek endpoint çağrısı:
+
+| Sınıf | Adet |
+|---|---|
+| (a) Tamamen doğru | **22/30** (12 bayraksız + 10 yanlış-alarmlı) |
+| (b) Hata var, katmanlar YAKALADI | **8/30** |
+| (c) Hata var, SESSİZ geçti | **0/30** ✓ |
+
+Ortalama uçtan uca süre **6,7 sn** (3,4–11,7) — thinking'li tek çağrının
+90-150 sn'sine karşı ~15-20×. En dağınık fiş (File) 5/5 koşuda hatalıydı
+ama 5'inde de yakalandı; ±1 TL çekirdeği (PINAR 158↔159) dahil.
+
+Not: 10/30 koşuda fiş doğruyken kalem bayrağı çıktı (yanlış alarm) —
+kullanıcı birkaç doğru kalemi teyit etmek zorunda kalıyor; güvenliğin
+bilinçli bedeli.
+
 ## Dosyalar
 
 - `m3-test/run_test.py` — izole test aracı (sandbox'tan API'ye erişim olan ortamda `--mode both` ile aynı testi koşar)
