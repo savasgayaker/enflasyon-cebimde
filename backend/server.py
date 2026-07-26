@@ -212,8 +212,10 @@ def validate_and_flag(parsed: dict) -> dict:
     }
 
 
-def call_minimax(raw_image: bytes) -> str:
-    """MiniMax M3'e adaptif vision çağrısı. Üç kovalı retry politikası:
+def call_minimax(raw_image: bytes) -> dict:
+    """MiniMax M3'e adaptif vision çağrısı; ayrıştırılmış JSON dict döner.
+
+    Retry politikası (dört kova, hepsi ≤ 2 deneme bütçesini PAYLAŞIR):
 
     1. Timeout / ağ hatası      → bir SONRAKİ (daha küçük) boyutla tekrar dene.
     2. HTTP 429/500/502/503/504 → AYNI boyutta tekrar dene (2 sn bekle;
@@ -221,6 +223,11 @@ def call_minimax(raw_image: bytes) -> str:
        Sorun sağlayıcıda — küçültme çare değil.
     3. HTTP 400/401/403         → hemen vazgeç; kalıcı hata (bozuk istek veya
        geçersiz anahtar). Listede olmayan diğer statüler de retry edilmez.
+    4. Kullanılamayan yanıt     → AYNI boyutta tekrar dene:
+       finish_reason == "length" (token tavanına çarpıp kırpılmış — JSON
+       parse'ı beklemeye gerek yok) veya JSON ayrıştırma hatası. Ölçüm
+       kanıtı: aynı görüntüde yeni koşu kısa reasoning'le bitirebiliyor
+       (completion_tokens 3 955 – 24 000 arası savruluyor).
 
     Toplam deneme her koşulda en fazla 2 — sonsuz döngü riski yok.
     """
@@ -256,11 +263,37 @@ def call_minimax(raw_image: bytes) -> str:
             resp.raise_for_status()
             data = resp.json()
             elapsed = time.monotonic() - t0
+            choice = data["choices"][0]
+            finish_reason = choice.get("finish_reason")
+            content = choice["message"].get("content") or ""
+
+            # Kova 4a: token tavanına çarpmış → yanıt kırpık, parse denemeye gerek yok
+            if finish_reason == "length":
+                last_err = ValueError("finish_reason=length (yanıt token tavanında kırpıldı)")
+                logger.warning(
+                    "parse-receipt deneme %d KIRPIK (finish_reason=length): %dpx, %.1f sn — "
+                    "AYNI boyutta tekrar",
+                    attempt_no, max_edge, elapsed,
+                )
+                continue
+
+            # Kova 4b: JSON ayrıştırma hatası → yeni koşu şansı
+            try:
+                parsed = extract_json(content)
+            except (ValueError, json.JSONDecodeError) as e:
+                last_err = e
+                logger.warning(
+                    "parse-receipt deneme %d JSON HATASI: %dpx, %.1f sn — %s | ilk 200: %s — "
+                    "AYNI boyutta tekrar",
+                    attempt_no, max_edge, elapsed, e, content[:200],
+                )
+                continue
+
             logger.info(
-                "parse-receipt deneme %d BAŞARILI: %dpx, %.1f sn (timeout %d sn)",
-                attempt_no, max_edge, elapsed, timeout_s,
+                "parse-receipt deneme %d BAŞARILI: %dpx, %.1f sn (timeout %d sn, finish=%s)",
+                attempt_no, max_edge, elapsed, timeout_s, finish_reason,
             )
-            return data["choices"][0]["message"].get("content") or ""
+            return parsed
         except requests.HTTPError as e:
             elapsed = time.monotonic() - t0
             status = e.response.status_code if e.response is not None else None
@@ -323,12 +356,11 @@ def parse_receipt(image: UploadFile = File(...)):
     except Exception:
         raise HTTPException(status_code=400, detail="Görüntü okunamadı (bozuk veya desteklenmeyen format)")
 
-    raw_out = call_minimax(raw_bytes)
+    parsed = call_minimax(raw_bytes)  # JSON parse + finish_reason retry'ları içeride
     try:
-        parsed = extract_json(raw_out)
         return validate_and_flag(parsed)
-    except (ValueError, json.JSONDecodeError) as e:
-        logger.error("Model yanıtı ayrıştırılamadı: %s | ilk 300 karakter: %s", e, raw_out[:300])
+    except ValueError as e:
+        logger.error("Model yanıtı şema doğrulamasından geçemedi: %s", e)
         raise HTTPException(
             status_code=502,
             detail="Fiş okunamadı: model geçerli bir sonuç döndürmedi, lütfen tekrar deneyin.",
