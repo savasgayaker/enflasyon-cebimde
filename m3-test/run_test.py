@@ -193,9 +193,10 @@ def compare(expected: dict, got: dict) -> dict:
     return r
 
 
-def shrink_image(path: Path, max_edge: int = 1800):
-    """Fotoğrafı uzun kenar max_edge px olacak şekilde küçült (JPEG %85).
-    Telefon fotoğrafları 8-12 MB; küçültmek isteği 10 kat hızlandırır, fiş metni okunur kalır."""
+def shrink_image(path: Path, max_edge: int = 2000):
+    """Fotoğrafı uzun kenar max_edge px olacak şekilde küçült (JPEG %80).
+    backend/server.py shrink_image ile AYNI parametreler — test, üretim
+    proxy'sinin gönderdiği görüntüyle birebir aynı koşulda koşsun diye."""
     try:
         from PIL import Image, ImageOps
         img = Image.open(path)
@@ -207,7 +208,7 @@ def shrink_image(path: Path, max_edge: int = 1800):
             scale = max_edge / max(w, h)
             img = img.resize((int(w * scale), int(h * scale)), Image.LANCZOS)
         buf = io.BytesIO()
-        img.save(buf, format="JPEG", quality=85)
+        img.save(buf, format="JPEG", quality=80)
         return buf.getvalue(), "image/jpeg"
     except ImportError:
         print("    ! Pillow yok — fotoğraf küçültülmeden gönderiliyor (yavaş olabilir)")
