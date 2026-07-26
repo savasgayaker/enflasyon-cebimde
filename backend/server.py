@@ -449,8 +449,13 @@ def cross_check(chosen: dict, other: dict) -> None:
         # unit/vatRate: iki çağrı çelişirse alan BOŞALTILIR, bayrak çıkmaz.
         # Yanlış alarm Ek 6-7'de zaten yapısal ~%30 tabanında; fiyatı bozmayan
         # bir alan için o tabanı yükseltmek doğru takas değil (Ek 7 kuralının aynısı).
-        a["unit"] = reconcile_optional(a.get("unit"), b.get("unit"))
-        a["vatRate"] = reconcile_optional(a.get("vatRate"), b.get("vatRate"))
+        for _field in ("unit", "vatRate"):
+            _av, _bv = a.get(_field), b.get(_field)
+            _merged = reconcile_optional(_av, _bv)
+            if _av is not None and _bv is not None and _merged is None:
+                # Yalnız ölçüm logu (Ek 8: "çelişkiden boşalan alan" sayacı).
+                logger.info("çapraz kontrol: %s çelişkisi (%r vs %r) — alan boşaltıldı", _field, _av, _bv)
+            a[_field] = _merged
         qty_differ = abs(float(a.get("quantity") or 0) - float(b.get("quantity") or 0)) > 0.001
         # unitPrice: temsil değil DEĞER karşılaştırılır; iki taraftan biri
         # hesaplanamıyorsa bu alandan bayrak çıkmaz (totalPrice zaten ayrıca

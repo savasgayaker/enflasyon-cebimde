@@ -81,6 +81,12 @@ def main():
             else:
                 rec["cls"] = "C_SESSIZ"
             rec["score"] = cmp_r["score"]
+            # Ek 8: unit/vatRate doluluk analizi için yanıt kalemleri de saklanır.
+            rec["resp_items"] = [
+                {"name": i.get("name"), "unit": i.get("unit"),
+                 "vatRate": i.get("vatRate"), "needsReview": i.get("needsReview")}
+                for i in resp.get("items", [])
+            ]
             rec["receipt_flag"] = resp.get("needsReview")
             rec["flagged_items"] = sum(1 for i in resp.get("items", []) if i.get("needsReview"))
             wrong = [
