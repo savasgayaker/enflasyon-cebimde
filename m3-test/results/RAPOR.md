@@ -215,6 +215,47 @@ uyuşmazlık dürüstçe işaretleniyor). Bu ~%30 taban çift-çağrı mimarisin
 yapısal bedeli; ancak 3. çağrı/oylama (maliyet) veya bayrak gevşetme
 (güvenlik riski) ile düşer. Mevcut denge kabul edildi.
 
+## Ek 8 — unit/vatRate prompt genişletmesi kabul testi (26 Tem 2026)
+
+Prompt commit'i `a390372` (uzunluk 1328 → 1812 karakter, +%36). Aynı düzen:
+6 fiş × 5 koşum = 30 gerçek endpoint çağrısı (`acceptance_dual.py`).
+
+### Ana tablo — regresyon kontrolü
+
+| Metrik | Ek 7 (taban) | Şimdi | Kural | Sonuç |
+|---|---|---|---|---|
+| (c) SESSİZ hata | 0/30 | **0/30** | 0 olmak zorunda | ✓ GEÇTİ |
+| (b) yakalanan hata | 8/30 | **6/30** | 6-10 arası normal | ✓ bandın içinde |
+| Yanlış alarm | 10/30 | **8/30** | ≤13/30 | ✓ yükselmedi, düştü |
+| Ortalama süre | 7,1 sn | **6,5 sn** | ≤8,5 sn | ✓ GEÇTİ |
+
+**Süre yorumu:** +%36 prompt'a rağmen süre DÜŞTÜ (6,5 sn; min 3,5, max 14,8).
+thinking_off'ta süreyi çıktı uzunluğu belirliyor (Ek 2); +484 karakterlik
+girdi artışının etkisi koşumlar arası doğal varyansın içinde kayboluyor.
+Prompt kısaltması gerekmiyor.
+
+### Yeni metrikler — ilk ölçüm (394 kalem üzerinden)
+
+| Yeni metrik | Değer | Hedef | Sonuç |
+|---|---|---|---|
+| unit dolu oranı | **372/394 = %94,4** | ≥ %90 | ✓ GEÇTİ |
+| vatRate dolu oranı | **347/394 = %88,1** | fişte basılıysa dolmalı | aşağıda |
+| çelişkiden boşalan | unit **22 (%5,6)**, vatRate **30 (%7,6)** | > %10 ise kararsız | ✓ ikisi de eşik altı |
+
+**vatRate fiş bazında:** A101/Bildirici/BİM/Migros **%100** — oranın net
+basıldığı fişlerde tam doluluk. File %70, GİMSA %85: eksikler okunaksız
+satırlar + çelişki boşaltmaları; uydurma yerine null tercih edildiği için
+beklenen dürüst boşluk.
+
+**unit boş kalan 22 kalem:** çoğunluğu File'ın bilinen sorunlu satırları
+(HARRAS, PINAR SÜT vb. 16 vaka) + A101'de ambalajı litreli deterjan/yağ
+satırları. Çelişki çiftlerinin dağılımı öğretici: 14/22'si `kg ↔ adet`
+(tartılı üründe çağrılardan biri adet diyor); ambalaj tuzağı (`adet ↔ lt`)
+yalnız 4 vaka — prompt'taki "SUT 1 L → adet" kuralı büyük ölçüde çalışıyor.
+
+**Karar:** tüm zorunlu kurallar geçti; prompt commit'i KALIYOR. unit doluluk
+hedefi aşıldı (%94,4); boş kalanlar uydurulmamış dürüst boşluk.
+
 ## Dosyalar
 
 - `m3-test/run_test.py` — izole test aracı (sandbox'tan API'ye erişim olan ortamda `--mode both` ile aynı testi koşar)

@@ -2,3 +2,5 @@
 photos/
 results/*
 !results/RAPOR.md
+# Ek'lerin arkasındaki tarihli ham ölçüm verileri repoda tutulur
+!results/ek*-acceptance-*.json
