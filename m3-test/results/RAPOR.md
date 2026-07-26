@@ -195,6 +195,26 @@ değilmiş:
 Ad-seçim iyileştirmesi yine de kazanç: ürün adları artık iki çağrının
 iyisinden (Türkçe karakterli) geliyor — dedup borcuna küçük iyileşme.
 
+## Ek 7 — unitPrice değer-karşılaştırması: sistematik desen kırıldı, taban yapısal (26 Tem 2026)
+
+Ayar: unitPrice çapraz kontrolü temsile değil DEĞERE (etkin birim fiyat =
+unitPrice ?? totalPrice/quantity); biri hesaplanamıyorsa bu alandan bayrak yok.
+
+| Metrik | Ek 6 | Sonra |
+|---|---|---|
+| (c) SESSİZ | 0/30 | **0/30** ✓ (ayar kalıyor) |
+| (b) yakalandı | 7/30 | 8/30 |
+| Yanlış alarm | 10/30 | **10/30** |
+| Ortalama süre | 7,6 sn | 7,1 sn |
+
+Toplam sayı değişmedi AMA hedeflenen desen giderildi: A101'in her koşuda
+"tam 4 kalem" sistematik sahte bayrağı kırıldı (artık 2/8/5/2/2 — değişken).
+Kalan alarmlar karşı çağrının GERÇEK hatalarının gölgesi (nondeterminizm her
+koşuda birkaç kalemde farklı değer üretiyor; doğru yanıt seçiliyor ama
+uyuşmazlık dürüstçe işaretleniyor). Bu ~%30 taban çift-çağrı mimarisinin
+yapısal bedeli; ancak 3. çağrı/oylama (maliyet) veya bayrak gevşetme
+(güvenlik riski) ile düşer. Mevcut denge kabul edildi.
+
 ## Dosyalar
 
 - `m3-test/run_test.py` — izole test aracı (sandbox'tan API'ye erişim olan ortamda `--mode both` ile aynı testi koşar)
