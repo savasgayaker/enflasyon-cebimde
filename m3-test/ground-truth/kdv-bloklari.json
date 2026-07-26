@@ -1,0 +1,36 @@
+{
+  "_aciklama": "Fotoğraflardaki KDV döküm blokları — birebir aktarım, hesaplama/düzeltme yok. 'bloklar' anahtarı oran, değeri fişte o oran için basılan KDV DAHİL tutar (tur=brut).",
+  "bim": {
+    "tur": "brut",
+    "genel_toplam": 249.00,
+    "bloklar": { "1": 125.00, "20": 124.00 },
+    "_not": "Fişte üç sütun basılı (MATRAH 123,76/103,33 · KDV TUTAR 1,24/20,67 · KDV DAHIL); KDV DAHIL sütunu aktarıldı."
+  },
+  "migros": {
+    "tur": "brut",
+    "genel_toplam": 361.30,
+    "bloklar": { "1": 199.90, "10": 147.50, "20": 13.90 }
+  },
+  "bildirici": {
+    "tur": "brut",
+    "genel_toplam": 1311.00,
+    "bloklar": { "1": 791.80, "10": 142.85, "20": 376.35 }
+  },
+  "gimsa": {
+    "tur": "brut",
+    "genel_toplam": 1391.80,
+    "bloklar": { "1": 1260.30, "10": 128.50, "20": 3.00 },
+    "_not": "KDV sütunu kısmen soluk (12,48/11,68/0,5 — TOPKDV 24,66 ile tutarlı); KDV DahilTutar sütunu net basılı ve aktarılan odur."
+  },
+  "a101": {
+    "tur": "brut",
+    "genel_toplam": 2164.50,
+    "bloklar": { "20": 900.00, "1": 1264.50 }
+  },
+  "file": {
+    "tur": "brut",
+    "genel_toplam": 3060.97,
+    "bloklar": { "1": 2940.97, "10": 60.00, "20": 60.00 },
+    "_not": "Fişte üç sütun basılı (MATRAH 2.911,85/54,55/50,00 · KDV TUTAR 29,12/5,45/10,00 · KDV DAHIL); KDV DAHIL sütunu aktarıldı."
+  }
+}
