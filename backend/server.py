@@ -87,6 +87,13 @@ MINIMAX_MAX_TOKENS = 24000  # reasoning payı yüksek; düşük değerde JSON ya
 # üretim 60 sn timeout'undan hiç geçemiyordu) — m3-test koşusu, 26 Tem 2026.
 MINIMAX_ATTEMPTS = [(1400, 120), (1000, 90)]
 
+# Geçici sağlayıcı hataları: aynı boyutta tekrar denemeye değer (sorun bizde
+# değil; küçültme çare olmaz). 429'da Retry-After başlığına uyulur.
+TRANSIENT_HTTP_STATUSES = {429, 500, 502, 503, 504}
+# Retry-After'a uyarken üst sınır — sync endpoint thread'ini dakikalarca
+# askıda tutmamak için (FastAPI threadpool'u sınırlı).
+RETRY_AFTER_CAP_S = 30.0
+
 # m3-test/run_test.py'deki PROMPT sabitiyle birebir aynı — test edilen davranış budur.
 RECEIPT_PROMPT = """Sen Türk market fişlerini okuyan bir asistansın. Sana verilen fişi analiz et ve SADECE aşağıdaki şemaya uyan geçerli bir JSON döndür. JSON dışında hiçbir açıklama, markdown, ``` bloğu yazma.
 
@@ -206,11 +213,16 @@ def validate_and_flag(parsed: dict) -> dict:
 
 
 def call_minimax(raw_image: bytes) -> str:
-    """MiniMax M3'e adaptif vision çağrısı (MINIMAX_ATTEMPTS planı).
+    """MiniMax M3'e adaptif vision çağrısı. Üç kovalı retry politikası:
 
-    Timeout / ağ hatasında bir sonraki deneme görüntüyü daha küçük boyutta
-    gönderir. HTTP hata yanıtları (4xx/5xx) retry edilmez — sunucu yanıt
-    vermiştir, küçültme çare olmaz.
+    1. Timeout / ağ hatası      → bir SONRAKİ (daha küçük) boyutla tekrar dene.
+    2. HTTP 429/500/502/503/504 → AYNI boyutta tekrar dene (2 sn bekle;
+       429'da Retry-After başlığı varsa ona uy, RETRY_AFTER_CAP_S ile sınırlı).
+       Sorun sağlayıcıda — küçültme çare değil.
+    3. HTTP 400/401/403         → hemen vazgeç; kalıcı hata (bozuk istek veya
+       geçersiz anahtar). Listede olmayan diğer statüler de retry edilmez.
+
+    Toplam deneme her koşulda en fazla 2 — sonsuz döngü riski yok.
     """
     api_key = os.environ.get("MINIMAX_API_KEY")
     if not api_key:
@@ -220,7 +232,8 @@ def call_minimax(raw_image: bytes) -> str:
         )
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
     last_err = None
-    for attempt_no, (max_edge, timeout_s) in enumerate(MINIMAX_ATTEMPTS, start=1):
+    max_edge, timeout_s = MINIMAX_ATTEMPTS[0]
+    for attempt_no in (1, 2):
         jpeg = shrink_image(raw_image, max_edge=max_edge)
         b64 = base64.b64encode(jpeg).decode()
         body = {
@@ -250,19 +263,44 @@ def call_minimax(raw_image: bytes) -> str:
             return data["choices"][0]["message"].get("content") or ""
         except requests.HTTPError as e:
             elapsed = time.monotonic() - t0
-            logger.error(
-                "parse-receipt deneme %d HTTP hatası: %dpx, %.1f sn — %s (retry edilmiyor)",
-                attempt_no, max_edge, elapsed, e,
-            )
+            status = e.response.status_code if e.response is not None else None
             last_err = e
-            break  # sunucu yanıt verdi; küçültme çare olmaz
+            if status in (401, 403):
+                logger.error(
+                    "parse-receipt HTTP %s: MINIMAX_API_KEY geçersiz veya süresi dolmuş olabilir "
+                    "(backend/.env kontrol edin) — retry edilmiyor",
+                    status,
+                )
+                break
+            if status in TRANSIENT_HTTP_STATUSES and attempt_no == 1:
+                wait = 2.0
+                if status == 429 and e.response is not None:
+                    retry_after = e.response.headers.get("Retry-After")
+                    if retry_after:
+                        try:
+                            wait = min(float(retry_after), RETRY_AFTER_CAP_S)
+                        except ValueError:
+                            pass
+                logger.warning(
+                    "parse-receipt deneme %d HTTP %s (geçici sağlayıcı hatası): "
+                    "%dpx, %.1f sn — %.1f sn bekleyip AYNI boyutta tekrar",
+                    attempt_no, status, max_edge, elapsed, wait,
+                )
+                time.sleep(wait)
+                continue  # boyut ve timeout aynı kalır
+            logger.error(
+                "parse-receipt deneme %d HTTP %s: %dpx, %.1f sn — kalıcı hata, retry edilmiyor",
+                attempt_no, status, max_edge, elapsed,
+            )
+            break
         except (requests.RequestException, KeyError, IndexError, ValueError) as e:
             elapsed = time.monotonic() - t0
             logger.warning(
-                "parse-receipt deneme %d başarısız: %dpx, %.1f sn (timeout %d sn) — %s",
+                "parse-receipt deneme %d başarısız (timeout/ağ): %dpx, %.1f sn (timeout %d sn) — %s",
                 attempt_no, max_edge, elapsed, timeout_s, e,
             )
             last_err = e
+            max_edge, timeout_s = MINIMAX_ATTEMPTS[1]  # küçük boyutla devam
     raise HTTPException(
         status_code=502,
         detail="Fiş okunamadı. Fişi düz bir zemine koyup çerçeveyi dolduracak şekilde tekrar çekmeyi deneyin.",
