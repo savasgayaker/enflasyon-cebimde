@@ -142,7 +142,7 @@ Turkish-only. `src/i18n/tr.ts` holds all strings; `t('a.b.c')` does dotted-path 
 Aşama 3 (vision-first geçiş: backend proxy + `parseReceiptViaM3`) tamamlandı. Aşağıdaki maddeler biliniyor ve bilinçli olarak açık bırakıldı:
 
 ### M3 pipeline
-- **Süre değişkenliği:** M3 vision medyan ~14 sn ama kalabalık fişte 141 sn'ye çıkabiliyor (RAPOR.md, File 23 ürün). 60 sn timeout bu kuyruğu kesebilir — timeout'a takılan büyük fişler için strateji (chunk'lama / daha yüksek timeout / async job) henüz yok.
+- **Süre değişkenliği — kök neden biliniyor:** gecikmeyi görüntü boyutu değil, modelin koşudan koşuya savrulan reasoning uzunluğu belirliyor (`completion_tokens` 4-24k; RAPOR.md Ek 2). Backend'in adaptif/kova'lı retry'ı belirtiyi yönetiyor; **streaming** (SSE, ilk-token timeout + kırpılma tespiti) kök neden çözülmezse gerekli olacak — belirti yönetimi kalıcı çözüm değil.
 - ~~**`BACKEND_URL` elle yazılı**~~ **KAPANDI:** artık Metro `hostUri`'sinden türetiliyor (`src/constants/config.ts`); `EXPO_PUBLIC_BACKEND_URL` env değişkeni her zaman öncelikli. (Borcun bedeli bir kez ödendi: DHCP, Mac'in IP'sini .26→.20 değiştirdiğinde iPhone E2E sessizce koptu.)
 - **Fiş-seviyesi needsReview kalemlere yayılıyor** (`receiptParserM3.ts`): toplam tutmadığında hangi kalemin hatalı olduğu bilinemediği için hepsi işaretleniyor. Kalem bazlı daraltma (ör. modelden şüphe skoru istemek) gelecek iş.
 

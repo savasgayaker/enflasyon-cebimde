@@ -65,6 +65,30 @@ Karar: 1400px'e dönüldü; backend'e adaptif plan eklendi (1. deneme 1400px/120
 timeout/ağ hatasında 2. deneme 1000px/90 sn). Boyut-mu-ürün-sayısı-mı sorusunun
 kontrollü ölçümü ayrıca yapılmaktadır.
 
+## Ek 2 — Gecikme ölçümü: süreyi ne belirliyor? (26 Tem 2026)
+
+File (23 ürün) ve A101 (21 ürün), 1400px ve 2000px'te 3'er kez, SERİ ve tek
+çağrıyla (600 sn timeout, retry'sız) ölçüldü. Bulgular:
+
+1. **Süre ≈ çıktı uzunluğu.** Başarılı 9 koşuda süre, `completion_tokens` ile
+   güçlü korelasyonlu (~100-150 token/sn); 28,4 sn ↔ 3 955 token'dan
+   182,4 sn ↔ 24 000 token'a. Aynı fiş, aynı boyut, temperature 0'da bile
+   token sayısı 4-6 kat savruluyor — belirleyici, modelin koşudan koşuya
+   değişen reasoning uzunluğu.
+2. **Görüntü boyutunun etkisi yok.** 1400 ve 2000px süre aralıkları tamamen
+   iç içe (JPEG farkı da yalnız %15). Boyutla oynamak yanlış koldu.
+3. **Tek çağrı güvenilirliği düşük: 12 koşudan 7 kullanılabilir sonuç.**
+   3 koşu timeout/bağlantı kesilmesine takıldı (600 sn sınırımızdan çok önce —
+   sağlayıcı tarafı kesintisi olası), 2 koşu token tavanına çarptı.
+4. **Token tavanı (24 000) sessiz başarısızlık üretiyor:** finish_reason=length
+   ile JSON kırpık geliyor; parse edilemiyor. "Yavaş fiş" ile "bozuk yanıt"
+   aynı kök nedenin iki yüzü. (Backend artık finish_reason=length ve JSON
+   hatasında da retry ediyor — kova 4.)
+
+Sonuç: gerçek kaldıraç görüntü değil, modelin reasoning üretimini kısmak
+(thinking parametresi / sıcaklık) veya akışı yönetmek (streaming). Kontrollü
+varyant ölçümü ayrıca koşulmaktadır.
+
 ## Dosyalar
 
 - `m3-test/run_test.py` — izole test aracı (sandbox'tan API'ye erişim olan ortamda `--mode both` ile aynı testi koşar)
