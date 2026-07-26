@@ -1,35 +1,14 @@
 import { BACKEND_URL } from '../constants/config';
-import { suggestCategory } from '../constants/categories';
-import type { ParsedReceipt, ParsedItem } from './receiptParser';
-
-/**
- * Backend'in /api/parse-receipt yanıt şeması (bkz. backend/server.py).
- * ParsedReceipt'ten farkları: fiş seviyesinde needsReview var,
- * ürünlerde categoryId yok (kategori önerisi istemcide yapılır).
- */
-interface M3Response {
-  storeName: string;
-  date: string;
-  totalAmount: number;
-  needsReview: boolean;
-  items: {
-    name: string;
-    quantity: number;
-    unitPrice: number | null;
-    totalPrice: number | null;
-    needsReview: boolean;
-  }[];
-}
+import { mapM3Response, type M3Response } from './m3Mapper';
+import type { ParsedReceipt } from './receiptParser';
 
 /**
  * Fiş fotoğrafını backend'deki MiniMax M3 vision proxy'sine yükler ve
  * ParsedReceipt döner. Eski `extractTextFromImage` + `parseReceipt`
  * zincirinin yerini alır (karar kaydı: m3-test/results/RAPOR.md).
  *
- * Aritmetik çapraz-kontrol backend'de yapılır; fiş seviyesindeki
- * needsReview burada ürünlere yayılır çünkü ParsedReceipt/UI kalem
- * bazlı bayrak kullanır ve toplam tutmadığında hangi kalemin hatalı
- * olduğu bilinemez — kullanıcı hepsini gözden geçirmeli.
+ * Yanıt → ParsedReceipt eşlemesi `mapM3Response`'ta (saf, birim testli);
+ * bu dosya yalnızca ağ katmanı.
  *
  * @param imageUri Yerel fotoğraf URI'si (kamera veya galeri çıktısı).
  * @throws Ağ hatası, backend hatası veya geçersiz yanıt durumunda
@@ -68,40 +47,5 @@ export async function parseReceiptViaM3(imageUri: string): Promise<ParsedReceipt
   }
 
   const data = (await response.json()) as M3Response;
-
-  const spreadReview = data.needsReview === true;
-  const items: ParsedItem[] = (data.items ?? []).map((it) => {
-    const quantity =
-      typeof it.quantity === 'number' && it.quantity > 0 ? it.quantity : 1;
-    // unitPrice yoksa toplamdan türet (totalPrice / quantity) — toplamı
-    // doğrudan birim fiyata yazmak çok adetli üründe inflation.ts'in birim
-    // fiyat karşılaştırmasını bozar.
-    let unitPrice = it.unitPrice ?? null;
-    if (unitPrice === null && it.totalPrice !== null) {
-      unitPrice = Math.round((it.totalPrice / quantity) * 100) / 100;
-    }
-    return {
-      name: it.name,
-      quantity,
-      unitPrice,
-      totalPrice: it.totalPrice,
-      categoryId: suggestCategory(it.name).id,
-      needsReview: spreadReview || it.needsReview === true,
-    };
-  });
-
-  // Model geçerli JSON döndürüp hiç ürün bulamadıysa en olası sebep fişin
-  // kadrajda çok küçük/uzak kalması — kullanıcıyı tekrar çekime yönlendir.
-  if (items.length === 0) {
-    throw new Error(
-      'Fişte ürün okunamadı. Fişe daha yakından, çerçeveyi dolduracak şekilde tekrar çekmeyi deneyin.',
-    );
-  }
-
-  return {
-    storeName: data.storeName ?? '',
-    date: data.date ?? new Date().toISOString().split('T')[0],
-    totalAmount: typeof data.totalAmount === 'number' ? data.totalAmount : 0,
-    items,
-  };
+  return mapM3Response(data);
 }

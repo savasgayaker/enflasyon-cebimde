@@ -137,12 +137,14 @@ Turkish-only. `src/i18n/tr.ts` holds all strings; `t('a.b.c')` does dotted-path 
 - `metro.config.js` pins a stable on-disk cache at `.metro-cache/` and caps `maxWorkers: 2`. Don't bump workers without reason — this exists to keep the dev machine responsive.
 - The repo root (`../`) contains the FastAPI `backend/` and a `test_result.md` testing protocol. Since Aşama 3 the app **does** call the backend for exactly one thing: `POST /api/parse-receipt` (receipt photo → MiniMax M3 vision → ParsedReceipt). All other data stays local in AsyncStorage — don't add further backend calls without explicit direction. Backend needs `MINIMAX_API_KEY` in `backend/.env` (see `.env.example`); MongoDB is optional (status endpoints return 503 without it, parse-receipt is unaffected).
 
-## Bilinen teknik borç (Aşama 3 sonrası)
+## Bilinen teknik borç (Aşama 3 KAPANDI — 26 Tem 2026)
 
-Aşama 3 (vision-first geçiş: backend proxy + `parseReceiptViaM3`) tamamlandı. Aşağıdaki maddeler biliniyor ve bilinçli olarak açık bırakıldı:
+**Aşama 3 kapalı.** Vision-first geçiş tamam: backend proxy (`/api/parse-receipt`, dört kovalı adaptif retry), `parseReceiptViaM3` + birim testli `mapM3Response` (`npm run test:m3-mapper`, 18/18), dinamik `BACKEND_URL`, iPhone saha testi doğrulandı. Aşağıdaki maddeler biliniyor ve bilinçli olarak açık bırakıldı:
 
 ### M3 pipeline
-- **Süre değişkenliği — kök neden biliniyor:** gecikmeyi görüntü boyutu değil, modelin koşudan koşuya savrulan reasoning uzunluğu belirliyor (`completion_tokens` 4-24k; RAPOR.md Ek 2). Backend'in adaptif/kova'lı retry'ı belirtiyi yönetiyor; **streaming** (SSE, ilk-token timeout + kırpılma tespiti) kök neden çözülmezse gerekli olacak — belirti yönetimi kalıcı çözüm değil.
+- **Ürün adı normalizasyonu / dedup stratejisi:** M3 çıktısı koşudan koşuya deterministik değil (aynı fişte `KÖPÜK SABUN` ↔ `K*P*K SABUN`, Türkçe/ASCII savrulması). `findOrCreateProduct` ada göre eşleştirdiği için aynı ürünün fiyat serisi farklı kayıtlara bölünebilir — enflasyon hesabı ürünü izleyemez. Çözüm adayları: istemcide isim normalizasyonu, fuzzy eşleşme, veya prompt'a "Türkçe karakterleri koru" kuralı.
+- **Reasoning uzunluğu kontrolü:** gecikmenin kök nedeni modelin savrulan reasoning'i (`completion_tokens` 4-24k; RAPOR.md Ek 2). `thinking: {"type": "disabled"}` ve temperature varyantlarının doğruluk/süre ölçümü devam ediyor; doğruluk bozulmadan token medyanı düşerse parametre kalıcı olacak.
+- **Streaming (SSE):** ilk-token timeout + kırpılma tespiti + canlı ilerleme. Reasoning kontrolü sonuçlanDIKTAN sonra değerlendirilecek — kök neden parametreyle çözülürse gerek kalmayabilir.
 - ~~**`BACKEND_URL` elle yazılı**~~ **KAPANDI:** artık Metro `hostUri`'sinden türetiliyor (`src/constants/config.ts`); `EXPO_PUBLIC_BACKEND_URL` env değişkeni her zaman öncelikli. (Borcun bedeli bir kez ödendi: DHCP, Mac'in IP'sini .26→.20 değiştirdiğinde iPhone E2E sessizce koptu.)
 - **Fiş-seviyesi needsReview kalemlere yayılıyor** (`receiptParserM3.ts`): toplam tutmadığında hangi kalemin hatalı olduğu bilinemediği için hepsi işaretleniyor. Kalem bazlı daraltma (ör. modelden şüphe skoru istemek) gelecek iş.
 
