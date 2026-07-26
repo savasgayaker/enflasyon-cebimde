@@ -167,6 +167,34 @@ bilinçli bedeli.
 
 **AŞAMA 3 KAPANDI** — kriter (c=0) karşılandı, Savaş onayı verildi (26 Tem 2026).
 
+## Ek 6 — Bayrak daraltma ayarı: güvenlik korundu, yanlış alarm yapısal (26 Tem 2026)
+
+Ayar: yalnız AD farkı (miktar+fiyatlar aynı) artık kalemi bayraklamıyor;
+iki addan iyisi seçiliyor (Türkçe karakterli > uzun). Kabul testi tekrarı
+(6 fiş × 5 koşu):
+
+| Metrik | Önce (Ek 5) | Sonra |
+|---|---|---|
+| (c) SESSİZ | 0/30 | **0/30** ✓ (geri alma gerekmedi) |
+| (b) yakalandı | 8/30 | 7/30 |
+| Yanlış alarm | 10/30 | **10/30 — DÜŞMEDİ** |
+| Ortalama süre | 6,7 sn | 7,6 sn |
+
+**Neden düşmedi — bayrak anatomisi:** yanlış alarmların kaynağı ad farkı
+değilmiş:
+- A101 5/5 koşuda TAM 4 kalem işaretli (fiş bayrağı yok) — sistematik desen;
+  büyük olasılıkla çok adetli kalemlerde iki çağrının unitPrice temsili
+  farklı (None ↔ dolu). Olası iyileştirme: unitPrice karşılaştırmasını
+  "ikisi de doluysa" ile sınırlamak (totalPrice zaten karşılaştırılıyor).
+- GİMSA'da fiş-seviyesi bayrak (kalem sayısı/total uyuşmazlığı) — karşı
+  çağrının GERÇEK hatasının gölgesi: seçilen yanıt doğru, öteki hatalı,
+  uyuşmazlık dürüstçe işaretleniyor. Bu, çift-çağrı mimarisinin yapısal
+  bedeli; ancak üçüncü çağrı (oylama) veya bayrak gevşetme (güvenlik
+  riski) ile azalır.
+
+Ad-seçim iyileştirmesi yine de kazanç: ürün adları artık iki çağrının
+iyisinden (Türkçe karakterli) geliyor — dedup borcuna küçük iyileşme.
+
 ## Dosyalar
 
 - `m3-test/run_test.py` — izole test aracı (sandbox'tan API'ye erişim olan ortamda `--mode both` ile aynı testi koşar)
