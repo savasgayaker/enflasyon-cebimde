@@ -85,3 +85,4 @@ android-sdk/-e
 *.env.*
 # .env.example şablonları commit'lenir (gerçek anahtar içermez)
 !*.env.example
+m3-test/acceptance_results.json
