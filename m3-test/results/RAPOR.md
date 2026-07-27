@@ -256,6 +256,59 @@ yalnız 4 vaka — prompt'taki "SUT 1 L → adet" kuralı büyük ölçüde çal
 **Karar:** tüm zorunlu kurallar geçti; prompt commit'i KALIYOR. unit doluluk
 hedefi aşıldı (%94,4); boş kalanlar uydurulmamış dürüst boşluk.
 
+## Ek 9 — unit/vatRate: doluluk değil DOĞRULUK (28 Tem 2026)
+
+**Gerekçe:** Ek 8 yalnız doluluk saydı (unit %94,4, vatRate %88,1) — dolu bir
+alan yanlış da olabilir ve yanlışlar, iki çağrının anlaştığı durumda çapraz
+kontrole yakalanmaz. Blok 7-D'de cevap anahtarına giren unit/vatRate ile artık
+doğruluk ölçülebilir. Ek 8'in KAYDEDİLMİŞ ham çıktısı puanlandı
+(`puanla-dogruluk.py`); yeni API çağrısı yapılmadı.
+
+### İki eşleme modunda sonuçlar (yalnız ada göre eşleşen kalemler puanlanır)
+
+| Mod | Eşleşme | unit D/Y/B | vatRate D/Y/B |
+|---|---|---|---|
+| dar (upper+trim+boşluk+KDV-eki) | 230/394 (%58,4) | %89,1 / %5,2 / %5,7 | %80,0 / %10,0 / %10,0 |
+| genis (+TR katlama, noktalama) | 286/394 (%72,6) | %87,1 / %5,9 / %7,0 | %77,3 / %11,5 / %11,2 |
+
+Fark (dar→genis): eşleşme +14,2 puan; unit DOĞRU −2,0, YANLIŞ +0,7, BOŞ +1,3;
+vatRate DOĞRU −2,7, YANLIŞ +1,5, BOŞ +1,2 puan.
+
+### Fiş bazında ayrışma
+
+A101, Bildirici, BİM, Migros: vatRate **%100**, unit ≥%93,8 (her iki modda).
+Tüm yanlışlar **File** (genis: unit %56,8 / vatRate %43,2 doğru) ve **GİMSA**
+(unit %100 / vatRate %71,2) fişlerinde toplanıyor — sorun modelin KDV
+kavrayışı değil, bu iki fişin baskı/çekim kalitesi.
+
+### %1→%10 sistematiği
+
+Karışıklık dökümünün ezici deseni `1 → 10` (dar 19/23, genis 25/33) —
+`%01` / `%1.` yazımının `%10` okunması. En ısrarcılar: SUTAS YOGURT (5 koşum,
+genis), KINDER PINGUI (4), TARLA KABAK %1→%20 (3), YABAN MERSINI %1→%20 (3).
+Tam liste betik çıktısında (dar modda 14 tekil çift).
+
+### Ad eşleşmesi ve ürün birleştirme
+
+Dar modda kalemlerin %41,6'sı, genis modda %27,4'ü cevap anahtarıyla ada göre
+eşleşemiyor. Eşleşmeyen örnekler (K.PEK / K•P•K ↔ KOPUK, HEADSHOULX20 eki,
+P.RONE ↔ PIRINC) karakter temizliğiyle çözülmeyen ad varyansları.
+`findOrCreateProduct` ada göre birleştirdiği için aynı varyans üretimde fiyat
+serilerini bölecektir — ürün birleştirme (Aşama 5) için ilk ölçülmüş taban:
+karakter temizliği sonrası bile ~%27 kayıp.
+
+### ALINAN KARARLAR
+
+1. Prompt'a %1/%10 kuralı EKLENMEYECEK. Sebep: hata 6 fişin
+   2'sinde toplanmış; iki fişlik örnekleme prompt yazmak
+   ezberletmektir. Yeni prompt = yeni kabul turu.
+2. Yapısal çözüm Adım 3'e taşındı: model fişin KDV döküm
+   bloğunu da çıkaracak, sunucu kalem gruplarının toplamını
+   blokla karşılaştıracak, tutmayan kalemler needsReview.
+   Bu, iki çağrının aynı yanlışta anlaşmasına KÖR DEĞİLDİR.
+3. Ad eşleşme varyansı, ürün birleştirme işinin sanılandan
+   zor olduğunun ilk ölçülmüş kanıtıdır. Aşama 5 planına girdi.
+
 ## Dosyalar
 
 - `m3-test/run_test.py` — izole test aracı (sandbox'tan API'ye erişim olan ortamda `--mode both` ile aynı testi koşar)
