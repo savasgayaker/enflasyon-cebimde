@@ -6,8 +6,12 @@ Fiyatlar ground-truth/<fis>.json'dan alınır (ONERI'den ASLA alınmaz);
 öneri yalnız oran gruplamasını belirler. Böylece önerilen oranlar yanlışsa
 grup toplamları fişte basılı bloklarla tutmaz ve fiş KALIR.
 
-Kullanım: python3 dogrula-kdv.py
+Kullanım: python3 dogrula-kdv.py [--kaynak=oneri|groundtruth]
+  oneri       (varsayılan) oranlar ONERI-unit-vat.json'dan
+  groundtruth oranlar ground-truth/<fis>.json kalemlerindeki vatRate'ten
+              (Blok 7-D sonrası — yazımın aritmetiği koruduğunun teyidi)
 """
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -31,7 +35,21 @@ def beklenen_deger(grup_toplami_brut: float, oran: int, tur: str) -> float:
 
 
 def main():
-    oneri = json.loads((GT_DIR / "ONERI-unit-vat.json").read_text())
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--kaynak", choices=["oneri", "groundtruth"], default="oneri")
+    args = ap.parse_args()
+
+    if args.kaynak == "oneri":
+        oneri = json.loads((GT_DIR / "ONERI-unit-vat.json").read_text())
+    else:
+        # ground-truth kalemlerinden aynı şemaya ({name, unit, vatRate}) indirge
+        oneri = {}
+        for fis in FISLER:
+            gt_items = json.loads((GT_DIR / f"{fis}.json").read_text())["items"]
+            oneri[fis] = [
+                {"name": i["name"], "unit": i.get("unit"), "vatRate": i.get("vatRate")}
+                for i in gt_items
+            ]
     kdv = json.loads((GT_DIR / "kdv-bloklari.json").read_text())
 
     kalan = []

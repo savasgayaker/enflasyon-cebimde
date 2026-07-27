@@ -3,11 +3,11 @@
   "date": "2026-06-28",
   "totalAmount": 361.30,
   "items": [
-    {"name": "COCA-COLA ZERO 450", "quantity": 1, "unitPrice": 50.00, "totalPrice": 50.00},
-    {"name": "LIPTON ICE TEA KARPZ", "quantity": 1, "unitPrice": 47.50, "totalPrice": 47.50},
-    {"name": "COCA-COLA ZERO 330", "quantity": 1, "unitPrice": 50.00, "totalPrice": 50.00},
-    {"name": "MIGROS ISLAK HAVLU", "quantity": 1, "unitPrice": 13.90, "totalPrice": 13.90},
-    {"name": "M&M'S FISTIKLI DRAJE", "quantity": 1, "unitPrice": 99.95, "totalPrice": 99.95},
-    {"name": "M&M'S FISTIKLI DRAJE", "quantity": 1, "unitPrice": 99.95, "totalPrice": 99.95}
+    {"name": "COCA-COLA ZERO 450", "quantity": 1, "unitPrice": 50.00, "totalPrice": 50.00, "unit": "adet", "vatRate": 10},
+    {"name": "LIPTON ICE TEA KARPZ", "quantity": 1, "unitPrice": 47.50, "totalPrice": 47.50, "unit": "adet", "vatRate": 10},
+    {"name": "COCA-COLA ZERO 330", "quantity": 1, "unitPrice": 50.00, "totalPrice": 50.00, "unit": "adet", "vatRate": 10},
+    {"name": "MIGROS ISLAK HAVLU", "quantity": 1, "unitPrice": 13.90, "totalPrice": 13.90, "unit": "adet", "vatRate": 20},
+    {"name": "M&M'S FISTIKLI DRAJE", "quantity": 1, "unitPrice": 99.95, "totalPrice": 99.95, "unit": "adet", "vatRate": 1},
+    {"name": "M&M'S FISTIKLI DRAJE", "quantity": 1, "unitPrice": 99.95, "totalPrice": 99.95, "unit": "adet", "vatRate": 1}
   ]
 }

@@ -3,14 +3,14 @@
   "date": "2026-07-25",
   "totalAmount": 1311.00,
   "items": [
-    {"name": "MARKET POSET", "quantity": 3, "unitPrice": 1.00, "totalPrice": 3.00},
-    {"name": "ELMA KG STARKING 1", "quantity": 1.496, "unitPrice": 94.95, "totalPrice": 142.05},
-    {"name": "ULUDAG 1LT LIMONATA", "quantity": 1, "unitPrice": 66.40, "totalPrice": 66.40},
-    {"name": "PINAR 430GR SOSIS EK", "quantity": 1, "unitPrice": 499.90, "totalPrice": 499.90},
-    {"name": "CITIR EKMEK 7LI SAND", "quantity": 1, "unitPrice": 79.95, "totalPrice": 79.95},
-    {"name": "BEYPAZARI 6X200ML SO", "quantity": 1, "unitPrice": 69.90, "totalPrice": 69.90},
-    {"name": "GILL BLUE III 3 ADET", "quantity": 1, "unitPrice": 168.60, "totalPrice": 168.60},
-    {"name": "DURU 4*150GR SAB.OKY", "quantity": 1, "unitPrice": 204.75, "totalPrice": 204.75},
-    {"name": "DIMES 1LT MEY.SUYU S", "quantity": 1, "unitPrice": 76.45, "totalPrice": 76.45}
+    {"name": "MARKET POSET", "quantity": 3, "unitPrice": 1.00, "totalPrice": 3.00, "unit": "adet", "vatRate": 20},
+    {"name": "ELMA KG STARKING 1", "quantity": 1.496, "unitPrice": 94.95, "totalPrice": 142.05, "unit": "kg", "vatRate": 1},
+    {"name": "ULUDAG 1LT LIMONATA", "quantity": 1, "unitPrice": 66.40, "totalPrice": 66.40, "unit": "adet", "vatRate": 10},
+    {"name": "PINAR 430GR SOSIS EK", "quantity": 1, "unitPrice": 499.90, "totalPrice": 499.90, "unit": "adet", "vatRate": 1},
+    {"name": "CITIR EKMEK 7LI SAND", "quantity": 1, "unitPrice": 79.95, "totalPrice": 79.95, "unit": "adet", "vatRate": 1},
+    {"name": "BEYPAZARI 6X200ML SO", "quantity": 1, "unitPrice": 69.90, "totalPrice": 69.90, "unit": "adet", "vatRate": 1},
+    {"name": "GILL BLUE III 3 ADET", "quantity": 1, "unitPrice": 168.60, "totalPrice": 168.60, "unit": "adet", "vatRate": 20},
+    {"name": "DURU 4*150GR SAB.OKY", "quantity": 1, "unitPrice": 204.75, "totalPrice": 204.75, "unit": "adet", "vatRate": 20},
+    {"name": "DIMES 1LT MEY.SUYU S", "quantity": 1, "unitPrice": 76.45, "totalPrice": 76.45, "unit": "adet", "vatRate": 10}
   ]
 }
