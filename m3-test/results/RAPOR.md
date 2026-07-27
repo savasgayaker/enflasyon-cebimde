@@ -309,6 +309,25 @@ karakter temizliği sonrası bile ~%27 kayıp.
 3. Ad eşleşme varyansı, ürün birleştirme işinin sanılandan
    zor olduğunun ilk ölçülmüş kanıtıdır. Aşama 5 planına girdi.
 
+### Ek 9 — ek not: gerçek doğruluk tahmini
+
+Genis moda geçişte yeni eşleşen 56 kalem, önceki 230 kalemden
+düşük puan aldı: unit ~%79 (önceki %89), vatRate ~%66 (önceki
+%80). Adı zor okunan kalem alanları da daha yanlış çıkarıyor;
+ortak kök neden baskı/çekim kalitesi. Hâlâ eşleşmeyen 108 kalem
+en az bu kadar zor olduğundan, 394 kalemin tamamı üzerinden
+gerçek vatRate doğruluğu %77'nin ALTINDA, tahminen %72-75.
+
+Sonuç: şema tasarımında vatRate ve unit "doğrulanmış" alan
+olarak ele ALINMAYACAK; kaynağı ve doğrulanma durumu ayrıca
+tutulacak (Adım 2 girdisi).
+
+Ayrıca: SAMPUAN...HEADSHOULX20 örneğinde KDV eki ada yapışıyor
+(% okunamayınca strip_kdv_suffix devreye girmiyor). Kör kuralla
+düzeltilemez — "X20" 20'li ambalaj da olabilir. Çözüm yine Ek 9
+karar 2'ye bağlı: kalemin gerçek oranı bilinirse sondaki sayının
+vergi mi ambalaj mı olduğu ayırt edilebilir.
+
 ## Dosyalar
 
 - `m3-test/run_test.py` — izole test aracı (sandbox'tan API'ye erişim olan ortamda `--mode both` ile aynı testi koşar)
