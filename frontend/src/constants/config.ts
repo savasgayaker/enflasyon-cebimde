@@ -24,3 +24,18 @@ if (__DEV__) {
   // Metro log'unda "BACKEND_URL → http://..." satırı görünmeli.
   console.log(`BACKEND_URL → ${BACKEND_URL} (hostUri: ${hostUri ?? 'YOK'})`);
 }
+
+/**
+ * Supabase — veritabanı ve kimlik.
+ *
+ * Değerler frontend/.env dosyasından gelir (gitignore'lu). EXPO_PUBLIC_ ön eki
+ * bu değişkenlerin uygulama paketine gömüldüğü anlamına gelir; publishable
+ * anahtarı için bu doğru ve beklenen davranıştır. sb_secret_ / service_role
+ * anahtarı BURAYA GİRMEZ.
+ */
+export const SUPABASE_URL = process.env.EXPO_PUBLIC_SUPABASE_URL ?? '';
+export const SUPABASE_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? '';
+
+if (__DEV__ && (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY)) {
+  console.warn('SUPABASE_URL / SUPABASE_PUBLISHABLE_KEY bos — frontend/.env dosyasini kontrol et');
+}
