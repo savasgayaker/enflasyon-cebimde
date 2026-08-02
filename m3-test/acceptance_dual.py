@@ -21,6 +21,32 @@ sys.path.insert(0, str(M3TEST))
 from run_test import compare  # noqa: E402
 
 URL = "http://127.0.0.1:8000/api/parse-receipt"
+REPO = M3TEST.parent
+
+
+def jeton_al() -> str:
+    """Adım 3'ten sonra /api/parse-receipt jeton istiyor.
+
+    Jetonu betik kendisi alıyor; elle set edilen bir ortam değişkenine
+    bırakılsaydı unutulduğu koşumda 30 istek birden 401'e düşer ve sonuç
+    dosyası "hepsi BACKEND_ERR" diye dolardı — yani ölçüm aracı bozulduğunu
+    söylemeden bozulurdu.
+
+    Not: her çağrı Supabase'de YENİ bir anonim kullanıcı doğurur. Bu, kullanıcı
+    başına hız sınırının bu betiği hiç etkilememesi demek — ölçüm için istenen
+    davranış bu, ama sınırın anonim kayıt akışını kendi başına korumadığını da
+    gösteriyor (üretim öncesi ayrıca ele alınacak).
+    """
+    p = subprocess.run(
+        ["node", str(REPO / "frontend" / "scripts" / "jeton-al.mjs")],
+        capture_output=True, text=True, timeout=60,
+    )
+    if p.returncode != 0 or not p.stdout.strip():
+        sys.exit("Jeton alinamadi: " + (p.stderr.strip()[:200] or "bos cikti"))
+    return p.stdout.strip()
+
+
+JETON = jeton_al()
 OUT = Path(__file__).parent / "acceptance_results.json"
 FIXTURES = ["a101", "bildirici", "bim", "file", "gimsa", "migros"]
 RUNS = 5
@@ -29,7 +55,9 @@ RUNS = 5
 def post(photo: Path):
     t0 = time.monotonic()
     p = subprocess.run(
-        ["curl", "-s", "-X", "POST", "-F", f"image=@{photo}", URL],
+        ["curl", "-s", "-X", "POST",
+         "-H", f"Authorization: Bearer {JETON}",
+         "-F", f"image=@{photo}", URL],
         capture_output=True, text=True, timeout=200,
     )
     elapsed = time.monotonic() - t0
@@ -57,6 +85,14 @@ def main():
                 continue
             rec["seconds"] = round(elapsed, 1)
             if "detail" in resp:
+                # Kimlik/sınır hatasında DUR: 30 koşumun tamamı anlamsız
+                # BACKEND_ERR olarak kaydedilirdi ve rapor "ölçüm yapıldı" gibi
+                # görünürdü. Sessizce bozulmuş bir ölçüm aracı, hiç ölçmemekten
+                # daha kötüdür.
+                if "Oturum" in str(resp["detail"]) or "Çok fazla" in str(resp["detail"]):
+                    sys.exit("Sunucu jetonu kabul etmedi ({}). Test durduruldu: "
+                             "30 kosumu bosa harcamanin anlami yok."
+                             .format(str(resp["detail"])[:80]))
                 # Backend hata döndürdü (502 vb.) — hata sunulmadı, sessiz değil.
                 rec.update(cls="BACKEND_ERR", error=resp["detail"][:120])
                 results.append(rec)
