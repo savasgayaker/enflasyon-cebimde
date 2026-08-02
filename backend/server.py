@@ -14,7 +14,7 @@ from typing import List
 
 import requests
 from dotenv import load_dotenv
-from fastapi import APIRouter, FastAPI, File, HTTPException, UploadFile
+from fastapi import APIRouter, Depends, FastAPI, File, HTTPException, UploadFile
 from PIL import Image, ImageOps
 from pydantic import BaseModel, Field
 from starlette.middleware.cors import CORSMiddleware
@@ -27,6 +27,7 @@ from receipt_fields import (
     strip_kdv_suffix, extract_kdv_rate, normalize_vat_rate,
     normalize_unit, reconcile_optional,
 )
+from auth import auth_modu, gecerli_kullanici
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -483,7 +484,10 @@ def cross_check(chosen: dict, other: dict) -> None:
 
 
 @api_router.post("/parse-receipt")
-def parse_receipt(image: UploadFile = File(...)):
+def parse_receipt(
+    image: UploadFile = File(...),
+    kullanici: dict = Depends(gecerli_kullanici),
+):
     """Fiş fotoğrafını İKİ paralel MiniMax M3 (thinking_off) çağrısıyla okur,
     yanıtları çapraz kontrol eder, ParsedReceipt JSON'u döner.
 
@@ -495,6 +499,7 @@ def parse_receipt(image: UploadFile = File(...)):
     Sync def bilinçli: requests bloklar; FastAPI sync endpoint'i threadpool'da
     çalıştırdığı için event loop tıkanmaz.
     """
+    logger.info("parse-receipt istek: kullanici=%s anonim=%s", kullanici["id"], kullanici["is_anonymous"])
     raw_bytes = image.file.read()
     if not raw_bytes:
         raise HTTPException(status_code=400, detail="Boş görüntü dosyası")
@@ -551,11 +556,16 @@ app.include_router(api_router)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_credentials=True,
+    allow_credentials=False,
     allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/api/saglik")
+def saglik():
+    """Tunelin ve kabin ayakta oldugunu gormek icin. Sir icermez."""
+    return {"durum": "ok", "auth": auth_modu()}
 
 @app.on_event("shutdown")
 async def shutdown_db_client():

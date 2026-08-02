@@ -86,3 +86,7 @@ android-sdk/-e
 # .env.example şablonları commit'lenir (gerçek anahtar içermez)
 !*.env.example
 m3-test/acceptance_results.json
+
+# Claude Code makine-yerel ayarlari (mutlak yol icerir, commit'lenmez)
+.claude/settings.local.json
+**/.claude/settings.local.json
