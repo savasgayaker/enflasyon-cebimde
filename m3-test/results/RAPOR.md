@@ -328,9 +328,92 @@ düzeltilemez — "X20" 20'li ambalaj da olabilir. Çözüm yine Ek 9
 karar 2'ye bağlı: kalemin gerçek oranı bilinirse sondaki sayının
 vergi mi ambalaj mı olduğu ayırt edilebilir.
 
+## Ek 10 — Docker kabini + jetonlu uçtan uca kabul testi (3 Ağu 2026)
+
+**Gerekçe:** Aşama 4 Adım 3'te sunucuya kimlik doğrulama eklendi (`76b5ffc`),
+istemci jeton göndermeye başladı (`9a3b03b`), kabul testi jetonu kendisi alır
+hale getirildi (`cdb3884`) ve servis Docker kabinine taşındı (`9bbc4fc`).
+Bunların hiçbiri model doğruluğunu değiştirmemeli — ama kabin farklı bir Python
+(3.11-slim) ve farklı kütüphane sürümleri demek. Ek 8'in düzeni aynen
+tekrarlandı: 6 fiş × 5 koşum = 30 gerçek çağrı, bu kez **kap üzerinden ve her
+istek Bearer jetonuyla**.
+
+### Ana tablo — regresyon kontrolü
+
+| Metrik | Ek 8 (venv, jetonsuz) | Kap (jetonlu) | Kural | Sonuç |
+|---|---|---|---|---|
+| (c) SESSİZ hata | 0/30 | **0/30** | 0 olmak zorunda | ✓ GEÇTİ |
+| (b) yakalanan hata | 6/30 | **7/30** | 6-10 arası normal | ✓ bandın içinde |
+| Yanlış alarm | 8/30 | **10/30** | ≤13/30 | ✓ eşik altı |
+| Ortalama süre | 6,5 sn | **5,1 sn** | ≤8,5 sn | ✓ GEÇTİ |
+| Kimlik hatası (401/429) | — | **0/30** | 0 olmak zorunda | ✓ GEÇTİ |
+
+**Süre yorumu — dikkat:** 6,5 → 5,1 sn düşüşü kaba MAL EDİLEMEZ. Kap aynı
+MiniMax API'sine gidiyor ve araya bir ağ sıçraması daha ekliyor; model tarafını
+hızlandıramaz. Fark uçta: maksimum 14,8 → 8,4 sn, yani uzun kuyruk kaybolmuş —
+bu, sağlayıcı tarafındaki o günkü yük farkının imzası (Ek 2: süreyi çıktı
+uzunluğu belirliyor). Doğru okuma: **kap süreyi bozmadı.**
+
+### Fiş bazında hareket — gerileme değil, model kararsızlığı
+
+| Fiş | Ek 8 hatalı koşum | Kap hatalı koşum |
+|---|---|---|
+| file | 5/5 | **3/5** |
+| a101 | 0/5 | **2/5** |
+| migros | 0/5 | **1/5** |
+| gimsa | 1/5 | 1/5 |
+| bim | 0/5 | 0/5 |
+| bildirici | 0/5 | 0/5 |
+
+Yönler karışık: bir fiş düzelirken iki fiş bozuluyor. Kaptan gelen bir gerileme
+tek yönlü olurdu. Fiş başına 5 koşum bu farkı ayırt edemeyecek kadar küçük bir
+örneklem; toplam 7 hatalı koşum kabul kuralındaki 6-10 bandının içinde.
+
+### Kalem düzeyi bayrak kapsaması
+
+Hatalı kalemlerin kalem düzeyinde bayraksız kalma oranı %29'dan (14 kalemde 4)
+**%18'e** (17 kalemde 3) indi. Küçük örneklem, ama yön doğru — ve bu oran zaten
+güvenlik ağının İKİNCİ katmanı; birinci katman fiş düzeyi bayrak.
+
+### migros 5. koşum — Ek 9 karar 2'nin ilk gerçek vakası
+
+İki ölçümün toplam 13 hatalı koşumu içinde **fiş düzeyi bayrağın `False`
+kaldığı tek koşum.** Hata yalnız kalem düzeyi `needsReview` sayesinde yakalandı.
+Sebebi rastlantı değil:
+
+| Kalem | Model | Doğru | Fark | KDV |
+|---|---|---|---|---|
+| LIPTON ICE TEA KARPZ | 97,50 | 47,50 | **+50,00** | %10 |
+| M&M'S FISTIKLI DRAJE | 49,95 | 99,95 | **−50,00** | %1 |
+
+İki hata fiş toplamında birbirini TAM olarak götürüyor. "Toplam tutuyor mu"
+kontrolü bu fişi kusursuz sayardı. Ama kalemler farklı KDV gruplarında: %10
+grubu 50 fazla, %1 grubu 50 eksik. **Ek 9 karar 2'de tarif edilen KDV bloğu
+bazlı grup mutabakatı bu hatayı yakalardı.** Karar 2 böylece teorik gerekçeden
+ölçülmüş gerekçeye terfi etti; Aşama 3.5 planındaki önceliği buna göre
+okunmalı.
+
+### Kimlik katmanı
+
+30 koşumun 30'u geçerli Bearer jetonuyla gitti; 401/429 hiç görülmedi, betiğin
+erken durdurma koruması tetiklenmedi. Jeton yenileme dahil kimlik katmanı ölçüm
+boyunca şeffaf kaldı. (Canlı davranış matrisi ayrıca elle doğrulanmıştı:
+jetonsuz → 401, sahte jeton → 401, geçerli jeton + boş dosya → 400.)
+
+### Ölçülmeyen
+
+Bu koşumun **parasal maliyeti kaydedilmedi** — koşum öncesi/sonrası MiniMax
+bakiyesi not alınmadı. Fiş başına gerçek maliyet hâlâ AÇIK KALEM; bir sonraki
+kabul turunda bakiye farkı mutlaka not edilmeli.
+
+**Karar:** tüm zorunlu kurallar geçti. Kabin ve kimlik katmanı model
+doğruluğunu bozmadı; `asama4-sunucu` dalı birleştirilebilir.
+
 ## Dosyalar
 
 - `m3-test/run_test.py` — izole test aracı (sandbox'tan API'ye erişim olan ortamda `--mode both` ile aynı testi koşar)
 - `m3-test/ground-truth/*.json` — 6 fişin elle doğrulanmış cevap anahtarları
 - `m3-test/results/karsilastirma.json` — alan alan karşılaştırma çıktısı
+- `m3-test/results/ek8-acceptance-2026-07-26.json` — Ek 8 ham çıktısı (venv, jetonsuz taban)
+- `m3-test/results/ek10-acceptance-2026-08-03.json` — Ek 10 ham çıktısı (kap, jetonlu)
 - Fotoğraflar ve `.env` (MiniMax anahtarı) git'e girmez (`.gitignore`)
