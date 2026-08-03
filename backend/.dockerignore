@@ -1,0 +1,19 @@
+# Sırlar imajın İÇİNE girmez; çalışma anında env_file ile verilir.
+.env
+*.env
+*.env.*
+.env.example
+
+# venv macOS ikilikleri içeriyor: Linux kabında işe yaramaz, üstelik derleme
+# bağlamını yüzlerce megabayt şişirip her build'i yavaşlatır.
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+tests/
+
+# Geliştirme bağımlılıkları (pytest, pandas, boto3, emergentintegrations).
+# Kap yalnızca requirements-runtime.txt ile kurulur.
+requirements.txt
+
+.DS_Store
