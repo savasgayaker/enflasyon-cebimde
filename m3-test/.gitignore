@@ -5,3 +5,10 @@ results/*
 # Ek'lerin arkasındaki tarihli ham ölçüm verileri repoda tutulur
 !results/ek*-acceptance-*.json
 !results/ek*-pilot-*.json
+
+# --- Ek 12b — ölçüm arşivleri açıkça izlenir (2026-08-04 kararı) ---
+# Bilerek DAR: joker *.json/*.txt değil, yalnız adlandırılmış ölçüm kalıpları.
+# Yollar m3-test/ köküne göredir; kök .gitignore'dan delinemez (iç .gitignore üstündür).
+!results/ek*-on-kayit-*.md
+!results/ek*-kdv-gunluk-*.txt
+!results/ek*-eski-kol-*.json

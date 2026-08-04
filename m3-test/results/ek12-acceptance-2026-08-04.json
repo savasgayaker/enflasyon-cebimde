@@ -1,0 +1,2751 @@
+[
+  {
+    "fixture": "a101",
+    "run": 1,
+    "seconds": 8.8,
+    "cls": "A_dogru_bayrakli",
+    "score": "başlık 3/3, ürün eşleşme 21/21, fiyat doğru 21/21, fazladan 0",
+    "resp_items": [
+      {
+        "name": "K€P€K SABUN 400 ML ZEYTİNYAĞLIX",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "KAPIKULAK SABUN 400 ML BEYAZSABUN",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "SAMPUAN 3300ML MENTOL HEADSHOULDER",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "KAPIKULAK SABUN 400 ML MANOLYA AQUA",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "TIRAS BICAGI 10LU 3 BTC. SAMUR",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "ALISVERIS POSETI",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "UN BUGDAY 2 KG SOKE GELENEK",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "PERFUME BALDO 1000 G OVADAN",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIKOLATA CUBUK 28 G NUTELLA GOMUL",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIKOLATA CUBUK 28 G NUTELLA GOMUL",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "KEK €€KOLATA SOSLU 9X20 G BROWN",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "BUZGULU COP TORBASI 15LT SPON",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "KEK CILEKLI 35 G ULKER KEKSTRA",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "DOND. MAC MN 7LI BDH/DBL KDT 3",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "KEK FRAMBUAZLI 114 G ETI TARTLI",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SUT YAGLI 200 ML PINAR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SUT YAGLI 200 ML PINAR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "GRI SSINi TAHBUGDAYCLI YATOHUNLU",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ZEYTINYAGI SIZMA 1L YALIN EGEN",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SIVI DET. RENKLI 2,97 L PERWOL",
+        "unit": null,
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "SU 1.5 L",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 3,
+    "wrong": []
+  },
+  {
+    "fixture": "a101",
+    "run": 2,
+    "seconds": 9.2,
+    "cls": "A_dogru_bayrakli",
+    "score": "başlık 3/3, ürün eşleşme 21/21, fiyat doğru 21/21, fazladan 0",
+    "resp_items": [
+      {
+        "name": "KePek SABUN 400 ML ZEYTINYAĞLI",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "KePek SABUN 400 ML BEYAZSABUN",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "SAMPUAN 330ML MENTOL HEADSHOUL",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "KePek SABUN 400 ML MANOLYA AQUA",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "TIRAS BICAGI 10LU 3 BTC. SAMUR",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "ALISVERIS POSETI",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "UN BUGDAY 2 KG SOKE GELENEK",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "PeR*Ne BALDO 1000 G OVADAN",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIKOLATA CUBUK 28 G NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIKOLATA CUBUK 28 G NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "KEK eeKOLATA SOSLU 9X20 G BROWN",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "BUZGULU COP TORBASI 15Lt SPON",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "KEK CILEKLI 35 G ULKER KESTRA",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "DOND. MAC MN 7LI BDH/DBL KDT 3",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "KEK FRAMBUAZLI 114 G ETI TARTLI",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SUT YAGLI 200 ML PINAR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SUT YAGLI 200 ML PINAR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "GRI SSINI TAHBUGDAYCIYATOHUNLU",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ZEYTINYAGI SIZMA 1L YALIN ECEM",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SIVI DET. RENKLI 2,97 L PERWOL",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "SU 1.5 L",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 2,
+    "wrong": []
+  },
+  {
+    "fixture": "a101",
+    "run": 3,
+    "seconds": 9.4,
+    "cls": "A_dogru_bayrakli",
+    "score": "başlık 3/3, ürün eşleşme 21/21, fiyat doğru 21/21, fazladan 0",
+    "resp_items": [
+      {
+        "name": "KOLİYE SABUN 400 ML ZEYTİNYAĞLI",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "KOLİYE SABUN 400 ML BEYAZ",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "ŞAMPUAN 330ML MENTOL HEADSHOUL",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "KOLİYE SABUN 400 ML MANOLYA AQUA",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "TIRAŞ BICAĞI 10LU 3 BİÇ. SAMUR",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "ALISVERIS POSETI",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "UN BUGDAY 2 KG SOKE GELENEK",
+        "unit": null,
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "PORNNO BALDO 1000 G OVADAN",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIKOLATA CUBUK 28 G NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIKOLATA CUBUK 28 G NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "KOLİYE KOLATA SOSLU 9X20 G BROWN",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "BUZGULU COP TORBASI 15Lt SPON",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "KEK CILEKLI 35 G ULKER KEKSTRA",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "DOND. MAC MN 7LI BDM/DBL KDT 3",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "KEK FRAMBUAZLI 114 G ETI TARTI",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SUT YAGLI 200 ML PINAR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SUT YAGLI 200 ML PINAR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "GR●SS●N● TANBUGDAY●LYATO●UNLU",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ZEYTINYAGI SIZMA 1L YALIN EGENX",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SIVI DET. RENKLI 2,97 L PERWOLX",
+        "unit": "lt",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "SU 1.5 L",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 6,
+    "wrong": []
+  },
+  {
+    "fixture": "a101",
+    "run": 4,
+    "seconds": 8.8,
+    "cls": "A_dogru_bayrakli",
+    "score": "başlık 3/3, ürün eşleşme 21/21, fiyat doğru 21/21, fazladan 0",
+    "resp_items": [
+      {
+        "name": "KOLONYALI SABUN 400 ML ZEYTINYAGLI",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "KOLONYALI SABUN 400 ML BEYAZSABUN",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "SAMPUAN 330<ML MENTOL HEADSHOUL",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "KOLONYALI SABUN 400 ML MANOLYA AQUA",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "TIRAS BICAGI 10LU 3 BTC. SAMUR",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "ALISVERIS POSETI",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "UN BUGDAY 2 KG SOKE GELENEK",
+        "unit": null,
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "PERLENE BALDO 1000 G OVADAN",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIKOLATA CUBUK 28 G NUTELLA GOMUL",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIKOLATA CUBUK 28 G NUTELLA GOMUL",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIKOLATA SOSLU 9X20 G BROWNIE",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "BUZGULU COP TORBASI 15LT SPON",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "KEK CILEKLI 35 G ULKER KEKSTRA",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "DOND. MAC MN 7LI BDM/DBL KDT 3KG",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "KEK FRAMBUAZLI 114 G ETI TARTLI",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SUT YAGLI 200 ML PINAR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SUT YAGLI 200 ML PINAR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "GRISSINI TAMBUGDAYCLIYATOHUMLU",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ZEYTINYAGI SIZMA 1L YALIN EGEN",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SIVI DET. RENKLI 2,97 L PER<N<OL",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "SU 1.5 L",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": true,
+    "flagged_items": 3,
+    "wrong": []
+  },
+  {
+    "fixture": "a101",
+    "run": 5,
+    "seconds": 8.6,
+    "cls": "B_yakalandi",
+    "score": "başlık 3/3, ürün eşleşme 20/21, fiyat doğru 17/21, fazladan 0",
+    "resp_items": [
+      {
+        "name": "K€P€K SABUN 400 ML ZEYT*NYA*LIX",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "KEPEK SABUN 400 ML BEYAZSABUN",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "SAMPUAN 330ML MENTOL HEADSHOULX",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "KEPEK SABUN 400 ML MANOLYA AQUA",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "TIRAS BICAGI 10LU 3 BTC. SAMUR",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "ALISVERIS POSETI",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "UN BUGDAY 2 KG SOKE GELENEK",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "PERANE BALDO 1000 G OVADAN",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIKOLATA CUBUK 28 G NUTELLA GOK",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIKOLATA CUBUK 28 G NUTELLA GOK",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "KEK CIKOLATALI SOSLU 9X20 G BROWN",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "BUZGULU COP TORBASI 15Lt SPON",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "KEK CILEKLI 35 G ULKER KEKSTRA",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "DOND. MAC MN 7LI BDH/DBL KDT 3K",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "KEK FRAMBUAZLI 114 G ETI TARTLI",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SUT YAGLI 200 ML PINAR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SUT YAGLI 200 ML PINAR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "GRISSINI TAMBUGDAYLI/CAYOTOHUNLU",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ZEYTINYAGI SIZMA 1L YALIN ECEM",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SIVI DET. RENKLI 2,97 L PERWOL",
+        "unit": null,
+        "vatRate": 20.0,
+        "needsReview": true
+      }
+    ],
+    "receipt_flag": true,
+    "flagged_items": 3,
+    "wrong": [
+      "TIRAS BICAGI 10LU 3 BIC. SAMUR: 6.0 (doğru 142.0)",
+      "BUZGULU COP TORBASI 15LI SPON: 39.0 (doğru 89.5)",
+      "SIVI DET. RENKLI 2,97 L PERWOL: 69.0 (doğru 365.0)",
+      "SU 1.5 L: None (doğru 69.0)"
+    ]
+  },
+  {
+    "fixture": "bildirici",
+    "run": 1,
+    "seconds": 4.3,
+    "cls": "A_dogru",
+    "score": "başlık 3/3, ürün eşleşme 9/9, fiyat doğru 9/9, fazladan 0",
+    "resp_items": [
+      {
+        "name": "MARKET POSET",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "ELMA KG STARKING 1",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ULUDAG 1LT LIMONATA",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "PINAR 430GR SOSIS EK",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CITIR EKMEK 7LI SAND",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "BEYPAZARI 6X200ML SO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "GILL BLUE III 3 ADET",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "DURU 4*150GR SAB. OKY",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "DIMES 1LT MEY. SUYU S",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 0,
+    "wrong": []
+  },
+  {
+    "fixture": "bildirici",
+    "run": 2,
+    "seconds": 4.1,
+    "cls": "A_dogru_bayrakli",
+    "score": "başlık 3/3, ürün eşleşme 9/9, fiyat doğru 9/9, fazladan 0",
+    "resp_items": [
+      {
+        "name": "MARKET POSET",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "ELMA KG STARKING 1",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ULUDAG 1LT LIMONATA",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "PINAR 430GR SOSIS EK",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CITIR EKMEK 7LI SAND",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "BEYPAZARI 6X200ML SO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "GILL BLUE III 3 ADET",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "DURU 4*150GR SAB.OKY",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "DIMES 1LT MEY.SUYU S",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 2,
+    "wrong": []
+  },
+  {
+    "fixture": "bildirici",
+    "run": 3,
+    "seconds": 4.1,
+    "cls": "A_dogru",
+    "score": "başlık 3/3, ürün eşleşme 9/9, fiyat doğru 9/9, fazladan 0",
+    "resp_items": [
+      {
+        "name": "MARKET POSET",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "ELMA KG STARKING 1",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ULUDAG 1LT LIMONATA",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "PINAR 430GR SOSIS EK",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CITIR EKMEK 7LI SAND",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "BEYPAZARI 6X200ML SO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "GILL BLUE III 3 ADET",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "DURU 4*150GR SAB.OKY",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "DIMES 1LT MEY.SUYU S",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 0,
+    "wrong": []
+  },
+  {
+    "fixture": "bildirici",
+    "run": 4,
+    "seconds": 5.1,
+    "cls": "A_dogru",
+    "score": "başlık 3/3, ürün eşleşme 9/9, fiyat doğru 9/9, fazladan 0",
+    "resp_items": [
+      {
+        "name": "MARKET POSET",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "ELMA KG STARKING 1",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ULUDAG 1LT LIMONATA",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "PINAR 430GR SOSIS EK",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CITIR EKMEK 7LI SAND",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "BEYPAZARI 6X200ML SO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "GILL BLUE III 3 ADET",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "DURU 4*150GR SAB. OKY",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "DIMES 1LT MEY. SUYU S",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 0,
+    "wrong": []
+  },
+  {
+    "fixture": "bildirici",
+    "run": 5,
+    "seconds": 4.8,
+    "cls": "A_dogru",
+    "score": "başlık 3/3, ürün eşleşme 9/9, fiyat doğru 9/9, fazladan 0",
+    "resp_items": [
+      {
+        "name": "MARKET POSET",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "ELMA KG STARKING 1",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ULUDAG 1LT LIMONATA",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "PINAR 430GR SOSIS EK",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CITIR EKMEK 7LI SAND",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "BEYPAZARI 6X200ML SO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "GILL BLUE III 3 ADET",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "DURU 4*150GR SAB. OKY",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "DIMES 1LT MEY.SUYU S",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 0,
+    "wrong": []
+  },
+  {
+    "fixture": "bim",
+    "run": 1,
+    "seconds": 3.7,
+    "cls": "A_dogru",
+    "score": "başlık 3/3, ürün eşleşme 3/3, fiyat doğru 3/3, fazladan 0",
+    "resp_items": [
+      {
+        "name": "ÇBK-TOPTANEPEYNIR250GR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "TUVALET KAGIDI 16LI",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "ALISVERIS POSETI BIM",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 0,
+    "wrong": []
+  },
+  {
+    "fixture": "bim",
+    "run": 2,
+    "seconds": 2.6,
+    "cls": "A_dogru",
+    "score": "başlık 3/3, ürün eşleşme 3/3, fiyat doğru 3/3, fazladan 0",
+    "resp_items": [
+      {
+        "name": "ÇBK-TOPTNEPEYNİRİ 250G",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "TUVALET KAĞIDI 16LI",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "ALIŞVERİŞ POŞETİ BİM",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 0,
+    "wrong": []
+  },
+  {
+    "fixture": "bim",
+    "run": 3,
+    "seconds": 3.0,
+    "cls": "A_dogru",
+    "score": "başlık 3/3, ürün eşleşme 3/3, fiyat doğru 3/3, fazladan 0",
+    "resp_items": [
+      {
+        "name": "ÇBK - TOPTANEPEYNİRİ",
+        "unit": null,
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "TUVALET KAĞIDI 16LI",
+        "unit": null,
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "ALIŞVERİŞ POŞETİ BİM",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 0,
+    "wrong": []
+  },
+  {
+    "fixture": "bim",
+    "run": 4,
+    "seconds": 2.7,
+    "cls": "A_dogru",
+    "score": "başlık 3/3, ürün eşleşme 3/3, fiyat doğru 3/3, fazladan 0",
+    "resp_items": [
+      {
+        "name": "ÇBK-TOPTANEPEYNİRİ",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "TUVALET KAĞIDI 16LI",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "ALIŞVERİŞ POŞETİ",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 0,
+    "wrong": []
+  },
+  {
+    "fixture": "bim",
+    "run": 5,
+    "seconds": 3.2,
+    "cls": "A_dogru",
+    "score": "başlık 3/3, ürün eşleşme 3/3, fiyat doğru 3/3, fazladan 0",
+    "resp_items": [
+      {
+        "name": "ÇBK-TOPTN PEYNİR 250G",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "TUVALET KAĞIDI 16LI",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "ALIŞVERİŞ POŞETİ BİM",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 0,
+    "wrong": []
+  },
+  {
+    "fixture": "file",
+    "run": 1,
+    "seconds": 8.2,
+    "cls": "B_yakalandi",
+    "score": "başlık 3/3, ürün eşleşme 23/23, fiyat doğru 19/23, fazladan 0",
+    "resp_items": [
+      {
+        "name": "ITHAL MUZ",
+        "unit": "kg",
+        "vatRate": null,
+        "needsReview": false
+      },
+      {
+        "name": "ALIŞVERIS POSETI",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "MISIR ADET",
+        "unit": null,
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "PIL FILETO KG SEMPLC",
+        "unit": null,
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "SUTAS YOGURT 1000 G",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": true
+      },
+      {
+        "name": "HARHAS RUL TERYG 1KG",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": true
+      },
+      {
+        "name": "PINAR YAGLI SUT 1LT",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "TARLA KABAK",
+        "unit": "kg",
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "YABAN MERSINI 300 GR",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "FELIX TON BALIK 85 G",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "FELIX TRAKLU 85 G",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "DANA ORTAYAGLI KUSB",
+        "unit": "kg",
+        "vatRate": null,
+        "needsReview": false
+      },
+      {
+        "name": "EKS KRM SG 56G ZUBER",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "SAC YUFKASI 1000G",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": false
+      },
+      {
+        "name": "BOREK KG",
+        "unit": "kg",
+        "vatRate": null,
+        "needsReview": false
+      },
+      {
+        "name": "YUMURTA 15LI ABALICI",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": false
+      },
+      {
+        "name": "YGN MASNLI KEFIR 250",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": false
+      },
+      {
+        "name": "SADE BARET 250G",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "BAHRATLI 160G LAVS",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "CIKO BEYAZ 70G ULKER",
+        "unit": null,
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "SEFTALI",
+        "unit": null,
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "COCA COLA ZERO 1L",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "PATLAMIS MISIR 150 G",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": true,
+    "flagged_items": 11,
+    "wrong": [
+      "PINAR YAGLI SUT 1LT: 158.0 (doğru 159.0)",
+      "EKS KRM SG 55G ZUBER: 89.9 (doğru 69.9)",
+      "BAHARATLI 160G LAYS: 91.9 (doğru 81.9)",
+      "CIKO.BEYAZ 70G ULKER: None (doğru 185.0)"
+    ]
+  },
+  {
+    "fixture": "file",
+    "run": 2,
+    "seconds": 7.6,
+    "cls": "B_yakalandi",
+    "score": "başlık 3/3, ürün eşleşme 23/23, fiyat doğru 19/23, fazladan 0",
+    "resp_items": [
+      {
+        "name": "ITHAL MUZ",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ALISVERIS POSETI",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "MISIR NUDET",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "PIL-FILETO KG SEMPL.C",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SUTAS YOGURT 1000 G",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "HARRAS RUL TERYG 1KG",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "PINAR YAGLI SUT 1LT",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "TARLA KABAK",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "YAGAN MERSINI 300 GR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "FELIX TON BALIK 85 G",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "FELIX TRAKLU 85 G",
+        "unit": null,
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "DANA ORTAYAGLI KUSB",
+        "unit": null,
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "EKS KRM SG 55G ZUBER",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "SAC YUFKASI 1000G",
+        "unit": null,
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "BOREK KG",
+        "unit": null,
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "YUMURTA 15LI ABALICI",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "YGN MASNLI KEFIR 250",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "SADE BAGET 250G",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "BAHRATLI 160G LAYS",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "CIKO BEYAZ 70G ULKER",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SEFTALI",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "COCA COLA ZERO 1L",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "PATLAMIS MISIR 150 G",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": true,
+    "flagged_items": 11,
+    "wrong": [
+      "HARRAS RUL TERYG 1KG: 498.0 (doğru 499.0)",
+      "PINAR YAGLI SUT 1LT: 158.0 (doğru 159.0)",
+      "EKS KRM SG 55G ZUBER: 69.3 (doğru 69.9)",
+      "CIKO.BEYAZ 70G ULKER: 105.0 (doğru 185.0)"
+    ]
+  },
+  {
+    "fixture": "file",
+    "run": 3,
+    "seconds": 8.7,
+    "cls": "B_yakalandi",
+    "score": "başlık 3/3, ürün eşleşme 21/23, fiyat doğru 15/23, fazladan 1",
+    "resp_items": [
+      {
+        "name": "ITHAL MUZ",
+        "unit": "kg",
+        "vatRate": null,
+        "needsReview": false
+      },
+      {
+        "name": "ALIŞVERİS POŞETİ",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "MISIR NIŞASTA 1000G",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": false
+      },
+      {
+        "name": "PİL-FİLETO KG SEMPL",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SUTAS YOGURT 1000 G",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": true
+      },
+      {
+        "name": "HARRAS RUL TERYG 1KG",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "PINAR YAGLI SUT 1LT",
+        "unit": null,
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "TARLA KABAK",
+        "unit": null,
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "YABAN MERSİNİ 300 GR",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": false
+      },
+      {
+        "name": "FELİX TON BALIK 85 G",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "FELIX TRAKLU 85 G",
+        "unit": null,
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "DANA ORTAYAĞLI KUSB",
+        "unit": null,
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "EKS KRM SG 55G ZUBER",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "SAC YUFKASI 1000G",
+        "unit": null,
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "BOREK KG",
+        "unit": null,
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "YUMURTA 15LI ARAUCII",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "SADE BİSKÜ 250G",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": false
+      },
+      {
+        "name": "SADE BARET 250G",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "BAHRATLI 160G LAYS",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "CIKO.BEYAZ 70G ULKER",
+        "unit": "kg",
+        "vatRate": null,
+        "needsReview": false
+      },
+      {
+        "name": "COCA COLA ZERO 1L",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "PATLAMİŞ MISIR 150 G",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": true,
+    "flagged_items": 12,
+    "wrong": [
+      "PINAR YAGLI SUT 1LT: 158.0 (doğru 159.0)",
+      "SAC YUFKASI 1000G: 59.25 (doğru 149.0)",
+      "BOREK KG: 74.0 (doğru 59.25)",
+      "YUMURTA 15LI ABALICI: 98.0 (doğru 74.0)",
+      "YBN MRSNLI KEFIR 250: None (doğru 98.0)",
+      "BAHARATLI 160G LAYS: 185.0 (doğru 81.9)",
+      "CIKO.BEYAZ 70G ULKER: 65.45 (doğru 185.0)",
+      "SEFTALI: None (doğru 65.45)"
+    ]
+  },
+  {
+    "fixture": "file",
+    "run": 4,
+    "seconds": 7.6,
+    "cls": "B_yakalandi",
+    "score": "başlık 3/3, ürün eşleşme 23/23, fiyat doğru 20/23, fazladan 0",
+    "resp_items": [
+      {
+        "name": "ITHAL MUZ",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ALIŞVERIS POSETI",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "MISIR ADET",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "PIL FILETO KG SEMPLC",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SUTAS YOGURT 1000 G",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "HARHAS RUL TERYG 1KG",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "PINAR YAGLI SUT 1LT",
+        "unit": null,
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "TARLA KABAK",
+        "unit": null,
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "YABAN MERSINI 300 GR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "FELIX TON BALIK 85 G",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "FELIX TRAKLU 85 G",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "DANA ORTAYAGLI KUSB",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "EKS KRM SG 55G ZUBER",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "SAC YUFKASI 1000G",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "BOREK KG",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "YUMURTA 15LI AIBALICI",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "YBN MISINLI KEFIR 250",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SADE BARET 250G",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "BAHRATLI 150G LAYS",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "CIKO.BEYAZ 70G ULKER",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "SEFTALI",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "COCA COLA ZERO 1L",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "PATLAMIS MISIR 150 G",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": true,
+    "flagged_items": 9,
+    "wrong": [
+      "PINAR YAGLI SUT 1LT: 158.0 (doğru 159.0)",
+      "EKS KRM SG 55G ZUBER: 69.3 (doğru 69.9)",
+      "BAHARATLI 160G LAYS: 91.9 (doğru 81.9)"
+    ]
+  },
+  {
+    "fixture": "file",
+    "run": 5,
+    "seconds": 9.9,
+    "cls": "B_yakalandi",
+    "score": "başlık 3/3, ürün eşleşme 23/23, fiyat doğru 21/23, fazladan 0",
+    "resp_items": [
+      {
+        "name": "ITHAL MUZ",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ALISVERIS POSETI",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "MISIR ADET",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "PIL FILETO KG SEMPLC",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SUTAS YOGURT 1000 G",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": true
+      },
+      {
+        "name": "HARHAS RUL TEREY 1KG",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "PINAR YAGLI SUT 1LT",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "TARLA KABAK",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "YAGAN MERSINI 300 GR",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "FELIX TON BALIK 85 G",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "FELIX TAVUKLU 85 G",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "DANA ORTAYAAGLI KU SB",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "EKS KRM SG 55G ZUBER",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SAC YUFKASI 1000G",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "BOREK KG",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "YUMURTA 15LI ABALICI",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "YBN MISINLI KEFIR 250",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "SADE BARET 250G",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "BAHARATLI 16OG LAVS",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "CIKO.BEYAZ 70G ULKER",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "SEFTALI",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "COCA COLA ZERO 1L",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "PATLAMIS MISIR 150 G",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": true,
+    "flagged_items": 6,
+    "wrong": [
+      "PINAR YAGLI SUT 1LT: 158.0 (doğru 159.0)",
+      "EKS KRM SG 55G ZUBER: 69.3 (doğru 69.9)"
+    ]
+  },
+  {
+    "fixture": "gimsa",
+    "run": 1,
+    "seconds": 6.4,
+    "cls": "A_dogru_bayrakli",
+    "score": "başlık 3/3, ürün eşleşme 17/17, fiyat doğru 17/17, fazladan 0",
+    "resp_items": [
+      {
+        "name": "POSET",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "COCA COLA ZERO 1 LT",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIX BUBBLE TEA SEFTALI 300 ML",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "RAMAZAN PİDESİ GIMSA 200 GR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "EKER MEYVELI YOGURT 65 GR SEF-KAY",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "KURU PASTA NORMAL",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "EKER MEYVELI YOGURT 65 GR SEF-KAY",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ICLI KOFTE",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "KINDER PINGUI 4 LU 120 GR",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "TRILECE TATLISI",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ATOM",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ACUKA KAHVALTILIK",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIX BUBBLE TEA ANANAS 300 ML",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": true,
+    "flagged_items": 1,
+    "wrong": []
+  },
+  {
+    "fixture": "gimsa",
+    "run": 2,
+    "seconds": 5.9,
+    "cls": "A_dogru_bayrakli",
+    "score": "başlık 3/3, ürün eşleşme 17/17, fiyat doğru 17/17, fazladan 0",
+    "resp_items": [
+      {
+        "name": "COCA COLA ZERO 1 LT",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "COCA COLA ZERO 1 LT",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIX BUBBLE TEA SEFTALI 300 ML",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "RAMAZAN PİDESİ GİMSA 200 GR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "EKER MEYVELİ YOGURT 65 GR SEF-KAY",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": true
+      },
+      {
+        "name": "KURU PASTA NORMAL",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "EKER MEYVELİ YOGURT 65 GR SEF-KAY",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ICLI KOFTE",
+        "unit": "kg",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "KINDER PINGUI 4 LU 120 GR",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "TRİLİCE TATLISI",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ATOM",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ACUKA KAHVALTILIK",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIX BUBBLE TEA ANANAS 300 ML",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": true,
+    "flagged_items": 1,
+    "wrong": []
+  },
+  {
+    "fixture": "gimsa",
+    "run": 3,
+    "seconds": 6.4,
+    "cls": "A_dogru_bayrakli",
+    "score": "başlık 3/3, ürün eşleşme 17/17, fiyat doğru 17/17, fazladan 0",
+    "resp_items": [
+      {
+        "name": "COCA COLA ZERO 1 LT",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIX BUBBLE TEA SEFTALI 300 ML",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "RAMAZAN PIDESIİ GIMSA 200 GR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "EKER MEYVELI YOGURT 65 GR SEF-KAY",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "KURU PASTA NORMAL",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "EKER MEYVELI YOGURT 65 GR SEF-KAY",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ICLI KOFTE",
+        "unit": "kg",
+        "vatRate": null,
+        "needsReview": false
+      },
+      {
+        "name": "KINDER PINGUI 4 LU 120 GR",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "TRILECE TATLISI",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ATOM",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ACUKA KAHVALTILIK",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIX BUBBLE TEA ANANAS 300 ML",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "POSET",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      }
+    ],
+    "receipt_flag": true,
+    "flagged_items": 1,
+    "wrong": []
+  },
+  {
+    "fixture": "gimsa",
+    "run": 4,
+    "seconds": 8.0,
+    "cls": "A_dogru",
+    "score": "başlık 3/3, ürün eşleşme 17/17, fiyat doğru 17/17, fazladan 0",
+    "resp_items": [
+      {
+        "name": "COCA COLA ZERO 1 LT",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "COCA COLA ZERO 1 LT",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIX BUBBLE TEA SEFTALI 300 ML",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "RAMAZAN PIDESI GIMSA 200 GR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "EKER MEYVELI YOGURT 65 GR SEF-KAY",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "KURU PASTA NORMAL",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "EKER MEYVELI YOGURT 65 GR SEF-KAY",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ICLI KOFTE",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "KINDER PINGUI 4 LU 120 GR",
+        "unit": "adet",
+        "vatRate": null,
+        "needsReview": false
+      },
+      {
+        "name": "TRILECE TATLISI",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ATOM",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ACUKA KAHVALTILIK",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIX BUBBLE TEA ANANAS 300 ML",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 0,
+    "wrong": []
+  },
+  {
+    "fixture": "gimsa",
+    "run": 5,
+    "seconds": 6.0,
+    "cls": "A_dogru",
+    "score": "başlık 3/3, ürün eşleşme 17/17, fiyat doğru 17/17, fazladan 0",
+    "resp_items": [
+      {
+        "name": "POŞET",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "COCA COLA ZERO 1 LT",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIX BUBBLE TEA ŞEFTALI 300 ML",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "RAMAZAN PIDESIİ GIMSA 200 GR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "EKER MEYVELİ YOĞURT 65 GR SEF-KAY",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "NUTELLA GO",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "KURU PASTA NORMAL",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "EKER MEYVELİ YOĞURT 65 GR SEF-KAY",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ICLI KOFTE",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "KINDER PİNGUİ 4 LU 120 GR",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "TRİLECE TATLISI",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ATOM",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "ACUKA KAHVALTILIK",
+        "unit": "kg",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "CIX BUBBLE TEA ANANAS 300 ML",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 0,
+    "wrong": []
+  },
+  {
+    "fixture": "migros",
+    "run": 1,
+    "seconds": 3.8,
+    "cls": "A_dogru_bayrakli",
+    "score": "başlık 3/3, ürün eşleşme 6/6, fiyat doğru 6/6, fazladan 0",
+    "resp_items": [
+      {
+        "name": "COCA-COLA ZERO 450",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": true
+      },
+      {
+        "name": "LIPTON ICE TEA KARPZ",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": true
+      },
+      {
+        "name": "COCA-COLA ZERO 330",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": true
+      },
+      {
+        "name": "MIGROS ISLAK HAVLU",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": true
+      },
+      {
+        "name": "M&M'S FISTIKLI DRAJE",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "M&M'S FISTIKLI DRAJE",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 4,
+    "wrong": []
+  },
+  {
+    "fixture": "migros",
+    "run": 2,
+    "seconds": 3.8,
+    "cls": "A_dogru",
+    "score": "başlık 3/3, ürün eşleşme 6/6, fiyat doğru 6/6, fazladan 0",
+    "resp_items": [
+      {
+        "name": "COCA-COLA ZERO 450",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "LIPTON ICE TEA KARPZ",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "COCA-COLA ZERO 330",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "MIGROS ISLAK HAVLU",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "M&M'S FISTIKLI DRAJE",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "M&M'S FISTIKLI DRAJE",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 0,
+    "wrong": []
+  },
+  {
+    "fixture": "migros",
+    "run": 3,
+    "seconds": 3.0,
+    "cls": "A_dogru",
+    "score": "başlık 3/3, ürün eşleşme 6/6, fiyat doğru 6/6, fazladan 0",
+    "resp_items": [
+      {
+        "name": "COCA-COLA ZERO 450",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "LIPTON ICE TEA KARPZ",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "COCA-COLA ZERO 330",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": false
+      },
+      {
+        "name": "MIGROS ISLAK HAVLU",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "M&M'S FISTIKLI DRAJE",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "M&M'S FISTIKLI DRAJE",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 0,
+    "wrong": []
+  },
+  {
+    "fixture": "migros",
+    "run": 4,
+    "seconds": 3.1,
+    "cls": "A_dogru_bayrakli",
+    "score": "başlık 3/3, ürün eşleşme 6/6, fiyat doğru 6/6, fazladan 0",
+    "resp_items": [
+      {
+        "name": "COCA-COLA ZERO 450",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": true
+      },
+      {
+        "name": "LIPTON ICE TEA KARPZ",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": true
+      },
+      {
+        "name": "COCA-COLA ZERO 330",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": true
+      },
+      {
+        "name": "MIGROS ISLAK HAVLU",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "M&M'S FISTIKLI DRAJE",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "M&M'S FISTIKLI DRAJE",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 3,
+    "wrong": []
+  },
+  {
+    "fixture": "migros",
+    "run": 5,
+    "seconds": 4.2,
+    "cls": "A_dogru_bayrakli",
+    "score": "başlık 3/3, ürün eşleşme 6/6, fiyat doğru 6/6, fazladan 0",
+    "resp_items": [
+      {
+        "name": "COCA-COLA ZERO 450",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": true
+      },
+      {
+        "name": "LIPTON ICE TEA KARPZ",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": true
+      },
+      {
+        "name": "COCA-COLA ZERO 330",
+        "unit": "adet",
+        "vatRate": 10.0,
+        "needsReview": true
+      },
+      {
+        "name": "MIGROS ISLAK HAVLU",
+        "unit": "adet",
+        "vatRate": 20.0,
+        "needsReview": false
+      },
+      {
+        "name": "M&M'S FISTIKLI DRAJE",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      },
+      {
+        "name": "M&M'S FISTIKLI DRAJE",
+        "unit": "adet",
+        "vatRate": 1.0,
+        "needsReview": false
+      }
+    ],
+    "receipt_flag": false,
+    "flagged_items": 3,
+    "wrong": []
+  }
+]

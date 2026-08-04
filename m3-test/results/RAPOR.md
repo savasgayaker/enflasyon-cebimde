@@ -546,3 +546,191 @@ bu veriyle desteklenmiyor; kdvBlok'suz aynı-rejim ölçümü yok, olsaydı fark
 - `m3-test/kdv-blogu-pilot.py` — Ek 11 pilot aracı (KDV bloğu çıkarımı, üretim rejimiyle)
 - `m3-test/results/ek11-kdv-pilot-2026-08-04.json` — Ek 11 ham çıktısı (6 çağrı, prompt metni dahil)
 - Fotoğraflar ve `.env` (MiniMax anahtarı) git'e girmez (`.gitignore`)
+
+---
+
+## Ek 12 — kdvBlok'lu prompt + mutabakat katmanının kabul turu (4 Ağustos 2026)
+
+**Soru.** Aşama 3.5'te üretim prompt'una `kdvBlok` alanı eklendi ve KDV bloğu
+mutabakatı (Kapı A/B + Onarım 1/2) koda girdi. Bu değişiklik fiş okuma
+doğruluğuna zarar verdi mi; KDV oranı doğruluğunu gerçekten iyileştirdi mi?
+
+**Yöntem.** Ölçüm aletine dokunulmadı: `acceptance_dual.py` ve `run_test.py`
+Ek 10'daki hâliyle koştu. Yeni metrikler, diske yazılmış ham çıktının üstünde
+çalışan ayrı bir puanlayıcıyla hesaplandı (`m3-test/puanla-kdv-oran.py`). Aynı
+puanlayıcı Ek 10 arşivine de uygulandı — taban çizgisi yeniden ölçüldü, önceki
+rapordan aktarılmadı. Bir değişikliği ölçtüğümüz turda ölçüm aletini de
+değiştirseydik, farkın koddan mı aletten mi geldiğini bir daha ayıramazdık.
+Kabul ölçütü tur **başlamadan** yazıldı ve sonuca göre değiştirilmedi.
+
+### Sayılar
+
+| metrik | Ek 10 (eski prompt, mutabakat yok) | Ek 12 (kdvBlok + mutabakat) |
+|---|---|---|
+| koşum | 30 | 30 |
+| puanlanan kalem | 392 | 387 |
+| KDV oranı doğru | 307 (%78.3) | 345 (%89.1) |
+| KDV oranı **yanlış** | 46 (%11.7) | 13 (%3.4) |
+| KDV oranı boş (null) | 39 (%9.9) | 29 (%7.5) |
+| başlık (havuzlanmış) | 90/90 (%100.00) | 90/90 (%100.00) |
+| ürün eşleşme (havuzlanmış) | 394/395 (%99.75) | 392/395 (%99.24) |
+| fiyat doğru (havuzlanmış) | 378/395 (%95.70) | 370/395 (%93.67) |
+| **başlık+kalem bileşik oranı** | %97.95 | %96.82 |
+| fazladan kalem (teşhis, ölçüt değil) | 0 | 1 |
+| sınıf dağılımı | {'A_dogru_bayrakli': 10, 'B_yakalandi': 7, 'A_dogru': 13} | {'A_dogru_bayrakli': 11, 'B_yakalandi': 6, 'A_dogru': 13} |
+| süre ort / ortanca / en yüksek | 5.06 / 4.60 / 8.40 sn | 5.83 / 5.90 / 9.90 sn |
+| eşleşmeyen (cevapta fazla / anahtarda eksik) | 2 / 3 | 6 / 8 |
+
+### Fiş bazında (doğru / yanlış / boş)
+
+| fiş | Ek 10 | Ek 12 |
+|---|---|---|
+| a101 | 103 / 0 / 2 | 102 / 0 / 0 |
+| bildirici | 45 / 0 / 0 | 45 / 0 / 0 |
+| bim | 15 / 0 / 0 | 15 / 0 / 0 |
+| file | 63 / 29 / 23 | 78 / 7 / 27 |
+| gimsa | 55 / 17 / 10 | 75 / 6 / 2 |
+| migros | 26 / 0 / 4 | 30 / 0 / 0 |
+
+### Kabul ölçütleri
+
+- **yanlis oran artisi <= 1 puan** — GEÇTİ (%11.7 -> %3.4 (-8.4 puan))
+- **dogru oran dusmemis** — GEÇTİ (%78.3 -> %89.1 (+10.8 puan))
+- **baslik+kalem bilesik orani dusmemis** — KALDI (%97.95 -> %96.82 (-1.14 puan))
+- **C_SESSIZ artmamis** — GEÇTİ (0 -> 0)
+- Alt metrik uyarısı: bileşik oran geçse de şu metrik(ler) düştü: ürün eşleşme, fiyat doğru.
+
+**Karar: RET.**
+
+> **ÜSTÜ ÇİZİLMEDİ, ÜZERİNE YAZILDI:** Bu RET kararı Ek 12b (2026-08-04) ile geçersiz kılınmıştır — bkz. `## Ek 12b`. Ölçüt değiştirilmedi; aynı ölçüt, gün etkisini eleyen eşleştirilmiş bir tasarımla yeniden ölçüldü ve düşüşün aletin kendi gürültüsü içinde kaldığı görüldü.
+
+
+### Mutabakatın saha davranışı
+
+Kap günlüğünden (`results/ek12-kdv-gunluk-2026-08-04.txt`) sayılan durumlar: `kapi_a` 14, `kapi_b` 4, `belirsiz_oransiz` 3, `aritmetik_bozuk` 2, `uyusmazlik` 3.
+
+Teşhisler Ek 11 pilotuyla aynı çıktı: `a101` permütasyon (Kapı B) ile, `bildirici`
+blok toplamı tutmadığı için (Kapı A) elendi; iki fişte de kalemlere dokunulmadı.
+`file`'da Onarım 1 iki koşumda çalıştı ve 19 kaleme %1 ithaf etti — cevap
+anahtarındaki 19 adet %1'lik kalemle birebir. Diğer `file` koşumlarında durum
+`belirsiz_oransiz` kaldı ve tasarım gereği dokunulmadı; `file`'ın boş sayısındaki
+artış buradan geliyor. Bu bilinçli bir tercih: emin olunmayan yerde null bırakmak,
+yanlış oran yazmaktan iyidir — yanlış oran sessizce yanlış enflasyon üretir.
+
+### Düzeltmeler ve sınırlar
+
+**Ek 11'in "0 yeni bayrak" ifadesi sahada birebir tutmadı.** Ek 11 altı *sabit*
+model çıktısı üzerinde oynatılmıştı; canlıda çıktı koşumdan koşuma değişiyor ve
+dar bayrak koşuluna düşen bir koşum çıkabiliyor. `gimsa`'da bir koşumda
+`uyusmazlik` görüldü. Doğru ifade: **30 koşumda 1 yeni yanlış alarm (%3,3)**.
+
+**Süre farkı nedensel olarak ölçülmedi.** İki tur farklı günlerde, farklı API
+yükü altında koştu; Ek 10'un kendi içindeki dağılımı bile 4,6-8,4 sn arasında.
+Ortalamadaki artış kaydedilmiştir ama `kdvBlok`'a atfedilemez. Bunu ayırmak için
+park edilmiş 12 çağrılık A/B (kdvBlok'lu vs kdvBlok'suz, aynı oturumda,
+dönüşümlü) gerekiyor. AÇIK KALEM.
+
+**Eşleşmeyen kalem artışı denetlendi, puanlama artefaktı değil.** Dışarıda kalan
+çiftler isim varyansından kaynaklanıyor (`KOLİYE SABUN` ↔ `KOPUK SABUN`,
+`MISIR NIŞASTA 1000G` ↔ `MISIR ADET`, iki turda da görülen `COCA COLA` ↔ `POSET`
+kayması). Bu kalemlerin oranları cevap anahtarıyla zaten uyumluydu; eşleşselerdi
+"doğru" hanesine yazılacaklardı. Yani dışlama Ek 12'yi şişirmiyor, hafifçe eksik
+gösteriyor. İsim varyansı Aşama 5'in (ürün birleştirme) girdisidir.
+
+**Ölçüt 3 önce ölçülemedi — kaydı düşülüyor.** İlk değerlendirmede puanlayıcı
+`score` alanını sayı sanıp süzdü; oysa `acceptance_dual.py` oraya `compare()`'in
+özet dizesini yazıyor (`başlık 3/3, ürün eşleşme 21/21, ...`). Bu yüzden ölçüt 3
+"değerlendirilemedi" düştü ve tümü-geçmeli mantık ilk turda RET üretti. Bu bir
+gerileme bulgusu değil, ölçüm hatasıydı. Düzeltme ölçütü değiştirmek değil,
+dizeyi ayrıştırıp ölçütü ölçülebilir kılmak oldu; havuzlanmış oran (koşum başına
+ortalama değil) seçildi, çünkü kalem sayısı farklı fişleri eşit ağırlıklandırmak
+tabloyu bozardı. Çözülemeyen koşum: Ek 10'da 0, Ek 12'de 0.
+
+**Yöntemsel not.** Bu makinede Docker daemon saati ana makineden ~1 saat ileri;
+`docker compose logs --since` bu yüzden boş döndü ve günlük filtresiz çekildi
+(kabın tüm ömründeki POST sayısı 30 olduğu için pencere zaten yalnız bu tur).
+Sonraki turlarda `--since`'a güvenilmemeli.
+
+**`m3-test/kdv-blogu-pilot.py` artık tarihsel kayıttır.** Korumalı çapaları
+değişmiş prompt'ta bulunmadığı için tasarımı gereği durur; yeniden koşturulmak
+için değil, Ek 11'in nasıl ölçüldüğünü belgelemek için duruyor.
+
+---
+
+## Ek 12b — Eski kolun aynı gün tekrarı (gün etkisi testi)
+
+**Tarih:** 2026-08-04 · **Ön kayıt:** `results/ek12b-on-kayit-2026-08-04.md` — koşum verisi
+ÜRETİLMEDEN ÖNCE yazıldı ve push edildi (commit 89e1406). **Puanlayıcı:** `puanla_bilesik.py`,
+**karar betiği:** `karar-ek12b.py` — ikisi de koşumdan önce yazıldı; ölçüm aletine
+(`acceptance_dual.py`) dokunulmadı.
+
+### Neden bu tur gerekti
+Ek 12'de önceden ilan edilmiş ölçüt 3 düştü (bileşik oran 97.95 -> 96.82, -1.14 puan)
+ve karar RET oldu. Ancak Ek 10 (eski kol) 2026-08-03'te, Ek 12 (yeni kol) 2026-08-04'te alınmıştı:
+tek kollu ve farklı günlü bir karşılaştırma, "prompt etkisi" ile "gün etkisi"ni ayıramaz.
+İkinci bir yeni-kol turu bu sorunu çözmezdi — karşılaştırma yine dünkü tek tura karşı yapılacaktı.
+Bu yüzden aynı 30 çağrı, eski promptu (8e9fe96 sürümü, kdvBlok'suz) **bugün** koşmak için harcandı.
+Tek tur iki bilinmeyeni birden çözer: C10b vs C12 eşleştirilmiş karşılaştırmayı verir (gün etkisi
+elenir), C10b vs C10 ise aynı yapılandırmanın iki turu olarak **aletin kendi gürültüsünü** ölçer.
+
+### Karar kuralı (veri görülmeden sabitlendi)
+    N = |C10b - C10|            aynı yapılandırmanın iki turu arası fark
+    B = max(N; 0,25 puan)       0,25 puan = 1 kalem / 395 kalem = aletin en küçük adımı
+    E = C10b - C12              aynı gün, eski kol eksi yeni kol
+    E <= B -> KABUL   |   E > B -> RET ONAYLANDI
+Tam 1 tur; üçüncü tur yok. Hiçbir koşum dışlanmadı (dejenere koşumlar dahil).
+
+### Ölçüm
+| büyüklük | değer |
+|---|---|
+| C10 — eski kol, 2026-08-03 | 97.95 |
+| C10b — eski kol, 2026-08-04 | 96.25 |
+| C12 — yeni kol, 2026-08-04 | 96.82 |
+| N — aynı yapılandırma, iki tur farkı | 1.70 puan |
+| B — bant = max(N; 0,25) | 1.70 puan |
+| E = C10b - C12 | -0.57 puan |
+
+### KARAR: KABUL
+E (-0.57) <= B (1.70) olduğu için ölçüt 3'ün ihlali gösterilememiştir. Ek 12'nin RET kararı
+gün etkisiyle açıklanmıştır: aynı eski yapılandırma iki turda kendi kendinden 1.70 puan saptı,
+yani RET'i tetikleyen -1.14 puanlık düşüş aletin kendi salınımının içinde kalıyor. Dahası
+bugün eski kol, yeni kolun da **altında** kaldı (96.25 < 96.82).
+
+### Üç turun alt kırılımı
+| | Ek 10 (eski, dün) | Ek 12 (yeni, bugün) | Ek 12b (eski, bugün) |
+|---|---|---|---|
+| bileşik oran | 97.95 | 96.82 | 96.25 |
+| başlık | 90/90 | 90/90 | 90/90 |
+| ürün eşleşme | 394/395 | 392/395 | 391/395 |
+| fiyat doğru | 378/395 | 370/395 | 366/395 |
+| fazladan kalem | 0 | 1 | 0 |
+| koşum bazında ss | 3.24 | 4.53 | 5.57 |
+| süre ort/ortanca/max (sn) | 5.06 / 4.55 / 8.40 | 5.83 / 5.50 / 9.90 | 5.67 / 5.10 / 10.60 |
+| sınıflar | A 13 / A-bayraklı 10 / B 7 / C_SESSIZ 0 | A 13 / A-bayraklı 11 / B 6 / C_SESSIZ 0 | A 9 / A-bayraklı 10 / B 11 / C_SESSIZ 0 |
+
+### Ne öğrendik — bağlayıcı
+1. **Aletin çözünürlüğü N = 1.70 puandır.** 30 koşumda bundan küçük gerçek bir gerileme
+   SAPTANAMAZ. Bu KABUL "gerileme yoktur" demek değil, "gerileme gösterilememiştir" demektir.
+2. **Gün etkisi, ölçülen etkiden büyüktür.** Bundan böyle ölçüt 3'e dayanan hiçbir kabul/ret
+   kararı, iki kolu farklı günlerde koşan tek kollu bir turla verilmez; eşleştirilmiş (aynı gün,
+   iki kol) tasarım ölçütün parçasıdır. Bu kural bizim aleyhimize de işler.
+3. **B bandı kalıcıdır.** Sonuca göre esnetilemez; gelecekteki turlarda da geçerlidir.
+4. **C_SESSIZ üç turda da 0.** Güvenlik ağı üç rejimde de tuttu.
+5. **Süre AÇIK KALEM'i betimleyici olarak kapandı:** eski kol dün 5.06 sn -> bugün
+   5.67 sn (gün etkisi +0.61 sn); yeni kol bugün 5.83 sn. kdvBlok'a
+   atfedilebilecek fark +0.17 sn — ihmal edilebilir. Ek 12'de yazılan "+0,8 sn maliyet"
+   okuması yanlıştı; farkın büyük kısmı gün etkisidir.
+
+### Sınırlar (dürüst kayıt)
+- N tek bir fark tahminidir ve kendisi de gürültülüdür; "bandın" kesinliği abartılmamalıdır.
+- Eski kol bugün, `server.py` içinde `kdv_mutabakat` modülü YÜKLÜ halde koştu; ancak kdvBlok
+  üretilmediği için modül `blok_yok` ile sessiz kaldı (KDV günlüğü 0 satır) ve modül
+  zaten ürün adına/fiyatına/başlığa dokunmuyor. Ölçüt 3 açısından eski kol yapılandırması geçerlidir.
+- Bugünkü turun genel kalitesi düşüktü (A 9 / A-bayraklı 10 / B 11 / C_SESSIZ 0). Bu kararın yönünü değiştirmiyor: ölçüt havuzlanmış
+  orana bakar ve ön kayıt gereği hiçbir koşum dışlanmadı — düşük kalite eski kolun aleyhinedir,
+  yani KABUL kararını kolaylaştırmamış, aksine gün etkisinin varlığını doğrulamıştır.
+
+### Arşivler
+- `results/ek12b-eski-kol-2026-08-04.json` (30 kayıt)
+- `results/ek12b-kdv-gunluk-2026-08-04.txt` (0 satır — eski kolda beklenen sessizlik)
+- `results/ek12b-on-kayit-2026-08-04.md` (sha256 88fe5ea7…ceb7e8a)
