@@ -27,6 +27,7 @@ from receipt_fields import (
     strip_kdv_suffix, extract_kdv_rate, normalize_vat_rate,
     normalize_unit, reconcile_optional,
 )
+from kdv_mutabakat import kdv_mutabakati
 from auth import auth_modu, gecerli_kullanici
 
 ROOT_DIR = Path(__file__).parent
@@ -170,8 +171,10 @@ def validate_and_flag(parsed: dict) -> dict:
         # vatRate: önce modelin ayrı alanı, olmazsa adın sonundan kurtarma.
         # K1 gereği fiş görüntüsü saklanmıyor — burada atılan bilgi kalıcı kaybolur.
         vat = normalize_vat_rate(it.get("vatRate"))
+        vat_kaynak = "model" if vat is not None else None
         if vat is None:
             vat = extract_kdv_rate(raw_name)
+            vat_kaynak = "kural" if vat is not None else None
         items.append({
             "name": strip_kdv_suffix(raw_name),
             "quantity": it.get("quantity") if isinstance(it.get("quantity"), (int, float)) else 1,
@@ -179,6 +182,9 @@ def validate_and_flag(parsed: dict) -> dict:
             "unitPrice": it.get("unitPrice"),
             "totalPrice": total_price,
             "vatRate": vat,
+            # supabase receipt_items.vat_rate_source ile ayni sozluk:
+            # model / kural / kdv_blogu / kullanici
+            "vatRateSource": vat_kaynak,
             "needsReview": total_price is None,
         })
 
@@ -188,12 +194,27 @@ def validate_and_flag(parsed: dict) -> dict:
         raise ValueError(f"totalAmount sayı değil: {parsed['totalAmount']!r}")
 
     arithmetic_ok = not any_null and abs(price_sum - total_amount) <= 0.01
+
+    # KDV bloğu mutabakatı (Ek 11): kalem oranlarını YERİNDE onarır, yalnız dar
+    # koşulda uyuşmazlık bildirir. Bayrak burada needsReview'a KARIŞTIRILMAZ:
+    # parse_receipt yanıt seçimini "aritmetik tutuyor mu" semantiği üzerinden
+    # yapıyor; o semantiği bozmamak için ayrı alanda taşınır ve seçimden SONRA
+    # uygulanır.
+    kdv = kdv_mutabakati(items, parsed.get("kdvBlok"), total_amount, arithmetic_ok)
+    if kdv["onarimlar"]:
+        logger.info("KDV bloğu onarımı (%s): %s", kdv["durum"], kdv["onarimlar"])
+    elif kdv["durum"] in ("kapi_a", "kapi_b", "uyusmazlik", "belirsiz_oransiz"):
+        logger.info("KDV bloğu durumu: %s (blok=%s gruplar=%s)",
+                    kdv["durum"], kdv["blok"], kdv["gruplar"])
+
     return {
         "storeName": str(parsed["storeName"] or ""),
         "date": str(parsed["date"] or ""),
         "totalAmount": total_amount,
         "items": items,
         "needsReview": not arithmetic_ok,
+        "kdvDurum": kdv["durum"],
+        "kdvUyusmazligi": kdv["uyusmazlik"],
     }
 
 
@@ -450,6 +471,7 @@ def cross_check(chosen: dict, other: dict) -> None:
         # unit/vatRate: iki çağrı çelişirse alan BOŞALTILIR, bayrak çıkmaz.
         # Yanlış alarm Ek 6-7'de zaten yapısal ~%30 tabanında; fiyatı bozmayan
         # bir alan için o tabanı yükseltmek doğru takas değil (Ek 7 kuralının aynısı).
+        _vat_a_once = a.get("vatRate")
         for _field in ("unit", "vatRate"):
             _av, _bv = a.get(_field), b.get(_field)
             _merged = reconcile_optional(_av, _bv)
@@ -457,6 +479,12 @@ def cross_check(chosen: dict, other: dict) -> None:
                 # Yalnız ölçüm logu (Ek 8: "çelişkiden boşalan alan" sayacı).
                 logger.info("çapraz kontrol: %s çelişkisi (%r vs %r) — alan boşaltıldı", _field, _av, _bv)
             a[_field] = _merged
+        # Oranın kaynağı oranla birlikte hareket eder: çelişkiden boşaldıysa
+        # kaynak da boşalır; a boşken b doluysa kaynak b'den gelir.
+        if a.get("vatRate") is None:
+            a["vatRateSource"] = None
+        elif _vat_a_once is None:
+            a["vatRateSource"] = b.get("vatRateSource")
         qty_differ = abs(float(a.get("quantity") or 0) - float(b.get("quantity") or 0)) > 0.001
         # unitPrice: temsil değil DEĞER karşılaştırılır; iki taraftan biri
         # hesaplanamıyorsa bu alandan bayrak çıkmaz (totalPrice zaten ayrıca
@@ -549,6 +577,11 @@ def parse_receipt(
         chosen, other = first, second
 
     cross_check(chosen, other)
+    if chosen.get("kdvUyusmazligi"):
+        # Ek 11 dar koşulu: blok iki kapıdan da geçti, kalemler totalAmount'u
+        # tutturuyor, buna rağmen gruplar uzlaşmıyor ve tek çözümlü taşıma yok.
+        chosen["needsReview"] = True
+        logger.info("KDV bloğu uyuşmazlığı (%s) — fiş needsReview", chosen.get("kdvDurum"))
     return chosen
 
 

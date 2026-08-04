@@ -15,11 +15,11 @@ WORKDIR /app
 COPY requirements-runtime.txt .
 RUN pip install --no-cache-dir -r requirements-runtime.txt
 
-# DÖRT dosyanın DÖRDÜ de gerekli. server.py; receipt_prompt, receipt_fields ve
-# auth modüllerini içe aktarıyor — biri eksik kalırsa kap sorunsuz DERLENİR,
+# BEŞ dosyanın BEŞİ de gerekli. server.py; receipt_prompt, receipt_fields,
+# auth ve kdv_mutabakat modüllerini içe aktarıyor — biri eksik kalırsa kap sorunsuz DERLENİR,
 # sonra ilk çalıştırmada ModuleNotFoundError ile ölür. Yeni bir .py dosyası
 # eklenirse bu satıra da eklenmeli.
-COPY auth.py receipt_fields.py receipt_prompt.py server.py ./
+COPY auth.py kdv_mutabakat.py receipt_fields.py receipt_prompt.py server.py ./
 
 # Derleme anında duman testi: yukarıdaki listede eksik bir modül varsa BUILD
 # BURADA PATLAR. Aksi halde hata, kap çalıştırıldığında ortaya çıkardı — yani
