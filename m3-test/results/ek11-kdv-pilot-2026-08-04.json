@@ -1,0 +1,1340 @@
+{
+  "tarih": "2026-08-04 00:57",
+  "model": "MiniMax-M3",
+  "rejim": {
+    "thinking": {
+      "type": "disabled"
+    },
+    "max_tokens": 24000,
+    "merdiven": [
+      [
+        1400,
+        45
+      ],
+      [
+        1000,
+        45
+      ]
+    ]
+  },
+  "prompt_sha256": "ba68058fd59d9c612288563b362e7124892594ff4a8efbb25279c155de8baf08",
+  "prompt": "Sen Türk market fişlerini okuyan bir asistansın. Sana verilen fişi analiz et ve SADECE aşağıdaki şemaya uyan geçerli bir JSON döndür. JSON dışında hiçbir açıklama, markdown, ``` bloğu yazma.\n\n{\n  \"storeName\": \"mağaza adı (ör. Migros, A101, BİM, File, Bildirici, CarrefourSA)\",\n  \"date\": \"YYYY-MM-DD\",\n  \"totalAmount\": 0.0,\n  \"kdvBlok\": {\"1\": 0.0, \"10\": 0.0, \"20\": 0.0},\n  \"items\": [\n    {\"name\": \"ÜRÜN ADI\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 0.0, \"totalPrice\": 0.0, \"vatRate\": 20}\n  ]\n}\n\nKurallar:\n- items listesine SADECE satın alınan ürün/hizmet satırlarını koy. KDV satırları, TOPKDV, ara toplam, POS/banka satırları, kampanya mesajları, adres, vergi no gibi satırlar ürün DEĞİLDİR.\n- totalAmount fişin ödenecek genel toplamıdır (ÖDENECEK / GENEL TOPLAM / TOPLAM).\n- Türk fişlerinde fiyatlar \"*18,00\" veya \"x120,00\" gibi yazılabilir; virgül ondalık ayracıdır.\n- Tartılı/adetli ürünlerde (ör. \"0,455 kg x 89,90\") quantity ve unitPrice'ı ayrıştır; totalPrice satırın toplam tutarıdır.\n- Bir ürünün fiyatını fişte bulamıyorsan totalPrice değerini null yap.\n- Ürün adına KDV oranını (%1, %01, %10, %20 gibi) DAHİL ETME; ad KDV işaretinden önce biter.\n- storeName için şirket unvanını değil MARKA adını yaz (ör. \"GİMSA PERAKENDE GIDA SANAYİ VE TİCARET A.Ş.\" → \"GİMSA\", \"BIY BIRLESIK MAĞAZALAR A.Ş.\" → \"BİM\", \"FILE MARKET MAĞAZACILIK A.Ş.\" → \"File\").\n- unit, quantity'nin fişte hangi birimde yazıldığıdır. SADECE şunlardan biri olabilir: \"adet\", \"kg\", \"gr\", \"lt\", \"ml\", \"paket\". Ambalaj boyutu DEĞİLDİR: \"SUT 1 L PINAR\" bir adet karton süttür → \"adet\" (litre bilgisi ürünün adında kalır). Tartılı satırda (\"0,455 kg x 89,90\") → \"kg\". Emin değilsen null.\n- vatRate, o satırın KDV oranıdır; sayı olarak yaz (%1 → 1, %10 → 10, %20 → 20). Ürün adının sonundaki KDV işaretinden okunur. Fişte oran yoksa null.\n- kdvBlok, fişin altındaki KDV döküm tablosudur (KDV DAHİL / DAHİL TUTAR / KDVLİ TOPLAM sütunu). Anahtar KDV oranıdır (1, 10, 20), değer o oran için fişte BASILI KDV DAHİL tutardır.\n- Tabloda MATRAH ve KDV TUTARI sütunları da varsa onları yazma; yalnız KDV DAHİL sütununu yaz. Fişte KDV DAHİL sütunu basılı değilse kendin toplama/hesaplama yapma, kdvBlok değerini null bırak.\n- kdvBlok'a yalnız fişte basılı oranları koy; basılı olmayan oranı ekleme. Bloklardaki tutarların toplamı totalAmount'a eşit çıkmasa bile değerleri DÜZELTME — fişte ne yazıyorsa onu yaz.\n- Emin olamadığın alanları uydurma; null kullan.",
+  "tolerans": 0.01,
+  "toplam_sure": 10.4,
+  "kayitlar": [
+    {
+      "fixture": "a101",
+      "seconds": 10.2,
+      "usage": {
+        "total_tokens": 4393,
+        "total_characters": 0,
+        "prompt_tokens": 3122,
+        "completion_tokens": 1271,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      },
+      "raw_output": "{\n  \"storeName\": \"A101\",\n  \"date\": \"2026-05-31\",\n  \"totalAmount\": 2164.50,\n  \"kdvBlok\": {\n    \"20\": 1264.50,\n    \"1\": 900.00\n  },\n  \"items\": [\n    {\"name\": \"KEK SABUN 400 ML ZEYTINYAGLI\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 49.50, \"totalPrice\": 49.50, \"vatRate\": 20},\n    {\"name\": \"KEK SABUN 400 ML BEYAZSABUN\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 49.50, \"totalPrice\": 49.50, \"vatRate\": 20},\n    {\"name\": \"SAMPUAN 330ML MENTOL HEADSHOUL\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 149.00, \"totalPrice\": 149.00, \"vatRate\": 20},\n    {\"name\": \"KEK SABUN 400 ML MANOLYA AQUA\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 49.50, \"totalPrice\": 49.50, \"vatRate\": 20},\n    {\"name\": \"TIRAS BICAGI 10LU 3 BIC. SAMUR\", \"quantity\": 1, \"unit\": \"paket\", \"unitPrice\": 142.00, \"totalPrice\": 142.00, \"vatRate\": 20},\n    {\"name\": \"ALISVERIS POSETI\", \"quantity\": 6, \"unit\": \"adet\", \"unitPrice\": 1.00, \"totalPrice\": 6.00, \"vatRate\": 20},\n    {\"name\": \"UN BUGDAY 2 KG SOKE GELENEK\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 82.50, \"totalPrice\": 82.50, \"vatRate\": 1},\n    {\"name\": \"PERANE BALDO 1000 G OVADAN\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 83.50, \"totalPrice\": 83.50, \"vatRate\": 1},\n    {\"name\": \"CIKOLATA CUBUK 28 G NUTELLA\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 29.50, \"totalPrice\": 29.50, \"vatRate\": 1},\n    {\"name\": \"CIKOLATA CUBUK 28 G NUTELLA\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 29.50, \"totalPrice\": 29.50, \"vatRate\": 1},\n    {\"name\": \"KEK CIKOLATALI SOSLU 9X20 G BROWN\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 69.00, \"totalPrice\": 69.00, \"vatRate\": 1},\n    {\"name\": \"BUZGULU COP TORBASI 15Lt SPON\", \"quantity\": 4, \"unit\": \"adet\", \"unitPrice\": 22.38, \"totalPrice\": 89.50, \"vatRate\": 20},\n    {\"name\": \"KEK CILEKLI 35 G ULKER KEKSTRA\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 39.00, \"totalPrice\": 39.00, \"vatRate\": 1},\n    {\"name\": \"DOND. MAC MN 7LI BDM/DBL KDT 3\", \"quantity\": 1, \"unit\": \"paket\", \"unitPrice\": 325.00, \"totalPrice\": 325.00, \"vatRate\": 1},\n    {\"name\": \"KEK FRAMBUAZLI 114 G ETI TARTLI\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 43.00, \"totalPrice\": 43.00, \"vatRate\": 1},\n    {\"name\": \"SUT YAGLI 200 ML PINAR\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 26.00, \"totalPrice\": 26.00, \"vatRate\": 1},\n    {\"name\": \"SUT YAGLI 200 ML PINAR\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 26.00, \"totalPrice\": 26.00, \"vatRate\": 1},\n    {\"name\": \"GRI SSINI TAHBUGDAYLI YATOHUNLU\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 77.50, \"totalPrice\": 77.50, \"vatRate\": 1},\n    {\"name\": \"ZEYTINYAGI SIZMA 1L YALIN ECEN\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 365.00, \"totalPrice\": 365.00, \"vatRate\": 1},\n    {\"name\": \"SIVI DET. RENKLI 2,97 L PERWOL\", \"quantity\": 6, \"unit\": \"adet\", \"unitPrice\": 60.83, \"totalPrice\": 365.00, \"vatRate\": 20},\n    {\"name\": \"SU 1.5 L\", \"quantity\": 1, \"unit\": \"adet\", \"unitPrice\": 69.00, \"totalPrice\": 69.00, \"vatRate\": 1}\n  ]\n}",
+      "parsed": {
+        "storeName": "A101",
+        "date": "2026-05-31",
+        "totalAmount": 2164.5,
+        "kdvBlok": {
+          "20": 1264.5,
+          "1": 900.0
+        },
+        "items": [
+          {
+            "name": "KEK SABUN 400 ML ZEYTINYAGLI",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 49.5,
+            "totalPrice": 49.5,
+            "vatRate": 20
+          },
+          {
+            "name": "KEK SABUN 400 ML BEYAZSABUN",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 49.5,
+            "totalPrice": 49.5,
+            "vatRate": 20
+          },
+          {
+            "name": "SAMPUAN 330ML MENTOL HEADSHOUL",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 149.0,
+            "totalPrice": 149.0,
+            "vatRate": 20
+          },
+          {
+            "name": "KEK SABUN 400 ML MANOLYA AQUA",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 49.5,
+            "totalPrice": 49.5,
+            "vatRate": 20
+          },
+          {
+            "name": "TIRAS BICAGI 10LU 3 BIC. SAMUR",
+            "quantity": 1,
+            "unit": "paket",
+            "unitPrice": 142.0,
+            "totalPrice": 142.0,
+            "vatRate": 20
+          },
+          {
+            "name": "ALISVERIS POSETI",
+            "quantity": 6,
+            "unit": "adet",
+            "unitPrice": 1.0,
+            "totalPrice": 6.0,
+            "vatRate": 20
+          },
+          {
+            "name": "UN BUGDAY 2 KG SOKE GELENEK",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 82.5,
+            "totalPrice": 82.5,
+            "vatRate": 1
+          },
+          {
+            "name": "PERANE BALDO 1000 G OVADAN",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 83.5,
+            "totalPrice": 83.5,
+            "vatRate": 1
+          },
+          {
+            "name": "CIKOLATA CUBUK 28 G NUTELLA",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 29.5,
+            "totalPrice": 29.5,
+            "vatRate": 1
+          },
+          {
+            "name": "CIKOLATA CUBUK 28 G NUTELLA",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 29.5,
+            "totalPrice": 29.5,
+            "vatRate": 1
+          },
+          {
+            "name": "KEK CIKOLATALI SOSLU 9X20 G BROWN",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 69.0,
+            "totalPrice": 69.0,
+            "vatRate": 1
+          },
+          {
+            "name": "BUZGULU COP TORBASI 15Lt SPON",
+            "quantity": 4,
+            "unit": "adet",
+            "unitPrice": 22.38,
+            "totalPrice": 89.5,
+            "vatRate": 20
+          },
+          {
+            "name": "KEK CILEKLI 35 G ULKER KEKSTRA",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 39.0,
+            "totalPrice": 39.0,
+            "vatRate": 1
+          },
+          {
+            "name": "DOND. MAC MN 7LI BDM/DBL KDT 3",
+            "quantity": 1,
+            "unit": "paket",
+            "unitPrice": 325.0,
+            "totalPrice": 325.0,
+            "vatRate": 1
+          },
+          {
+            "name": "KEK FRAMBUAZLI 114 G ETI TARTLI",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 43.0,
+            "totalPrice": 43.0,
+            "vatRate": 1
+          },
+          {
+            "name": "SUT YAGLI 200 ML PINAR",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 26.0,
+            "totalPrice": 26.0,
+            "vatRate": 1
+          },
+          {
+            "name": "SUT YAGLI 200 ML PINAR",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 26.0,
+            "totalPrice": 26.0,
+            "vatRate": 1
+          },
+          {
+            "name": "GRI SSINI TAHBUGDAYLI YATOHUNLU",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 77.5,
+            "totalPrice": 77.5,
+            "vatRate": 1
+          },
+          {
+            "name": "ZEYTINYAGI SIZMA 1L YALIN ECEN",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 365.0,
+            "totalPrice": 365.0,
+            "vatRate": 1
+          },
+          {
+            "name": "SIVI DET. RENKLI 2,97 L PERWOL",
+            "quantity": 6,
+            "unit": "adet",
+            "unitPrice": 60.83,
+            "totalPrice": 365.0,
+            "vatRate": 20
+          },
+          {
+            "name": "SU 1.5 L",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 69.0,
+            "totalPrice": 69.0,
+            "vatRate": 1
+          }
+        ]
+      },
+      "hata": null,
+      "denemeler": [
+        {
+          "deneme": 1,
+          "px": 1400,
+          "saniye": 10.2,
+          "finish_reason": "stop",
+          "sonuc": "ok"
+        }
+      ],
+      "finish_reason": "stop",
+      "px": 1400,
+      "kdv_blok_ham": {
+        "20": 1264.5,
+        "1": 900.0
+      },
+      "kdv_blok_atilan": [],
+      "referans_blok": {
+        "20": 900.0,
+        "1": 1264.5
+      },
+      "blok_dogrulugu": {
+        "satirlar": [
+          {
+            "oran": 1,
+            "model": 900.0,
+            "referans": 1264.5,
+            "fark": -364.5,
+            "durum": "sapan"
+          },
+          {
+            "oran": 20,
+            "model": 1264.5,
+            "referans": 900.0,
+            "fark": 364.5,
+            "durum": "sapan"
+          }
+        ],
+        "tam": 0,
+        "sapan": 2,
+        "eksik": 0,
+        "fazla": 0,
+        "en_buyuk_sapma": 364.5,
+        "tumu_tam": false
+      },
+      "kalem_gruplari": {
+        "20": 900.0,
+        "1": 1264.5
+      },
+      "oransiz_kalem": 0,
+      "fiyatsiz_kalem": 0,
+      "oransiz_kalem_toplami": 0.0,
+      "ic_tutarlilik": {
+        "satirlar": [
+          {
+            "oran": 1,
+            "model": 1264.5,
+            "referans": 900.0,
+            "fark": 364.5,
+            "durum": "sapan"
+          },
+          {
+            "oran": 20,
+            "model": 900.0,
+            "referans": 1264.5,
+            "fark": -364.5,
+            "durum": "sapan"
+          }
+        ],
+        "tam": 0,
+        "sapan": 2,
+        "eksik": 0,
+        "fazla": 0,
+        "en_buyuk_sapma": 364.5,
+        "tumu_tam": false
+      },
+      "taban_puan": "başlık 3/3, ürün eşleşme 21/21, fiyat doğru 21/21, fazladan 0"
+    },
+    {
+      "fixture": "bildirici",
+      "seconds": 5.0,
+      "usage": {
+        "total_tokens": 3542,
+        "total_characters": 0,
+        "prompt_tokens": 3122,
+        "completion_tokens": 420,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      },
+      "raw_output": "{\"storeName\":\"Bildirici\",\"date\":\"2026-07-25\",\"totalAmount\":1311.00,\"kdvBlok\":{\"1\":791.60,\"10\":142.85,\"20\":376.35},\"items\":[{\"name\":\"MARKET POSET\",\"quantity\":3,\"unit\":\"adet\",\"unitPrice\":1.00,\"totalPrice\":3.00,\"vatRate\":20},{\"name\":\"ELMA KG STARKING 1\",\"quantity\":1.496,\"unit\":\"kg\",\"unitPrice\":94.95,\"totalPrice\":142.05,\"vatRate\":1},{\"name\":\"ULUDAG 1LT LIMONATA\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":66.40,\"totalPrice\":66.40,\"vatRate\":10},{\"name\":\"PINAR 430GR SOSIS EK\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":499.90,\"totalPrice\":499.90,\"vatRate\":1},{\"name\":\"CITIR EKMEK 7LI SAND\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":79.95,\"totalPrice\":79.95,\"vatRate\":1},{\"name\":\"BEYPAZARI 6X200ML SO\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":69.90,\"totalPrice\":69.90,\"vatRate\":1},{\"name\":\"GILL BLUE III 3 ADET\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":168.60,\"totalPrice\":168.60,\"vatRate\":20},{\"name\":\"DURU 4*150GR SAB.OKY\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":204.75,\"totalPrice\":204.75,\"vatRate\":20},{\"name\":\"DIMES 1LT MEY.SUYU S\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":76.45,\"totalPrice\":76.45,\"vatRate\":10}]}",
+      "parsed": {
+        "storeName": "Bildirici",
+        "date": "2026-07-25",
+        "totalAmount": 1311.0,
+        "kdvBlok": {
+          "1": 791.6,
+          "10": 142.85,
+          "20": 376.35
+        },
+        "items": [
+          {
+            "name": "MARKET POSET",
+            "quantity": 3,
+            "unit": "adet",
+            "unitPrice": 1.0,
+            "totalPrice": 3.0,
+            "vatRate": 20
+          },
+          {
+            "name": "ELMA KG STARKING 1",
+            "quantity": 1.496,
+            "unit": "kg",
+            "unitPrice": 94.95,
+            "totalPrice": 142.05,
+            "vatRate": 1
+          },
+          {
+            "name": "ULUDAG 1LT LIMONATA",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 66.4,
+            "totalPrice": 66.4,
+            "vatRate": 10
+          },
+          {
+            "name": "PINAR 430GR SOSIS EK",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 499.9,
+            "totalPrice": 499.9,
+            "vatRate": 1
+          },
+          {
+            "name": "CITIR EKMEK 7LI SAND",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 79.95,
+            "totalPrice": 79.95,
+            "vatRate": 1
+          },
+          {
+            "name": "BEYPAZARI 6X200ML SO",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 69.9,
+            "totalPrice": 69.9,
+            "vatRate": 1
+          },
+          {
+            "name": "GILL BLUE III 3 ADET",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 168.6,
+            "totalPrice": 168.6,
+            "vatRate": 20
+          },
+          {
+            "name": "DURU 4*150GR SAB.OKY",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 204.75,
+            "totalPrice": 204.75,
+            "vatRate": 20
+          },
+          {
+            "name": "DIMES 1LT MEY.SUYU S",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 76.45,
+            "totalPrice": 76.45,
+            "vatRate": 10
+          }
+        ]
+      },
+      "hata": null,
+      "denemeler": [
+        {
+          "deneme": 1,
+          "px": 1400,
+          "saniye": 5.0,
+          "finish_reason": "stop",
+          "sonuc": "ok"
+        }
+      ],
+      "finish_reason": "stop",
+      "px": 1400,
+      "kdv_blok_ham": {
+        "1": 791.6,
+        "10": 142.85,
+        "20": 376.35
+      },
+      "kdv_blok_atilan": [],
+      "referans_blok": {
+        "1": 791.8,
+        "10": 142.85,
+        "20": 376.35
+      },
+      "blok_dogrulugu": {
+        "satirlar": [
+          {
+            "oran": 1,
+            "model": 791.6,
+            "referans": 791.8,
+            "fark": -0.2,
+            "durum": "sapan"
+          },
+          {
+            "oran": 10,
+            "model": 142.85,
+            "referans": 142.85,
+            "fark": 0.0,
+            "durum": "tam"
+          },
+          {
+            "oran": 20,
+            "model": 376.35,
+            "referans": 376.35,
+            "fark": 0.0,
+            "durum": "tam"
+          }
+        ],
+        "tam": 2,
+        "sapan": 1,
+        "eksik": 0,
+        "fazla": 0,
+        "en_buyuk_sapma": 0.2,
+        "tumu_tam": false
+      },
+      "kalem_gruplari": {
+        "20": 376.35,
+        "1": 791.8,
+        "10": 142.85
+      },
+      "oransiz_kalem": 0,
+      "fiyatsiz_kalem": 0,
+      "oransiz_kalem_toplami": 0.0,
+      "ic_tutarlilik": {
+        "satirlar": [
+          {
+            "oran": 1,
+            "model": 791.8,
+            "referans": 791.6,
+            "fark": 0.2,
+            "durum": "sapan"
+          },
+          {
+            "oran": 10,
+            "model": 142.85,
+            "referans": 142.85,
+            "fark": 0.0,
+            "durum": "tam"
+          },
+          {
+            "oran": 20,
+            "model": 376.35,
+            "referans": 376.35,
+            "fark": 0.0,
+            "durum": "tam"
+          }
+        ],
+        "tam": 2,
+        "sapan": 1,
+        "eksik": 0,
+        "fazla": 0,
+        "en_buyuk_sapma": 0.2,
+        "tumu_tam": false
+      },
+      "taban_puan": "başlık 3/3, ürün eşleşme 9/9, fiyat doğru 9/9, fazladan 0"
+    },
+    {
+      "fixture": "bim",
+      "seconds": 3.8,
+      "usage": {
+        "total_tokens": 3294,
+        "total_characters": 0,
+        "prompt_tokens": 3122,
+        "completion_tokens": 172,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      },
+      "raw_output": "{\"storeName\":\"BİM\",\"date\":\"2026-07-25\",\"totalAmount\":249.00,\"kdvBlok\":{\"1\":125.00,\"20\":124.00},\"items\":[{\"name\":\"ÇBK- TOPTNEPEYNİR250GR\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":125.00,\"totalPrice\":125.00,\"vatRate\":1},{\"name\":\"TUVALET KAĞIDI 16LI\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":123.00,\"totalPrice\":123.00,\"vatRate\":20},{\"name\":\"ALIŞVERİŞ POŞETİ\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":1.00,\"totalPrice\":1.00,\"vatRate\":20}]}",
+      "parsed": {
+        "storeName": "BİM",
+        "date": "2026-07-25",
+        "totalAmount": 249.0,
+        "kdvBlok": {
+          "1": 125.0,
+          "20": 124.0
+        },
+        "items": [
+          {
+            "name": "ÇBK- TOPTNEPEYNİR250GR",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 125.0,
+            "totalPrice": 125.0,
+            "vatRate": 1
+          },
+          {
+            "name": "TUVALET KAĞIDI 16LI",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 123.0,
+            "totalPrice": 123.0,
+            "vatRate": 20
+          },
+          {
+            "name": "ALIŞVERİŞ POŞETİ",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 1.0,
+            "totalPrice": 1.0,
+            "vatRate": 20
+          }
+        ]
+      },
+      "hata": null,
+      "denemeler": [
+        {
+          "deneme": 1,
+          "px": 1400,
+          "saniye": 3.8,
+          "finish_reason": "stop",
+          "sonuc": "ok"
+        }
+      ],
+      "finish_reason": "stop",
+      "px": 1400,
+      "kdv_blok_ham": {
+        "1": 125.0,
+        "20": 124.0
+      },
+      "kdv_blok_atilan": [],
+      "referans_blok": {
+        "1": 125.0,
+        "20": 124.0
+      },
+      "blok_dogrulugu": {
+        "satirlar": [
+          {
+            "oran": 1,
+            "model": 125.0,
+            "referans": 125.0,
+            "fark": 0.0,
+            "durum": "tam"
+          },
+          {
+            "oran": 20,
+            "model": 124.0,
+            "referans": 124.0,
+            "fark": 0.0,
+            "durum": "tam"
+          }
+        ],
+        "tam": 2,
+        "sapan": 0,
+        "eksik": 0,
+        "fazla": 0,
+        "en_buyuk_sapma": 0.0,
+        "tumu_tam": true
+      },
+      "kalem_gruplari": {
+        "1": 125.0,
+        "20": 124.0
+      },
+      "oransiz_kalem": 0,
+      "fiyatsiz_kalem": 0,
+      "oransiz_kalem_toplami": 0.0,
+      "ic_tutarlilik": {
+        "satirlar": [
+          {
+            "oran": 1,
+            "model": 125.0,
+            "referans": 125.0,
+            "fark": 0.0,
+            "durum": "tam"
+          },
+          {
+            "oran": 20,
+            "model": 124.0,
+            "referans": 124.0,
+            "fark": 0.0,
+            "durum": "tam"
+          }
+        ],
+        "tam": 2,
+        "sapan": 0,
+        "eksik": 0,
+        "fazla": 0,
+        "en_buyuk_sapma": 0.0,
+        "tumu_tam": true
+      },
+      "taban_puan": "başlık 3/3, ürün eşleşme 3/3, fiyat doğru 3/3, fazladan 0"
+    },
+    {
+      "fixture": "file",
+      "seconds": 8.6,
+      "usage": {
+        "total_tokens": 4101,
+        "total_characters": 0,
+        "prompt_tokens": 3122,
+        "completion_tokens": 979,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "raw_output": "{\"storeName\":\"File\",\"date\":\"2026-07-23\",\"totalAmount\":3060.97,\"kdvBlok\":{\"1\":2940.97,\"10\":60.00,\"20\":60.00},\"items\":[{\"name\":\"ITHAL MUZ\",\"quantity\":1.178,\"unit\":\"kg\",\"unitPrice\":99.90,\"totalPrice\":117.68,\"vatRate\":null},{\"name\":\"ALISVERIS POSETI\",\"quantity\":7,\"unit\":\"adet\",\"unitPrice\":1.00,\"totalPrice\":7.00,\"vatRate\":20},{\"name\":\"MISIR RUET\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":209.00,\"totalPrice\":209.00,\"vatRate\":null},{\"name\":\"PIL-FILETO KG SEMPLC\",\"quantity\":0.822,\"unit\":\"kg\",\"unitPrice\":289.00,\"totalPrice\":237.56,\"vatRate\":null},{\"name\":\"SUTAS YOGURT 1000 G\",\"quantity\":2,\"unit\":\"adet\",\"unitPrice\":49.50,\"totalPrice\":89.50,\"vatRate\":null},{\"name\":\"HARRAS RUL TERYG 1KG\",\"quantity\":2,\"unit\":\"adet\",\"unitPrice\":249.50,\"totalPrice\":499.00,\"vatRate\":null},{\"name\":\"PINAR YAGLI SUT 1LT\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":158.00,\"totalPrice\":158.00,\"vatRate\":null},{\"name\":\"TARLA KABAK\",\"quantity\":1.12,\"unit\":\"kg\",\"unitPrice\":59.90,\"totalPrice\":67.09,\"vatRate\":null},{\"name\":\"YASAN MERSINI 300 GR\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":149.00,\"totalPrice\":149.00,\"vatRate\":null},{\"name\":\"FELIX TON BALIK 85 G\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":26.50,\"totalPrice\":26.50,\"vatRate\":20},{\"name\":\"FELIX TRAKLU 85 G\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":26.50,\"totalPrice\":26.50,\"vatRate\":20},{\"name\":\"DANA ORTAVAGLI KUSB\",\"quantity\":0.692,\"unit\":\"kg\",\"unitPrice\":795.00,\"totalPrice\":550.14,\"vatRate\":null},{\"name\":\"EKS KRM 56 56G ZUBER\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":69.90,\"totalPrice\":69.90,\"vatRate\":null},{\"name\":\"SAC YUFKASI 1000G\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":149.00,\"totalPrice\":149.00,\"vatRate\":null},{\"name\":\"BOREK KG\",\"quantity\":0.158,\"unit\":\"kg\",\"unitPrice\":375.00,\"totalPrice\":59.25,\"vatRate\":null},{\"name\":\"YUMURTA 15LI ABALICI\",\"quantity\":2,\"unit\":\"adet\",\"unitPrice\":49.00,\"totalPrice\":74.00,\"vatRate\":null},{\"name\":\"YAN MASNLI KEFIR 250\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":98.00,\"totalPrice\":98.00,\"vatRate\":null},{\"name\":\"SADE BARET 250G\",\"quantity\":2,\"unit\":\"adet\",\"unitPrice\":18.75,\"totalPrice\":37.50,\"vatRate\":null},{\"name\":\"BAHARATLI 160G LAYS\",\"quantity\":2,\"unit\":\"adet\",\"unitPrice\":45.95,\"totalPrice\":81.90,\"vatRate\":null},{\"name\":\"CIKO.BEYAZ 70G ULKER\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":105.00,\"totalPrice\":105.00,\"vatRate\":null},{\"name\":\"SEFTALI\",\"quantity\":0.728,\"unit\":\"kg\",\"unitPrice\":89.90,\"totalPrice\":65.45,\"vatRate\":null},{\"name\":\"COCA COLA ZERO 1L\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":60.00,\"totalPrice\":60.00,\"vatRate\":10},{\"name\":\"PATLAMIS MISIR 150 G\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":43.00,\"totalPrice\":43.00,\"vatRate\":null}]}",
+      "parsed": {
+        "storeName": "File",
+        "date": "2026-07-23",
+        "totalAmount": 3060.97,
+        "kdvBlok": {
+          "1": 2940.97,
+          "10": 60.0,
+          "20": 60.0
+        },
+        "items": [
+          {
+            "name": "ITHAL MUZ",
+            "quantity": 1.178,
+            "unit": "kg",
+            "unitPrice": 99.9,
+            "totalPrice": 117.68,
+            "vatRate": null
+          },
+          {
+            "name": "ALISVERIS POSETI",
+            "quantity": 7,
+            "unit": "adet",
+            "unitPrice": 1.0,
+            "totalPrice": 7.0,
+            "vatRate": 20
+          },
+          {
+            "name": "MISIR RUET",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 209.0,
+            "totalPrice": 209.0,
+            "vatRate": null
+          },
+          {
+            "name": "PIL-FILETO KG SEMPLC",
+            "quantity": 0.822,
+            "unit": "kg",
+            "unitPrice": 289.0,
+            "totalPrice": 237.56,
+            "vatRate": null
+          },
+          {
+            "name": "SUTAS YOGURT 1000 G",
+            "quantity": 2,
+            "unit": "adet",
+            "unitPrice": 49.5,
+            "totalPrice": 89.5,
+            "vatRate": null
+          },
+          {
+            "name": "HARRAS RUL TERYG 1KG",
+            "quantity": 2,
+            "unit": "adet",
+            "unitPrice": 249.5,
+            "totalPrice": 499.0,
+            "vatRate": null
+          },
+          {
+            "name": "PINAR YAGLI SUT 1LT",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 158.0,
+            "totalPrice": 158.0,
+            "vatRate": null
+          },
+          {
+            "name": "TARLA KABAK",
+            "quantity": 1.12,
+            "unit": "kg",
+            "unitPrice": 59.9,
+            "totalPrice": 67.09,
+            "vatRate": null
+          },
+          {
+            "name": "YASAN MERSINI 300 GR",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 149.0,
+            "totalPrice": 149.0,
+            "vatRate": null
+          },
+          {
+            "name": "FELIX TON BALIK 85 G",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 26.5,
+            "totalPrice": 26.5,
+            "vatRate": 20
+          },
+          {
+            "name": "FELIX TRAKLU 85 G",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 26.5,
+            "totalPrice": 26.5,
+            "vatRate": 20
+          },
+          {
+            "name": "DANA ORTAVAGLI KUSB",
+            "quantity": 0.692,
+            "unit": "kg",
+            "unitPrice": 795.0,
+            "totalPrice": 550.14,
+            "vatRate": null
+          },
+          {
+            "name": "EKS KRM 56 56G ZUBER",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 69.9,
+            "totalPrice": 69.9,
+            "vatRate": null
+          },
+          {
+            "name": "SAC YUFKASI 1000G",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 149.0,
+            "totalPrice": 149.0,
+            "vatRate": null
+          },
+          {
+            "name": "BOREK KG",
+            "quantity": 0.158,
+            "unit": "kg",
+            "unitPrice": 375.0,
+            "totalPrice": 59.25,
+            "vatRate": null
+          },
+          {
+            "name": "YUMURTA 15LI ABALICI",
+            "quantity": 2,
+            "unit": "adet",
+            "unitPrice": 49.0,
+            "totalPrice": 74.0,
+            "vatRate": null
+          },
+          {
+            "name": "YAN MASNLI KEFIR 250",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 98.0,
+            "totalPrice": 98.0,
+            "vatRate": null
+          },
+          {
+            "name": "SADE BARET 250G",
+            "quantity": 2,
+            "unit": "adet",
+            "unitPrice": 18.75,
+            "totalPrice": 37.5,
+            "vatRate": null
+          },
+          {
+            "name": "BAHARATLI 160G LAYS",
+            "quantity": 2,
+            "unit": "adet",
+            "unitPrice": 45.95,
+            "totalPrice": 81.9,
+            "vatRate": null
+          },
+          {
+            "name": "CIKO.BEYAZ 70G ULKER",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 105.0,
+            "totalPrice": 105.0,
+            "vatRate": null
+          },
+          {
+            "name": "SEFTALI",
+            "quantity": 0.728,
+            "unit": "kg",
+            "unitPrice": 89.9,
+            "totalPrice": 65.45,
+            "vatRate": null
+          },
+          {
+            "name": "COCA COLA ZERO 1L",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 60.0,
+            "totalPrice": 60.0,
+            "vatRate": 10
+          },
+          {
+            "name": "PATLAMIS MISIR 150 G",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 43.0,
+            "totalPrice": 43.0,
+            "vatRate": null
+          }
+        ]
+      },
+      "hata": null,
+      "denemeler": [
+        {
+          "deneme": 1,
+          "px": 1400,
+          "saniye": 8.6,
+          "finish_reason": "stop",
+          "sonuc": "ok"
+        }
+      ],
+      "finish_reason": "stop",
+      "px": 1400,
+      "kdv_blok_ham": {
+        "1": 2940.97,
+        "10": 60.0,
+        "20": 60.0
+      },
+      "kdv_blok_atilan": [],
+      "referans_blok": {
+        "1": 2940.97,
+        "10": 60.0,
+        "20": 60.0
+      },
+      "blok_dogrulugu": {
+        "satirlar": [
+          {
+            "oran": 1,
+            "model": 2940.97,
+            "referans": 2940.97,
+            "fark": 0.0,
+            "durum": "tam"
+          },
+          {
+            "oran": 10,
+            "model": 60.0,
+            "referans": 60.0,
+            "fark": 0.0,
+            "durum": "tam"
+          },
+          {
+            "oran": 20,
+            "model": 60.0,
+            "referans": 60.0,
+            "fark": 0.0,
+            "durum": "tam"
+          }
+        ],
+        "tam": 3,
+        "sapan": 0,
+        "eksik": 0,
+        "fazla": 0,
+        "en_buyuk_sapma": 0.0,
+        "tumu_tam": true
+      },
+      "kalem_gruplari": {
+        "20": 60.0,
+        "10": 60.0
+      },
+      "oransiz_kalem": 19,
+      "fiyatsiz_kalem": 0,
+      "oransiz_kalem_toplami": 2859.97,
+      "ic_tutarlilik": {
+        "satirlar": [
+          {
+            "oran": 1,
+            "model": null,
+            "referans": 2940.97,
+            "durum": "eksik"
+          },
+          {
+            "oran": 10,
+            "model": 60.0,
+            "referans": 60.0,
+            "fark": 0.0,
+            "durum": "tam"
+          },
+          {
+            "oran": 20,
+            "model": 60.0,
+            "referans": 60.0,
+            "fark": 0.0,
+            "durum": "tam"
+          }
+        ],
+        "tam": 2,
+        "sapan": 0,
+        "eksik": 1,
+        "fazla": 0,
+        "en_buyuk_sapma": 2940.97,
+        "tumu_tam": false
+      },
+      "taban_puan": "başlık 3/3, ürün eşleşme 23/23, fiyat doğru 21/23, fazladan 0"
+    },
+    {
+      "fixture": "gimsa",
+      "seconds": 6.9,
+      "usage": {
+        "total_tokens": 3872,
+        "total_characters": 0,
+        "prompt_tokens": 3122,
+        "completion_tokens": 750,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        }
+      },
+      "raw_output": "{\"storeName\":\"GİMSA\",\"date\":\"2026-05-10\",\"totalAmount\":1391.80,\"kdvBlok\":{\"1\":1260.30,\"10\":128.50,\"20\":3.00},\"items\":[{\"name\":\"COCA COLA ZERO 1 LT\",\"quantity\":3,\"unit\":\"adet\",\"unitPrice\":1.00,\"totalPrice\":3.00,\"vatRate\":20},{\"name\":\"NUTELLA GO\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":49.50,\"totalPrice\":49.50,\"vatRate\":10},{\"name\":\"NUTELLA GO\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":24.90,\"totalPrice\":24.90,\"vatRate\":1},{\"name\":\"NUTELLA GO\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":24.90,\"totalPrice\":24.90,\"vatRate\":1},{\"name\":\"NUTELLA GO\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":24.90,\"totalPrice\":24.90,\"vatRate\":1},{\"name\":\"CIX BUBBLE TEA SEFTALI 300 ML\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":39.50,\"totalPrice\":39.50,\"vatRate\":10},{\"name\":\"RAMAZAN PİDESİ GİMSA 200 GR\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":17.50,\"totalPrice\":17.50,\"vatRate\":1},{\"name\":\"EKER MEYVELİ YOĞURT 65 GR SEF-KAY.\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":25.00,\"totalPrice\":25.00,\"vatRate\":1},{\"name\":\"NUTELLA GO\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":24.90,\"totalPrice\":24.90,\"vatRate\":1},{\"name\":\"KURU PASTA NORMAL\",\"quantity\":0.542,\"unit\":\"kg\",\"unitPrice\":199.00,\"totalPrice\":107.86,\"vatRate\":1},{\"name\":\"EKER MEYVELİ YOĞURT 65 GR SEF-KAY.\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":25.00,\"totalPrice\":25.00,\"vatRate\":1},{\"name\":\"ICLI KOFTE\",\"quantity\":1.034,\"unit\":\"kg\",\"unitPrice\":599.50,\"totalPrice\":619.88,\"vatRate\":1},{\"name\":\"KINDER PİNGUİ 4 LU 120 GR\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":99.00,\"totalPrice\":99.00,\"vatRate\":10},{\"name\":\"TRİLECE TATLISI\",\"quantity\":0.588,\"unit\":\"kg\",\"unitPrice\":239.00,\"totalPrice\":140.53,\"vatRate\":1},{\"name\":\"ATOM\",\"quantity\":0.21,\"unit\":\"kg\",\"unitPrice\":315.00,\"totalPrice\":66.15,\"vatRate\":1},{\"name\":\"ACUKA KAHVALTILIK\",\"quantity\":0.244,\"unit\":\"kg\",\"unitPrice\":245.00,\"totalPrice\":59.78,\"vatRate\":1},{\"name\":\"CIX BUBBLE TEA ANANAS 300 ML\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":39.50,\"totalPrice\":39.50,\"vatRate\":10}]}",
+      "parsed": {
+        "storeName": "GİMSA",
+        "date": "2026-05-10",
+        "totalAmount": 1391.8,
+        "kdvBlok": {
+          "1": 1260.3,
+          "10": 128.5,
+          "20": 3.0
+        },
+        "items": [
+          {
+            "name": "COCA COLA ZERO 1 LT",
+            "quantity": 3,
+            "unit": "adet",
+            "unitPrice": 1.0,
+            "totalPrice": 3.0,
+            "vatRate": 20
+          },
+          {
+            "name": "NUTELLA GO",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 49.5,
+            "totalPrice": 49.5,
+            "vatRate": 10
+          },
+          {
+            "name": "NUTELLA GO",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 24.9,
+            "totalPrice": 24.9,
+            "vatRate": 1
+          },
+          {
+            "name": "NUTELLA GO",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 24.9,
+            "totalPrice": 24.9,
+            "vatRate": 1
+          },
+          {
+            "name": "NUTELLA GO",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 24.9,
+            "totalPrice": 24.9,
+            "vatRate": 1
+          },
+          {
+            "name": "CIX BUBBLE TEA SEFTALI 300 ML",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 39.5,
+            "totalPrice": 39.5,
+            "vatRate": 10
+          },
+          {
+            "name": "RAMAZAN PİDESİ GİMSA 200 GR",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 17.5,
+            "totalPrice": 17.5,
+            "vatRate": 1
+          },
+          {
+            "name": "EKER MEYVELİ YOĞURT 65 GR SEF-KAY.",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 25.0,
+            "totalPrice": 25.0,
+            "vatRate": 1
+          },
+          {
+            "name": "NUTELLA GO",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 24.9,
+            "totalPrice": 24.9,
+            "vatRate": 1
+          },
+          {
+            "name": "KURU PASTA NORMAL",
+            "quantity": 0.542,
+            "unit": "kg",
+            "unitPrice": 199.0,
+            "totalPrice": 107.86,
+            "vatRate": 1
+          },
+          {
+            "name": "EKER MEYVELİ YOĞURT 65 GR SEF-KAY.",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 25.0,
+            "totalPrice": 25.0,
+            "vatRate": 1
+          },
+          {
+            "name": "ICLI KOFTE",
+            "quantity": 1.034,
+            "unit": "kg",
+            "unitPrice": 599.5,
+            "totalPrice": 619.88,
+            "vatRate": 1
+          },
+          {
+            "name": "KINDER PİNGUİ 4 LU 120 GR",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 99.0,
+            "totalPrice": 99.0,
+            "vatRate": 10
+          },
+          {
+            "name": "TRİLECE TATLISI",
+            "quantity": 0.588,
+            "unit": "kg",
+            "unitPrice": 239.0,
+            "totalPrice": 140.53,
+            "vatRate": 1
+          },
+          {
+            "name": "ATOM",
+            "quantity": 0.21,
+            "unit": "kg",
+            "unitPrice": 315.0,
+            "totalPrice": 66.15,
+            "vatRate": 1
+          },
+          {
+            "name": "ACUKA KAHVALTILIK",
+            "quantity": 0.244,
+            "unit": "kg",
+            "unitPrice": 245.0,
+            "totalPrice": 59.78,
+            "vatRate": 1
+          },
+          {
+            "name": "CIX BUBBLE TEA ANANAS 300 ML",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 39.5,
+            "totalPrice": 39.5,
+            "vatRate": 10
+          }
+        ]
+      },
+      "hata": null,
+      "denemeler": [
+        {
+          "deneme": 1,
+          "px": 1400,
+          "saniye": 6.9,
+          "finish_reason": "stop",
+          "sonuc": "ok"
+        }
+      ],
+      "finish_reason": "stop",
+      "px": 1400,
+      "kdv_blok_ham": {
+        "1": 1260.3,
+        "10": 128.5,
+        "20": 3.0
+      },
+      "kdv_blok_atilan": [],
+      "referans_blok": {
+        "1": 1260.3,
+        "10": 128.5,
+        "20": 3.0
+      },
+      "blok_dogrulugu": {
+        "satirlar": [
+          {
+            "oran": 1,
+            "model": 1260.3,
+            "referans": 1260.3,
+            "fark": 0.0,
+            "durum": "tam"
+          },
+          {
+            "oran": 10,
+            "model": 128.5,
+            "referans": 128.5,
+            "fark": 0.0,
+            "durum": "tam"
+          },
+          {
+            "oran": 20,
+            "model": 3.0,
+            "referans": 3.0,
+            "fark": 0.0,
+            "durum": "tam"
+          }
+        ],
+        "tam": 3,
+        "sapan": 0,
+        "eksik": 0,
+        "fazla": 0,
+        "en_buyuk_sapma": 0.0,
+        "tumu_tam": true
+      },
+      "kalem_gruplari": {
+        "20": 3.0,
+        "10": 227.5,
+        "1": 1161.3
+      },
+      "oransiz_kalem": 0,
+      "fiyatsiz_kalem": 0,
+      "oransiz_kalem_toplami": 0.0,
+      "ic_tutarlilik": {
+        "satirlar": [
+          {
+            "oran": 1,
+            "model": 1161.3,
+            "referans": 1260.3,
+            "fark": -99.0,
+            "durum": "sapan"
+          },
+          {
+            "oran": 10,
+            "model": 227.5,
+            "referans": 128.5,
+            "fark": 99.0,
+            "durum": "sapan"
+          },
+          {
+            "oran": 20,
+            "model": 3.0,
+            "referans": 3.0,
+            "fark": 0.0,
+            "durum": "tam"
+          }
+        ],
+        "tam": 1,
+        "sapan": 2,
+        "eksik": 0,
+        "fazla": 0,
+        "en_buyuk_sapma": 99.0,
+        "tumu_tam": false
+      },
+      "taban_puan": "başlık 3/3, ürün eşleşme 17/17, fiyat doğru 17/17, fazladan 0"
+    },
+    {
+      "fixture": "migros",
+      "seconds": 4.2,
+      "usage": {
+        "total_tokens": 3413,
+        "total_characters": 0,
+        "prompt_tokens": 3122,
+        "completion_tokens": 291,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        }
+      },
+      "raw_output": "{\"storeName\":\"Migros\",\"date\":\"2026-06-28\",\"totalAmount\":361.30,\"kdvBlok\":{\"1\":199.90,\"10\":147.50,\"20\":13.90},\"items\":[{\"name\":\"COCA-COLA ZERO 450\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":50.00,\"totalPrice\":50.00,\"vatRate\":10},{\"name\":\"LIPTON ICE TEA KARPZ\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":47.50,\"totalPrice\":47.50,\"vatRate\":10},{\"name\":\"COCA-COLA ZERO 330\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":50.00,\"totalPrice\":50.00,\"vatRate\":10},{\"name\":\"MIGROS ISLAK HAVLU\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":13.90,\"totalPrice\":13.90,\"vatRate\":20},{\"name\":\"M&M'S FISTIKLI DRAJE\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":99.95,\"totalPrice\":99.95,\"vatRate\":1},{\"name\":\"M&M'S FISTIKLI DRAJE\",\"quantity\":1,\"unit\":\"adet\",\"unitPrice\":99.95,\"totalPrice\":99.95,\"vatRate\":1}]}",
+      "parsed": {
+        "storeName": "Migros",
+        "date": "2026-06-28",
+        "totalAmount": 361.3,
+        "kdvBlok": {
+          "1": 199.9,
+          "10": 147.5,
+          "20": 13.9
+        },
+        "items": [
+          {
+            "name": "COCA-COLA ZERO 450",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 50.0,
+            "totalPrice": 50.0,
+            "vatRate": 10
+          },
+          {
+            "name": "LIPTON ICE TEA KARPZ",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 47.5,
+            "totalPrice": 47.5,
+            "vatRate": 10
+          },
+          {
+            "name": "COCA-COLA ZERO 330",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 50.0,
+            "totalPrice": 50.0,
+            "vatRate": 10
+          },
+          {
+            "name": "MIGROS ISLAK HAVLU",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 13.9,
+            "totalPrice": 13.9,
+            "vatRate": 20
+          },
+          {
+            "name": "M&M'S FISTIKLI DRAJE",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 99.95,
+            "totalPrice": 99.95,
+            "vatRate": 1
+          },
+          {
+            "name": "M&M'S FISTIKLI DRAJE",
+            "quantity": 1,
+            "unit": "adet",
+            "unitPrice": 99.95,
+            "totalPrice": 99.95,
+            "vatRate": 1
+          }
+        ]
+      },
+      "hata": null,
+      "denemeler": [
+        {
+          "deneme": 1,
+          "px": 1400,
+          "saniye": 4.2,
+          "finish_reason": "stop",
+          "sonuc": "ok"
+        }
+      ],
+      "finish_reason": "stop",
+      "px": 1400,
+      "kdv_blok_ham": {
+        "1": 199.9,
+        "10": 147.5,
+        "20": 13.9
+      },
+      "kdv_blok_atilan": [],
+      "referans_blok": {
+        "1": 199.9,
+        "10": 147.5,
+        "20": 13.9
+      },
+      "blok_dogrulugu": {
+        "satirlar": [
+          {
+            "oran": 1,
+            "model": 199.9,
+            "referans": 199.9,
+            "fark": 0.0,
+            "durum": "tam"
+          },
+          {
+            "oran": 10,
+            "model": 147.5,
+            "referans": 147.5,
+            "fark": 0.0,
+            "durum": "tam"
+          },
+          {
+            "oran": 20,
+            "model": 13.9,
+            "referans": 13.9,
+            "fark": 0.0,
+            "durum": "tam"
+          }
+        ],
+        "tam": 3,
+        "sapan": 0,
+        "eksik": 0,
+        "fazla": 0,
+        "en_buyuk_sapma": 0.0,
+        "tumu_tam": true
+      },
+      "kalem_gruplari": {
+        "10": 147.5,
+        "20": 13.9,
+        "1": 199.9
+      },
+      "oransiz_kalem": 0,
+      "fiyatsiz_kalem": 0,
+      "oransiz_kalem_toplami": 0.0,
+      "ic_tutarlilik": {
+        "satirlar": [
+          {
+            "oran": 1,
+            "model": 199.9,
+            "referans": 199.9,
+            "fark": 0.0,
+            "durum": "tam"
+          },
+          {
+            "oran": 10,
+            "model": 147.5,
+            "referans": 147.5,
+            "fark": 0.0,
+            "durum": "tam"
+          },
+          {
+            "oran": 20,
+            "model": 13.9,
+            "referans": 13.9,
+            "fark": 0.0,
+            "durum": "tam"
+          }
+        ],
+        "tam": 3,
+        "sapan": 0,
+        "eksik": 0,
+        "fazla": 0,
+        "en_buyuk_sapma": 0.0,
+        "tumu_tam": true
+      },
+      "taban_puan": "başlık 3/3, ürün eşleşme 6/6, fiyat doğru 6/6, fazladan 0"
+    }
+  ]
+}

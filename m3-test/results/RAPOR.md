@@ -409,6 +409,133 @@ kabul turunda bakiye farkı mutlaka not edilmeli.
 **Karar:** tüm zorunlu kurallar geçti. Kabin ve kimlik katmanı model
 doğruluğunu bozmadı; `asama4-sunucu` dalı birleştirilebilir.
 
+## Ek 11 — KDV grup mutabakatı pilotu: mekanizmanın yeri alarm değil ONARIM (4 Ağu 2026)
+
+**Gerekçe:** Ek 9 karar 2, fişin altındaki KDV döküm bloğunu okuyup kalem
+toplamlarıyla karşılaştırmayı öneriyordu. Aşama 3.5'te önce ucuz pilot koşuldu:
+prompt'a `kdvBlok` alanı eklendi, 6 fiş × 1 koşum = 6 gerçek çağrı. Üretim
+prompt'u (`backend/receipt_prompt.py`) DEĞİŞTİRİLMEDİ — pilot metni bellekte
+genişletir, çapa metinleri bulunmazsa durur.
+
+### Rejim uyarısı — ilk koşum (v1) geçersiz sayıldı
+
+v1, `server.py`'nin gönderdiği `"thinking": {"type": "disabled"}` ayarını
+göndermiyordu (`run_test.py`'den miras). Sonuç: a101 312 sn, file 3 denemede de
+timeout. Bu **kdvBlok'a mal EDİLEMEZ**: 26 Tem'in kdvBlok'suz doğrudan-API
+koşumları aynı rejimde a101 246,5 sn ve file 480,7 sn sürmüştü. Yavaşlığın
+kaynağı istenen alan değil, açık bırakılan thinking. v2, `server.py`'nin
+ayarlarıyla (thinking kapalı, max_tokens 24000, 1400→1000 px / 45 sn merdiveni)
+yeniden koştu: 6/6 sonuç, timeout yok, toplam 10,4 sn.
+
+### Ana tablo (v2, üretim rejimi)
+
+| Fiş | Süre | Blok ↔ cevap anahtarı | Kalem toplamı ↔ blok | Taban çıkarım |
+|---|---|---|---|---|
+| bim | 3,8 sn | tam 2/2 | tutuyor | 3/3 ✓ |
+| migros | 4,2 sn | tam 3/3 | tutuyor | 6/6 ✓ |
+| bildirici | 5,0 sn | 2 tam / 1 sapan (0,20) | sapma 0,20 | 9/9 ✓ |
+| gimsa | 6,9 sn | tam 3/3 | sapma 99,00 | 17/17 ✓ |
+| file | 8,6 sn | tam 3/3 | %1 grubu ölçülemiyor | 21/23 |
+| a101 | 10,2 sn | 2 sapan (±364,50) | sapma 364,50 | 21/21 ✓ |
+
+Blok 6/6 okundu, 4/6 kuruşuna tam, grup düzeyinde 13/16. Taban çıkarım
+bozulmadı — yeni alan eklenmesi kalem/fiyat isabetini düşürmedi.
+
+### Sapmanın dört ayrı kaynağı — ve kaçı gerçek
+
+Ham mutabakat "4/6 fişte sinyal" veriyor. Sinyallerin anatomisi ayrıştırıldığında
+tablo tersine dönüyor:
+
+- **a101 — etiket takası, YANLIŞ ALARM.** Model bloğu `{%20: 1264,50, %1: 900,00}`
+  yazmış; fişte tersi basılı. Kalemler ise kusursuz (21/21 fiyat) ve grup
+  toplamları cevap anahtarıyla birebir aynı. Yani hata kalemlerde değil, yalnız
+  bloğun iki etiketinde. Kullanıcıya bayrak gitseydi tamamen yersiz olurdu.
+- **bildirici — blok yanlış okundu, YANLIŞ ALARM.** %1 bloğu 791,80 yerine
+  791,60 okunmuş; kalemler 9/9 doğru. Sapmanın suçlusu yine blok.
+- **file — mekanizmanın katkısı YOK (tespitte).** Blok kuruşuna doğru; kalem
+  toplamı 2.979,97 ≠ 3.060,97 çünkü iki fiyat yanlış (PINAR SÜT 159→158,
+  ÇİKO 185→105). Bu farkı **mevcut aritmetik kontrol zaten yakalıyor**
+  (`validate_and_flag`). Blok burada tespit değil, aşağıdaki onarımı sağlıyor.
+- **gimsa — TEK GERÇEK YENİ YAKALAMA.** Kalem toplamı totalAmount'a tam uyuyor,
+  yani mevcut kontrol kör; ama KINDER PİNGUİ (99,00) %10 grubunda dururken
+  bloğa göre %1'de olmalı. Ek 9'un `%1→%10 sistematiği` bu.
+
+Özet: 6 fişte ham mutabakat 4 sinyal üretir; bunların **2'si yanlış alarm,
+1'i zaten yakalanan bir hata, 1'i gerçek yeni yakalama.**
+
+### İki kapı — cevap anahtarı gerektirmeyen özdenetim
+
+Yanlış alarmların ikisi de fiş üzerindeki bilgiyle ayıklanabiliyor:
+
+| Kapı | Kural | Fişte tetiklenen |
+|---|---|---|
+| A | `sum(kdvBlok) == totalAmount` değilse blok şüphelidir, kullanılmaz | bildirici (1.310,80 ≠ 1.311,00) |
+| B | Blok değerleri kalem gruplarının permütasyonu ise etiket takasıdır, blok kullanılmaz | a101 (aynı iki değer, ters etiket) |
+
+Kapı A'nın gücü şu: bildirici'de kalem toplamı totalAmount'a tam uyuyor, blok
+uymuyor — hangi tarafın yanlış olduğu **ölçülebiliyor**, tahmin edilmiyor.
+
+### Onarım — mekanizmanın asıl değeri
+
+Kapıları geçen blok, bayrak kaynağı değil veri kaynağı olarak kullanılır:
+
+- **Onarım 1 — oran ithafı.** Blokta bir oran varken o orana hiç kalem
+  atanmamışsa ve oransız kalemler varsa, o kalemler tek aday gruba yazılır.
+  file'da **19 kalem** böyle oran kazanıyor (blok %1/%10/%20, kalemlerde yalnız
+  %10 ve %20 dolu → boş kalan tek grup %1). Ek 9'un "vatRate doluluğu düşük"
+  sorununa doğrudan cevap.
+- **Onarım 2 — tek çözümlü taşıma.** Bir kalemin başka gruba taşınması
+  mutabakatı sağlıyorsa ve bu çözüm TEK ise taşınır. gimsa'da 99,00 tutarlı
+  kalem tek: KINDER PİNGUİ → %1. Birden çok aday varsa taşıma YAPILMAZ
+  (alt-küme belirsizliği).
+- Onarılan kalemlerde `vat_rate_source = 'kdv_blogu'`.
+- **Bayrak yalnız** blok iki kapıyı da geçmiş, mutabakat tutmamış ve tek çözümlü
+  onarım bulunamamışsa çıkar. Bu örneklemde **0/6** — yani mekanizma sıfır yeni
+  yanlış alarmla 20 kalem oranı düzeltiyor ve mevcut kontrolün göremediği bir
+  oran hatasını sessizce onarıyor.
+
+### KARAR
+
+1. KDV bloğu **alarm kaynağı değil, onarım kaynağıdır**. Ek 9 karar 2'nin
+   "uyuşmazlık ⇒ needsReview" kurgusu bu ölçümle DEĞİŞTİRİLDİ: ham kural 6 fişin
+   4'ünde tetiklenirdi ve bunların yarısı yersizdi (Ek 6'nın yanlış alarm
+   bütçesi buna dayanmaz).
+2. Kapı A ve Kapı B, blok kullanılmadan önce zorunludur.
+3. Onarım 1 ve 2 uygulanır; belirsizse dokunulmaz.
+4. Bayrak, yalnız yukarıdaki dar koşulda çıkar.
+
+### Maliyet — Ek 10'un açık kalemi kapandı
+
+| Fiş | Kalem | prompt tk | completion tk | toplam tk |
+|---|---|---|---|---|
+| bim | 3 | 3.122 | 172 | 3.294 |
+| migros | 6 | 3.122 | 291 | 3.413 |
+| bildirici | 9 | 3.122 | 420 | 3.542 |
+| gimsa | 17 | 3.122 | 750 | 3.872 |
+| file | 23 | 3.122 | 979 | 4.101 |
+| a101 | 21 | 3.122 | 1.271 | 4.393 |
+
+Çağrı başı 3,3–4,4 bin token; sabit 3.122'si görüntünün kendisi. Değişken kısım
+**kalem sayısıyla** birlikte büyüyor — kdvBlok alanı çıktıya üç satır JSON
+ekliyor, yani onlarca token mertebesinde. "Blok istemek token'ı katladı" okuması
+bu veriyle desteklenmiyor; kdvBlok'suz aynı-rejim ölçümü yok, olsaydı fark
+ölçülebilirdi.
+
+### Ölçülmeyen / riskler
+
+- n = 6, fiş başına tek koşum. Kapı B **tek gözleme** dayanıyor; a101'de
+  kalemlerin doğru, bloğun yanlış olduğu doğrulandı ama bu genel bir kanıt değil.
+  Bu yüzden Kapı B'de onarım da bayrak da yapılmaz, blok yalnızca atılır —
+  en kötü durumda sinyal kaybedilir, veri bozulmaz.
+- Onarımın DOĞRU veriyi bozup bozmadığı ölçülmedi. 30 koşumluk kabul turunda
+  "onarım sonrası kalem oranı cevap anahtarına göre kötüleşti mi" ayrı metrik
+  olarak izlenmeli.
+- Süre: v2 ortalaması 6,5 sn, Ek 10'un 5,1 sn'sinin üstünde ve fiş bazında
+  6/6'sında Ek 10'un 5 koşumluk maksimumunu aşıyor. Tutarlı bir kayma, ama iki
+  ölçüm farklı yoldan geçiyor (kap + çift çağrı vs doğrudan tek çağrı), bu yüzden
+  artış bloğa mal EDİLEMEZ. Temiz cevap için aynı betikle kdvBlok'lu/kdvBlok'suz
+  A/B gerekir (12 çağrı) — tasarımı değiştirmediği için şimdilik açık bırakıldı.
+
 ## Dosyalar
 
 - `m3-test/run_test.py` — izole test aracı (sandbox'tan API'ye erişim olan ortamda `--mode both` ile aynı testi koşar)
@@ -416,4 +543,6 @@ doğruluğunu bozmadı; `asama4-sunucu` dalı birleştirilebilir.
 - `m3-test/results/karsilastirma.json` — alan alan karşılaştırma çıktısı
 - `m3-test/results/ek8-acceptance-2026-07-26.json` — Ek 8 ham çıktısı (venv, jetonsuz taban)
 - `m3-test/results/ek10-acceptance-2026-08-03.json` — Ek 10 ham çıktısı (kap, jetonlu)
+- `m3-test/kdv-blogu-pilot.py` — Ek 11 pilot aracı (KDV bloğu çıkarımı, üretim rejimiyle)
+- `m3-test/results/ek11-kdv-pilot-2026-08-04.json` — Ek 11 ham çıktısı (6 çağrı, prompt metni dahil)
 - Fotoğraflar ve `.env` (MiniMax anahtarı) git'e girmez (`.gitignore`)
