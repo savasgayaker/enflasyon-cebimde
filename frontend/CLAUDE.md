@@ -74,6 +74,16 @@ Production flow on the scan screen:
 
 **Arithmetic cross-check → needsReview:** the backend compares `sum(items.totalPrice)` against `totalAmount`; a gap > 0.01 TL (or any null price) marks the response `needsReview: true`. All 5 vision errors in testing were catchable by this check. The existing receipt-preview UI (yellow "İNCELEYİN" / red "FİYAT GİRİN" strips) renders these flags unchanged.
 
+
+> **Güncelleme (4 Ağu 2026) — yukarıdaki boru hattı anlatımı şu noktalarda güncelliğini yitirdi:**
+> - **Kimlik adımı eksik.** Gerçek akış: `scan.tsx` (base64 çekim) → Supabase anonim oturumundan erişim
+>   jetonu → `POST /api/parse-receipt` (`Authorization: Bearer …`) → backend JWT doğrulaması →
+>   çift-paralel model çağrısı → `cross_check` → `kdv_mutabakat` → yanıt.
+> - **Backend adresi LAN IP olarak sabit değil:** `EXPO_PUBLIC_BACKEND_URL` yoksa Expo `hostUri`sinden
+>   türetilir.
+> - **Zaman aşımı/retry politikası değişti:** tek 60 sn + 1 retry değil; çift-paralel çağrı, 45 sn,
+>   kademeli boyut merdiveni ve kovalı retry.
+> - `kdvBlok` alanı ile `backend/kdv_mutabakat.py` bu bölümde hiç anılmıyor; ikisi de üretimde.
 #### Retired (but kept) regex parser
 
 `extractTextFromImage` (`src/services/ocrService.ts`) + `parseReceipt` (`src/services/receiptParser.ts`) are **retired from the production path but intentionally NOT deleted** — they are the offline fallback if the M3 route proves unreliable. `npm run test:parser` (20/20 baseline) and the OCR Test screen stay green as the insurance policy; don't break them in unrelated changes.
@@ -137,15 +147,20 @@ Turkish-only. `src/i18n/tr.ts` holds all strings; `t('a.b.c')` does dotted-path 
 - `metro.config.js` pins a stable on-disk cache at `.metro-cache/` and caps `maxWorkers: 2`. Don't bump workers without reason — this exists to keep the dev machine responsive.
 - The repo root (`../`) contains the FastAPI `backend/` and a `test_result.md` testing protocol. Since Aşama 3 the app **does** call the backend for exactly one thing: `POST /api/parse-receipt` (receipt photo → MiniMax M3 vision → ParsedReceipt). All other data stays local in AsyncStorage — don't add further backend calls without explicit direction. Backend needs `MINIMAX_API_KEY` in `backend/.env` (see `.env.example`); MongoDB is optional (status endpoints return 503 without it, parse-receipt is unaffected).
 
-## Bilinen teknik borç (Aşama 3 KAPANDI — 26 Tem 2026, Savaş onayı)
+> **Güncelleme (4 Ağu 2026):** Veri için doğru, **kimlik akışı için eksik**. Uygulama açılışta Supabase
+> anonim oturumu açar (`frontend/src/services/supabase.ts`), her `parse-receipt` çağrısına `Authorization: Bearer <erişim jetonu>`
+> ekler; backend bu JWT'yi doğrulamak için `SUPABASE_URL` ister ve Docker içinde koşar. Ayrıntı: bu
+> dosyanın sonundaki "Aşama 3.5 → Aşama 4" bölümü.
 
-**Aşama 3 KAPALI** — kabul kriteri karşılandı (30 koşuda 0 sessiz hata, RAPOR.md Ek 5) ve Savaş onayladı. Teknik iş: backend proxy (`/api/parse-receipt`), `parseReceiptViaM3` + birim testli `mapM3Response` (`npm run test:m3-mapper`, 18/18), dinamik `BACKEND_URL`, iPhone saha testi doğrulandı. **Yayın konfigürasyonu: çift-paralel thinking_off** — iki eşzamanlı M3 çağrısı + kalem bazlı çapraz kontrol + aritmetik kontrol (karar ve kabul testi: RAPOR.md Ek 5; 30 koşuda 0 sessiz hata, ortalama 6,7 sn). Aşağıdaki maddeler biliniyor ve bilinçli olarak açık:
+## Bilinen teknik borç (Aşama 3.5 KAPANDI — 4 Ağu 2026; Aşama 3 kapanışı: 26 Tem 2026, Savaş onayı)
+
+**Aşama 3 KAPALI** — kabul kriteri karşılandı (30 koşuda 0 sessiz hata, RAPOR.md Ek 12/12b (tarihsel: Ek 5)) ve Savaş onayladı. Teknik iş: backend proxy (`/api/parse-receipt`), `parseReceiptViaM3` + birim testli `mapM3Response` (`npm run test:m3-mapper`, 18/18), dinamik `BACKEND_URL`, iPhone saha testi doğrulandı. **Yayın konfigürasyonu: çift-paralel thinking_off** — iki eşzamanlı M3 çağrısı + kalem bazlı çapraz kontrol + aritmetik kontrol (karar ve kabul testi: RAPOR.md Ek 12/12b (tarihsel: Ek 5); 30 koşuda 0 sessiz hata, ortalama 5,1–5,8 sn). Aşağıdaki maddeler biliniyor ve bilinçli olarak açık:
 
 ### M3 pipeline
 - **Ürün adı normalizasyonu / dedup stratejisi:** M3 çıktısı koşudan koşuya deterministik değil (aynı fişte `KÖPÜK SABUN` ↔ `K*P*K SABUN`, Türkçe/ASCII savrulması). `findOrCreateProduct` ada göre eşleştirdiği için aynı ürünün fiyat serisi farklı kayıtlara bölünebilir — enflasyon hesabı ürünü izleyemez. **Kısmen hafifledi:** backend'deki `_pick_better_name` (çapraz kontrol, Türkçe karakterli adı tercih eder) tek fiş içindeki iki çağrının ad varyansını gideriyor; ama FİŞLER ARASI varyans (bugünkü fişte KÖPÜK, yarınkinde K*P*K) çözülmedi. Kalan çözüm adayları: istemcide isim normalizasyonu, fuzzy eşleşme.
 - **±1 TL sınıfı tutarlı okuma hataları** — çapraz kontrole kör (iki çağrı da aynı yanlışı okur; ör. File'da PINAR 158↔159), azaltma yolu fotoğraf kalitesi (yakın çekim), thinking açıkken de mevcut. Kabul testinde bu sınıf dahil 0 sessiz hata çıktı ama teorik körlük duruyor.
-- **Yanlış alarm oranı:** kabul testinde 10/30 koşuda fiş doğruyken kalem bayrağı çıktı (model nondeterminizmi iki doğru-ya-yakın yanıtı da farklılaştırabiliyor) — kullanıcı fazladan teyit yapıyor. Bayrak eşiklerini gevşetme/isim-normalizasyonuyla azaltılabilir.
-- ~~**Reasoning uzunluğu kontrolü**~~ **KARARA BAĞLANDI:** çift-paralel thinking_off yayında (RAPOR.md Ek 3-5). Streaming ihtiyacı büyük ölçüde ortadan kalktı (süre ~6,7 sn, deterministik); yalnızca thinking'e geri dönülürse yeniden değerlendirilir.
+- **Yanlış alarm oranı:** kabul testinde 11/30 (Ek 12 ölçümü; ayrıca kdvUyusmazligi 1/30 = %3,3) koşuda fiş doğruyken kalem bayrağı çıktı (model nondeterminizmi iki doğru-ya-yakın yanıtı da farklılaştırabiliyor) — kullanıcı fazladan teyit yapıyor. Bayrak eşiklerini gevşetme/isim-normalizasyonuyla azaltılabilir.
+- ~~**Reasoning uzunluğu kontrolü**~~ **KARARA BAĞLANDI:** çift-paralel thinking_off yayında (RAPOR.md Ek 3-5). Streaming ihtiyacı büyük ölçüde ortadan kalktı (süre ~5,1–5,8 sn, deterministik); yalnızca thinking'e geri dönülürse yeniden değerlendirilir.
 - ~~**`BACKEND_URL` elle yazılı**~~ **KAPANDI:** artık Metro `hostUri`'sinden türetiliyor (`src/constants/config.ts`); `EXPO_PUBLIC_BACKEND_URL` env değişkeni her zaman öncelikli. (Borcun bedeli bir kez ödendi: DHCP, Mac'in IP'sini .26→.20 değiştirdiğinde iPhone E2E sessizce koptu.)
 - **Fiş-seviyesi needsReview kalemlere yayılıyor** (`receiptParserM3.ts`): toplam tutmadığında hangi kalemin hatalı olduğu bilinemediği için hepsi işaretleniyor. Kalem bazlı daraltma (ör. modelden şüphe skoru istemek) gelecek iş.
 
@@ -163,3 +178,71 @@ Turkish-only. `src/i18n/tr.ts` holds all strings; `t('a.b.c')` does dotted-path 
 - **Adım 2.5:** Kategori kelime-sınırlı eşleme — küçük, izole, hızlı kazanım.
 - **M6:** Dashboard / Ürünler / Analitik ekranları kayıt sonrası nasıl davranıyor — uçtan uca veri akışını doğrula, gerekirse `inflation.ts` hesaplamasını gözden geçir.
 - **Üretim hazırlığı:** BACKEND_URL'in ortam değişkenine taşınması, backend'in gerçek bir sunucuya dağıtımı, rate limit / maliyet takibi.
+
+> **Çelişki düzeltmesi (4 Ağu 2026):** `BACKEND_URL`'in ortam değişkenine taşınması **kapandı** —
+> "Bilinen teknik borç" bölümündeki KAPANDI satırıyla aynı borç (`EXPO_PUBLIC_BACKEND_URL` +
+> `hostUri` türetmesi); burada açık iş gibi görünmesi bir iç çelişkidir. Açık kalan tek iş backend'in
+> **gerçek sunucuya dağıtımı**: Docker imajı hazır, eksik olan alan adı + Cloudflare Tunnel.
+
+---
+
+## Aşama 3.5 → Aşama 4 (4 Ağu 2026 itibarıyla güncel durum)
+
+Bu bölüm, dosyanın 26 Temmuz'da donmuş üst kısmıyla çeliştiği **her yerde otoritedir**.
+
+### Üretimdeki hat
+
+- Prompt tek kaynaktan gelir: `backend/receipt_prompt.py` — sha256 `ba68058f…8baf08`, 2422 karakter,
+  `kdvBlok` alanı **var**. Önceki sürüm: `73f7177c…fba888` (1812 karakter, `kdvBlok` yok).
+- KDV mutabakatı: `backend/kdv_mutabakat.py`. Yazılı KDV özet bloğu **onarım kaynağıdır, alarm kaynağı
+  değildir**: Kapı A (blok toplamı ≠ `totalAmount` → bloğu at), Kapı B (blok değerleri ürün gruplarının
+  permütasyonu → etiket takası → at), Onarım 1 (oran ithafı), Onarım 2 (tek çözümlü taşıma), dar bayrak.
+- `needsReview` semantiği kirletilmez: blok kararı ayrı anahtarlarda taşınır (`kdvDurum`,
+  `kdvUyusmazligi`) ve yanıt seçimi ile `cross_check` sonrasında OR'lanır.
+- `vat_rate_source` sözlüğü DB check constraint'iyle sabittir: `model`, `kdv_blogu`, `kullanici`, `kural`.
+- Kimlik: uygulama Supabase **anonim** oturumu açar, `Authorization: Bearer` gönderir, backend JWT'yi
+  doğrular (`SUPABASE_URL`). Backend Docker içinde koşar; sağlık ucu `/api/saglik`.
+
+### Ölçülen kazanç (Ek 10 → Ek 12, 30 koşum)
+
+- KDV oranı doğruluğu %78,3 → %89,1; yanlış oran %11,7 → %3,4; C_SESSİZ üç turda da 0.
+- Bileşik oran: Ek 10 %97,95 (862/880) · Ek 12 %96,82 (852/880) · Ek 12b (eski kol, aynı gün) %96,25.
+- Gün etkisi ölçüldü: N = 1,70 puan; bant B = max(N; 0,25) = 1,70; E = C10b − C12 = −0,57 → **KABUL**
+  (ölçüt 3 ihlali gösterilemedi). Ek 12'nin RET kararı Ek 12b ile geçersiz kılınmıştır.
+- Süre: gün etkisi +0,61 sn; `kdvBlok`'a atfedilebilir fark ~+0,17 sn; güncel bant ~5,1–5,8 sn.
+  Ek 12'deki "+0,8 sn maliyet" okuması **yanlıştı** ve Ek 12b'de düzeltildi.
+
+### Ölçüm disiplini
+
+Bağlayıcı kural seti kök `CLAUDE.md`'dedir. Özeti: ölçüt **veriden önce** yazılır ve commit'lenir;
+ölçüm aleti (`m3-test/acceptance_dual.py`) ölçümün yapıldığı turda değiştirilmez; tek kollu, farklı
+günde koşulmuş bir turdan ölçüt 3 kararı çıkarılmaz; N ≈ 1,70 puanın altındaki fark **görülemez**
+(KABUL = "gerileme gösterilemedi", "gerileme yok" değil); oranlar havuzlanır, koşum ortalaması
+alınmaz; koşum dışlanmaz; sayılar elle değil üreteçle yazılır; yanlış kararlar silinmez, üzerine yazılır.
+
+### 26 Temmuz'da hiç anılmayan dosyalar
+
+- `frontend/src/services/supabase.ts` ve `frontend/src/constants/config.ts`'in `SUPABASE_*` export'ları.
+- Kök testler: `tests/test_kdv_mutabakat.py` — 16 test fonksiyonu, pytest'in topladığı test sayısı 21 (fark: parametrize
+  genişlemesi). Ayrıca `tests/test_receipt_fields.py`.
+- `frontend/scripts/jeton-al.mjs` (test jetonu), `frontend/scripts/dogrula-supabase.mjs`.
+- Puanlayıcılar: `m3-test/puanla_bilesik.py`, `m3-test/puanla-kdv-oran.py`, `m3-test/karar-ek12b.py`.
+  Arşivler `m3-test/results/` altında; `m3-test/.gitignore` 12–14. satırlardaki **dar** negation'larla
+  izlenir (depo herkese açık olduğu için joker desen kullanılmaz).
+- Kök `CLAUDE.md` — ölçüm disiplini ve Aşama 3.5 kapanış kaydı.
+
+### Açık kalemler (4 Ağu 2026)
+
+- **M6** — kayıt sonrası uçtan uca veri akışı (Dashboard / Ürünler / Analitik + `inflation.ts`). Akış
+  **%100 yereldir**: Zustand + AsyncStorage; frontend'deki tek HTTP çağrısı `parse-receipt`, hiç
+  `.from/.insert/.select` yok. Ağsız, simülatörde doğrulanabilir.
+- **Alan kaybı (4 Ağu 2026 taraması):** backend'in ürettiği `unit` ve `vatRate` alanları frontend'e
+  ulaşmıyor — `frontend` genelinde `vatRate` 0 kez, `unit` 1 kez geçiyor. Alanlar `m3Mapper`
+  sınırında düşüyor ve store'a hiç girmiyor. M6 kapsamında değil, Aşama 4 planlamasında hesaba katılmalı.
+- Supabase şeması hazır ama bağlı değil (9 tablo, 19 RLS satırı) — Aşama 4 işi, M6 kapsamı dışında.
+- Cloudflare Tunnel: alan adı alınmadı (Blok 12-A engelli). Blok 13 (iPhone uçtan uca), Blok 14
+  (Mac mini kesintisizliği) sırada.
+- Adım 2.5 (kategori kelime-sınırı); ürün birleştirme (Ek 9 karar 3) — isim varyansı eşleşmeyen kalem
+  olarak görünür ve gerçek enflasyon serisini engeller.
+- Çevrimdışı kuyruk yok (Adım 4). Frontend'de jest tarzı test yok. Park edilmiş 3 `tsc` hatası
+  (`analytics.tsx`'te `expo-file-system` ×2, gifted-charts ×1).
