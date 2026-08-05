@@ -39,6 +39,7 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
 8. **Yanlış çıkmış karar silinmez, üzerine yazılır.** Ek 12'nin RET satırı
    yerinde duruyor; altına Ek 12b göndermesi eklendi.
 9. **Karakterizasyon ≠ şartname.** "Mevcut davranış, DEĞİŞTİRİLMEYECEK" başlıklı her madde kodun ne *yaptığını* anlatmalıdır — yazarın ne yapması gerektiğini düşündüğünü değil. M6-A'da bu ikisi karıştı: senaryoların hiçbiri farkı göremezdi, fark ancak koda bakılarak bulundu ve tur kendi durdurma kuralıyla durdu. Karakterizasyon maddeleri yazılmadan önce ilgili satırlar kodun kendisinden okunur (`docs/m6a2-kapanis-2026-08-05.md`).
+10. **Tavsiye kabul kapisi degildir.** On kayittaki "onerilen sekil" yol gostericidir, kabul kurali baglayicidir. Ikisi celisirse kabul kapisi uygulanir; sapma veri gorulmeden once ilan edilir ve kapanis kaydina gecer. Celiski, on kaydi yazanin hatasidir.
 
 ### Ölçüm araçları nerede
 - `m3-test/acceptance_dual.py` — ölçüm aleti (jetonlu, 6 fiş × 5 koşum = 30).
@@ -47,7 +48,8 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
 - `m3-test/karar-ek12b.py` — ön kayıtlı karar kuralını otomatik uygular.
 - Arşivler: `m3-test/results/ek*-*.json|txt` (izlenmeleri `m3-test/.gitignore`
   içindeki DAR negation'larla sağlanır — kök `.gitignore`'dan delinemez).
-- `frontend/scripts/test-inflation.ts` — `npm run test:inflation` (frontend dizininde): 9 senaryo / 13 kontrol, kişisel enflasyon hesabının regresyon kilidi. Beklenen değerlerin gerekçesi: `docs/m6a2-on-kayit-2026-08-05.md`.
+- `frontend/scripts/test-inflation.ts` — enflasyon hesabinin olcum araci: 12 senaryo / 12 kontrol (`npm run test:inflation`, frontend/ icinden; cikis kodu 0 = hepsi yesil). Beklenen degerlerin gerekcesi on kayitlarda: `docs/m6a2-on-kayit-2026-08-05.md` (fiyat toplulastirma) ve `docs/m6c-on-kayit-2026-08-05.md` (agirlik paydasi).
+- Kaynak dogrulama kanali (mimar icin): `https://raw.githubusercontent.com/savasgayaker/enflasyon-cebimde/<commit-sha>/<yol>`. **Daima commit sha'sina sabitle** — dal ucuna (`main`) giden yol bayat kopya dondurebiliyor (2026-08-05'te dondurdu). Push'suz commit'ler bu kanaldan gorunmez.
 
 ### Prompt provenansı
 `backend/receipt_prompt.py` içindeki `RECEIPT_PROMPT` tek kaynaktır; `server.py` ve
@@ -60,8 +62,8 @@ YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
   alan adı henüz alınmadı; bu karar verilmeden Blok 12-A başlamaz.
 - M6 — kayıt sonrası uçtan uca akış. **M6-A2 KABUL (2026-08-05, `32c5df3`)**: `inflation.ts`'teki fiyat toplulaştırma hatası düzeltildi; dönem fiyatı artık `Σ(unitPrice × quantity) / Σ(quantity)`, yani gösterilen enflasyon alışveriş sıklığından şişmiyor. Kanıt zinciri: `4336ccf` (M6-A ön kayıt, durdurma kuralıyla durdu) → `e5d3913` (M6-A2 ön kayıt) → `1b7766b` (düzeltme öncesi KIRMIZI kanıt) → `32c5df3` (düzeltme) → `49214a6` (kapanış notu `docs/m6a2-kapanis-2026-08-05.md`). Kalan işler aşağıdaki M6-B…M6-E maddeleridir.
 - M6-B — yıllıklaştırma: `yearlyRate = w × 12` doğrusal; bileşik olmalı mı? Ayrıca `monthlyRate` adı yanıltıcı — gerçekte bir *pencere* oranı. Ön kayıt yazılmadı.
-- M6-C — ağırlık paydası: `totalCurrentSpending` tüm current kayıtların `totalPrice` toplamı; iki dönemde de görülmeyen (yeni) ürünler örtük %0 enflasyon gibi davranıp genel oranı seyreltiyor. Etkisi ilk haftalarda en büyük — her ürünün yeni olduğu dönemde oran ~%0 çıkar. **Tanım kararı Savaş'ta, henüz verilmedi:** (a) eşleşen örneklem üzerinden ağırlıkların yeniden normalize edilmesi — resmî endekslerin yöntemi, mimarinin önerisi; (b) mevcut davranışın korunması. Ön kayıt karardan sonra yazılır.
-- M6-D — kapsama göstergesi ("bu oran harcamanın %X'ini kapsıyor"). M6-C'den sonra ve ayrı turda: tek turda tek değişiklik ölçülür.
+- **M6-C KABUL (2026-08-05, `47932cf`)**: agirlik paydasi eslesen orneklemle sinirlandi (`weight = spending / matchedSpending`); genel oran artik kategori oranlariyla ic tutarli ve yeni urun almak orani seyreltmiyor. On kayit `docs/m6c-on-kayit-2026-08-05.md`, kapanis `docs/m6c-kapanis-2026-08-05.md`, zincir `171597c` -> `818d283` -> `47932cf` -> `cef4ec6`.
+- M6-D — **SIRADAKI**: kapsama gostergesi ("bu oran harcamanin %X'ini kapsiyor"), yani `matchedSpending / totalCurrentSpending` degerinin ayri bir cikti alani olarak raporlanmasi. Kendi on kaydi ve kendi turu.
 - M6-E — ekran tarafı: kayıt → Dashboard / Ürünler / Analitik akışının simülatörde uçtan uca doğrulanması. Hesap düzeldiği için artık anlamlı; kendi ön kaydını ister.
 - **Adım 2.5** — kategori kelime-sınırı iyileştirmesi (ölçmek yeni bir kabul turu ister).
 - **Ürün birleştirme** (Ek 9 karar 3) — isim varyansı ölçümlerde eşleşmeyen kalem
