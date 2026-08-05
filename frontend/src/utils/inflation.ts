@@ -53,22 +53,56 @@ export function calculateInflation(
   }
 
   // Calculate price changes per product
-  const productPriceChanges: { [productId: string]: { current: number; previous: number; spending: number } } = {};
+  // T1 (docs/m6a2-on-kayit-2026-08-05.md): dönem içi ürün fiyatı, kayıtların
+  // miktar-ağırlıklı birim değeridir — Σ(unitPrice×quantity) / Σ(quantity);
+  // Σ(quantity) ≤ 0 ise unitPrice'ların basit ortalaması. Toplama (eski
+  // davranış) alışveriş sıklığını fiyat artışı gibi ölçüyordu.
+  const accumulators: {
+    [productId: string]: {
+      curPxQ: number; curQ: number; curP: number; curN: number;
+      prevPxQ: number; prevQ: number; prevP: number; prevN: number;
+      spending: number;
+    };
+  } = {};
 
-  // Get current average prices
   currentRecords.forEach((r) => {
-    if (!productPriceChanges[r.productId]) {
-      productPriceChanges[r.productId] = { current: 0, previous: 0, spending: 0 };
+    if (!accumulators[r.productId]) {
+      accumulators[r.productId] = {
+        curPxQ: 0, curQ: 0, curP: 0, curN: 0,
+        prevPxQ: 0, prevQ: 0, prevP: 0, prevN: 0,
+        spending: 0,
+      };
     }
-    productPriceChanges[r.productId].current += r.unitPrice;
-    productPriceChanges[r.productId].spending += r.totalPrice;
+    const acc = accumulators[r.productId];
+    acc.curPxQ += r.unitPrice * r.quantity;
+    acc.curQ += r.quantity;
+    acc.curP += r.unitPrice;
+    acc.curN += 1;
+    acc.spending += r.totalPrice;
   });
 
-  // Get previous average prices
   previousRecords.forEach((r) => {
-    if (productPriceChanges[r.productId]) {
-      productPriceChanges[r.productId].previous += r.unitPrice;
+    const acc = accumulators[r.productId];
+    if (acc) {
+      acc.prevPxQ += r.unitPrice * r.quantity;
+      acc.prevQ += r.quantity;
+      acc.prevP += r.unitPrice;
+      acc.prevN += 1;
     }
+  });
+
+  // Kayıt yoksa 0 döner; aşağıdaki `previous > 0 && current > 0` süzgeci bu
+  // ürünleri eskisi gibi dışarıda bırakır.
+  const periodPrice = (pxq: number, q: number, p: number, n: number): number =>
+    n === 0 ? 0 : q > 0 ? pxq / q : p / n;
+
+  const productPriceChanges: { [productId: string]: { current: number; previous: number; spending: number } } = {};
+  Object.entries(accumulators).forEach(([productId, acc]) => {
+    productPriceChanges[productId] = {
+      current: periodPrice(acc.curPxQ, acc.curQ, acc.curP, acc.curN),
+      previous: periodPrice(acc.prevPxQ, acc.prevQ, acc.prevP, acc.prevN),
+      spending: acc.spending,
+    };
   });
 
   // Calculate weighted inflation
