@@ -38,6 +38,7 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
    çoğaltmaz.
 8. **Yanlış çıkmış karar silinmez, üzerine yazılır.** Ek 12'nin RET satırı
    yerinde duruyor; altına Ek 12b göndermesi eklendi.
+9. **Karakterizasyon ≠ şartname.** "Mevcut davranış, DEĞİŞTİRİLMEYECEK" başlıklı her madde kodun ne *yaptığını* anlatmalıdır — yazarın ne yapması gerektiğini düşündüğünü değil. M6-A'da bu ikisi karıştı: senaryoların hiçbiri farkı göremezdi, fark ancak koda bakılarak bulundu ve tur kendi durdurma kuralıyla durdu. Karakterizasyon maddeleri yazılmadan önce ilgili satırlar kodun kendisinden okunur (`docs/m6a2-kapanis-2026-08-05.md`).
 
 ### Ölçüm araçları nerede
 - `m3-test/acceptance_dual.py` — ölçüm aleti (jetonlu, 6 fiş × 5 koşum = 30).
@@ -46,6 +47,7 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
 - `m3-test/karar-ek12b.py` — ön kayıtlı karar kuralını otomatik uygular.
 - Arşivler: `m3-test/results/ek*-*.json|txt` (izlenmeleri `m3-test/.gitignore`
   içindeki DAR negation'larla sağlanır — kök `.gitignore`'dan delinemez).
+- `frontend/scripts/test-inflation.ts` — `npm run test:inflation` (frontend dizininde): 9 senaryo / 13 kontrol, kişisel enflasyon hesabının regresyon kilidi. Beklenen değerlerin gerekçesi: `docs/m6a2-on-kayit-2026-08-05.md`.
 
 ### Prompt provenansı
 `backend/receipt_prompt.py` içindeki `RECEIPT_PROMPT` tek kaynaktır; `server.py` ve
@@ -53,10 +55,14 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
 YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 Önceki: `73f7177c…fba888` (1812 karakter, `kdvBlok` yok).
 
-### Açık kalemler (2026-08-04 itibarıyla)
+### Açık kalemler (2026-08-05 itibarıyla)
 - **Blok 13** — uygulamayı arka uca bağlama + iPhone uçtan uca test. Tünel için
   alan adı henüz alınmadı; bu karar verilmeden Blok 12-A başlamaz.
-- **M6** — kayıt sonrası uçtan uca veri akışı; şu ana kadar hiç ölçülmedi.
+- M6 — kayıt sonrası uçtan uca akış. **M6-A2 KABUL (2026-08-05, `32c5df3`)**: `inflation.ts`'teki fiyat toplulaştırma hatası düzeltildi; dönem fiyatı artık `Σ(unitPrice × quantity) / Σ(quantity)`, yani gösterilen enflasyon alışveriş sıklığından şişmiyor. Kanıt zinciri: `4336ccf` (M6-A ön kayıt, durdurma kuralıyla durdu) → `e5d3913` (M6-A2 ön kayıt) → `1b7766b` (düzeltme öncesi KIRMIZI kanıt) → `32c5df3` (düzeltme) → `49214a6` (kapanış notu `docs/m6a2-kapanis-2026-08-05.md`). Kalan işler aşağıdaki M6-B…M6-E maddeleridir.
+- M6-B — yıllıklaştırma: `yearlyRate = w × 12` doğrusal; bileşik olmalı mı? Ayrıca `monthlyRate` adı yanıltıcı — gerçekte bir *pencere* oranı. Ön kayıt yazılmadı.
+- M6-C — ağırlık paydası: `totalCurrentSpending` tüm current kayıtların `totalPrice` toplamı; iki dönemde de görülmeyen (yeni) ürünler örtük %0 enflasyon gibi davranıp genel oranı seyreltiyor. Etkisi ilk haftalarda en büyük — her ürünün yeni olduğu dönemde oran ~%0 çıkar. **Tanım kararı Savaş'ta, henüz verilmedi:** (a) eşleşen örneklem üzerinden ağırlıkların yeniden normalize edilmesi — resmî endekslerin yöntemi, mimarinin önerisi; (b) mevcut davranışın korunması. Ön kayıt karardan sonra yazılır.
+- M6-D — kapsama göstergesi ("bu oran harcamanın %X'ini kapsıyor"). M6-C'den sonra ve ayrı turda: tek turda tek değişiklik ölçülür.
+- M6-E — ekran tarafı: kayıt → Dashboard / Ürünler / Analitik akışının simülatörde uçtan uca doğrulanması. Hesap düzeldiği için artık anlamlı; kendi ön kaydını ister.
 - **Adım 2.5** — kategori kelime-sınırı iyileştirmesi (ölçmek yeni bir kabul turu ister).
 - **Ürün birleştirme** (Ek 9 karar 3) — isim varyansı ölçümlerde eşleşmeyen kalem
   olarak görünüyor; ürün kimliği çözülmeden kişisel enflasyon serisi kurulamaz.
