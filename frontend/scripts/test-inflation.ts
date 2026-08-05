@@ -13,6 +13,10 @@
  * %5,0 → %10,0 (payda turu; değişiklik veri görülmeden ilan edildi) ve
  * S10/S11/S12 eklendi. M6-C alet doğrulaması: düzeltmeden önce S8+S11+S12
  * KIRMIZI, diğer dokuzu YEŞİL.
+ *
+ * M6-D güncellemesi (docs/m6d-on-kayit-2026-08-05.md): S13–S18 eklendi
+ * (coverageRate alanı); S1–S12'ye dokunulmadı (T-D3 invaryans). M6-D alet
+ * doğrulaması: düzeltmeden önce S13–S18'in ALTISI da KIRMIZI, S1–S12 YEŞİL.
  */
 import { calculateInflation } from '../src/utils/inflation';
 import type { PriceRecord, Product } from '../src/store/useAppStore';
@@ -226,6 +230,83 @@ senaryo('S12 — payda + kategori değişmezliği (T-C3 kilidi)', () => {
   check('monthlyRate', r.monthlyRate, 5.2);
   check('gıda (tek ondalık)', yuvarla1(r.categoryRates['gida']), 10);
   check('temizlik (tek ondalık)', yuvarla1(r.categoryRates['temizlik']), 0);
+});
+
+senaryo('S13 — tam eşleşme: kapsama %100 (T-D1)', () => {
+  // A: önceki 1×100, cari 1×110 (tek ürün). Eşleşen 110 / cari toplam 110 → %100,0.
+  const r = calculateInflation(
+    [kayit('urun-a', ONCEKI, 100), kayit('urun-a', CARI_1, 110)],
+    [urun('urun-a', 'gida')],
+    ARALIK,
+  );
+  check('coverageRate', r.coverageRate, 100);
+  check('monthlyRate (değişmez)', r.monthlyRate, 10);
+});
+
+senaryo('S14 — S12 verisi: kapsama %50, mevcut sayılar DEĞİŞMEZ (T-D3)', () => {
+  // Cari toplam 110+100+210 = 420; eşleşen 110+100 = 210 → 210/420 = 0,5 → %50,0.
+  const r = calculateInflation(
+    [
+      kayit('urun-a', ONCEKI, 100),
+      kayit('urun-a', CARI_1, 110),
+      kayit('urun-b', ONCEKI, 100),
+      kayit('urun-b', CARI_1, 100),
+      kayit('urun-c', CARI_1, 210),
+    ],
+    [urun('urun-a', 'gida'), urun('urun-b', 'temizlik'), urun('urun-c', 'gida')],
+    ARALIK,
+  );
+  check('coverageRate', r.coverageRate, 50);
+  check('monthlyRate (değişmez)', r.monthlyRate, 5.2);
+  check('gıda (değişmez)', yuvarla1(r.categoryRates['gida']), 10);
+  check('temizlik (değişmez)', yuvarla1(r.categoryRates['temizlik']), 0);
+});
+
+senaryo('S15 — S10 verisi: eşleşen küme boş → kapsama %0', () => {
+  // Yalnız önceki A (1×50), yalnız cari C (1×55): pay 0, payda 55 → %0,0.
+  const r = calculateInflation(
+    [kayit('urun-a', ONCEKI, 50), kayit('urun-c', CARI_1, 55)],
+    [urun('urun-a', 'gida'), urun('urun-c', 'gida')],
+    ARALIK,
+  );
+  check('coverageRate', r.coverageRate, 0);
+  check('coverageRate NaN değil', Number.isNaN(r.coverageRate), false);
+  check('monthlyRate (değişmez)', r.monthlyRate, 0);
+  check('categoryRates boş (değişmez)', JSON.stringify(r.categoryRates), '{}');
+});
+
+senaryo('S16 — cari kayıt yok: erken dönüş yolu, alan tanımlı (T-D2)', () => {
+  // Yalnız önceki dönem kaydı var; erken dönüş coverageRate: 0 taşımalı.
+  const r = calculateInflation(
+    [kayit('urun-a', ONCEKI, 50)],
+    [urun('urun-a', 'gida')],
+    ARALIK,
+  );
+  check('coverageRate', r.coverageRate, 0);
+  check('tanımlı (undefined değil)', r.coverageRate !== undefined, true);
+});
+
+senaryo('S17 — kısmi eşleşme: yuvarlama kilidi (%33,3)', () => {
+  // A: 100→100 (fiyat sabit); C yalnız cari 200. Eşleşen 100 / toplam 300
+  // → round(333,33)/10 = %33,3. monthlyRate 0 (fiyat değişmedi).
+  const r = calculateInflation(
+    [kayit('urun-a', ONCEKI, 100), kayit('urun-a', CARI_1, 100), kayit('urun-c', CARI_1, 200)],
+    [urun('urun-a', 'gida'), urun('urun-c', 'gida')],
+    ARALIK,
+  );
+  check('coverageRate', r.coverageRate, 33.3);
+  check('monthlyRate (değişmez)', r.monthlyRate, 0);
+});
+
+senaryo('S18 — S8 verisi: kapsama %50, monthlyRate DEĞİŞMEZ (T-D3)', () => {
+  // A: önceki 1×50, cari 1×55 · C: yalnız cari 1×55. Eşleşen 55 / toplam 110 → %50,0.
+  const r = calculateInflation(
+    [kayit('urun-a', ONCEKI, 50), kayit('urun-a', CARI_1, 55), kayit('urun-c', CARI_1, 55)],
+    [urun('urun-a', 'gida'), urun('urun-c', 'gida')],
+    ARALIK,
+  );
+  check('coverageRate', r.coverageRate, 50);
+  check('monthlyRate (değişmez)', r.monthlyRate, 10);
 });
 
 console.log('\n=== DAĞILIM ===');
