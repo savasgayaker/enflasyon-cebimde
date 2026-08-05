@@ -48,7 +48,7 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
 - `m3-test/karar-ek12b.py` — ön kayıtlı karar kuralını otomatik uygular.
 - Arşivler: `m3-test/results/ek*-*.json|txt` (izlenmeleri `m3-test/.gitignore`
   içindeki DAR negation'larla sağlanır — kök `.gitignore`'dan delinemez).
-- `frontend/scripts/test-inflation.ts` — enflasyon hesabinin olcum araci: 12 senaryo / 22 kontrol (`npm run test:inflation`, frontend/ icinden; cikis kodu 0 = hepsi yesil). Beklenen degerlerin gerekcesi on kayitlarda: `docs/m6a2-on-kayit-2026-08-05.md` (fiyat toplulastirma) ve `docs/m6c-on-kayit-2026-08-05.md` (agirlik paydasi).
+- `frontend/scripts/test-inflation.ts` — enflasyon hesabinin olcum araci: 18 senaryo / 38 kontrol (`npm run test:inflation`, frontend/ icinden; cikis kodu 0 = hepsi yesil). Beklenen degerlerin gerekcesi on kayitlarda: `docs/m6a2-on-kayit-2026-08-05.md` (fiyat toplulastirma) ve `docs/m6c-on-kayit-2026-08-05.md` (agirlik paydasi).
 - Kaynak dogrulama kanali (mimar icin): `https://raw.githubusercontent.com/savasgayaker/enflasyon-cebimde/<commit-sha>/<yol>`. **Daima commit sha'sina sabitle** — dal ucuna (`main`) giden yol bayat kopya dondurebiliyor (2026-08-05'te dondurdu). Push'suz commit'ler bu kanaldan gorunmez.
 
 ### Prompt provenansı
@@ -61,10 +61,10 @@ YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 - **Blok 13** — uygulamayı arka uca bağlama + iPhone uçtan uca test. Tünel için
   alan adı henüz alınmadı; bu karar verilmeden Blok 12-A başlamaz.
 - M6 — kayıt sonrası uçtan uca akış. **M6-A2 KABUL (2026-08-05, `32c5df3`)**: `inflation.ts`'teki fiyat toplulaştırma hatası düzeltildi; dönem fiyatı artık `Σ(unitPrice × quantity) / Σ(quantity)`, yani gösterilen enflasyon alışveriş sıklığından şişmiyor. Kanıt zinciri: `4336ccf` (M6-A ön kayıt, durdurma kuralıyla durdu) → `e5d3913` (M6-A2 ön kayıt) → `1b7766b` (düzeltme öncesi KIRMIZI kanıt) → `32c5df3` (düzeltme) → `49214a6` (kapanış notu `docs/m6a2-kapanis-2026-08-05.md`). Kalan işler aşağıdaki M6-B…M6-E maddeleridir.
-- M6-B — yıllıklaştırma: `yearlyRate = w × 12` doğrusal; bileşik olmalı mı? Ayrıca `monthlyRate` adı yanıltıcı — gerçekte bir *pencere* oranı. Ön kayıt yazılmadı.
+- M6-B (yilliklastirma ve adlandirma): **SIRADAKI**. Karar bekleyen iki soru: yillik oran dogrusal (w x 12) mi bilesik mi; ve monthlyRate aslinda bir pencere orani oldugu halde 'aylik' adini tasiyor. Etiket karari ekran isinden once gelmek zorunda oldugu icin M6-E'nin onune alindi (karar 2026-08-05).
 - **M6-C KABUL (2026-08-05, `47932cf`)**: agirlik paydasi eslesen orneklemle sinirlandi (`weight = spending / matchedSpending`); genel oran artik kategori oranlariyla ic tutarli ve yeni urun almak orani seyreltmiyor. On kayit `docs/m6c-on-kayit-2026-08-05.md`, kapanis `docs/m6c-kapanis-2026-08-05.md`, zincir `171597c` -> `818d283` -> `47932cf` -> `cef4ec6`.
-- M6-D — **SIRADAKI**: kapsama gostergesi ("bu oran harcamanin %X'ini kapsiyor"), yani `matchedSpending / totalCurrentSpending` degerinin ayri bir cikti alani olarak raporlanmasi. Kendi on kaydi ve kendi turu.
-- M6-E — ekran tarafı: kayıt → Dashboard / Ürünler / Analitik akışının simülatörde uçtan uca doğrulanması. Hesap düzeldiği için artık anlamlı; kendi ön kaydını ister.
+- M6-D (kapsama gostergesi, coverageRate): KABUL 2026-08-05. Zincir: 6ad408a on kayit -> 0c1d33b alti senaryo KIRMIZI -> 916059c uygulama (+9/-0) -> 4d0bb21 kapanis. Not: docs/m6d-kapanis-2026-08-05.md. Invaryans (T-D3) uc bagimsiz yoldan olculdu: sifir silinen satir, 7/7 bayt-kimlik, S1-S12 dokunulmamis beklentilerle yesil.
+- M6-E (ekran tarafi): M6-B'den sonra. Kapsam: coverageRate'in ekranda adi ve dusuk kapsama uyari esigi; monthlyTrend etiketi (grafik fiyat degisimini degil harcama degisimini ciziyor); kayit -> Dashboard / Urunler / Analitik uctan uca simulator dogrulamasi.
 - **Adım 2.5** — kategori kelime-sınırı iyileştirmesi (ölçmek yeni bir kabul turu ister).
 - **Ürün birleştirme** (Ek 9 karar 3) — isim varyansı ölçümlerde eşleşmeyen kalem
   olarak görünüyor; ürün kimliği çözülmeden kişisel enflasyon serisi kurulamaz.
