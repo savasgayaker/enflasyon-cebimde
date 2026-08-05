@@ -4,6 +4,10 @@ import { PriceRecord, Product, Receipt } from '../store/useAppStore';
 export interface InflationData {
   monthlyRate: number;
   yearlyRate: number;
+  // T-D1 (docs/m6d-on-kayit-2026-08-05.md): cari harcamanın hesaba katılan payı
+  // (%). monthlyRate eşleşen örneklemden gelir; coverageRate o örneklemin tüm
+  // sepeti ne kadar temsil ettiğini söyler. Her çıkış yolunda tanımlı sayıdır.
+  coverageRate: number;
   categoryRates: { [categoryId: string]: number };
   monthlyTrend: { month: string; rate: number }[];
 }
@@ -47,6 +51,8 @@ export function calculateInflation(
     return {
       monthlyRate: 0,
       yearlyRate: 0,
+      // T-D2: alan her çıkış yolunda tanımlı — ön kayıtta ilan edilen tek ekleme.
+      coverageRate: 0,
       categoryRates: {},
       monthlyTrend: [],
     };
@@ -181,6 +187,9 @@ export function calculateInflation(
   return {
     monthlyRate: Math.round(weightedInflation * 1000) / 10,
     yearlyRate: Math.round(weightedInflation * 12 * 1000) / 10,
+    // T-D1: matchedSpending yeniden hesaplanmaz, yukarıdaki değer kullanılır;
+    // totalCurrentSpending bu yolda > 0 (erken dönüş 0'ı ele aldı), NaN imkânsız.
+    coverageRate: Math.round((matchedSpending / totalCurrentSpending) * 1000) / 10,
     categoryRates,
     monthlyTrend,
   };
