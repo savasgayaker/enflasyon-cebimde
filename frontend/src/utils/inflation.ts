@@ -106,13 +106,23 @@ export function calculateInflation(
   });
 
   // Calculate weighted inflation
+  // T-C1 (docs/m6c-on-kayit-2026-08-05.md): genel oranın ağırlık paydası, oranı
+  // tanımlı (eşleşen) ürünlerin cari harcaması M'dir — tam sepet toplamı değil.
+  // Önceki dönemde görülmeyen ürünler eski paydada "%0 enflasyon" gibi durup
+  // oranı seyreltiyordu; kategori oranları zaten eşleşen örneklemle çalışıyordu.
+  // T-C2: M ≤ 0 iken bölme hiç yapılmaz (ternary) — oran 0, kategoriler boş.
+  const matchedSpending = Object.values(productPriceChanges).reduce(
+    (sum, data) => (data.previous > 0 && data.current > 0 ? sum + data.spending : sum),
+    0,
+  );
+
   let weightedInflation = 0;
   const categoryInflations: { [categoryId: string]: { weighted: number; totalWeight: number } } = {};
 
   Object.entries(productPriceChanges).forEach(([productId, data]) => {
     if (data.previous > 0 && data.current > 0) {
       const priceChange = (data.current - data.previous) / data.previous;
-      const weight = data.spending / totalCurrentSpending;
+      const weight = matchedSpending > 0 ? data.spending / matchedSpending : 0;
       weightedInflation += weight * priceChange;
 
       // Category-wise inflation
