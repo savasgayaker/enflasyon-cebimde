@@ -8,6 +8,11 @@
  * BİREBİR alınmıştır; kabul kuralı gereği burada değiştirilemezler. Beklenenler
  * DÜZELTME SONRASI değerlerdir — ön kayıt gereği bu test düzeltmeden önce
  * S1 ve S9'da KIRMIZI, S8'de YEŞİL koşmalıdır (alet doğrulaması).
+ *
+ * M6-C güncellemesi (docs/m6c-on-kayit-2026-08-05.md): S8'in beklenen değeri
+ * %5,0 → %10,0 (payda turu; değişiklik veri görülmeden ilan edildi) ve
+ * S10/S11/S12 eklendi. M6-C alet doğrulaması: düzeltmeden önce S8+S11+S12
+ * KIRMIZI, diğer dokuzu YEŞİL.
  */
 import { calculateInflation } from '../src/utils/inflation';
 import type { PriceRecord, Product } from '../src/store/useAppStore';
@@ -146,17 +151,17 @@ senaryo('S7 — yıllık oran doğrusal ×12 (karakterizasyon)', () => {
   check('yearlyRate', r.yearlyRate, 120);
 });
 
-senaryo('S8 — payda kilidi (karakterizasyon)', () => {
+senaryo('S8 — payda: eşleşen örneklem (M6-C ile beklentisi değişti)', () => {
   // A: önceki 1×50, cari 1×55 · C: önceki YOK, cari 1×55.
-  // Payda 55+55 = 110 → ağırlık 0,5 → 0,5×0,10 = %5,0.
-  // A'nın her iki dönemde tek kaydı var: T1'den etkilenmez. Bu senaryo
-  // düzeltme ÖNCESİ de yeşil olmalı; değer değişirse sebebi paydadır.
+  // M6-C T-C1: payda eşleşen örneklem M = 55 → ağırlık 55/55 = 1 → %10,0.
+  // (M6-A2 döneminde tam-payda kilidiydi ve %5,0 beklerdi; değişiklik veri
+  // görülmeden docs/m6c-on-kayit-2026-08-05.md'de gerekçesiyle ilan edildi.)
   const r = calculateInflation(
     [kayit('urun-a', ONCEKI, 50), kayit('urun-a', CARI_1, 55), kayit('urun-c', CARI_1, 55)],
     [urun('urun-a', 'gida'), urun('urun-c', 'gida')],
     ARALIK,
   );
-  check('monthlyRate', r.monthlyRate, 5);
+  check('monthlyRate', r.monthlyRate, 10);
 });
 
 senaryo('S9 — payda + T1 kilidi', () => {
@@ -173,6 +178,54 @@ senaryo('S9 — payda + T1 kilidi', () => {
     ARALIK,
   );
   check('monthlyRate', r.monthlyRate, 0);
+});
+
+senaryo('S10 — eşleşen küme boş: sıfır payda koruması (T-C2 kilidi)', () => {
+  // Önceki dönemde yalnız A (1×50), cari dönemde yalnız C (1×55). Erken dönüş
+  // devreye girmez (iki dönemde de harcama var) ama eşleşen küme E boştur:
+  // oran 0, kategoriler boş, NaN asla. Düzeltme ÖNCESİ de yeşil olmalı.
+  const r = calculateInflation(
+    [kayit('urun-a', ONCEKI, 50), kayit('urun-c', CARI_1, 55)],
+    [urun('urun-a', 'gida'), urun('urun-c', 'gida')],
+    ARALIK,
+  );
+  check('monthlyRate', r.monthlyRate, 0);
+  check('NaN değil', Number.isNaN(r.monthlyRate), false);
+  check('categoryRates boş', JSON.stringify(r.categoryRates), '{}');
+});
+
+senaryo('S11 — iç tutarlılık: genel oran = tek kategorinin oranı', () => {
+  // S8 verisi. M6-C sonrası genel oran, gıda kategorisinin bugün zaten ürettiği
+  // %10,0 değerine eşitlenir (envanter KANIT-1: mevcut kod 5 ≠ 10 üretiyor).
+  const r = calculateInflation(
+    [kayit('urun-a', ONCEKI, 50), kayit('urun-a', CARI_1, 55), kayit('urun-c', CARI_1, 55)],
+    [urun('urun-a', 'gida'), urun('urun-c', 'gida')],
+    ARALIK,
+  );
+  check('monthlyRate', r.monthlyRate, 10);
+  check('gıda kategorisi (tek ondalık)', yuvarla1(r.categoryRates['gida']), 10);
+  check('genel oranla aynı', yuvarla1(r.categoryRates['gida']), r.monthlyRate);
+});
+
+senaryo('S12 — payda + kategori değişmezliği (T-C3 kilidi)', () => {
+  // A(gıda) 100→110 · B(temizlik) 100→100 · C(gıda) yeni, cari 210.
+  // M = 110+100 = 210 → genel (110/210)×0,10 = %5,2 (eski payda 420 → %2,6).
+  // Kategoriler her iki tanımda da AYNI: gıda %10,0, temizlik %0,0 — T-C3
+  // cebirsel zorunluluk; kategori değeri kımıldarsa değişiklik sızmıştır.
+  const r = calculateInflation(
+    [
+      kayit('urun-a', ONCEKI, 100),
+      kayit('urun-a', CARI_1, 110),
+      kayit('urun-b', ONCEKI, 100),
+      kayit('urun-b', CARI_1, 100),
+      kayit('urun-c', CARI_1, 210),
+    ],
+    [urun('urun-a', 'gida'), urun('urun-b', 'temizlik'), urun('urun-c', 'gida')],
+    ARALIK,
+  );
+  check('monthlyRate', r.monthlyRate, 5.2);
+  check('gıda (tek ondalık)', yuvarla1(r.categoryRates['gida']), 10);
+  check('temizlik (tek ondalık)', yuvarla1(r.categoryRates['temizlik']), 0);
 });
 
 console.log('\n=== DAĞILIM ===');
