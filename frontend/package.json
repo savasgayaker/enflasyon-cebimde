@@ -10,7 +10,8 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "test:parser": "tsx scripts/test-parser.ts",
-    "test:m3-mapper": "tsx scripts/test-m3-mapper.ts"
+    "test:m3-mapper": "tsx scripts/test-m3-mapper.ts",
+    "test:inflation": "tsx scripts/test-inflation.ts"
   },
   "dependencies": {
     "@babel/runtime": "^7.20.6",
