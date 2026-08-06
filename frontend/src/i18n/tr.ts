@@ -126,6 +126,21 @@ export const tr = {
     lastYear: 'Son 1 Yıl',
     exportCSV: 'CSV Olarak Dışa Aktar',
     noData: 'Henüz yeterli veri yok',
+    // M6-E E0b (docs/m6e-on-kayit-2026-08-06.md §7.2)
+    spendingByCategory: 'Seçili Dönemde Harcama Dağılımı',
+    total: 'Toplam',
+  },
+
+  // Inflation display texts — M6-E E0b (docs/m6e-on-kayit-2026-08-06.md §7.1).
+  // {ay} ve {yuzde} yer tutucularını ekranMetinleri.ts doldurur.
+  inflation: {
+    windowLabel: 'Son {ay} ayda',
+    windowShort: 'Son 1 aydan kısa dönemde',
+    windowUnknown: 'Dönem belirsiz',
+    yearlyEquivalent: 'Yıllık eşdeğer (tahmin)',
+    coverage: 'Kapsama %{yuzde}',
+    lowCoverage: 'Düşük kapsama — harcamanın yalnızca küçük bir bölümü fiyat karşılaştırmasına girdi',
+    spendingChangeTitle: 'Harcama Değişimi',
   },
   
   // Receipt History
