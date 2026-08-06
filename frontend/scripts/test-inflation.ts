@@ -17,6 +17,12 @@
  * M6-D güncellemesi (docs/m6d-on-kayit-2026-08-05.md): S13–S18 eklendi
  * (coverageRate alanı); S1–S12'ye dokunulmadı (T-D3 invaryans). M6-D alet
  * doğrulaması: düzeltmeden önce S13–S18'in ALTISI da KIRMIZI, S1–S12 YEŞİL.
+ *
+ * M6-B güncellemesi (docs/m6b-on-kayit-2026-08-06.md): S7'nin beklentisi
+ * 120 → 213,8 (bileşik + pencereye göre normalize; §7.2'de veri görülmeden
+ * ilan edildi) ve S19–S23 eklendi (windowMonths alanı). Kırmızı turda tam
+ * 10 kontrol kırmızı olmalı (§8'deki adlı liste); başka hiçbir senaryonun
+ * beklentisi değişmedi.
  */
 import { calculateInflation } from '../src/utils/inflation';
 import type { PriceRecord, Product } from '../src/store/useAppStore';
@@ -56,6 +62,15 @@ const ARALIK = { start: new Date('2026-07-01T00:00:00Z'), end: new Date('2026-07
 const ONCEKI = '2026-06-10';
 const CARI_1 = '2026-07-05';
 const CARI_2 = '2026-07-12';
+
+// M6-B pencereleri (ön kayıt §7.1): uzunluklar tam 30 gün katı — ham ve
+// yuvarlanmış windowMonths aynı sayıya düşer, beklenenler elle hesaplanabilir.
+const ARALIK_90 = { start: new Date('2026-05-03T00:00:00Z'), end: new Date('2026-08-01T00:00:00Z') };
+const ARALIK_180 = { start: new Date('2026-02-02T00:00:00Z'), end: new Date('2026-08-01T00:00:00Z') };
+const ONCEKI_90 = '2026-03-15';
+const CARI_90 = '2026-06-15';
+const ONCEKI_180 = '2025-10-15';
+const CARI_180 = '2026-04-15';
 
 let sayac = 0;
 function kayit(productId: string, date: string, unitPrice: number, quantity = 1): PriceRecord {
@@ -145,14 +160,16 @@ senaryo('S6 — tek kategori: kategori oranı = genel oran (karakterizasyon)', (
   check('genel oranla aynı', yuvarla1(r.categoryRates['gida']), r.monthlyRate);
 });
 
-senaryo('S7 — yıllık oran doğrusal ×12 (karakterizasyon)', () => {
-  // S2 verisi → 10,0 × 12 = %120,0 (M6-B'ye kadar doğrusal davranış korunur).
+senaryo('S7 — yıllık oran bileşik ve pencereye göre normalize', () => {
+  // S2 verisi, n = 1,0 → 1,1^12 − 1 → %213,8. Eski doğrusal ×12 kilidi (120)
+  // M6-B ön kaydı §7.2'de VERİ GÖRÜLMEDEN ilan edilerek kırıldı.
   const r = calculateInflation(
     [kayit('urun-a', ONCEKI, 20), kayit('urun-a', CARI_1, 22)],
     [urun('urun-a', 'gida')],
     ARALIK,
   );
-  check('yearlyRate', r.yearlyRate, 120);
+  check('yearlyRate', r.yearlyRate, 213.8);
+  check('windowMonths', r.windowMonths, 1);
 });
 
 senaryo('S8 — payda: eşleşen örneklem (M6-C ile beklentisi değişti)', () => {
@@ -307,6 +324,67 @@ senaryo('S18 — S8 verisi: kapsama %50, monthlyRate DEĞİŞMEZ (T-D3)', () => 
   );
   check('coverageRate', r.coverageRate, 50);
   check('monthlyRate (değişmez)', r.monthlyRate, 10);
+});
+
+senaryo('S19 — 3 aylık pencerede bileşik yıllıklaştırma', () => {
+  // n = 3,0 · w = %10 → üs 4 → 1,1^4 − 1 = 0,4641 → %46,4.
+  const r = calculateInflation(
+    [kayit('urun-a', ONCEKI_90, 20), kayit('urun-a', CARI_90, 22)],
+    [urun('urun-a', 'gida')],
+    ARALIK_90,
+  );
+  check('monthlyRate', r.monthlyRate, 10);
+  check('yearlyRate', r.yearlyRate, 46.4);
+  check('windowMonths', r.windowMonths, 3);
+});
+
+senaryo('S20 — sıfır değişimde yıllık oran sıfır kalır', () => {
+  // w = 0 → 1,0^12 − 1 = 0.
+  const r = calculateInflation(
+    [kayit('urun-a', ONCEKI, 20), kayit('urun-a', CARI_1, 20)],
+    [urun('urun-a', 'gida')],
+    ARALIK,
+  );
+  check('monthlyRate', r.monthlyRate, 0);
+  check('yearlyRate', r.yearlyRate, 0);
+  check('windowMonths', r.windowMonths, 1);
+});
+
+senaryo('S21 — negatif değişimde bileşik yıllıklaştırma', () => {
+  // w = −%10 → 0,9^12 = 0,2824295 → (0,2824295 − 1)×1000 = −717,57 →
+  // Math.round → −718 → %−71,8 (yarım-nokta değil; en yakın tam sayı −718).
+  const r = calculateInflation(
+    [kayit('urun-a', ONCEKI, 20), kayit('urun-a', CARI_1, 18)],
+    [urun('urun-a', 'gida')],
+    ARALIK,
+  );
+  check('monthlyRate', r.monthlyRate, -10);
+  check('yearlyRate', r.yearlyRate, -71.8);
+  check('windowMonths', r.windowMonths, 1);
+});
+
+senaryo('S22 — cari kayıt yokken erken dönüş: windowMonths yine tanımlı', () => {
+  // windowMonths pencereden türer, veriden değil; erken dönüşte de dürüst değer.
+  const r = calculateInflation(
+    [kayit('urun-a', ONCEKI, 20)],
+    [urun('urun-a', 'gida')],
+    ARALIK,
+  );
+  check('yearlyRate', r.yearlyRate, 0);
+  check('coverageRate', r.coverageRate, 0);
+  check('windowMonths', r.windowMonths, 1);
+});
+
+senaryo('S23 — 6 aylık pencerede bileşik yıllıklaştırma', () => {
+  // n = 6,0 · w = %10 → üs 2 → 1,1^2 − 1 = 0,21 → %21,0.
+  const r = calculateInflation(
+    [kayit('urun-a', ONCEKI_180, 20), kayit('urun-a', CARI_180, 22)],
+    [urun('urun-a', 'gida')],
+    ARALIK_180,
+  );
+  check('monthlyRate', r.monthlyRate, 10);
+  check('yearlyRate', r.yearlyRate, 21);
+  check('windowMonths', r.windowMonths, 6);
 });
 
 console.log('\n=== DAĞILIM ===');
