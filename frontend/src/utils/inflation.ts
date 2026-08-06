@@ -8,6 +8,10 @@ export interface InflationData {
   // (%). monthlyRate eşleşen örneklemden gelir; coverageRate o örneklemin tüm
   // sepeti ne kadar temsil ettiğini söyler. Her çıkış yolunda tanımlı sayıdır.
   coverageRate: number;
+  // M6-B (docs/m6b-on-kayit-2026-08-06.md): pencere uzunluğu, ay cinsinden,
+  // tek ondalık — YALNIZCA gösterim için; hesaba girmez. M6-E'nin dürüst
+  // etiket yazabilmesi için ("son 3 ayda %X" diyebilmek için 3'ü bilmek gerekir).
+  windowMonths: number;
   categoryRates: { [categoryId: string]: number };
   monthlyTrend: { month: string; rate: number }[];
 }
@@ -35,6 +39,10 @@ export function calculateInflation(
 
   // Get previous period records (same duration, but before start date)
   const duration = dateRange.end.getTime() - dateRange.start.getTime();
+  // M6-B (docs/m6b-on-kayit-2026-08-06.md §6): pencere uzunluğu, 30 günlük ay
+  // yaklaşımıyla (2 592 000 000 ms). Üs HAM değerden hesaplanır; dışarı verilen
+  // windowMonths alanı tek ondalığa yuvarlanır ve YALNIZCA gösterim içindir.
+  const windowMonths = duration / 2592000000;
   const previousStart = new Date(dateRange.start.getTime() - duration);
   const previousEnd = new Date(dateRange.start.getTime() - 1);
   
@@ -53,6 +61,9 @@ export function calculateInflation(
       yearlyRate: 0,
       // T-D2: alan her çıkış yolunda tanımlı — ön kayıtta ilan edilen tek ekleme.
       coverageRate: 0,
+      // M6-B: windowMonths pencereden türer, veriden değil — erken dönüşte de
+      // dürüst değer (ilan edilen şekil tercihi: yerinde-hesap yerine sabit).
+      windowMonths: Math.round(windowMonths * 10) / 10,
       categoryRates: {},
       monthlyTrend: [],
     };
@@ -186,10 +197,17 @@ export function calculateInflation(
 
   return {
     monthlyRate: Math.round(weightedInflation * 1000) / 10,
-    yearlyRate: Math.round(weightedInflation * 12 * 1000) / 10,
+    // M6-B §6: bileşik yıllıklaştırma, üs HAM windowMonths'tan (12 / n).
+    // 1 + weightedInflation ≤ 0 imkânsız (eşleşen kümede previous > 0 ve
+    // current > 0; ağırlıklar negatif olamaz) — ayrıca korunmaz, kanıt ön kayıtta.
+    yearlyRate:
+      windowMonths > 0
+        ? Math.round((Math.pow(1 + weightedInflation, 12 / windowMonths) - 1) * 1000) / 10
+        : 0,
     // T-D1: matchedSpending yeniden hesaplanmaz, yukarıdaki değer kullanılır;
     // totalCurrentSpending bu yolda > 0 (erken dönüş 0'ı ele aldı), NaN imkânsız.
     coverageRate: Math.round((matchedSpending / totalCurrentSpending) * 1000) / 10,
+    windowMonths: Math.round(windowMonths * 10) / 10,
     categoryRates,
     monthlyTrend,
   };
