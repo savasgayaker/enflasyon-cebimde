@@ -52,12 +52,9 @@ export const tr = {
   // Home Dashboard
   home: {
     personalInflation: 'Kişisel Enflasyon',
-    monthly: 'Aylık',
-    yearly: 'Yıllık',
     totalReceipts: 'Toplam Fiş',
     totalProducts: 'Toplam Ürün',
     topCategory: 'En Pahalı Kategori',
-    last6Months: 'Son 6 Ay Trendi',
     scanReceipt: 'Fiş Tara',
     noData: 'Henüz veri yok',
     startScanning: 'İlk fişinizi tarayarak başlayın',
@@ -117,7 +114,6 @@ export const tr = {
     personalInflation: 'Kişisel Enflasyon Oranı',
     categoryBreakdown: 'Kategori Bazlı Enflasyon',
     monthlySpending: 'Aylık Harcama Dağılımı',
-    priceTrends: 'Fiyat Trendleri',
     dateRange: 'Tarih Aralığı',
     lastMonth: 'Son 1 Ay',
     last3Months: 'Son 3 Ay',
