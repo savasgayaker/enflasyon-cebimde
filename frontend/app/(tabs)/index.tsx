@@ -130,7 +130,7 @@ export default function HomeScreen() {
 
         {/* Trend Chart */}
         <View style={[styles.chartCard, { backgroundColor: theme.surface }]}>
-          <Text style={[styles.chartTitle, { color: theme.text }]}>{tr.home.last6Months}</Text>
+          <Text style={[styles.chartTitle, { color: theme.text }]}>{tr.inflation.spendingChangeTitle}</Text>
           {hasData ? (
             <LineChart
               data={chartData}

@@ -195,7 +195,7 @@ export default function AnalyticsScreen() {
             {/* Inflation Trend Chart */}
             <View style={[styles.card, { backgroundColor: theme.surface }]}>
               <Text style={[styles.cardTitle, { color: theme.text }]}>
-                {tr.analytics.priceTrends}
+                {tr.inflation.spendingChangeTitle}
               </Text>
               {lineData.length > 0 && (
                 <LineChart
@@ -251,7 +251,7 @@ export default function AnalyticsScreen() {
             {pieData.length > 0 && (
               <View style={[styles.card, { backgroundColor: theme.surface }]}>
                 <Text style={[styles.cardTitle, { color: theme.text }]}>
-                  {tr.analytics.monthlySpending}
+                  {tr.analytics.spendingByCategory}
                 </Text>
                 <View style={styles.pieContainer}>
                   <PieChart
@@ -265,7 +265,7 @@ export default function AnalyticsScreen() {
                           ₺{categorySpending.reduce((sum, c) => sum + c.totalSpending, 0).toFixed(0)}
                         </Text>
                         <Text style={[styles.pieCenterLabel, { color: theme.textSecondary }]}>
-                          Toplam
+                          {tr.analytics.total}
                         </Text>
                       </View>
                     )}
