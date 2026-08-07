@@ -77,7 +77,6 @@ export default function HomeScreen() {
   }, [inflationData.monthlyTrend]);
 
   const hasData = receipts.length > 0;
-  const officialRate = 62.4; // TÜİK rate for comparison (example)
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]} edges={['bottom']}>
@@ -99,15 +98,6 @@ export default function HomeScreen() {
               </Text>
               <Text style={styles.rateLabel}>{tr.home.yearly}</Text>
             </View>
-          </View>
-
-          {/* Comparison with official rate */}
-          <View style={styles.comparisonBox}>
-            <MaterialIcons name="compare-arrows" size={16} color={colors.accent} />
-            <Text style={styles.comparisonText}>
-              {tr.home.vsOfficial}:{' '}
-              <Text style={styles.comparisonValue}>%{officialRate}</Text>
-            </Text>
           </View>
         </View>
 
@@ -263,25 +253,6 @@ const styles = StyleSheet.create({
     width: 1,
     height: 50,
     backgroundColor: 'rgba(255,255,255,0.3)',
-  },
-  comparisonBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(255,255,255,0.15)',
-    borderRadius: borderRadius.full,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    marginTop: spacing.md,
-  },
-  comparisonText: {
-    ...typography.bodySmall,
-    color: colors.white,
-    marginLeft: spacing.xs,
-  },
-  comparisonValue: {
-    fontWeight: '700',
-    color: colors.accent,
   },
   statsRow: {
     flexDirection: 'row',

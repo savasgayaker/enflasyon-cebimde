@@ -54,7 +54,6 @@ export const tr = {
     personalInflation: 'Kişisel Enflasyon',
     monthly: 'Aylık',
     yearly: 'Yıllık',
-    vsOfficial: 'TÜİK oranına karşı',
     totalReceipts: 'Toplam Fiş',
     totalProducts: 'Toplam Ürün',
     topCategory: 'En Pahalı Kategori',
