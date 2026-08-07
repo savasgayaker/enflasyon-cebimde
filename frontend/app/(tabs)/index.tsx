@@ -15,6 +15,14 @@ import { useAppStore } from '../../src/store/useAppStore';
 import { colors, spacing, borderRadius, typography, shadows } from '../../src/constants/theme';
 import { tr } from '../../src/i18n/tr';
 import { calculateInflation } from '../../src/utils/inflation';
+import {
+  donemselOranEtiketi,
+  yillikEsdegerEtiketi,
+  kapsamaYuzdesine,
+  kapsamaMetni,
+  dusukKapsamaUyarisi,
+  oranGosterilsinMi,
+} from '../../src/utils/ekranMetinleri';
 import { categories } from '../../src/constants/categories';
 import { subMonths } from 'date-fns';
 
@@ -77,6 +85,10 @@ export default function HomeScreen() {
   }, [inflationData.monthlyTrend]);
 
   const hasData = receipts.length > 0;
+  // M6-E E4: karar mantigi modulde; ekran yalnizca cagirir ve basar.
+  const kapsamaYuzde = kapsamaYuzdesine(inflationData.coverageRate);
+  const oranGoster = hasData && oranGosterilsinMi(kapsamaYuzde);
+  const kapsamaUyari = dusukKapsamaUyarisi(kapsamaYuzde);
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]} edges={['bottom']}>
@@ -87,18 +99,24 @@ export default function HomeScreen() {
           <View style={styles.inflationRates}>
             <View style={styles.rateBox}>
               <Text style={styles.rateValue}>
-                {hasData ? `%${inflationData.monthlyRate.toFixed(1)}` : '-%'}
+                {oranGoster ? `%${inflationData.monthlyRate.toFixed(1)}` : '-%'}
               </Text>
-              <Text style={styles.rateLabel}>{tr.home.monthly}</Text>
+              <Text style={styles.rateLabel}>{donemselOranEtiketi(inflationData.windowMonths)}</Text>
             </View>
             <View style={styles.rateDivider} />
             <View style={styles.rateBox}>
               <Text style={styles.rateValue}>
-                {hasData ? `%${inflationData.yearlyRate.toFixed(1)}` : '-%'}
+                {oranGoster ? `%${inflationData.yearlyRate.toFixed(1)}` : '-%'}
               </Text>
-              <Text style={styles.rateLabel}>{tr.home.yearly}</Text>
+              <Text style={styles.rateLabel}>{yillikEsdegerEtiketi()}</Text>
             </View>
           </View>
+          {oranGoster && (
+            <Text style={[styles.rateLabel, styles.kapsamaSatiri]}>{kapsamaMetni(kapsamaYuzde)}</Text>
+          )}
+          {oranGoster && kapsamaUyari && (
+            <Text style={[styles.rateLabel, styles.kapsamaSatiri]}>{kapsamaUyari}</Text>
+          )}
         </View>
 
         {/* Quick Stats */}
@@ -253,6 +271,10 @@ const styles = StyleSheet.create({
     width: 1,
     height: 50,
     backgroundColor: 'rgba(255,255,255,0.3)',
+  },
+  kapsamaSatiri: {
+    textAlign: 'center',
+    marginTop: spacing.sm,
   },
   statsRow: {
     flexDirection: 'row',

@@ -17,6 +17,14 @@ import { useAppStore } from '../../src/store/useAppStore';
 import { colors, spacing, borderRadius, typography, shadows } from '../../src/constants/theme';
 import { tr } from '../../src/i18n/tr';
 import { calculateInflation, calculateCategorySpending, exportToCSV } from '../../src/utils/inflation';
+import {
+  donemselOranEtiketi,
+  yillikEsdegerEtiketi,
+  kapsamaYuzdesine,
+  kapsamaMetni,
+  dusukKapsamaUyarisi,
+  oranGosterilsinMi,
+} from '../../src/utils/ekranMetinleri';
 import { categories } from '../../src/constants/categories';
 import { subMonths, subYears } from 'date-fns';
 
@@ -116,6 +124,10 @@ export default function AnalyticsScreen() {
   };
 
   const hasData = priceRecords.length > 0;
+  // M6-E E4: karar mantigi modulde; ekran yalnizca cagirir ve basar.
+  const kapsamaYuzde = kapsamaYuzdesine(inflationData.coverageRate);
+  const oranGoster = hasData && oranGosterilsinMi(kapsamaYuzde);
+  const kapsamaUyari = dusukKapsamaUyarisi(kapsamaYuzde);
 
   const dateRangeOptions: { key: DateRange; label: string }[] = [
     { key: '1m', label: tr.analytics.lastMonth },
@@ -174,22 +186,32 @@ export default function AnalyticsScreen() {
               <View style={styles.inflationDisplay}>
                 <View style={styles.inflationItem}>
                   <Text style={[styles.inflationValue, { color: colors.primary }]}>
-                    %{inflationData.monthlyRate.toFixed(1)}
+                    {oranGoster ? `%${inflationData.monthlyRate.toFixed(1)}` : '-%'}
                   </Text>
                   <Text style={[styles.inflationLabel, { color: theme.textSecondary }]}>
-                    {tr.home.monthly}
+                    {donemselOranEtiketi(inflationData.windowMonths)}
                   </Text>
                 </View>
                 <View style={[styles.inflationDivider, { backgroundColor: theme.border }]} />
                 <View style={styles.inflationItem}>
                   <Text style={[styles.inflationValue, { color: colors.accent }]}>
-                    %{inflationData.yearlyRate.toFixed(1)}
+                    {oranGoster ? `%${inflationData.yearlyRate.toFixed(1)}` : '-%'}
                   </Text>
                   <Text style={[styles.inflationLabel, { color: theme.textSecondary }]}>
-                    {tr.home.yearly}
+                    {yillikEsdegerEtiketi()}
                   </Text>
                 </View>
               </View>
+              {oranGoster && (
+                <Text style={[styles.inflationLabel, styles.kapsamaSatiri, { color: theme.textSecondary }]}>
+                  {kapsamaMetni(kapsamaYuzde)}
+                </Text>
+              )}
+              {oranGoster && kapsamaUyari && (
+                <Text style={[styles.inflationLabel, styles.kapsamaSatiri, { color: colors.warning }]}>
+                  {kapsamaUyari}
+                </Text>
+              )}
             </View>
 
             {/* Inflation Trend Chart */}
@@ -355,6 +377,10 @@ const styles = StyleSheet.create({
   inflationLabel: {
     ...typography.bodySmall,
     marginTop: 4,
+  },
+  kapsamaSatiri: {
+    textAlign: 'center',
+    marginTop: spacing.sm,
   },
   inflationDivider: {
     width: 1,
