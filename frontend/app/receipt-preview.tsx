@@ -33,6 +33,8 @@ type UIItem = {
   totalPrice: number;
   categoryId: string;
   needsReview: boolean;
+  unit?: string | null;
+  vatRate?: number | null;
 };
 
 export default function ReceiptPreview() {
@@ -68,6 +70,8 @@ export default function ReceiptPreview() {
         totalPrice: it.totalPrice ?? 0,
         categoryId: it.categoryId,
         needsReview: it.needsReview,
+        unit: it.unit,
+        vatRate: it.vatRate,
       })),
     [initialData],
   );
@@ -200,6 +204,8 @@ export default function ReceiptPreview() {
           quantity: item.quantity,
           unitPrice: item.unitPrice,
           totalPrice: item.totalPrice,
+          unit: item.unit,
+          vatRate: item.vatRate,
           date,
         };
         
