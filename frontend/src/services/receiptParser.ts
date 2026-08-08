@@ -34,6 +34,8 @@ export interface ParsedItem {
   categoryId: string;
   /** Fiyat null ya da aritmetikle kurtarıldıysa true; ekranda işaretlenmeli. */
   needsReview: boolean;
+  unit?: string | null;
+  vatRate?: number | null;
 }
 
 /**

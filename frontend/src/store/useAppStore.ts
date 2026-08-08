@@ -27,6 +27,8 @@ export interface PriceRecord {
   unitPrice: number;
   totalPrice: number;
   date: string;
+  unit?: string | null;
+  vatRate?: number | null;
 }
 
 export interface UserSettings {

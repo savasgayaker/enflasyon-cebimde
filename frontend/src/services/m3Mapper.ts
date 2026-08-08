@@ -16,6 +16,8 @@ export interface M3Response {
     quantity: number;
     unitPrice: number | null;
     totalPrice: number | null;
+    unit?: string | null;
+    vatRate?: number | null;
     needsReview: boolean;
   }[];
 }
@@ -67,6 +69,8 @@ export function mapM3Response(data: M3Response): ParsedReceipt {
       quantity,
       unitPrice,
       totalPrice,
+      unit: it.unit,
+      vatRate: it.vatRate,
       categoryId: suggestCategory(it.name).id,
       needsReview: spreadReview || it.needsReview === true || totalPrice === null,
     };
