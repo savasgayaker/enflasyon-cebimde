@@ -142,5 +142,43 @@ console.log('10) Boş ürün listesi → yönlendirme mesajlı Error');
 
 // ---------------------------------------------------------------------------
 console.log('');
+
+// --- M7-A1: unit / vatRate tip zinciri olcumu ---
+// A1'de bu alanlar M3Response ve ParsedItem tiplerinde yok.
+// Giriste tip koprusu, cikista tipsiz okuma. Ikisi de A2'de degismeden calisir.
+const alanEkle = (temel: object, ek: Record<string, unknown>) =>
+  ({ ...temel, ...ek }) as unknown as ReturnType<typeof item>;
+const alanOku = (o: unknown, ad: string): unknown =>
+  (o as Record<string, unknown>)[ad];
+
+// S-U1 alanlar dolu (GIMSA ground-truth POSET kalemi)
+{
+  const y = mapM3Response(baseResponse([
+    alanEkle(item({ quantity: 3, unitPrice: 1, totalPrice: 3 }),
+             { unit: "adet", vatRate: 20 }),
+  ]));
+  check("S-U1 unit dolu tasinir", alanOku(y.items[0], "unit") as unknown, "adet" as unknown);
+  check("S-U1 vatRate dolu tasinir", alanOku(y.items[0], "vatRate") as unknown, 20 as unknown);
+}
+
+// S-U2 alanlar acikca null (bilinmiyor; null olarak korunmali)
+{
+  const y = mapM3Response(baseResponse([
+    alanEkle(item({ quantity: 1, unitPrice: 10, totalPrice: 10 }),
+             { unit: null, vatRate: null }),
+  ]));
+  check("S-U2 unit null korunur", alanOku(y.items[0], "unit") as unknown, null as unknown);
+  check("S-U2 vatRate null korunur", alanOku(y.items[0], "vatRate") as unknown, null as unknown);
+}
+
+// S-U3 alanlar hic gelmez - muhafiz: varsayilan uydurulmamali
+{
+  const y = mapM3Response(baseResponse([
+    item({ quantity: 1, unitPrice: 10, totalPrice: 10 }),
+  ]));
+  check("S-U3 unit uydurulmaz", alanOku(y.items[0], "unit") as unknown, undefined as unknown);
+  check("S-U3 vatRate uydurulmaz", alanOku(y.items[0], "vatRate") as unknown, undefined as unknown);
+}
+
 console.log(`Sonuç: ${passed}/${passed + failed} kontrol başarılı.`);
 process.exit(failed === 0 ? 0 : 1);
