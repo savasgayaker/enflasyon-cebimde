@@ -2,6 +2,16 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// M7-A3: sema surum damgasi. Surum 1, kimlik gocu (S5).
+// unit ve vatRate optional alanlar oldugu icin donusume gerek yok;
+// amac mekanizmayi kurmak ve kayitlarin hangi semayla yazildigini damgalamak.
+export const SEMA_SURUMU = 1;
+
+export function semaGocu(kalan: unknown, oncekiSurum: number): unknown {
+  void oncekiSurum;
+  return kalan;
+}
+
 export interface Receipt {
   id: string;
   storeName: string;
@@ -178,6 +188,8 @@ export const useAppStore = create<AppState>()(
     {
       name: 'enflasyon-storage',
       storage: createJSONStorage(() => AsyncStorage),
+      version: SEMA_SURUMU,
+      migrate: semaGocu,
     }
   )
 );
