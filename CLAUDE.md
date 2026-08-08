@@ -42,6 +42,8 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
 10. **Tavsiye kabul kapisi degildir.** On kayittaki "onerilen sekil" yol gostericidir, kabul kurali baglayicidir. Ikisi celisirse kabul kapisi uygulanir; sapma veri gorulmeden once ilan edilir ve kapanis kaydina gecer. Celiski, on kaydi yazanin hatasidir.
 11. Kapi boru hattina baglanmaz — bir kapinin cikisi tee gibi bir boruya verilmez; once dosyaya yazilir, ayri komutla basilir, boru zorunluysa set -o pipefail ilan edilir (set -e yalnizca boru hattinin son komutunu gorur, tee her zaman 0 doner ve kapiyi sessizce iptal eder). Ayrica calisan bir olcum deseni sebepsiz degistirilmez; degistirilecekse once gercek cikti uzerinde eslestigi gosterilir. Kaynak: M6-B kapanisi, 6c7373c.
 
+12. **Olcum ani ilan edilir.** Her kabul maddesi, ilan edilen tur sirasinda hangi turdan SONRA saglanabilir oldugunu acikca yazar. On kayit yazilirken her madde icin "bu ne zaman olculebilir?" sorusu tur kapsamlariyla karsilastirilarak tek tek cevaplanir. M6-E'de iki ayri ic celiski dogrudan bu adimin atlanmasindan dogdu. Ayni kural ifadenin okunmasi icin de gecerlidir: bir kosul kod grafigine atifta bulunuyorsa, metinsel mi calisma zamani mi okunacagi onceden yazilir; yazilmamissa yorum karari ilan edilir ve mumkunse makineyle sinanir.
+
 ### Ölçüm araçları nerede
 - `m3-test/acceptance_dual.py` — ölçüm aleti (jetonlu, 6 fiş × 5 koşum = 30).
 - `m3-test/puanla_bilesik.py` — başlık+eşleşme+fiyat bileşik oranı, arşivden.
@@ -51,6 +53,7 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
   içindeki DAR negation'larla sağlanır — kök `.gitignore`'dan delinemez).
 - `frontend/scripts/test-inflation.ts` — enflasyon hesabinin olcum araci: 23 senaryo / 54 kontrol (`npm run test:inflation`, frontend/ icinden; cikis kodu 0 = hepsi yesil). Beklenen degerlerin gerekcesi on kayitlarda: `docs/m6a2-on-kayit-2026-08-05.md` (fiyat toplulastirma) ve `docs/m6c-on-kayit-2026-08-05.md` (agirlik paydasi).
 - Bu aletin ozet satirinin birebir bicimi: Toplam: <yesil> yesil kontrol, <kirmizi> kirmizi kontrol — senaryo sayisi bu satirda YOKTUR, kaynaktaki senaryo( cagrilarindan ya da DAGILIM etiketlerinden sayilir. Ayristirici yazan her blok bu bicime uyar, tahmin etmez.
+- Ekran metinleri aleti: `frontend/scripts/test-ekran-metinleri.ts` — 27 kontrol, ekranMetinleri.ts'in saf fonksiyonlarini olcer. package.json'da betigi YOK; `npx tsx scripts/test-ekran-metinleri.ts` ile calistirilir. Ozet satiri biçimi yukaridakiyle aynidir.
 - Kaynak dogrulama kanali (mimar icin): `https://raw.githubusercontent.com/savasgayaker/enflasyon-cebimde/<commit-sha>/<yol>`. **Daima commit sha'sina sabitle** — dal ucuna (`main`) giden yol bayat kopya dondurebiliyor (2026-08-05'te dondurdu). Push'suz commit'ler bu kanaldan gorunmez.
 
 ### Prompt provenansı
@@ -66,7 +69,8 @@ YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 - M6-B — yilliklastirma bilesik ve pencere uzunluguna gore normalize: **KABUL** (zincir: 64d2240 on kayit -> 3bc771e kirmizi -> d716fb7 uygulama -> 6c7373c kapanis)
 - **M6-C KABUL (2026-08-05, `47932cf`)**: agirlik paydasi eslesen orneklemle sinirlandi (`weight = spending / matchedSpending`); genel oran artik kategori oranlariyla ic tutarli ve yeni urun almak orani seyreltmiyor. On kayit `docs/m6c-on-kayit-2026-08-05.md`, kapanis `docs/m6c-kapanis-2026-08-05.md`, zincir `171597c` -> `818d283` -> `47932cf` -> `cef4ec6`.
 - M6-D (kapsama gostergesi, coverageRate): KABUL 2026-08-05. Zincir: 6ad408a on kayit -> 0c1d33b alti senaryo KIRMIZI -> 916059c uygulama (+9/-0) -> 4d0bb21 kapanis. Not: docs/m6d-kapanis-2026-08-05.md. Invaryans (T-D3) uc bagimsiz yoldan olculdu: sifir silinen satir, 7/7 bayt-kimlik, S1-S12 dokunulmamis beklentilerle yesil.
-- M6-E — ekran katmani: **SIRADAKI** (adlar ve dogru etiketler, coverageRate gosterimi ve dusuk kapsama esigi, monthlyTrend etiketi, windowMonths'a dayali durust metinler, ucdan uca simulator dogrulamasi)
+- M6-E — ekran katmani: **KABUL** — dokuz alt tur (E0..E5d), dort ilan edilmis sapma; zincir f1db5ce -> 1f03926 -> 5d2dded -> 68bec88 -> 26b66c7 -> e6cb0bc -> 89e2459 -> 9a7b688 -> e6a5eca -> 631b06d; kapanis notu docs/m6e-kapanis-2026-08-07.md
+- M6 hesap ve ekran katmanlarinin TAMAMI kapandi (A2, B, C, D, E). Siradaki is yayin hattidir: Blok 12-A (alan adi + Cloudflare Tunnel). Tunel, TestFlight'in onkosuludur — testcilerin telefonu yerel agdaki adrese ulasamaz. Ayrinti: docs/m6e-kapanis-2026-08-07.md bolum 9.
 - **Adım 2.5** — kategori kelime-sınırı iyileştirmesi (ölçmek yeni bir kabul turu ister).
 - **Ürün birleştirme** (Ek 9 karar 3) — isim varyansı ölçümlerde eşleşmeyen kalem
   olarak görünüyor; ürün kimliği çözülmeden kişisel enflasyon serisi kurulamaz.
