@@ -163,4 +163,9 @@ export const tr = {
     privacyPolicy: 'Gizlilik Politikası',
     version: 'Versiyon',
   },
+  receiptPreview: {
+    hataGecersizKalem: 'Tüm ürünlerin adı ve fiyatı olmalıdır',
+    seritEksik: 'FİYAT GİRİN',
+    seritIncele: 'İNCELEYİN',
+  },
 };

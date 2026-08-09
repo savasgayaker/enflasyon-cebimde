@@ -19,6 +19,11 @@ import { colors, spacing, borderRadius, typography, shadows } from '../src/const
 import { tr } from '../src/i18n/tr';
 import { categories, suggestCategory } from '../src/constants/categories';
 import type { ParsedReceipt } from '../src/services/receiptParser';
+import {
+  kalemGecerliMi,
+  seritSeviyesi,
+  kayitKarari,
+} from '../src/utils/fisKalemKurallari';
 
 /**
  * Ekran-içi kalem tipi. Parser `unitPrice/totalPrice: number | null` döner;
@@ -150,9 +155,9 @@ export default function ReceiptPreview() {
       return;
     }
 
-    const invalidItems = items.filter((item) => !item.name.trim() || item.unitPrice <= 0);
-    if (invalidItems.length > 0) {
-      Alert.alert(tr.error, 'Tüm ürünlerin adı ve fiyatı olmalıdır');
+    const gecersiz = items.filter((item) => !kalemGecerliMi(item));
+    if (gecersiz.length > 0) {
+      Alert.alert(tr.error, tr.receiptPreview.hataGecersizKalem);
       return;
     }
 
@@ -195,15 +200,14 @@ export default function ReceiptPreview() {
 
       // Create products and price records
       for (const item of items) {
+        const karar = kayitKarari(item);
         const product = findOrCreateProduct(item.name.trim(), item.categoryId);
         
         const priceRecord = {
           id: Date.now().toString(36) + Math.random().toString(36).substr(2),
           productId: product.id,
           receiptId,
-          quantity: item.quantity,
-          unitPrice: item.unitPrice,
-          totalPrice: item.totalPrice,
+          ...karar.kayit,
           unit: item.unit,
           vatRate: item.vatRate,
           date,
@@ -231,17 +235,18 @@ export default function ReceiptPreview() {
     //   needsReview && totalPrice === 0 → KIRMIZI (fiyat bulunamadı, manuel girilmeli)
     //   needsReview && totalPrice > 0   → SARI (aritmetik kurtarma veya Düzen B; incele)
     //   needsReview false               → vurgu yok
-    const reviewMissing = item.needsReview && item.totalPrice === 0;
-    const reviewSoft = item.needsReview && item.totalPrice > 0;
+    const seviye = seritSeviyesi(item);
+    const reviewMissing = seviye === 'eksik';
+    const reviewSoft = seviye === 'incele';
     const reviewColor = reviewMissing
       ? colors.error
       : reviewSoft
         ? colors.warning
         : null;
     const reviewLabel = reviewMissing
-      ? 'FİYAT GİRİN'
+      ? tr.receiptPreview.seritEksik
       : reviewSoft
-        ? 'İNCELEYİN'
+        ? tr.receiptPreview.seritIncele
         : null;
 
     return (
