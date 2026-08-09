@@ -18,12 +18,27 @@ RECEIPT_PROMPT = """Sen Türk market fişlerini okuyan bir asistansın. Sana ver
   "totalAmount": 0.0,
   "kdvBlok": {"1": 0.0, "10": 0.0, "20": 0.0},
   "items": [
-    {"name": "ÜRÜN ADI", "quantity": 1, "unit": "adet", "unitPrice": 0.0, "totalPrice": 0.0, "vatRate": 20}
+    {"name": "ÜRÜN ADI", "quantity": 1, "unit": "adet", "unitPrice": 0.0, "totalPrice": 0.0, "vatRate": 20, "satirTipi": "urun"}
   ]
 }
 
 Kurallar:
 - items listesine SADECE satın alınan ürün/hizmet satırlarını koy. KDV satırları, TOPKDV, ara toplam, POS/banka satırları, kampanya mesajları, adres, vergi no gibi satırlar ürün DEĞİLDİR.
+
+INDIRIM SATIRLARI - kampanya mesaji ile kampanya indirimi ayri seylerdir.
+Ayirt edici olcut satirin fis toplamina katilip katilmadigidir, adi veya
+gorunumu degil. Fis toplamina katilan her negatif tutarli satir items
+listesinde KALIR ve satirTipi degeri indirim olur.
+Bu satirlar iki yerde bulunur:
+  a) urun satirlarinin arasinda, indirdigi urunun hemen ardinda.
+     Ornek: 10 TL UZERINE SAMPUA  -170,00
+  b) fisin sonunda INDIRIMLER gibi bir baslik altinda toplu halde.
+     Burada her indirim genellikle iki satirdir: once kampanya kodu,
+     sonra urun adi ve negatif tutar. Bu bolumdeki satirlarin HEPSI
+     items listesine alinir. Bolumun kendi basligi bir kalem
+     DEGILDIR ve alinmaz.
+Kampanya kodu varsa indirim kaleminin name alanina yazilir.
+Toplama katilmayan bilgilendirme satirlari kalem degildir.
 - totalAmount fişin ödenecek genel toplamıdır (ÖDENECEK / GENEL TOPLAM / TOPLAM).
 - Türk fişlerinde fiyatlar "*18,00" veya "x120,00" gibi yazılabilir; virgül ondalık ayracıdır.
 - Tartılı/adetli ürünlerde (ör. "0,455 kg x 89,90") quantity ve unitPrice'ı ayrıştır; totalPrice satırın toplam tutarıdır.
@@ -35,4 +50,8 @@ Kurallar:
 - kdvBlok, fişin altındaki KDV döküm tablosudur (KDV DAHİL / DAHİL TUTAR / KDVLİ TOPLAM sütunu). Anahtar KDV oranıdır (1, 10, 20), değer o oran için fişte BASILI KDV DAHİL tutardır.
 - Tabloda MATRAH ve KDV TUTARI sütunları da varsa onları yazma; yalnız KDV DAHİL sütununu yaz. Fişte KDV DAHİL sütunu basılı değilse kendin toplama/hesaplama yapma, kdvBlok değerini null bırak.
 - kdvBlok'a yalnız fişte basılı oranları koy; basılı olmayan oranı ekleme. Bloklardaki tutarların toplamı totalAmount'a eşit çıkmasa bile değerleri DÜZELTME — fişte ne yazıyorsa onu yaz.
-- Emin olamadığın alanları uydurma; null kullan."""
+- Emin olamadığın alanları uydurma; null kullan.
+satirTipi bu kuralin disindadir: her kalemde MUTLAKA doldurulur.
+Emin olamadigin durumda urun yaz. Bir kalemi yanlislikla indirim
+saymak, bir indirimi kacirmaktan daha zararlidir.
+"""
