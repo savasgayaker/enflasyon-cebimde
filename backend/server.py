@@ -26,6 +26,9 @@ from receipt_prompt import RECEIPT_PROMPT
 from receipt_fields import (
     strip_kdv_suffix, extract_kdv_rate, normalize_vat_rate,
     normalize_unit, reconcile_optional,
+    normalize_satir_tipi,
+    TUR_URUN,
+    TUR_INDIRIM,
 )
 from kdv_mutabakat import kdv_mutabakati
 from auth import auth_modu, gecerli_kullanici
@@ -175,6 +178,16 @@ def validate_and_flag(parsed: dict) -> dict:
         if vat is None:
             vat = extract_kdv_rate(raw_name)
             vat_kaynak = "kural" if vat is not None else None
+        _tur = normalize_satir_tipi(it.get("satirTipi"))
+        _tp = it.get("totalPrice")
+        # M7-B3b: negatif tutar yalniz indirim turunde serbesttir;
+        # indirim turu negatif olmayan tutar tasiyamaz.
+        _tur_uyusmaz = False
+        if isinstance(_tp, (int, float)):
+            if _tp < 0 and _tur != TUR_INDIRIM:
+                _tur_uyusmaz = True
+            if _tp > 0 and _tur == TUR_INDIRIM:
+                _tur_uyusmaz = True
         items.append({
             "name": strip_kdv_suffix(raw_name),
             "quantity": it.get("quantity") if isinstance(it.get("quantity"), (int, float)) else 1,
@@ -185,7 +198,8 @@ def validate_and_flag(parsed: dict) -> dict:
             # supabase receipt_items.vat_rate_source ile ayni sozluk:
             # model / kural / kdv_blogu / kullanici
             "vatRateSource": vat_kaynak,
-            "needsReview": total_price is None,
+            "satirTipi": _tur,
+            "needsReview": total_price is None or _tur_uyusmaz,
         })
 
     try:
@@ -485,6 +499,17 @@ def cross_check(chosen: dict, other: dict) -> None:
             a["vatRateSource"] = None
         elif _vat_a_once is None:
             a["vatRateSource"] = b.get("vatRateSource")
+        # M7-B3b / S4: tur celiskisinde bosaltma YAPILMAZ.
+        # Alan bosalirsa dogrulama tur bilgisiz kalir ve eklenen
+        # guvenligin tamami kaybolur. Celiskide urun secilir ve
+        # kalem bayraklanir: indirimi kacirmak, urunu indirim
+        # sanmaktan iyidir.
+        _ta = normalize_satir_tipi(a.get("satirTipi"))
+        _tb = normalize_satir_tipi(b.get("satirTipi"))
+        if _ta != _tb:
+            a["satirTipi"] = TUR_URUN
+            a["needsReview"] = True
+
         qty_differ = abs(float(a.get("quantity") or 0) - float(b.get("quantity") or 0)) > 0.001
         # unitPrice: temsil değil DEĞER karşılaştırılır; iki taraftan biri
         # hesaplanamıyorsa bu alandan bayrak çıkmaz (totalPrice zaten ayrıca

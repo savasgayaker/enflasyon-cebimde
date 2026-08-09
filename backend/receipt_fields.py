@@ -77,6 +77,27 @@ UNIT_MAP = {
 VALID_UNITS = {"adet", "kg", "gr", "lt", "ml", "paket"}
 
 
+TUR_URUN = "urun"
+TUR_INDIRIM = "indirim"
+
+
+def normalize_satir_tipi(ham):
+    """Kalem satir turunu normalize eder.
+
+    M7-B3b. Bilinmeyen, bos veya eksik deger urun sayilir: bir kalemi
+    yanlislikla indirim saymak, bir indirimi kacirmaktan daha
+    zararlidir. Kacirilan indirim aritmetik kontrole takilir ve
+    gorunur olur; urun sanilan indirim fiyat serisine sessizce yanlis
+    veri yazar.
+    """
+    if not isinstance(ham, str):
+        return TUR_URUN
+    d = ham.strip().lower()
+    if d == TUR_INDIRIM:
+        return TUR_INDIRIM
+    return TUR_URUN
+
+
 def normalize_unit(v):
     """Model'in unit alanını sözlükteki değerlerden birine indirger.
     Sözlükte yoksa None — yanlış birim, eksik birimden kötüdür."""
