@@ -180,5 +180,39 @@ const alanOku = (o: unknown, ad: string): unknown =>
   check("S-U3 vatRate uydurulmaz", alanOku(y.items[0], "vatRate") as unknown, undefined as unknown);
 }
 
+
+// --- M7-D2: satirTipi tip zinciri olcumu ---
+
+// S-T1 alan dolu gelir
+{
+  const y = mapM3Response(baseResponse([
+    alanEkle(item({ quantity: 1, unitPrice: -170, totalPrice: -170 }),
+             { satirTipi: "indirim" }),
+  ]));
+  check("S-T1 satirTipi dolu tasinir",
+    alanOku(y.items[0], "satirTipi") as unknown, "indirim" as unknown);
+}
+
+// S-T2 alan acikca null
+{
+  const y = mapM3Response(baseResponse([
+    alanEkle(item({ quantity: 1, unitPrice: 10, totalPrice: 10 }),
+             { satirTipi: null }),
+  ]));
+  check("S-T2 satirTipi null korunur",
+    alanOku(y.items[0], "satirTipi") as unknown, null as unknown);
+}
+
+// S-T3 alan hic gelmez - muhafiz (S5): bu cek iki turda da yesildir.
+// D2-1'de hicbir sey olcmez; D2-2'de mapper'in varsayilan
+// uydurmadigini garanti eder.
+{
+  const y = mapM3Response(baseResponse([
+    item({ quantity: 1, unitPrice: 10, totalPrice: 10 }),
+  ]));
+  check("S-T3 satirTipi uydurulmaz",
+    alanOku(y.items[0], "satirTipi") as unknown, undefined as unknown);
+}
+
 console.log(`Sonuç: ${passed}/${passed + failed} kontrol başarılı.`);
 process.exit(failed === 0 ? 0 : 1);
