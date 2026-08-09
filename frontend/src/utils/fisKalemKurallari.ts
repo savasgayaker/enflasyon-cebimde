@@ -32,16 +32,32 @@ export interface KayitKarari {
   };
 }
 
-const ISKELE = 'M7-D1-2 bekleniyor: govde henuz yazilmadi';
-
-export function kalemGecerliMi(_kalem: KalemGirdisi): boolean {
-  throw new Error(ISKELE);
+export function kalemGecerliMi(kalem: KalemGirdisi): boolean {
+  // M7-D1: bugunku davranis birebir korunur. Indirim istisnasi
+  // D3'te gelecek; buradaki hal V4 ve V5 muhafizlarina baglidir.
+  return kalem.name.trim() !== '' && kalem.unitPrice > 0;
 }
 
-export function seritSeviyesi(_kalem: KalemGirdisi): SeritSeviyesi {
-  throw new Error(ISKELE);
+export function seritSeviyesi(kalem: KalemGirdisi): SeritSeviyesi {
+  // M7-D1: bugunku davranis birebir korunur. Negatif tutar iki
+  // dali da atlar ve yok doner; S4 muhafizina baglidir ve D4'te
+  // degisecektir.
+  if (!kalem.needsReview) return 'yok';
+  if (kalem.totalPrice === 0) return 'eksik';
+  if (kalem.totalPrice > 0) return 'incele';
+  return 'yok';
 }
 
-export function kayitKarari(_kalem: KalemGirdisi): KayitKarari {
-  throw new Error(ISKELE);
+export function kayitKarari(kalem: KalemGirdisi): KayitKarari {
+  // M7-D1: bugunku davranis birebir korunur. Urun her kalem icin
+  // kosulsuz olusturulur; indirim istisnasi D3'te gelecek ve K2
+  // muhafizi orada degisecektir.
+  return {
+    urunOlusturulsunMu: true,
+    kayit: {
+      quantity: kalem.quantity,
+      unitPrice: kalem.unitPrice,
+      totalPrice: kalem.totalPrice,
+    },
+  };
 }
