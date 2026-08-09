@@ -32,5 +32,11 @@
     "genel_toplam": 3060.97,
     "bloklar": { "1": 2940.97, "10": 60.00, "20": 60.00 },
     "_not": "Fişte üç sütun basılı (MATRAH 2.911,85/54,55/50,00 · KDV TUTAR 29,12/5,45/10,00 · KDV DAHIL); KDV DAHIL sütunu aktarıldı."
+  },
+  "a101-indirim": {
+    "tur": "brut",
+    "genel_toplam": 677.00,
+    "bloklar": { "1": 546.00, "20": 131.00 },
+    "_not": "Indirim satiri (-170,00) %20 kovasindan dusulmustur: 301,00 - 170,00 = 131,00"
   }
 }

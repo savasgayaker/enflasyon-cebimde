@@ -1,0 +1,106 @@
+{
+  "storeName": "A101",
+  "date": "2026-08-08",
+  "totalAmount": 677.0,
+  "items": [
+    {
+      "name": "TURSU KORNISON 1650 G TUKAS",
+      "quantity": 1,
+      "unitPrice": 89.5,
+      "totalPrice": 89.5,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "KOZ BIBER 680 G COKCA",
+      "quantity": 1,
+      "unitPrice": 85.0,
+      "totalPrice": 85.0,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "SAMPUAN KOMPLE DIRENC 400ML EL",
+      "quantity": 1,
+      "unitPrice": 299.0,
+      "totalPrice": 299.0,
+      "unit": "adet",
+      "vatRate": 20,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "10 TL UZERINE SAMPUA",
+      "quantity": 1,
+      "unitPrice": -170.0,
+      "totalPrice": -170.0,
+      "unit": "adet",
+      "vatRate": 20,
+      "satirTipi": "indirim"
+    },
+    {
+      "name": "CIPS MISIR TACO 135 G DORITOS",
+      "quantity": 1,
+      "unitPrice": 62.0,
+      "totalPrice": 62.0,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "LAVAS GELENEKSEL 6 LI 390 G UN",
+      "quantity": 1,
+      "unitPrice": 79.5,
+      "totalPrice": 79.5,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "KONSERVE MISIR 3X150 G TUKAS",
+      "quantity": 1,
+      "unitPrice": 89.0,
+      "totalPrice": 89.0,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "CIPS MISIR TACO 135 G DORITOS",
+      "quantity": 1,
+      "unitPrice": 62.0,
+      "totalPrice": 62.0,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "BAHARAT SUSAM 75 G DIYAR",
+      "quantity": 1,
+      "unitPrice": 17.0,
+      "totalPrice": 17.0,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "CIPS MISIR TACO 135 G DORITOS",
+      "quantity": 1,
+      "unitPrice": 62.0,
+      "totalPrice": 62.0,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "ALISVERIS POSETI",
+      "quantity": 2,
+      "unitPrice": 1.0,
+      "totalPrice": 2.0,
+      "unit": "adet",
+      "vatRate": 20,
+      "satirTipi": "urun"
+    }
+  ]
+}
