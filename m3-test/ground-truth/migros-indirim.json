@@ -1,0 +1,196 @@
+{
+  "storeName": "Migros",
+  "date": "2026-08-09",
+  "totalAmount": 2706.89,
+  "items": [
+    {
+      "name": "BUZDAGI DOGAL MINERA",
+      "quantity": 2.0,
+      "unitPrice": 49.0,
+      "totalPrice": 98.0,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "LIPTON ICETEA SEFTA.",
+      "quantity": 1.0,
+      "unitPrice": 57.0,
+      "totalPrice": 57.0,
+      "unit": "adet",
+      "vatRate": 10,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "OMO SIVI ACTIVE COLD",
+      "quantity": 1.0,
+      "unitPrice": 399.95,
+      "totalPrice": 399.95,
+      "unit": "adet",
+      "vatRate": 20,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "NAMET DANA DONER",
+      "quantity": 1.0,
+      "unitPrice": 279.95,
+      "totalPrice": 279.95,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "A.O.C. SADE DONDURMA",
+      "quantity": 1.0,
+      "unitPrice": 437.95,
+      "totalPrice": 437.95,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "A.O.C. SADE DONDURMA",
+      "quantity": 1.0,
+      "unitPrice": 437.95,
+      "totalPrice": 437.95,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "UNTAD PREMIUM DEV TO",
+      "quantity": 1.0,
+      "unitPrice": 215.0,
+      "totalPrice": 215.0,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "REIS GONEN BALDO",
+      "quantity": 1.0,
+      "unitPrice": 434.95,
+      "totalPrice": 434.95,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "% 25 % INDIRIM",
+      "quantity": 1.0,
+      "unitPrice": -108.74,
+      "totalPrice": -108.74,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "indirim"
+    },
+    {
+      "name": "COCA-COLA ZERO",
+      "quantity": 1.0,
+      "unitPrice": 65.0,
+      "totalPrice": 65.0,
+      "unit": "adet",
+      "vatRate": 10,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "YABAN MERSINI 125 G",
+      "quantity": 1.0,
+      "unitPrice": 69.95,
+      "totalPrice": 69.95,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "MIGROS SIVI SABUN",
+      "quantity": 1.0,
+      "unitPrice": 50.95,
+      "totalPrice": 50.95,
+      "unit": "adet",
+      "vatRate": 20,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "DARDANEL SUSHIDA",
+      "quantity": 1.0,
+      "unitPrice": 195.0,
+      "totalPrice": 195.0,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "DARDANEL SUSHIDA",
+      "quantity": 1.0,
+      "unitPrice": 195.0,
+      "totalPrice": 195.0,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "LPM SEFTALI SIVI SA.",
+      "quantity": 1.0,
+      "unitPrice": 214.95,
+      "totalPrice": 214.95,
+      "unit": "adet",
+      "vatRate": 20,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "BANVIT PLC.SCHNITZEL",
+      "quantity": 1.0,
+      "unitPrice": 149.95,
+      "totalPrice": 149.95,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "MIGROS PLASTIK POSET",
+      "quantity": 4.0,
+      "unitPrice": 1.0,
+      "totalPrice": 4.0,
+      "unit": "adet",
+      "vatRate": 20,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "LIMON KG.",
+      "quantity": 0.645,
+      "unitPrice": 89.95,
+      "totalPrice": 58.02,
+      "unit": "kg",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "NAMET DANA DONER",
+      "quantity": 1.0,
+      "unitPrice": -69.99,
+      "totalPrice": -69.99,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "indirim"
+    },
+    {
+      "name": "BANVIT PLC.SCHNITZEL",
+      "quantity": 1.0,
+      "unitPrice": -40.0,
+      "totalPrice": -40.0,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "indirim"
+    },
+    {
+      "name": "A.O.C. SADE DONDURMA",
+      "quantity": 1.0,
+      "unitPrice": -437.95,
+      "totalPrice": -437.95,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "indirim"
+    }
+  ]
+}

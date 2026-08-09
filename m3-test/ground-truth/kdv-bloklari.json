@@ -38,5 +38,11 @@
     "genel_toplam": 677.00,
     "bloklar": { "1": 546.00, "20": 131.00 },
     "_not": "Indirim satiri (-170,00) %20 kovasindan dusulmustur: 301,00 - 170,00 = 131,00"
+  },
+  "migros-indirim": {
+    "tur": "yok",
+    "genel_toplam": 2706.89,
+    "topkdv": 141.69,
+    "_not": "Migros oran kirilimi basmaz, yalniz TOPKDV verir. Kova kapisi bu fiste kullanilamaz."
   }
 }

@@ -134,18 +134,51 @@ Bu nedenle indirimli gozlemler **isaretli** kalir. Motorun bu isareti nasil
 kullanacagi (taban donemden dislama, iki seri gosterme) ayri bir on kayit
 konusudur ve K5 kapsaminda karara baglanmamistir.
 
-### Baglanti kurali
+### Baglanti kurali (09 Agu 2026'da genisletildi)
 
-Birincil sinyal **konum**: indirim satiri kendinden onceki kaleme aittir.
-Metin esleme guvenilmezdir; yazici adi keser ("SAMPUA").
+Ilk hali tek fisten (A101) yazilmisti ve konumu birincil sinyal ilan
+ediyordu. Ikinci bir fis (Migros, 09.08.2026) bu kurali curuttu: ayni
+zincirde indirimler fisin sonunda ayri bir INDIRIMLER blogunda toplanir
+ve konum kurali dordun ucunde yanlis urune baglar.
 
-Dogrulayici sinyal **KDV kovasi**: bir orandaki kalemler toplami eksi o orana
-dusen indirimler, fiste basili o oran tutarina esit olmalidir.
+**Sinyal, indirim satirinin kendi seklinden secilir:**
 
-Tutucu kural: baglantidan emin olunamiyorsa indirim **fis duzeyinde** kalir ve
-hicbir urunun fiyati degistirilmez. **Indirimi yanlis urune baglamak, hic
-baglamamaktan kotudur** - yanlis baglama hic yasanmamis bir fiyat cokusu
-uydurur.
+    satir bir urun adi tasiyorsa    ada gore eslestir
+    tasimiyorsa                     kendinden onceki kaleme bagla
+
+Iki sekil de olculmustur. Migros fisinin sonundaki blokta her indirim
+urun adini kendisi tasir (NAMET DANA DONER, BANVIT PLC.SCHNITZEL,
+A.O.C. SADE DONDURMA); ayni fisin ortasindaki indirim ad tasimaz
+(yuzde 25 indirim) ve konumla dogru baglanir - onceki kalem 434,95 ve
+434,95 carpi 0,25 esittir 108,74.
+
+**KDV orani eleme sinyalidir, dogrulayici degil.** A101'de KDV kova
+tablosu vardi ve baglantiyi bagimsiz dogruladi; Migros yalniz TOPKDV
+basar, kova kirilimi yoktur. Kova kapisi bu nedenle zorunlu kapi
+degildir, bulundugunda kullanilan ek kanittir. Satir basindaki oran
+isareti ise her iki fiste de vardir: indirimin orani bagli oldugu
+urunun oraniyla ayni olmalidir, tutmayan aday elenir.
+
+**Baglanti birimi satir degil urundur.** Migros fisinde
+A.O.C. SADE DONDURMA iki kez gecer (ikisi de 437,95) ve indirim
+-437,95'tir; yani iki al bir ode. Indirimi tek bir satira baglamak
+"biri 437,95, digeri bedava" gibi hic yasanmamis bir fiyat uydurur.
+Dogrusu urun duzeyinde toplamaktir: 2 adet, odenen 437,95, birim
+218,98. Ad ve fiyati birebir ayni olan satirlar bu amacla tek grup
+sayilir.
+
+**Yapisal basliklar ne urun ne indirimdir.** INDIRIMLER: gibi bolum
+basliklari ucuncu bir satir cinsidir ve atilir; ancak ardindan gelenler
+atilmaz. Mevcut prompt kuralinin en cok yanilttigi nokta burasidir.
+
+**Kampanya kodu ham etikettir.** Migros'ta indirim iki satirdir: once
+kampanya kodu (yildiz INDIRIM, yildiz SECALBANVI, yildiz AOCDONDURM),
+sonra urun adi ve tutar. K5'in sakla dedigi ham etiket bu koddur.
+
+Tutucu kural degismedi: baglantidan emin olunamiyorsa indirim fis
+duzeyinde kalir ve hicbir urunun fiyati degistirilmez. Indirimi yanlis
+urune baglamak, hic baglamamaktan kotudur.
+
 
 ### Urun indirimi ile odeme indirimi ayrimi
 
