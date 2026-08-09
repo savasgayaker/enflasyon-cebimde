@@ -82,6 +82,10 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
 frontend/scripts/test-m3-mapper.ts        24 kontrol (npm run test:m3-mapper)
   Ozet satiri bicimi digerlerinden FARKLI: Sonuc: P/T kontrol basarili.
   Yesil = P, kirmizi = T eksi P (M7-A/S1 karari).
+backend/test_dogrulama.py                 9 kontrol
+  Kosum: backend/venv/bin/python3 backend/test_dogrulama.py
+  Indirim satiri dogrulamasi: tur gecisi, negatif dali,
+  tur celiskisi. Ozet satiri TS aletleriyle ayni bicimde.
 - Kaynak dogrulama kanali (mimar icin): `https://raw.githubusercontent.com/savasgayaker/enflasyon-cebimde/<commit-sha>/<yol>`. **Daima commit sha'sina sabitle** — dal ucuna (`main`) giden yol bayat kopya dondurebiliyor (2026-08-05'te dondurdu). Push'suz commit'ler bu kanaldan gorunmez.
 
 ### Prompt provenansı
@@ -90,6 +94,28 @@ frontend/scripts/test-m3-mapper.ts        24 kontrol (npm run test:m3-mapper)
 YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 Önceki: `73f7177c…fba888` (1812 karakter, `kdvBlok` yok).
 
+
+## M7-B kapandi (09 Agu 2026)
+
+Indirim satirlari taniniyor. K5 sartname, iki gercek fis cevap
+anahtari: a101-indirim (satir-ici indirim, KDV kova tablosu var) ve
+migros-indirim (dort indirim, ucu fis sonundaki blokta, kova yok).
+Vision regresyonu artik 8 fis.
+
+Turlar: B1 ve B1b cevap anahtarlari, B2 kirmizi olcum, B3a prompt
+(iki tur), B3b dogrulama (iki tur). Dokuz ilan edilmis sapma.
+
+K5'in baglanti kurali Migros fisiyle genisletildi: konum birincil
+sinyal DEGILDIR. Indirim satiri urun adi tasiyorsa ada gore, aksi
+halde onceki kaleme baglanir. KDV kovasi zorunlu kapi degil, ek
+kanittir - her fis kova basmaz.
+
+M7-C icin baglayici: indirimin hangi urune ait oldugu ayri ve acik
+bir alan olarak modelden istenecek. Ad benzerliginden cikarim
+yapilmayacak; ad savrulmasi uc kez olculdu.
+
+Ayrinti: docs/m7b-on-kayit-2026-08-08.md, m7b2-kapanis-2026-08-09.md,
+m7b3a-kapanis-2026-08-09.md, m7b3b-kapanis-2026-08-09.md.
 
 ## M7-A kapandi (08 Agu 2026)
 
