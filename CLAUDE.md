@@ -52,6 +52,20 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
   aranirken birebir dize kullanilir.
   (c) Ozet satiri bicimleri aletten alete degisir; her alet kendi
   olculmus biciminden okunur.
+  (d) Yapilandirilmis veri dosyalarina program eliyle yazarken tam
+  serilestirme (json.dump gibi) yapilmaz; metin eki yapilir. Tam
+  serilestirme dokunulmamis kayitlari yeniden bicimlendirir ve sayi
+  gosterimini bozar. M7-B1'de olculdu: kdv-bloklari.json'a girdi
+  json.dump ile eklenince dosyanin tamami yeniden bicimlendi,
+  kompakt satirlar acildi ve 249.00 gosterimi 249.0 oldu. Cevap
+  anahtarlarinda bu, fotograftan birebir aktarim ilkesini deler.
+  Silme-0 kapisi yakaladi.
+  (e) Olcum degerlendiricileri tasima hatasini basarisizliktan ayirmak
+  zorundadir. HTTP hatasi, zaman asimi veya kimlik hatasi alan bir
+  cagri olcum degildir; kaldi diye sayilirsa yanlis kirmizi uretir ve
+  gecersiz bir kapi degeri dogurur. M7-B3a ikinci turunda olculdu:
+  suresi dolmus jetonla alti cagri 401 aldi ve degerlendirici bunlari
+  esik dususu olarak raporladi.
   Bir kapinin **degeri** yanlis ilan edilmisse desen kalibrasyonuyla
   duzeltilemez; ilan edilmis sapma gerekir (M7-A/S7).
 

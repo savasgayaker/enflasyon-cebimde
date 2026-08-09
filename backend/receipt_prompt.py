@@ -37,6 +37,10 @@ Bu satirlar iki yerde bulunur:
      sonra urun adi ve negatif tutar. Bu bolumdeki satirlarin HEPSI
      items listesine alinir. Bolumun kendi basligi bir kalem
      DEGILDIR ve alinmaz.
+          Her indirim TEK kalemdir. Kampanya kodu ve urun adi ayri
+          satirlarda gorunse bile birlikte tek kalem olustururlar:
+          tutar bir kez yazilir, ayni tutar iki kaleme bolunmez.
+          Bir indirim icin iki kalem uretirsen fis toplami bozulur.
 Kampanya kodu varsa indirim kaleminin name alanina yazilir.
 Toplama katilmayan bilgilendirme satirlari kalem degildir.
 - totalAmount fişin ödenecek genel toplamıdır (ÖDENECEK / GENEL TOPLAM / TOPLAM).
