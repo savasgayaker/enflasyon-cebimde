@@ -236,9 +236,10 @@ alınmaz; koşum dışlanmaz; sayılar elle değil üreteçle yazılır; yanlı�
 - **M6** — kayıt sonrası uçtan uca veri akışı (Dashboard / Ürünler / Analitik + `inflation.ts`). Akış
   **%100 yereldir**: Zustand + AsyncStorage; frontend'deki tek HTTP çağrısı `parse-receipt`, hiç
   `.from/.insert/.select` yok. Ağsız, simülatörde doğrulanabilir.
-- **Alan kaybı (4 Ağu 2026 taraması):** backend'in ürettiği `unit` ve `vatRate` alanları frontend'e
-  ulaşmıyor — `frontend` genelinde `vatRate` 0 kez, `unit` 1 kez geçiyor. Alanlar `m3Mapper`
-  sınırında düşüyor ve store'a hiç girmiyor. M6 kapsamında değil, Aşama 4 planlamasında hesaba katılmalı.
+- **Alan kaybi KAPANDI (M7-A, 08 Agu 2026):** unit ve vatRate artik
+  M3Response, ParsedItem, PriceRecord ve UIItem boyunca tasiniyor.
+  Esleme duz gecistir; bos deger operatoru kullanilmaz - null
+  'bilinmiyor', undefined 'hic gelmedi' demektir. Store sema surumu 1.
 - Supabase şeması hazır ama bağlı değil (9 tablo, 19 RLS satırı) — Aşama 4 işi, M6 kapsamı dışında.
 - Cloudflare Tunnel: alan adı alınmadı (Blok 12-A engelli). Blok 13 (iPhone uçtan uca), Blok 14
   (Mac mini kesintisizliği) sırada.

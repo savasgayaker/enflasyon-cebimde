@@ -54,6 +54,9 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
 - `frontend/scripts/test-inflation.ts` — enflasyon hesabinin olcum araci: 23 senaryo / 54 kontrol (`npm run test:inflation`, frontend/ icinden; cikis kodu 0 = hepsi yesil). Beklenen degerlerin gerekcesi on kayitlarda: `docs/m6a2-on-kayit-2026-08-05.md` (fiyat toplulastirma) ve `docs/m6c-on-kayit-2026-08-05.md` (agirlik paydasi).
 - Bu aletin ozet satirinin birebir bicimi: Toplam: <yesil> yesil kontrol, <kirmizi> kirmizi kontrol — senaryo sayisi bu satirda YOKTUR, kaynaktaki senaryo( cagrilarindan ya da DAGILIM etiketlerinden sayilir. Ayristirici yazan her blok bu bicime uyar, tahmin etmez.
 - Ekran metinleri aleti: `frontend/scripts/test-ekran-metinleri.ts` — 27 kontrol, ekranMetinleri.ts'in saf fonksiyonlarini olcer. package.json'da betigi YOK; `npx tsx scripts/test-ekran-metinleri.ts` ile calistirilir. Ozet satiri biçimi yukaridakiyle aynidir.
+frontend/scripts/test-m3-mapper.ts        24 kontrol (npm run test:m3-mapper)
+  Ozet satiri bicimi digerlerinden FARKLI: Sonuc: P/T kontrol basarili.
+  Yesil = P, kirmizi = T eksi P (M7-A/S1 karari).
 - Kaynak dogrulama kanali (mimar icin): `https://raw.githubusercontent.com/savasgayaker/enflasyon-cebimde/<commit-sha>/<yol>`. **Daima commit sha'sina sabitle** — dal ucuna (`main`) giden yol bayat kopya dondurebiliyor (2026-08-05'te dondurdu). Push'suz commit'ler bu kanaldan gorunmez.
 
 ### Prompt provenansı
@@ -62,6 +65,28 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
 YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 Önceki: `73f7177c…fba888` (1812 karakter, `kdvBlok` yok).
 
+
+## M7-A kapandi (08 Agu 2026)
+
+unit ve vatRate artik backend'den store'a kadar tasiniyor. Dort tur
+KABUL: A1 (olcum aleti, kirmizi), A2 (M3Response, ParsedItem,
+PriceRecord + mapper eslemesi), A3 (persist surum damgasi), A4
+(UIItem, sinir eslemesi, priceRecord kurulumu).
+
+Store sema surumu artik 1. SEMA_SURUMU ve semaGocu useAppStore.ts'te
+disa aktarilmistir; goc kimliktir, donusum yapmaz.
+
+Yedi ilan edilmis sapma ve uc capa kalibrasyonu var; hepsi kosumdan
+once duyuruldu. Ayrinti: docs/m7a-on-kayit-2026-08-08.md ve
+docs/m7a-kapanis-2026-08-08.md.
+
+Kapanis notundaki 'M7-A'nin KANITLAMADIGI seyler' bolumu okunmadan
+bu is kapali sayilmaz. Ozetle: alanlarin cihazda fiilen aktigi
+metinsel kapiyla degil, Blok 13 uctan uca testiyle kanitlanacaktir.
+
+Asama 4 kararlari (K1-K5) artik depoda:
+docs/asama-4-veri-mimarisi-kararlar.md. K5 indirim satirlarini
+duzenler ve M7-B'nin sartnamesidir.
 ### Açık kalemler (2026-08-05 itibarıyla)
 - **Blok 13** — uygulamayı arka uca bağlama + iPhone uçtan uca test. Tünel için
   alan adı henüz alınmadı; bu karar verilmeden Blok 12-A başlamaz.
@@ -70,7 +95,12 @@ YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 - **M6-C KABUL (2026-08-05, `47932cf`)**: agirlik paydasi eslesen orneklemle sinirlandi (`weight = spending / matchedSpending`); genel oran artik kategori oranlariyla ic tutarli ve yeni urun almak orani seyreltmiyor. On kayit `docs/m6c-on-kayit-2026-08-05.md`, kapanis `docs/m6c-kapanis-2026-08-05.md`, zincir `171597c` -> `818d283` -> `47932cf` -> `cef4ec6`.
 - M6-D (kapsama gostergesi, coverageRate): KABUL 2026-08-05. Zincir: 6ad408a on kayit -> 0c1d33b alti senaryo KIRMIZI -> 916059c uygulama (+9/-0) -> 4d0bb21 kapanis. Not: docs/m6d-kapanis-2026-08-05.md. Invaryans (T-D3) uc bagimsiz yoldan olculdu: sifir silinen satir, 7/7 bayt-kimlik, S1-S12 dokunulmamis beklentilerle yesil.
 - M6-E — ekran katmani: **KABUL** — dokuz alt tur (E0..E5d), dort ilan edilmis sapma; zincir f1db5ce -> 1f03926 -> 5d2dded -> 68bec88 -> 26b66c7 -> e6cb0bc -> 89e2459 -> 9a7b688 -> e6a5eca -> c8453ca -> ea4dd46 -> 631b06d; kapanis notu docs/m6e-kapanis-2026-08-07.md
-- M6 hesap ve ekran katmanlarinin TAMAMI kapandi (A2, B, C, D, E). Siradaki is yayin hattidir: Blok 12-A (alan adi + Cloudflare Tunnel). Tunel, TestFlight'in onkosuludur — testcilerin telefonu yerel agdaki adrese ulasamaz. Ayrinti: docs/m6e-kapanis-2026-08-07.md bolum 9.
+Sonraki is: M7-B, M7-C, M7-D (K5 indirim satirlari), ardindan
+Blok 12-A (alan adi + Cloudflare Tunnel) ve yayin hatti.
+Bu sira zorunludur: K5 bir yazma ani kararidir ve K1 geregi geri
+donulemez. Yayina cikilip gercek fisler kaydedilmeye baslandiktan
+sonra indirim alanlari eklenirse, aradaki fislerin indirim bilgisi
+sonsuza kadar kaybolur.
 - **Adım 2.5** — kategori kelime-sınırı iyileştirmesi (ölçmek yeni bir kabul turu ister).
 - **Ürün birleştirme** (Ek 9 karar 3) — isim varyansı ölçümlerde eşleşmeyen kalem
   olarak görünüyor; ürün kimliği çözülmeden kişisel enflasyon serisi kurulamaz.
