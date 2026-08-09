@@ -31,7 +31,7 @@ export interface Product {
 
 export interface PriceRecord {
   id: string;
-  productId: string;
+  productId: string | null;
   receiptId: string;
   quantity: number;
   unitPrice: number;

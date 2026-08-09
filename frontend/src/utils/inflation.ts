@@ -83,6 +83,12 @@ export function calculateInflation(
   } = {};
 
   currentRecords.forEach((r) => {
+    // M7-D3a: urune bagli olmayan kayit gruplamaya girmez.
+    // Indirim kayitlarinin productId'si null'dir; buraya girerse
+    // null dizesi anahtariyla sahte bir urun grubu olusur.
+    // Tip korumasi tek basina yeterli degil: savunma veride.
+    // Iki dongu de kendi basina korunur; dolayli koruma kirilgandir (S8).
+    if (r.productId === null || r.productId === undefined) return;
     if (!accumulators[r.productId]) {
       accumulators[r.productId] = {
         curPxQ: 0, curQ: 0, curP: 0, curN: 0,
@@ -99,6 +105,12 @@ export function calculateInflation(
   });
 
   previousRecords.forEach((r) => {
+    // M7-D3a: urune bagli olmayan kayit gruplamaya girmez.
+    // Indirim kayitlarinin productId'si null'dir; buraya girerse
+    // null dizesi anahtariyla sahte bir urun grubu olusur.
+    // Tip korumasi tek basina yeterli degil: savunma veride.
+    // Iki dongu de kendi basina korunur; dolayli koruma kirilgandir (S8).
+    if (r.productId === null || r.productId === undefined) return;
     const acc = accumulators[r.productId];
     if (acc) {
       acc.prevPxQ += r.unitPrice * r.quantity;

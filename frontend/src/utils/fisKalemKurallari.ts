@@ -35,7 +35,13 @@ export interface KayitKarari {
 export function kalemGecerliMi(kalem: KalemGirdisi): boolean {
   // M7-D1: bugunku davranis birebir korunur. Indirim istisnasi
   // D3'te gelecek; buradaki hal V4 ve V5 muhafizlarina baglidir.
-  return kalem.name.trim() !== '' && kalem.unitPrice > 0;
+  if (kalem.name.trim() === '') return false;
+  // M7-D3a: indirim satirinin anlamli bir birim fiyati yoktur ve
+  // tutari negatiftir; gecerlilik sarti tur bazinda ayrisir.
+  // Indirim OLMAYAN negatif kalem hala gecersizdir (V4) - bu,
+  // backend'deki negatif dalinin arayuz karsiligidir.
+  if (kalem.satirTipi === 'indirim') return kalem.totalPrice < 0;
+  return kalem.unitPrice > 0;
 }
 
 export function seritSeviyesi(kalem: KalemGirdisi): SeritSeviyesi {
@@ -49,11 +55,11 @@ export function seritSeviyesi(kalem: KalemGirdisi): SeritSeviyesi {
 }
 
 export function kayitKarari(kalem: KalemGirdisi): KayitKarari {
-  // M7-D1: bugunku davranis birebir korunur. Urun her kalem icin
-  // kosulsuz olusturulur; indirim istisnasi D3'te gelecek ve K2
-  // muhafizi orada degisecektir.
+  // M7-D3a: indirim kaleminde urun OLUSTURULMAZ. Olusturulsaydi
+  // kampanya etiketi adinda sahte bir urun dogar ve zamanla fiyat
+  // serisini kirletirdi (on kayit cekirdek karari).
   return {
-    urunOlusturulsunMu: true,
+    urunOlusturulsunMu: kalem.satirTipi !== 'indirim',
     kayit: {
       quantity: kalem.quantity,
       unitPrice: kalem.unitPrice,
