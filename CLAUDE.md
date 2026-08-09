@@ -44,6 +44,17 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
 
 12. **Olcum ani ilan edilir.** Her kabul maddesi, ilan edilen tur sirasinda hangi turdan SONRA saglanabilir oldugunu acikca yazar. On kayit yazilirken her madde icin "bu ne zaman olculebilir?" sorusu tur kapsamlariyla karsilastirilarak tek tek cevaplanir. M6-E'de iki ayri ic celiski dogrudan bu adimin atlanmasindan dogdu. Ayni kural ifadenin okunmasi icin de gecerlidir: bir kosul kod grafigine atifta bulunuyorsa, metinsel mi calisma zamani mi okunacagi onceden yazilir; yazilmamissa yorum karari ilan edilir ve mumkunse makineyle sinanir.
 
+- **Kural 13**: kapi desenleri, olctukleri metnin gercek bicimine karsi
+  dogrulanmadan yazilmaz. Uc olculmus tuzak:
+  (a) `grep '^-[^-]'` ile silinen satir cikarmak, madde imiyle baslayan
+  silinmis satirlari yutar; dogrusu `grep '^-' | grep -v '^--- '`.
+  (b) `[a-z]` Turkce harfleri kapsamaz; `sinirinda` gibi kelimeler
+  aranirken birebir dize kullanilir.
+  (c) Ozet satiri bicimleri aletten alete degisir; her alet kendi
+  olculmus biciminden okunur.
+  Bir kapinin **degeri** yanlis ilan edilmisse desen kalibrasyonuyla
+  duzeltilemez; ilan edilmis sapma gerekir (M7-A/S7).
+
 ### Ölçüm araçları nerede
 - `m3-test/acceptance_dual.py` — ölçüm aleti (jetonlu, 6 fiş × 5 koşum = 30).
 - `m3-test/puanla_bilesik.py` — başlık+eşleşme+fiyat bileşik oranı, arşivden.
