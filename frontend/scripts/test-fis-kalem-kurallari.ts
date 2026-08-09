@@ -59,9 +59,9 @@ kontrol('V3 birim fiyat sifir gecersiz',
   () => kalemGecerliMi(k({ unitPrice: 0 })), false);
 kontrol('V4 birim fiyat negatif gecersiz (bugunku davranis)',
   () => kalemGecerliMi(k({ unitPrice: -170, totalPrice: -170 })), false);
-kontrol('V5 indirim turu de bugun gecersiz (D3 muhafizi)',
+kontrol('V5 indirim turundeki kalem gecerli sayilir',
   () => kalemGecerliMi(k({ unitPrice: -170, totalPrice: -170,
-                          satirTipi: 'indirim' })), false);
+                          satirTipi: 'indirim' })), true);
 
 senaryo('serit seviyesi');
 
@@ -78,9 +78,9 @@ senaryo('kayit karari');
 
 kontrol('K1 normal kalemde urun olusturulur',
   () => kayitKarari(k()).urunOlusturulsunMu, true);
-kontrol('K2 indirim kaleminde de bugun olusturulur (D3 muhafizi)',
+kontrol('K2 indirim kaleminde urun olusturulmaz',
   () => kayitKarari(k({ satirTipi: 'indirim', unitPrice: -170,
-                        totalPrice: -170 })).urunOlusturulsunMu, true);
+                        totalPrice: -170 })).urunOlusturulsunMu, false);
 kontrol('K3 kayit govdesi karar alanlarini tasir',
   () => kayitKarari(k({ quantity: 2, unitPrice: 15, totalPrice: 30 })).kayit,
   { quantity: 2, unitPrice: 15, totalPrice: 30 });
