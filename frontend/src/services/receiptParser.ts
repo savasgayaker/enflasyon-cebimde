@@ -36,6 +36,7 @@ export interface ParsedItem {
   needsReview: boolean;
   unit?: string | null;
   vatRate?: number | null;
+  satirTipi?: string | null;
 }
 
 /**

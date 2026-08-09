@@ -40,6 +40,7 @@ type UIItem = {
   needsReview: boolean;
   unit?: string | null;
   vatRate?: number | null;
+  satirTipi?: string | null;
 };
 
 export default function ReceiptPreview() {
@@ -77,6 +78,7 @@ export default function ReceiptPreview() {
         needsReview: it.needsReview,
         unit: it.unit,
         vatRate: it.vatRate,
+        satirTipi: it.satirTipi,
       })),
     [initialData],
   );
@@ -210,6 +212,7 @@ export default function ReceiptPreview() {
           ...karar.kayit,
           unit: item.unit,
           vatRate: item.vatRate,
+          satirTipi: item.satirTipi,
           date,
         };
         

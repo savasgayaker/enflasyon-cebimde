@@ -39,6 +39,7 @@ export interface PriceRecord {
   date: string;
   unit?: string | null;
   vatRate?: number | null;
+  satirTipi?: string | null;
 }
 
 export interface UserSettings {
