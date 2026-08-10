@@ -76,6 +76,19 @@ kontrol('S4 bayrakli negatif kalem incele alir',
 kontrol('S5 bayrakli negatif urun kalemi incele alir',
   () => seritSeviyesi(k({ needsReview: true, totalPrice: -170,
                           unitPrice: -170 })), 'incele');
+// S6 kapsam ceki: indirim satirinin tipik hali. Ayirt edici DEGIL -
+// negatif tutar zaten kendi dalindan incele alirdi (S14).
+kontrol('S6 bayrakli indirim satiri incele alir',
+  () => seritSeviyesi(k({ needsReview: true, totalPrice: -170,
+                          unitPrice: -170, satirTipi: 'indirim' })),
+  'incele');
+// S7 AYIRT EDICI: tutar sifir oldugunda indirim dali kaldirilirsa
+// sifir dalina duser ve eksik doner. Govdede indirim dalinin sonucu
+// degistirdigi tek girdi sinifi budur (S14).
+kontrol('S7 sifir tutarli bayrakli indirim eksik degil incele alir',
+  () => seritSeviyesi(k({ needsReview: true, totalPrice: 0,
+                          unitPrice: 0, satirTipi: 'indirim' })),
+  'incele');
 
 senaryo('kayit karari');
 
