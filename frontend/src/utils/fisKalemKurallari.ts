@@ -45,13 +45,17 @@ export function kalemGecerliMi(kalem: KalemGirdisi): boolean {
 }
 
 export function seritSeviyesi(kalem: KalemGirdisi): SeritSeviyesi {
-  // M7-D1: bugunku davranis birebir korunur. Negatif tutar iki
-  // dali da atlar ve yok doner; S4 muhafizina baglidir ve D4'te
-  // degisecektir.
+  // M7-D4: serit tutara degil TURE bakar.
+  // Indirim satirinda girilecek bir fiyat yoktur; eksik seviyesi
+  // kirmizi seritle fiyat girin der ve yaniltir. Ama bayraklandiysa
+  // gorunmez de olmamalidir - backend onu bir sebeple isaretledi.
+  // Negatif tutarli URUN kalemi de ayni sekilde incele alir:
+  // kalemGecerliMi onu reddediyor ve kullanici sebebini gormeli.
   if (!kalem.needsReview) return 'yok';
+  if (kalem.satirTipi === 'indirim') return 'incele';
+  if (kalem.totalPrice < 0) return 'incele';
   if (kalem.totalPrice === 0) return 'eksik';
-  if (kalem.totalPrice > 0) return 'incele';
-  return 'yok';
+  return 'incele';
 }
 
 export function kayitKarari(kalem: KalemGirdisi): KayitKarari {
