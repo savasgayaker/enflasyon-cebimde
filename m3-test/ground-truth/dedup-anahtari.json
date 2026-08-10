@@ -1,0 +1,159 @@
+{
+  "_aciklama": "M8 urun adi tekillestirme cevap anahtari. sinif alani: T1 katman 1 (Turkce harf, bosluk, noktalama) birlestirilmeli; YANLIS farkli urun, birlestirilirse yanlis birlestirme sayacina yazilir ve tur RET edilir; KACIRILAN ayni urun olabilir ama katman 2 kapsaminda, M8 birlestirmez ve bu kabul edilebilir maliyettir.",
+  "ciftler": [
+    {
+      "a": "POSET",
+      "b": "POŞET",
+      "beklenen": "birlestir",
+      "gerekce": "S ile S-cedilla farki",
+      "sinif": "T1"
+    },
+    {
+      "a": "KOZ BIBER 680 G COKCA",
+      "b": "KOZ BİBER 680 G COKCA",
+      "beklenen": "birlestir",
+      "gerekce": "noktasiz I ile noktali I farki",
+      "sinif": "T1"
+    },
+    {
+      "a": "LAVAS GELENEKSEL 6 LI 390 G UN",
+      "b": "LAVAŞ GELENEKSEL 6 LI 390 G UN",
+      "beklenen": "birlestir",
+      "gerekce": "S ile S-cedilla farki",
+      "sinif": "T1"
+    },
+    {
+      "a": "EKER MEYVELI YOGURT 6",
+      "b": "EKER MEYVELİ YOĞURT 6",
+      "beklenen": "birlestir",
+      "gerekce": "noktali I ve yumusak G farki",
+      "sinif": "T1"
+    },
+    {
+      "a": "ALISVERIS POSETI",
+      "b": "ALIŞVERİŞ POŞETİ",
+      "beklenen": "birlestir",
+      "gerekce": "S-cedilla ve noktali I farki",
+      "sinif": "T1"
+    },
+    {
+      "a": "MIGROS ISLAK HAVLU",
+      "b": "MİGROS ISLAK HAVLU",
+      "beklenen": "birlestir",
+      "gerekce": "noktali I farki",
+      "sinif": "T1"
+    },
+    {
+      "a": "BAHARAT SUSAM 75 G DIYAR",
+      "b": "BAHARAT SUSAM 75 G DİYAR",
+      "beklenen": "birlestir",
+      "gerekce": "noktali I farki",
+      "sinif": "T1"
+    },
+    {
+      "a": "SAMPUAN KOMPLE DIRENC 400ML EL",
+      "b": "ŞAMPUAN KOMPLE DİRENC 400ML EL",
+      "beklenen": "birlestir",
+      "gerekce": "S-cedilla ve noktali I farki",
+      "sinif": "T1"
+    },
+    {
+      "a": "CIPS MISIR TACO 135 G DORITOS",
+      "b": "CIPS  MISIR TACO 135 G DORITOS",
+      "beklenen": "birlestir",
+      "gerekce": "bosluk fazlaligi",
+      "sinif": "T1"
+    },
+    {
+      "a": "KARTON TABAK 21,5 CM",
+      "b": "  KARTON TABAK 21,5 CM  ",
+      "beklenen": "birlestir",
+      "gerekce": "bas ve son bosluk",
+      "sinif": "T1"
+    },
+    {
+      "a": "NUTELLA GO",
+      "b": "NUTELLA GO",
+      "beklenen": "birlestir",
+      "gerekce": "birebir ayni ad",
+      "sinif": "T1"
+    },
+    {
+      "a": "COCA-COLA ZERO 330",
+      "b": "COCA-COLA ZERO 450",
+      "beklenen": "ayri",
+      "gerekce": "farkli boyut, iki karakter farki",
+      "sinif": "YANLIS"
+    },
+    {
+      "a": "YABAN MERSINI 125 G",
+      "b": "YABAN MERSINI 300 GR",
+      "beklenen": "ayri",
+      "gerekce": "farkli boyut",
+      "sinif": "YANLIS"
+    },
+    {
+      "a": "KOPUK SABUN 400 ML BEYAZSABUN",
+      "b": "KOPUK SABUN 400 ML MANOLYA",
+      "beklenen": "ayri",
+      "gerekce": "farkli koku",
+      "sinif": "YANLIS"
+    },
+    {
+      "a": "KOPUK SABUN 400 ML MANOLYA",
+      "b": "KOPUK SABUN 400 ML ZEYTINYAGLI",
+      "beklenen": "ayri",
+      "gerekce": "farkli koku",
+      "sinif": "YANLIS"
+    },
+    {
+      "a": "CAMLA SU 500ML",
+      "b": "DAMLA SU 500ML",
+      "beklenen": "ayri",
+      "gerekce": "tek karakter farki ama farkli marka; katman 2 riski",
+      "sinif": "YANLIS"
+    },
+    {
+      "a": "PLASTIK CATAL KASIK",
+      "b": "PLASTIK CATAL",
+      "beklenen": "ayri",
+      "gerekce": "farkli urun, biri digerinin oneki",
+      "sinif": "YANLIS"
+    },
+    {
+      "a": "CCOLA ZERO 1L",
+      "b": "COCA COLA ZERO 1 LT",
+      "beklenen": "ayri",
+      "gerekce": "kisaltma farki; ayni urun olabilir ama katman 2, M8 kapsam disi",
+      "sinif": "KACIRILAN"
+    },
+    {
+      "a": "COCA-COLA ZERO",
+      "b": "COCA COLA ZERO 1L",
+      "beklenen": "ayri",
+      "gerekce": "eksik boyut belirteci; katman 2",
+      "sinif": "KACIRILAN"
+    },
+    {
+      "a": "POSET",
+      "b": "MARKET POSET",
+      "beklenen": "ayri",
+      "gerekce": "farkli kelime; ayni sey olabilir ama katman 2",
+      "sinif": "KACIRILAN"
+    },
+    {
+      "a": "ALISVERIS POSETI",
+      "b": "MIGROS PLASTIK POSET",
+      "beklenen": "ayri",
+      "gerekce": "farkli kelimeler; katman 2",
+      "sinif": "KACIRILAN"
+    },
+    {
+      "a": "BAHARAT SUSAM 75 G DIYAR",
+      "b": "BAHARAT SUSAM 75 G DIVAR",
+      "beklenen": "ayri",
+      "gerekce": "OCR harf hatasi Y ile V; katman 2 riski, M8 birlestirmez",
+      "sinif": "KACIRILAN"
+    }
+  ]
+}
