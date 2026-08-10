@@ -71,8 +71,11 @@ kontrol('S2 bayrakli ve tutar sifir eksik',
   () => seritSeviyesi(k({ needsReview: true, totalPrice: 0 })), 'eksik');
 kontrol('S3 bayrakli ve tutar pozitif incele',
   () => seritSeviyesi(k({ needsReview: true, totalPrice: 15 })), 'incele');
-kontrol('S4 bayrakli ve tutar negatif bugun seritsiz (D4 muhafizi)',
-  () => seritSeviyesi(k({ needsReview: true, totalPrice: -170 })), 'yok');
+kontrol('S4 bayrakli indirim satiri incele alir',
+  () => seritSeviyesi(k({ needsReview: true, totalPrice: -170 })), 'incele');
+kontrol('S5 bayrakli negatif urun kalemi incele alir',
+  () => seritSeviyesi(k({ needsReview: true, totalPrice: -170,
+                          unitPrice: -170 })), 'incele');
 
 senaryo('kayit karari');
 
