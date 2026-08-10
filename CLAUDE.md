@@ -106,6 +106,32 @@ YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 Önceki: `73f7177c…fba888` (1812 karakter, `kdvBlok` yok).
 
 
+## Blok 13-A - ilk cihaz olcumu (10 Agu 2026, KISMI)
+
+Uc gercek fis iPhone'da okutuldu; ucunun de toplami cevap
+anahtariyla birebir tuttu. **Indirimli fis artik kaydedilebiliyor**
+- M7-D'nin ana iddiasi cihazda dogrulandi. Indirim satirlari sari
+serit aliyor, kirmizi degil.
+
+Ucuncu indirim sekli olculdu: eksi isareti yerine D soneki
+(*130,00-D). Model dogru okudu; dokuzuncu fixture o davranisin
+muhafizi.
+
+Iki kusur olculdu: bir kalemde miktar ve birim fiyat kaymasi
+(toplam dogru oldugu icin aritmetik kontrol koru, capraz kontrol
+yakaladi) ve Migros'ta yirmi bir kalemin yirmi birinin bayraklanmasi
+(yanlis alarm orani).
+
+**Dort kanit hala acik** ve kapanis notlarindaki listelerden
+silinmedi: sahte urun kirliligi, ham etiket gorunumu, dokunma
+korumasi, motor dislamasi. M7-A'nin unit/vatRate kaniti da acik.
+
+Kayitlar yalniz telefonda: store AsyncStorage'a persist ediyor,
+backend'de kayit alan uc yok. Kayit sonrasi davranis ancak ekran
+goruntusuyle olculebilir.
+
+Ayrinti: docs/blok13a-cihaz-olcumu-2026-08-10.md
+
 ## M7-D kapandi (09 Agu 2026)
 
 Indirimli fis artik cihazda kaydedilebiliyor. Tur 0 olcumu bunun
