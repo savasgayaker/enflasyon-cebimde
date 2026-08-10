@@ -132,6 +132,26 @@ goruntusuyle olculebilir.
 
 Ayrinti: docs/blok13a-cihaz-olcumu-2026-08-10.md
 
+**Ikinci oturum (10 Agu, aksam):** dort acik kanittan ucu kapandi.
+Ham etiket cihazda gorunuyor, dokunma korumasi calisiyor, sahte urun
+kirliligi YOK. Sonuncusu dogrudan olculdu: uc indirim bagli olduklari
+urunle ayni adi tasiyordu ve katalogdaki kayit sayilari artmadi -
+findOrCreateProduct cagrilsaydi artardi. M7-D'nin cekirdek karari
+cihazda dogrulandi.
+
+Acik kalan tek kanit motor dislamasi; ana ekran -% gosteriyor ve bu
+sifir cikti oldugu icin filtreyi kanitlamaz. Enflasyon fiilen
+hesaplanmaya baslayinca olculebilir. M7-A'nin unit/vatRate kaniti da
+acik (alanlar arayuzde gosterilmiyor).
+
+**K-3 - urun adi dedup sorunu sahada gerceklesti.** Katalogda ayni
+urun defalarca ayri kayit: POSET uc ayri girdi, EKER MEYVELI YOGURT
+iki girdi, CIPS MISIR TACO uc girdi. Fark cogunlukla tek bir Turkce
+harf (I, S, G). Asama 3'un acik borcu. Motoru dogrudan etkiliyor:
+fiyat serisi bolununce her parcada tek gozlem kalir ve enflasyon
+hesaplanamaz. Veri kaybi yok (K4: ham adlar sakli, tekillestirme
+sonradan gecmise uygulanabilir).
+
 ## M7-D kapandi (09 Agu 2026)
 
 Indirimli fis artik cihazda kaydedilebiliyor. Tur 0 olcumu bunun

@@ -121,3 +121,113 @@ yol gerekir.
 
 Dort kanit icin telefonda dort ekrana bakilmasi yeterlidir ve
 ayri bir kod turu gerektirmez.
+
+# Ek - 10 Agu 2026, ikinci oturum
+
+Dort acik kanittan **ucu kapandi.** Ekran goruntuleriyle olculdu.
+
+## Kapanan: ham etiket
+
+Fis detayinda indirim satiri kampanya etiketiyle gorunuyor:
+10 TL UZERINE SAMPUA, tutar -170,00. Bilinmeyen urun yazmiyor.
+
+hamEtiket alani (M7-D3b-1) cihazda calisiyor. K5'in ucuncu olgusu
+fiilen saklaniyor ve ekranda okunuyor.
+
+## Kapanan: dokunma korumasi
+
+Indirim satirina dokunuldugunda hicbir ekran acilmiyor. productId
+null oldugu icin router.push cagrilmiyor (M7-D3b-2, S10 karari).
+
+## Kapanan: sahte urun kirliligi
+
+Urunler sekmesindeki katalogda hicbir kampanya adi yok. Aranan
+adlarin hicbiri listede degil.
+
+**Daha guclu bir kanit da olculdu.** Uc indirim, bagli olduklari
+urunle **ayni adi** tasiyordu. Katalogdaki kayit sayilari:
+
+    urun                    fis satiri  indirim  katalogda
+    A.O.C. SADE DONDURMA        2          1      2 kayit
+    NAMET DANA DONER            1          1      1 kayit
+    BANVIT PLC.SCHNITZEL        1          1      1 kayit
+
+findOrCreateProduct indirim icin cagrilsaydi ad zaten var olan
+urunle eslesir ve sayac bir artardi; A.O.C. uc kayit olurdu.
+Olmamis.
+
+Bu dolayli degil dogrudan kanittir: kodda findOrCreateProduct
+cagrisi ile productId atamasi ayni dala baglidir (M7-D3b-2).
+Sayac artmadiysa dal calismis demektir.
+
+**M7-D'nin cekirdek karari cihazda dogrulandi.**
+
+## Acik kalan tek kanit: motor dislamasi
+
+Ana ekranda kisisel enflasyon **-%** gosteriyor. Bu bir hata
+degildir; M6-E'de kapsama sifirken uydurma sayi gosterilmemesi
+icin boyle tasarlandi.
+
+Ancak **-% motor filtresini KANITLAMAZ.** Motor hicbir sey
+hesaplamiyor; filtre calissa da calismasa da ekranda ayni sey
+yazardi. Sifir cikti iki durumu ayirt edemez.
+
+Bu kanit ancak enflasyon fiilen hesaplanmaya basladiginda
+alinabilir.
+
+## K-3. Urun adi dedup sorunu sahada gerceklesti
+
+Katalogda ayni urun defalarca ayri kayit olmus. Olculen ornekler:
+
+    POSET (3) ve POSET (1) ve MARKET POSET (1)
+    ALISVERIS POSETI (2) ve ALISVERIS POSETI (1) ve
+      MIGROS PLASTIK POSET (2)
+    EKER MEYVELI YOGURT (2) ve EKER MEYVELI YOGURT (2)
+    LAVAS GELENEKSEL (2) ve LAVAS GELENEKSEL (1)
+    KOZ BIBER (2) ve KOZ BIBER (1)
+    BAHARAT SUSAM DIY (2) ve ayni urun DIV olarak (1)
+    MIGROS ISLAK HAVLU (1) ve MIGROS ISLAK HAVLU (1)
+    CIPS MISIR TACO uc ayri girdi (6, 3, 6 kayit)
+
+Fark cogunlukla **tek bir Turkce harf**: buyuk I ile noktali I,
+S ile S-cedilla, G ile yumusak G. M3 ayni urunu kosumdan kosuma
+farkli yaziyor.
+
+Asama 3'un acik borcunda yazili risk sahada gerceklesmistir.
+
+**Motoru dogrudan etkiler:** ayni urunun fiyat serisi ikiye
+bolununce her parcada tek gozlem kalir ve enflasyon hesaplanamaz.
+Ana ekranda -% gorunmesinin sebeplerinden biri muhtemelen budur.
+
+Veri kaybi yoktur: K4 geregi ham adlar saklaniyor ve tekillestirme
+sonradan yazilip gecmise yeniden uygulanabilir. Ancak artik gercek
+veriyle olculmus bir ornek vardir.
+
+## Kapanan gozlemin durumu
+
+    kanit                        durum
+    indirimli fis kaydedilebilir  KAPANDI (ilk oturum)
+    serit sari, kirmizi degil     KAPANDI (ilk oturum)
+    ucuncu indirim sekli okundu   KAPANDI (ilk oturum)
+    ham etiket                    KAPANDI
+    dokunma korumasi              KAPANDI
+    sahte urun kirliligi          KAPANDI
+    motor dislamasi               ACIK - enflasyon hesaplanmali
+    M7-A unit ve vatRate          ACIK - arayuzde gosterilmiyor
+
+## Uc kucuk gozlem
+
+1. Indirim satirinda birim fiyat isareti tutarsiz: bir kosumda
+   birim 170 ve toplam -170 gorundu, digerinde ikisi de -170.
+   Miktar bir iken carpim tutmuyor. Zarar vermiyor cunku
+   gecerlilik kontrolu totalPrice'a bakiyor.
+2. Urun sayisi indirimi de sayiyor: fis detayi 11 urun diyor,
+   dogrusu 10 urun arti 1 indirim.
+3. Indirim satirinda kategori secici var ve secilebiliyor.
+   Indirimin kategorisi olmamalidir. Kozmetik.
+
+## Sirada
+
+K-3 sıralama karari gerektiriyor: indirimin hangi urune bagli
+oldugunu bilmek (M7-C), urunlerin kendisi ikiye bolunmusken
+sinirli deger tasir.
