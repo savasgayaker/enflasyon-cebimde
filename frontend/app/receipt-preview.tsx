@@ -213,6 +213,7 @@ export default function ReceiptPreview() {
           unit: item.unit,
           vatRate: item.vatRate,
           satirTipi: item.satirTipi,
+          hamEtiket: item.name,
           date,
         };
         

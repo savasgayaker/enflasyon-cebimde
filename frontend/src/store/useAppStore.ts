@@ -40,6 +40,10 @@ export interface PriceRecord {
   unit?: string | null;
   vatRate?: number | null;
   satirTipi?: string | null;
+  // M7-D3b: fisten geldigi haliyle ham ad. Trim edilmez;
+  // K4 kural 1 geregi ham ad asla uzerine yazilmaz.
+  // Indirim kayitlarinda urun olmadigi icin adin tek yeri burasi.
+  hamEtiket?: string | null;
 }
 
 export interface UserSettings {
