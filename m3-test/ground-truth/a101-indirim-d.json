@@ -1,0 +1,115 @@
+{
+  "storeName": "A101",
+  "date": "2026-04-18",
+  "totalAmount": 551.0,
+  "items": [
+    {
+      "name": "ALISVERIS POSETI",
+      "quantity": 2.0,
+      "unitPrice": 1.0,
+      "totalPrice": 2.0,
+      "unit": "adet",
+      "vatRate": 20,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "MENDIVA 101LI ISL",
+      "quantity": 1.0,
+      "unitPrice": 49.0,
+      "totalPrice": 49.0,
+      "unit": "adet",
+      "vatRate": 20,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "BLADE200ML",
+      "quantity": 1.0,
+      "unitPrice": 249.0,
+      "totalPrice": 249.0,
+      "unit": "adet",
+      "vatRate": 20,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "CCOLA ZERO 1L",
+      "quantity": 1.0,
+      "unitPrice": 60.0,
+      "totalPrice": 60.0,
+      "unit": "adet",
+      "vatRate": 10,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "SCHWEPPES MAND1L",
+      "quantity": 1.0,
+      "unitPrice": 75.0,
+      "totalPrice": 75.0,
+      "unit": "adet",
+      "vatRate": 10,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "VIVIDENT NANE",
+      "quantity": 1.0,
+      "unitPrice": 35.0,
+      "totalPrice": 35.0,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "KARTON BARDAK 7 OZ 2",
+      "quantity": 1.0,
+      "unitPrice": 27.5,
+      "totalPrice": 27.5,
+      "unit": "adet",
+      "vatRate": 20,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "PLASTIK CATAL KASIK",
+      "quantity": 1.0,
+      "unitPrice": 16.5,
+      "totalPrice": 16.5,
+      "unit": "adet",
+      "vatRate": 20,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "KARTON TABAK 21,5 CM",
+      "quantity": 2.0,
+      "unitPrice": 26.0,
+      "totalPrice": 52.0,
+      "unit": "adet",
+      "vatRate": 20,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "MISTRAL 200LU PCT",
+      "quantity": 1.0,
+      "unitPrice": 25.5,
+      "totalPrice": 25.5,
+      "unit": "adet",
+      "vatRate": 20,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "MILKT. 150G R.KAYMK",
+      "quantity": 1.0,
+      "unitPrice": 89.5,
+      "totalPrice": 89.5,
+      "unit": "adet",
+      "vatRate": 1,
+      "satirTipi": "urun"
+    },
+    {
+      "name": "BLADE200ML",
+      "quantity": 1.0,
+      "unitPrice": -130.0,
+      "totalPrice": -130.0,
+      "unit": "adet",
+      "vatRate": 20,
+      "satirTipi": "indirim"
+    }
+  ]
+}

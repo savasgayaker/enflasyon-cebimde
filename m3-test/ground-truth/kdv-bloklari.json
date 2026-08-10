@@ -44,5 +44,11 @@
     "genel_toplam": 2706.89,
     "topkdv": 141.69,
     "_not": "Migros oran kirilimi basmaz, yalniz TOPKDV verir. Kova kapisi bu fiste kullanilamaz."
+  },
+  "a101-indirim-d": {
+    "tur": "yok",
+    "genel_toplam": 551.00,
+    "topkdv": 62.08,
+    "_not": "Oran kirilimi basmaz, yalniz TOPKDV verir. Indirim eksi isaretiyle degil D sonekiyle yazilmis (*130,00-D), ayri Urun Indirimleri blogunda. Indirim satirinda KDV orani basili degildir; anahtarda 20 yazilmistir cunku bagli oldugu urun (BLADE200ML) yuzde 20 oranindadir ve TOPKDV bu varsayimla birebir tutmaktadir."
   }
 }
