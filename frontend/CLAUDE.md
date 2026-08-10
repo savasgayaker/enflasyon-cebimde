@@ -240,6 +240,11 @@ alınmaz; koşum dışlanmaz; sayılar elle değil üreteçle yazılır; yanlı�
   M3Response, ParsedItem, PriceRecord ve UIItem boyunca tasiniyor.
   Esleme duz gecistir; bos deger operatoru kullanilmaz - null
   'bilinmiyor', undefined 'hic gelmedi' demektir. Store sema surumu 1.
+- **Karar mantigi saf modulde (M7-D, 09 Agu 2026):**
+  src/utils/fisKalemKurallari.ts - kalemGecerliMi, seritSeviyesi,
+  kayitKarari. Ekranlar karar mantigi icermez; cagirir ve basar.
+  Id uretimi ve store cagrilari ekranda kalir (saf modulde tarih
+  ve rastgelelik yok). Muhafiz: 15 kontrollu alet.
 - Supabase şeması hazır ama bağlı değil (9 tablo, 19 RLS satırı) — Aşama 4 işi, M6 kapsamı dışında.
 - Cloudflare Tunnel: alan adı alınmadı (Blok 12-A engelli). Blok 13 (iPhone uçtan uca), Blok 14
   (Mac mini kesintisizliği) sırada.

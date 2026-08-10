@@ -94,6 +94,9 @@ backend/test_dogrulama.py                 9 kontrol
   Kosum: backend/venv/bin/python3 backend/test_dogrulama.py
   Indirim satiri dogrulamasi: tur gecisi, negatif dali,
   tur celiskisi. Ozet satiri TS aletleriyle ayni bicimde.
+frontend/scripts/test-fis-kalem-kurallari.ts   15 kontrol
+  Kosum: npx tsx frontend/scripts/test-fis-kalem-kurallari.ts
+  Fis kalemi kurallari: gecerlilik, serit seviyesi, kayit karari.
 - Kaynak dogrulama kanali (mimar icin): `https://raw.githubusercontent.com/savasgayaker/enflasyon-cebimde/<commit-sha>/<yol>`. **Daima commit sha'sina sabitle** — dal ucuna (`main`) giden yol bayat kopya dondurebiliyor (2026-08-05'te dondurdu). Push'suz commit'ler bu kanaldan gorunmez.
 
 ### Prompt provenansı
@@ -102,6 +105,35 @@ backend/test_dogrulama.py                 9 kontrol
 YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 Önceki: `73f7177c…fba888` (1812 karakter, `kdvBlok` yok).
 
+
+## M7-D kapandi (09 Agu 2026)
+
+Indirimli fis artik cihazda kaydedilebiliyor. Tur 0 olcumu bunun
+onceden mumkun olmadigini gostermisti: sert kontrol birim fiyati
+sifirin altindaki kalemi reddediyordu.
+
+Indirim satiri satirTipi isaretli ayri bir PriceRecord olarak
+yazilir; productId null kalir ve findOrCreateProduct cagrilmaz
+(sahte urun kirliligi). hamEtiket alani fisten geldigi haliyle,
+trim edilmeden saklanir. Motor productId null olan kayitlari
+gruplamaya sokmaz - iki dongu de kendi basina korunur.
+
+Serit artik tutara degil ture bakar: indirim incele alir, eksik
+degil. Indirim satirinda girilecek bir fiyat yoktur.
+
+Karar mantigi saf modulde: frontend/src/utils/fisKalemKurallari.ts
+(kalemGecerliMi, seritSeviyesi, kayitKarari). Ekranlar karar
+mantigi icermez; cagirir ve basar.
+
+On dort ilan edilmis sapma. Bunlarin besi ayni hata sinifidir:
+olculmeden ilan edilen kapi degeri veya oncülü. Sinif Kural 13'un
+alti maddesiyle kayitlidir.
+
+Kapanis notundaki 'M7-D'nin KANITLAMADIGI seyler' bolumu okunmadan
+bu is kapali sayilmaz: cihazda hicbir sey olculmedi.
+
+Ayrinti: docs/m7d-on-kayit-2026-08-09.md,
+docs/m7d-kapanis-2026-08-09.md.
 
 ## M7-B kapandi (09 Agu 2026)
 
