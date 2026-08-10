@@ -66,6 +66,14 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
   gecersiz bir kapi degeri dogurur. M7-B3a ikinci turunda olculdu:
   suresi dolmus jetonla alti cagri 401 aldi ve degerlendirici bunlari
   esik dususu olarak raporladi.
+  (f) Silme kapisinin degeri, yamanin degistirdigi aralıktan degil
+  git'in raporladigi silmeden turetilir. Git ortak satirlari baglam
+  olarak esler: eski ve yeni govdede bayt kimlik ayni ve ayni sirada
+  duran satirlar silinmis sayilmaz. M7-D4-2'de olculdu.
+  (g) Karakter kapisi kok CLAUDE.md'de pozitif delta ile calisir:
+  yalniz eklenen satirlar taranir. Dosyada onceden yasayan tipografi
+  kapinin konusu degildir; kumeyi genisleterek cozmek kapiyi her yeni
+  karakterde gevsetmeyi gerektirir. docs dosyalari tam tarama kalir.
   Bir kapinin **degeri** yanlis ilan edilmisse desen kalibrasyonuyla
   duzeltilemez; ilan edilmis sapma gerekir (M7-A/S7).
 
