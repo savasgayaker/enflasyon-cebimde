@@ -203,11 +203,15 @@ export default function ReceiptPreview() {
       // Create products and price records
       for (const item of items) {
         const karar = kayitKarari(item);
-        const product = findOrCreateProduct(item.name.trim(), item.categoryId);
+        // M7-D3b: indirim kaleminde urun OLUSTURULMAZ; olusturulsaydi
+        // kampanya etiketi adinda sahte bir urun dogardi.
+        const product = karar.urunOlusturulsunMu
+          ? findOrCreateProduct(item.name.trim(), item.categoryId)
+          : null;
         
         const priceRecord = {
           id: Date.now().toString(36) + Math.random().toString(36).substr(2),
-          productId: product.id,
+          productId: product ? product.id : null,
           receiptId,
           ...karar.kayit,
           unit: item.unit,

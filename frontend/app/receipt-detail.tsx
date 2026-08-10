@@ -35,7 +35,7 @@ export default function ReceiptDetail() {
         const category = categories.find((c) => c.id === product?.categoryId);
         return {
           ...record,
-          productName: product?.name || 'Bilinmeyen Ürün',
+          productName: product?.name || record.hamEtiket || 'Bilinmeyen Ürün',
           category,
         };
       });
@@ -129,7 +129,7 @@ export default function ReceiptDetail() {
             <TouchableOpacity
               key={item.id}
               style={[styles.itemCard, { backgroundColor: theme.surface }]}
-              onPress={() => router.push({ pathname: '/product-detail', params: { id: item.productId } })}
+              onPress={() => { if (item.productId === null) return; router.push({ pathname: '/product-detail', params: { id: item.productId } }); }}
             >
               <View style={[styles.itemIcon, { backgroundColor: (item.category?.color || colors.category.other) + '20' }]}>
                 <MaterialIcons
