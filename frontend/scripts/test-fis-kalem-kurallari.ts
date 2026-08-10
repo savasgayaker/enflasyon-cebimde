@@ -71,7 +71,7 @@ kontrol('S2 bayrakli ve tutar sifir eksik',
   () => seritSeviyesi(k({ needsReview: true, totalPrice: 0 })), 'eksik');
 kontrol('S3 bayrakli ve tutar pozitif incele',
   () => seritSeviyesi(k({ needsReview: true, totalPrice: 15 })), 'incele');
-kontrol('S4 bayrakli indirim satiri incele alir',
+kontrol('S4 bayrakli negatif kalem incele alir',
   () => seritSeviyesi(k({ needsReview: true, totalPrice: -170 })), 'incele');
 kontrol('S5 bayrakli negatif urun kalemi incele alir',
   () => seritSeviyesi(k({ needsReview: true, totalPrice: -170,
