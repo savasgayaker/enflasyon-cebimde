@@ -83,6 +83,12 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
   Bir kapinin **degeri** yanlis ilan edilmisse desen kalibrasyonuyla
   duzeltilemez; ilan edilmis sapma gerekir (M7-A/S7).
 
+  (i) Bir kapi, yamanin kendisinden BAGIMSIZ bir kaynagi olcmelidir.
+  M8-5a'da tarih sabitlerinin varligi grep sayimiyla olculdu ama
+  sayilan satirlarin tamami yamanin kendi ekledigi kullanim
+  satirlariydi; kapi kendi urettigi metni kanit kabul etti ve gecti.
+  Sabit ve tip dogrulamalari yamadan ONCE, tanim satirlari uzerinden
+  yapilir.
 ### Ölçüm araçları nerede
 - `m3-test/acceptance_dual.py` — ölçüm aleti (jetonlu, 6 fiş × 5 koşum = 30).
 - `m3-test/puanla_bilesik.py` — başlık+eşleşme+fiyat bileşik oranı, arşivden.
