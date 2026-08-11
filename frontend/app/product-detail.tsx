@@ -31,14 +31,19 @@ export default function ProductDetail() {
   // M8-5c: gelen kimlik temsilci de olabilir uye de (S9).
   // Kume kendi memo'sunda kurulur ki referans kararli olsun
   // ve bagimlilik listesi tatmin olsun (S10).
-  const uyeler = useMemo(
-    () =>
-      new Set(
-        grupCoz(urunleriGrupla(products).gruplar, String(id)).uyeIdler,
-      ),
+  // M8-5c: cozum tek memo'da; uye kumesi ve ad ondan turer (S11).
+  const cozum = useMemo(
+    () => grupCoz(urunleriGrupla(products).gruplar, String(id)),
     [products, id],
   );
-  const category = categories.find((c) => c.id === product?.categoryId);
+  const uyeler = useMemo(() => new Set(cozum.uyeIdler), [cozum]);
+  // Grubun temsilci adi ve kategorisi. Grup bulunamazsa gelen
+  // urunun kendi degerlerine duser (S11 karar 3).
+  const temsilci = useMemo(
+    () => products.find((p) => p.id === cozum.temsilciId),
+    [products, cozum],
+  );
+  const category = categories.find((c) => c.id === (temsilci?.categoryId ?? product?.categoryId));
 
   // Get price history
   const priceHistory = useMemo(() => {
@@ -105,7 +110,7 @@ export default function ProductDetail() {
               color={colors.white}
             />
           </View>
-          <Text style={styles.productName}>{product.name}</Text>
+          <Text style={styles.productName}>{cozum.ad || product.name}</Text>
           <View style={styles.categoryBadge}>
             <Text style={styles.categoryText}>{category?.name || 'Diğer'}</Text>
           </View>
