@@ -16,6 +16,8 @@ import { tr } from '../src/i18n/tr';
 import { categories } from '../src/constants/categories';
 import { format } from 'date-fns';
 import { tr as trLocale } from 'date-fns/locale';
+import { urunleriGrupla } from '../src/utils/urunGruplama';
+import { grupCoz } from '../src/utils/urunListesi';
 
 const { width } = Dimensions.get('window');
 
@@ -26,6 +28,16 @@ export default function ProductDetail() {
   const theme = darkMode ? colors.dark : colors.light;
 
   const product = products.find((p) => p.id === id);
+  // M8-5c: gelen kimlik temsilci de olabilir uye de (S9).
+  // Kume kendi memo'sunda kurulur ki referans kararli olsun
+  // ve bagimlilik listesi tatmin olsun (S10).
+  const uyeler = useMemo(
+    () =>
+      new Set(
+        grupCoz(urunleriGrupla(products).gruplar, String(id)).uyeIdler,
+      ),
+    [products, id],
+  );
   const category = categories.find((c) => c.id === product?.categoryId);
 
   // Get price history
@@ -33,7 +45,7 @@ export default function ProductDetail() {
     if (!product) return [];
     
     return priceRecords
-      .filter((r) => r.productId === product.id)
+      .filter((r) => r.productId !== null && uyeler.has(r.productId))
       .map((record) => {
         const receipt = receipts.find((r) => r.id === record.receiptId);
         return {
@@ -42,7 +54,7 @@ export default function ProductDetail() {
         };
       })
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-  }, [product, priceRecords, receipts]);
+  }, [product, priceRecords, receipts, uyeler]);
 
   // Calculate stats
   const stats = useMemo(() => {
