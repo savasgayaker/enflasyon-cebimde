@@ -1,5 +1,6 @@
 import { format, subMonths, startOfMonth, endOfMonth } from 'date-fns';
 import { PriceRecord, Product, Receipt } from '../store/useAppStore';
+import { urunleriGrupla, temsilciHaritasi } from './urunGruplama';
 
 export interface InflationData {
   monthlyRate: number;
@@ -31,6 +32,11 @@ export function calculateInflation(
   products: Product[],
   dateRange: { start: Date; end: Date }
 ): InflationData {
+  // M8-5a: ayni tekil urunun kayitlari tek seride toplanir.
+  // Harita okuma aninda hesaplanir ve saklanmaz (M8/S2, K4 kural 2).
+  const _gruplar = urunleriGrupla(products);
+  const _temsilci = temsilciHaritasi(_gruplar);
+  const _kimlik = (id: string): string => _temsilci.get(id) ?? id;
   // Filter records in date range
   const currentRecords = priceRecords.filter((r) => {
     const date = new Date(r.date);
@@ -89,14 +95,15 @@ export function calculateInflation(
     // Tip korumasi tek basina yeterli degil: savunma veride.
     // Iki dongu de kendi basina korunur; dolayli koruma kirilgandir (S8).
     if (r.productId === null || r.productId === undefined) return;
-    if (!accumulators[r.productId]) {
-      accumulators[r.productId] = {
+    const _pid = _kimlik(r.productId);
+    if (!accumulators[_pid]) {
+      accumulators[_pid] = {
         curPxQ: 0, curQ: 0, curP: 0, curN: 0,
         prevPxQ: 0, prevQ: 0, prevP: 0, prevN: 0,
         spending: 0,
       };
     }
-    const acc = accumulators[r.productId];
+    const acc = accumulators[_pid];
     acc.curPxQ += r.unitPrice * r.quantity;
     acc.curQ += r.quantity;
     acc.curP += r.unitPrice;
@@ -111,7 +118,8 @@ export function calculateInflation(
     // Tip korumasi tek basina yeterli degil: savunma veride.
     // Iki dongu de kendi basina korunur; dolayli koruma kirilgandir (S8).
     if (r.productId === null || r.productId === undefined) return;
-    const acc = accumulators[r.productId];
+    const _pid = _kimlik(r.productId);
+    const acc = accumulators[_pid];
     if (acc) {
       acc.prevPxQ += r.unitPrice * r.quantity;
       acc.prevQ += r.quantity;
