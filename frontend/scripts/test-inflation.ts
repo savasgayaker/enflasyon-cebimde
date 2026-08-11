@@ -387,6 +387,59 @@ senaryo('S23 — 6 aylık pencerede bileşik yıllıklaştırma', () => {
   check('windowMonths', r.windowMonths, 6);
 });
 
+
+// --- M8-5a: gruplama kontrolleri (S24-S27) ---
+// Motor ayni tekil urunun kayitlarini tek seride topluyor mu.
+
+senaryo('S24 - ad varyantlari tek seri olusturur', () => {
+  const urunler = [
+    { id: 'v1', name: 'POSET', categoryId: 'gida', createdAt: '2026-01-01T00:00:00.000Z' },
+    { id: 'v2', name: 'PO\u015eET', categoryId: 'gida', createdAt: '2026-01-02T00:00:00.000Z' },
+  ];
+  const kayitlar = [kayit('v1', ONCEKI, 20), kayit('v2', CARI_1, 22)];
+  const r = calculateInflation(kayitlar, urunler, ARALIK);
+  check('S24 varyantlar birlesip oran uretir', r.monthlyRate, 10);
+});
+
+senaryo('S25 - null productId hala disarida', () => {
+  const urunler = [
+    { id: 'v1', name: 'POSET', categoryId: 'gida', createdAt: '2026-01-01T00:00:00.000Z' },
+    { id: 'v2', name: 'PO\u015eET', categoryId: 'gida', createdAt: '2026-01-02T00:00:00.000Z' },
+  ];
+  const kayitlar = [
+    kayit('v1', ONCEKI, 20),
+    kayit('v2', CARI_1, 22),
+    { ...kayit('v1', CARI_1, 5), productId: null },
+  ];
+  const r = calculateInflation(kayitlar, urunler, ARALIK);
+  check('S25 null kayit sonucu degistirmez', r.monthlyRate, 10);
+});
+
+senaryo('S26 - farkli boyutlar ayri seri kalir', () => {
+  const urunler = [
+    { id: 'z330', name: 'COCA-COLA ZERO 330', categoryId: 'icecek', createdAt: '2026-01-01T00:00:00.000Z' },
+    { id: 'z450', name: 'COCA-COLA ZERO 450', categoryId: 'icecek', createdAt: '2026-01-02T00:00:00.000Z' },
+  ];
+  const kayitlar = [
+    kayit('z330', ONCEKI, 30), kayit('z330', CARI_1, 33),
+    kayit('z450', ONCEKI, 40), kayit('z450', CARI_1, 48),
+  ];
+  const r = calculateInflation(kayitlar, urunler, ARALIK);
+  // M6-C: agirlik CARI harcamadan gelir.
+  // (33/81) carpi 10 arti (48/81) carpi 20 = 15,9
+  check('S26 iki ayri seri cari agirlikla birlesir', r.monthlyRate, 15.9);
+});
+
+senaryo('S27 - temsilci en eski uyedir', () => {
+  const urunler = [
+    { id: 'k1', name: 'KOZ BIBER', categoryId: 'gida', createdAt: '2026-01-01T00:00:00.000Z' },
+    { id: 'k2', name: 'KOZ B\u0130BER', categoryId: 'icecek', createdAt: '2026-06-01T00:00:00.000Z' },
+  ];
+  const kayitlar = [kayit('k2', ONCEKI, 50), kayit('k1', CARI_1, 55)];
+  const r = calculateInflation(kayitlar, urunler, ARALIK);
+  check('S27 karisik kategoride oran uretilir', r.monthlyRate, 10);
+});
+
 console.log('\n=== DAĞILIM ===');
 for (const d of dagilim) console.log(`  ${d.ad}: ${d.sonuc}`);
 console.log(`\nToplam: ${passed} yeşil kontrol, ${failed} kırmızı kontrol`);
