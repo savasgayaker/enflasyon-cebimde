@@ -12,6 +12,7 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { ayniUrunMu, NORMALIZE_SURUMU } from '../src/utils/urunAdiNormalize';
+import { urunleriGrupla, temsilciHaritasi } from '../src/utils/urunGruplama';
 
 interface Cift {
   a: string;
@@ -76,6 +77,56 @@ console.log('  noktasiz i ile esit mi: ' + (kucuk === 'i'));
 
 console.log('');
 console.log('');
+
+// --- M8-4: gruplama kontrolleri ---
+let gYesil = 0;
+let gKirmizi = 0;
+function gKontrol(etiket: string, bulunan: unknown, beklenen: unknown) {
+  const a = JSON.stringify(bulunan);
+  const b = JSON.stringify(beklenen);
+  if (a === b) {
+    gYesil++;
+    console.log('  yesil   ' + etiket);
+  } else {
+    gKirmizi++;
+    console.log('  KIRMIZI ' + etiket);
+    console.log('            bulunan=' + a + ' beklenen=' + b);
+  }
+}
+
+console.log('');
+console.log('=== gruplama ===');
+{
+  const urunler = [
+    { id: 'p1', name: 'POSET', createdAt: 3 },
+    { id: 'p2', name: 'PO\u015eET', createdAt: 1 },
+    { id: 'p3', name: 'COCA-COLA ZERO 330', createdAt: 2 },
+    { id: 'p4', name: 'COCA-COLA ZERO 450', createdAt: 4 },
+    { id: 'p5', name: '  POSET  ', createdAt: 5 },
+  ];
+  const s = urunleriGrupla(urunler);
+  gKontrol('G1 grup sayisi', s.gruplar.length, 3);
+  const h = temsilciHaritasi(s);
+  gKontrol('G2 POSET varyantlari ayni temsilcide',
+    [h.get('p1'), h.get('p2'), h.get('p5')], ['p2', 'p2', 'p2']);
+  gKontrol('G3 temsilci en eski uye', h.get('p1'), 'p2');
+  gKontrol('G4 farkli boyutlar ayri grupta',
+    h.get('p3') === h.get('p4'), false);
+  gKontrol('G5 surum ciktida tasiniyor', s.kuralSurumu, 1);
+}
+{
+  const s = urunleriGrupla([]);
+  gKontrol('G6 bos girdi bos sonuc', s.gruplar.length, 0);
+}
+{
+  const s = urunleriGrupla([
+    { id: 'x1', name: 'TEK URUN' },
+  ]);
+  gKontrol('G7 createdAt yokken de temsilci secilir',
+    s.gruplar[0].temsilciId, 'x1');
+}
+console.log('  gruplama: ' + gYesil + ' yesil, ' + gKirmizi + ' kirmizi');
+
 console.log('normalizasyon kural surumu: ' + NORMALIZE_SURUMU);
-console.log('Toplam: ' + yesil + ' yesil kontrol, ' + kirmizi + ' kirmizi kontrol');
-process.exit(kirmizi === 0 ? 0 : 1);
+console.log('Toplam: ' + (yesil + gYesil) + ' yesil kontrol, ' + (kirmizi + gKirmizi) + ' kirmizi kontrol');
+process.exit(kirmizi === 0 && gKirmizi === 0 ? 0 : 1);
