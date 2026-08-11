@@ -114,6 +114,11 @@ backend/test_dogrulama.py                 9 kontrol
 frontend/scripts/test-fis-kalem-kurallari.ts   15 kontrol
   Kosum: npx tsx frontend/scripts/test-fis-kalem-kurallari.ts
   Fis kalemi kurallari: gecerlilik, serit seviyesi, kayit karari.
+frontend/scripts/test-dedup.ts                29 kontrol
+  Urun adi tekillestirme: 22 cift arti 7 gruplama kontrolu.
+  K4'un uc sayacini basar; YANLIS birlestirme sifir olmali.
+frontend/scripts/test-urun-listesi.ts         13 kontrol
+  Liste kurulumu ve grup cozumu.
 - Kaynak dogrulama kanali (mimar icin): `https://raw.githubusercontent.com/savasgayaker/enflasyon-cebimde/<commit-sha>/<yol>`. **Daima commit sha'sina sabitle** — dal ucuna (`main`) giden yol bayat kopya dondurebiliyor (2026-08-05'te dondurdu). Push'suz commit'ler bu kanaldan gorunmez.
 
 ### Prompt provenansı
@@ -122,6 +127,38 @@ frontend/scripts/test-fis-kalem-kurallari.ts   15 kontrol
 YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 Önceki: `73f7177c…fba888` (1812 karakter, `kdvBlok` yok).
 
+
+## M8 kapandi (11 Agu 2026) - urun adi tekillestirme
+
+K-3'te olculen bolunmeler kapandi. Ayni tekil urunun kayitlari
+tek seride toplaniyor: liste tek satir gosteriyor, detay birlesik
+gecmis ciziyor, motor tek seri uzerinden hesapliyor.
+
+Mekanizma tek satirdaydi: useAppStore.ts:178 toLowerCase
+karsilastirmasi. Yerel bilgisiz calisir; S-cedilla ve yumusak G
+hic eslesmez, noktali I kucultulunce birlesen nokta uretir.
+
+**Esleme SAKLANMAZ** (S2, K4 kural 2): okuma aninda hesaplanir.
+Persist semasi degismedi, goc gerekmedi, sema surumu 1'de kaldi.
+
+Kapsam yalniz Turkce harf ve bosluk katmani. Bulanik benzerlik
+kapsam disi ve hic yapilmayabilir: CAMLA/DAMLA SU bir karakter
+farkli ve ayni urun, ZERO 330/450 iki karakter farkli ve FARKLI
+urun; duzenleme mesafesi ayiramaz (K4 kural 3).
+
+K4'un uc sayaci: dogru birlestirme 11, kacirilan 0, YANLIS
+birlestirme 0. Yanlis birlestirme kapisi hicbir turda ihlal
+edilmedi.
+
+**findOrCreateProduct hala eski kurali kullaniyor.** Yeni kayitlar
+bolunmeye devam eder ve okuma aninda gruplanir - K4 geregi yazma
+aninda normallestirme yapilmaz. Katalogda hala iki ayri Product
+kaydi gorunur; birlesme ekranda ve motorda olur.
+
+On bir ilan edilmis sapma, uc yeni Kural 13 maddesi (h, i, j).
+
+Ayrinti: docs/m8-on-kayit-2026-08-11.md,
+docs/m8-kapanis-2026-08-11.md.
 
 ## Blok 13-A - ilk cihaz olcumu (10 Agu 2026, KISMI)
 
