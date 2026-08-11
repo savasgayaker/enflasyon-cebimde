@@ -3,7 +3,7 @@
  *
  * Cekler bugunku davranisi korur; degisen tek sey gruplamadir.
  */
-import { listeSatirlariniKur } from '../src/utils/urunListesi';
+import { listeSatirlariniKur, grupCoz } from '../src/utils/urunListesi';
 import type { ListeKaydi, ListeUrunu } from '../src/utils/urunListesi';
 import { urunleriGrupla } from '../src/utils/urunGruplama';
 
@@ -76,5 +76,20 @@ kontrol('L9 kategori temsilciden okunur',
   () => kur().find((s) => s.id === 'v1')?.categoryId, 'gida');
 
 console.log('');
+
+console.log('');
+console.log('=== grup cozumu (M8-5c) ===');
+{
+  const gruplar = urunleriGrupla(URUNLER).gruplar;
+  kontrol('D1 temsilci kimligiyle grup bulunur',
+    () => grupCoz(gruplar, 'v1').uyeIdler.sort(), ['v1', 'v2']);
+  kontrol('D2 uye kimligiyle ayni grup bulunur',
+    () => grupCoz(gruplar, 'v2').uyeIdler.sort(), ['v1', 'v2']);
+  kontrol('D3 gruba ait olmayan kimlikte bos doner',
+    () => grupCoz(gruplar, 'yok').temsilciId, null);
+  kontrol('D4 cozulen ad temsilcinin adidir',
+    () => grupCoz(gruplar, 'v2').ad, 'POSET');
+}
+
 console.log('Toplam: ' + yesil + ' yesil kontrol, ' + kirmizi + ' kirmizi kontrol');
 process.exit(kirmizi === 0 ? 0 : 1);

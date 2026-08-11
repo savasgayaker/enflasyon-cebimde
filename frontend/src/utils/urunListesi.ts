@@ -71,3 +71,29 @@ export function listeSatirlariniKur(
     };
   });
 }
+
+/** Bir urun kimliginin ait oldugu grubun cozumu. */
+export interface GrupCozumu {
+  /** Grubun temsilci kimligi; null ise kimlik hicbir gruba ait degil. */
+  temsilciId: string | null;
+  /** Temsilcinin ham adi. */
+  ad: string;
+  /** Gruba giren tum kimlikler. */
+  uyeIdler: string[];
+}
+
+/**
+ * Gelen kimligin ait oldugu grubu cozer.
+ *
+ * Kimlik temsilci de olabilir uye de: urun listesi temsilci
+ * kimligi gonderir, fis detayi kaydin kendi uye kimligini
+ * gonderir. Ikisi de ayni grubu bulur (S9 karar 1).
+ */
+export function grupCoz(gruplar: UrunGrubu[], id: string): GrupCozumu {
+  for (const g of gruplar) {
+    if (g.uyeIdler.includes(id)) {
+      return { temsilciId: g.temsilciId, ad: g.temsilciAd, uyeIdler: g.uyeIdler };
+    }
+  }
+  return { temsilciId: null, ad: '', uyeIdler: [] };
+}
