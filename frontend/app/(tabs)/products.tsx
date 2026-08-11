@@ -15,6 +15,8 @@ import { useAppStore } from '../../src/store/useAppStore';
 import { colors, spacing, borderRadius, typography, shadows } from '../../src/constants/theme';
 import { tr } from '../../src/i18n/tr';
 import { categories, Category } from '../../src/constants/categories';
+import { urunleriGrupla } from '../../src/utils/urunGruplama';
+import { listeSatirlariniKur } from '../../src/utils/urunListesi';
 
 export default function ProductsScreen() {
   const router = useRouter();
@@ -26,29 +28,21 @@ export default function ProductsScreen() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   // Calculate product data with price info
-  const productData = useMemo(() => {
-    return products.map((product) => {
-      const records = priceRecords
-        .filter((r) => r.productId === product.id)
-        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-      
-      const lastPrice = records[0]?.unitPrice || 0;
-      const firstPrice = records[records.length - 1]?.unitPrice || lastPrice;
-      const priceChange = firstPrice > 0 
-        ? ((lastPrice - firstPrice) / firstPrice) * 100 
-        : 0;
-      
-      const category = categories.find((c) => c.id === product.categoryId);
-      
-      return {
-        ...product,
-        lastPrice,
-        priceChange,
-        recordCount: records.length,
-        category,
-      };
-    });
-  }, [products, priceRecords]);
+  // M8-5b: ayni tekil urunun kayitlari tek satirda toplanir.
+  // Kurulum saf modulde; ekran cagirir, kategoriyi sabit
+  // katalogdan zenginlestirir ve basar (S7).
+  const productData = useMemo(
+    () =>
+      listeSatirlariniKur(
+        urunleriGrupla(products).gruplar,
+        products,
+        priceRecords,
+      ).map((satir) => ({
+        ...satir,
+        category: categories.find((c) => c.id === satir.categoryId),
+      })),
+    [products, priceRecords],
+  );
 
   // Filter products
   const filteredProducts = useMemo(() => {
