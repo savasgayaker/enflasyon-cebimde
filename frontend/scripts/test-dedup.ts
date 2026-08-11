@@ -11,6 +11,7 @@
  */
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import { ayniUrunMu, NORMALIZE_SURUMU } from '../src/utils/urunAdiNormalize';
 
 interface Cift {
   a: string;
@@ -23,9 +24,11 @@ interface Cift {
 const yol = join(__dirname, '../../m3-test/ground-truth/dedup-anahtari.json');
 const anahtar = JSON.parse(readFileSync(yol, 'utf-8')) as { ciftler: Cift[] };
 
-// Bugunku uretim kurali - useAppStore.ts findOrCreateProduct
-function bugunkuKural(a: string, b: string): boolean {
-  return a.toLowerCase() === b.toLowerCase();
+// M8-3: olculen kural artik normalizasyon modulu.
+// Bugunku uretim kurali (toLowerCase) M8-2'de olculdu:
+// 12 yesil / 10 kirmizi, kacirilan 10.
+function olculenKural(a: string, b: string): boolean {
+  return ayniUrunMu(a, b);
 }
 
 let yesil = 0;
@@ -36,7 +39,7 @@ let yanlisBirlestirme = 0;
 
 console.log('=== cift bazinda ===');
 for (const c of anahtar.ciftler) {
-  const bulunan = bugunkuKural(c.a, c.b) ? 'birlestir' : 'ayri';
+  const bulunan = olculenKural(c.a, c.b) ? 'birlestir' : 'ayri';
   const gecti = bulunan === c.beklenen;
   if (gecti) {
     yesil++;
@@ -72,5 +75,7 @@ console.log('  U+0130 toLowerCase -> ' + kodlar.join(' ') + '  uzunluk ' + kucuk
 console.log('  noktasiz i ile esit mi: ' + (kucuk === 'i'));
 
 console.log('');
+console.log('');
+console.log('normalizasyon kural surumu: ' + NORMALIZE_SURUMU);
 console.log('Toplam: ' + yesil + ' yesil kontrol, ' + kirmizi + ' kirmizi kontrol');
 process.exit(kirmizi === 0 ? 0 : 1);
