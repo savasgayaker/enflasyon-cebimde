@@ -74,6 +74,12 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
   yalniz eklenen satirlar taranir. Dosyada onceden yasayan tipografi
   kapinin konusu degildir; kumeyi genisleterek cozmek kapiyi her yeni
   karakterde gevsetmeyi gerektirir. docs dosyalari tam tarama kalir.
+  (h) Bir kapinin desen eslesmemesi, olculen seyin basarisiz oldugu
+  anlamina GELMEZ. Sayi cikarimi eslesmezse kapi sessizce yanlis bir
+  teshis basabilir: M8-5a'da test:inflation gecmisken kapi mevcut
+  kontroller bozuldu diye raporladi, cunku desen ASCII arıyordu ve
+  aletin bicimi Turkceydi. Sayi cikarimlari bicimden bagimsiz
+  yazilir; eslesme yoksa kapi RET degil DUR vermelidir.
   Bir kapinin **degeri** yanlis ilan edilmisse desen kalibrasyonuyla
   duzeltilemez; ilan edilmis sapma gerekir (M7-A/S7).
 
