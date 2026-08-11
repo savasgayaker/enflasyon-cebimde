@@ -92,6 +92,11 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
 ### Ölçüm araçları nerede
 - `m3-test/acceptance_dual.py` — ölçüm aleti (jetonlu, 6 fiş × 5 koşum = 30).
 - `m3-test/puanla_bilesik.py` — başlık+eşleşme+fiyat bileşik oranı, arşivden.
+  (j) Lint kapisi, dokunulan dosya zaten temiz degilse DELTA olur:
+  temiz tabanda bulgu sayisi olculur ve yamadan sonra ayni sayi
+  beklenir. M8-5b'de olculdu - kullanilmayan bir import yamadan once
+  de vardi ve kapi turu haksiz yere RET etti. Yeni ihlal sizmasi
+  yakalanir, mevcut borc turun sirtina yuklenmez.
 - `m3-test/puanla-kdv-oran.py` — KDV oranı doğru/yanlış/boş, arşivden.
 - `m3-test/karar-ek12b.py` — ön kayıtlı karar kuralını otomatik uygular.
 - Arşivler: `m3-test/results/ek*-*.json|txt` (izlenmeleri `m3-test/.gitignore`
