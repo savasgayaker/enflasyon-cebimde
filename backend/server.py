@@ -52,7 +52,11 @@ if mongo_url:
     client = AsyncIOMotorClient(mongo_url)
     db = client[os.environ.get('DB_NAME', 'enflasyon')]
 
-app = FastAPI()
+# Blok 12-B: belge uclari kapali. Tunel arkasinda internete
+# aciktilar ve uc adlarini, parametre bicimlerini, model
+# alanlarini ifsa ediyorlardi. Kritik uc JWT korumali oldugu
+# icin bu bir acik degil gereksiz bir yuzeydi.
+app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 api_router = APIRouter(prefix="/api")
 
 
