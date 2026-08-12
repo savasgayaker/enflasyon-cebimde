@@ -11,7 +11,10 @@ services:
       # Tünel açıldıktan sonra "127.0.0.1:8000:8000" yapılıp yerel ağdan
       # tamamen kapatılabilir — Blok 11'de tekrar bakılacak.
       - "8000:8000"
-    restart: unless-stopped
+    # Blok 14/S1: always, unless-stopped degil. macOS yeniden
+    # baslatmasinda Docker konteyneri temiz durduruyor ve
+    # unless-stopped bunu elle durdurulmus sayip kaldirmiyor.
+    restart: always
     healthcheck:
       test:
         - CMD
