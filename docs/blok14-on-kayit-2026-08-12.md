@@ -82,3 +82,61 @@ olculebilir.
 
 Baglama daraltmasi; Metro'nun kalicilastirilmasi - gelistirme
 araci oldugu icin gerekmez; izleme ve uyari kurulumu.
+
+### S1 - Kapi E'nin hangi senaryoyu olctugu netlestirildi
+
+Tarih: 12 Agu 2026, ikinci reboot turundan once ilan edildi.
+
+Ilk reboot olcumu kapi E'de RET verdi ve kok neden iki ayri
+halkada bulundu.
+
+**Halka 1 - konteyner politikasi.** Yeniden baslatmada Docker
+konteyneri temiz durdurdu ve unless-stopped politikasi bunu elle
+durdurulmus sayarak geri kaldirmadi.
+
+**Halka 2 - oturum bagimliligi.** Docker Desktop bir **kullanici
+uygulamasidir** ve oturum acilmadan kalkmaz. Ilk reboot'ta
+kalkmasinin sebebi kullanicinin giris yapmasiydi. Sistem
+LaunchDaemon'lari yalnizca ayricalikli yardimcilardir ve sanal
+makineyi baslatmazlar.
+
+**Sonuc: kapi E ilk kosumda gozetimsiz senaryoyu hic olcmedi.**
+Insan girisli bir yeniden baslatmayi olctu.
+
+## Karar: otomatik giris ve always politikasi
+
+Ikisi birlikte uygulanir.
+
+    otomatik giris    makine acilinca oturum kendiliginden acilir
+    restart always    konteyner daemon her kalktiginda geri gelir
+
+**Otomatik girisin gerekcesi FileVault kararinin devamidir.**
+FileVault zaten kapalidir; diske fiziksel erisimi olan biri veriyi
+okuyabiliyordu. Otomatik giris yeni bir risk sinifi eklemez, ayni
+kararin mantiksal sonucudur. Kazanc gozetimsiz calismadir ve bu
+Blok 14'un amacidir.
+
+**Elenen secenek - yalniz always.** Insan girisli yeniden
+baslatmalarda kapi E'yi gecirir ancak gozetimsiz senaryo acik
+kalir. Blok 14 tam olarak o senaryo icin yazilmistir.
+
+**Elenen secenek - oturumsuz konteyner calistiricisi.** Docker
+Desktop yerine daemon olarak calisan bir alternatif kurmak tam
+cozumdur ancak yeni bir arac zinciri getirir ve ayri bir blok
+ister. Bugun gerekmiyor.
+
+**always politikasinin bedeli acikca yazilir:** elle durdurulan bir
+konteyner de daemon yeniden baslatildiginda geri gelir. Sunucu
+kullanimi icin dogru yondur; gelistirme sirasinda bir konteyneri
+kapali tutmak istenirse compose down kullanilir.
+
+## Kapi E yeniden tanimlanir
+
+    E. **fisi cekilmis gibi** yeniden baslatma sonrasi, giris
+       ekraninda hicbir sey yapmadan:
+         saglik ucu ikiyuz
+         belge uclari dortyuz
+         jetonsuz parse-receipt dortyuzbir
+
+Olcum yontemi: makine yeniden baslatilir, **kullanici hicbir tusa
+basmaz**, otomatik giris beklenir ve ardindan uclar olculur.
