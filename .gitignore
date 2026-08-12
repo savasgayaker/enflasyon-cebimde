@@ -90,3 +90,6 @@ m3-test/acceptance_results.json
 # Claude Code makine-yerel ayarlari (mutlak yol icerir, commit'lenmez)
 .claude/settings.local.json
 **/.claude/settings.local.json
+
+# Cloudflare Tunnel jetonu - asla commit edilmez (Blok 12-A)
+cloudflared.env
