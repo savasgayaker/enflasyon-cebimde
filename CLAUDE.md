@@ -101,6 +101,16 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
 - `m3-test/karar-ek12b.py` — ön kayıtlı karar kuralını otomatik uygular.
 - Arşivler: `m3-test/results/ek*-*.json|txt` (izlenmeleri `m3-test/.gitignore`
   içindeki DAR negation'larla sağlanır — kök `.gitignore`'dan delinemez).
+  (k) Bir dosyadan dongu ile okurken, dongunun icinde calisan komut
+  ayni girdi akisini miras alir ve kalan satirlari yutabilir. 16-B'de
+  olculdu: uc degiskenden yalniz biri yazildi cunku ilk komut dosyanin
+  geri kalanini tuketti. Ic komutlara girdi akisi bos verilir.
+  (l) Dogrulama bolumunun RET dali yoksa eksik sonuc commit mesajina
+  yanlis iddia olarak sizar. 16-B'de olculdu: eksik yazma goruldu,
+  kosum durmadi ve mesaj uc degiskenin de yazildigini iddia etti.
+  Kural 13/h kapinin yanlis teshis yazmasiydi; bu onun kardesi -
+  kapinin yoklugu yanlis iddiayi gecirir. Olculen her sey kapiya
+  baglanir ya da hic olculmez.
 - `frontend/scripts/test-inflation.ts` — enflasyon hesabinin olcum araci: 23 senaryo / 54 kontrol (`npm run test:inflation`, frontend/ icinden; cikis kodu 0 = hepsi yesil). Beklenen degerlerin gerekcesi on kayitlarda: `docs/m6a2-on-kayit-2026-08-05.md` (fiyat toplulastirma) ve `docs/m6c-on-kayit-2026-08-05.md` (agirlik paydasi).
 - Bu aletin ozet satirinin birebir bicimi: Toplam: <yesil> yesil kontrol, <kirmizi> kirmizi kontrol — senaryo sayisi bu satirda YOKTUR, kaynaktaki senaryo( cagrilarindan ya da DAGILIM etiketlerinden sayilir. Ayristirici yazan her blok bu bicime uyar, tahmin etmez.
 - Ekran metinleri aleti: `frontend/scripts/test-ekran-metinleri.ts` — 27 kontrol, ekranMetinleri.ts'in saf fonksiyonlarini olcer. package.json'da betigi YOK; `npx tsx scripts/test-ekran-metinleri.ts` ile calistirilir. Ozet satiri biçimi yukaridakiyle aynidir.

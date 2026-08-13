@@ -74,3 +74,28 @@ Dis testci daveti. Gizlilik politikasi ve uygulama ici hesap
 silme gerektirir; ayri bir istir.
 
 App Store yayini. TestFlight dahili test bu blogun sinusdur.
+
+### S1 - 16-B yarim kaldi ve commit mesaji yanlis iddia tasidi
+
+Tarih: 13 Agu 2026, kosumdan sonra tespit edildi.
+
+16-B blogu uc ortam degiskenini uc ortama yazacakti. **Yalnizca
+birincisi yazildi.**
+
+**Kok neden:** degiskenler bir dosyadan dongu ile okunuyordu ve
+dongunun icinde calisan komut ayni girdi akisini miras aldi.
+Komut kalan satirlari yutunca dongu bir tur sonra bitti.
+
+**Ikinci kusur birinciden agir:** dogrulama bolumunun RET dali
+yoktu. Eksik sonuc goruldu ama kosum durmadi ve **commit mesaji
+uc degiskenin de yazildigini iddia etti.** Iddia o anda yanlisti.
+
+Commit push edilmistir ve tarih degistirilmez. Duzeltme buraya
+yazilir: db9ac28 mesajindaki "uc EXPO_PUBLIC degiskeni uc ortama
+da yazildi" cumlesi **o an icin yanlistir.** Eksik iki degisken
+ayni kosum sonrasi tamamlandi ve uc ortamda uc ad olculdu.
+
+**Kayda gecirilen sinif:** dogrulama kapisiz olursa eksik sonuc
+commit mesajina yanlis iddia olarak sizar. Kural 13/h kapinin
+yanlis teshis yazmasiydi; bu onun kardesidir - kapinin yoklugu
+yanlis iddiayi gecirir.
