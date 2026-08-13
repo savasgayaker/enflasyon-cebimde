@@ -128,11 +128,11 @@ YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 Önceki: `73f7177c…fba888` (1812 karakter, `kdvBlok` yok).
 
 
-## Izleme karari (13 Agu 2026) - KURULUM HENUZ YAPILMADI
+## Izleme kuruldu (13 Agu 2026)
 
-Dis bir sondaj servisi saglik ucunu bes dakikada bir yoklayacak;
-iki ardisik basarisizlikta e-posta gidecek. Kurulum kullanici
-adimidir ve bu satir yazilirken **henuz yapilmamistir.**
+Dis bir sondaj servisi saglik ucunu bes dakikada bir yokluyor ve
+kesintide e-posta gonderiyor. **Gercek bir kesintiyle sinandi:**
+konteyner durduruldu, uyari geldi, servis geri alindi.
 Makine kendini izleyemez - kapandiginda haber veremez.
 
 **Olculen kor nokta:** saglik ucu hicbir dis bagimliligi kontrol
@@ -149,7 +149,7 @@ sondajda API cagrisi harcar, dis servis yavasladiginda yanlis
 alarm uretir, ve asil ariza sinifi (makine kapanmasi, internet,
 Docker) zaten basit sondajla yakalanir.
 
-**Sondaj GET ile yapilacak.** HEAD istegi dortyuzbes doner ve
+**Sondaj GET ile yapiliyor.** HEAD istegi dortyuzbes doner ve
 izleme bunu surekli ariza sanardi (Blok 12-A'da olculdu).
 
 **MiniMax kota takibi saglayici panelinden okunur.** Backend
