@@ -128,6 +128,40 @@ YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 Önceki: `73f7177c…fba888` (1812 karakter, `kdvBlok` yok).
 
 
+## Blok 14 kapandi (13 Agu 2026) - surekli calisma
+
+Mac mini gozetimsiz sunucu olarak calisiyor. Elektrik geldiginde
+hicbir insan mudahalesi olmadan zincir kendini toparliyor:
+makine acilir (autorestart), oturum acilir (otomatik giris),
+Docker kalkar, konteyner kalkar (restart always), tunel kalkar
+(LaunchDaemon). Ikinci reboot olcumunde saglik ilk denemede 200.
+
+**Dort yanlis teshis duzeltildi.** Uykuyu tutan seyin enerji
+ayari mi yardimci uygulama mi oldugu, uygulama kapatilarak
+olculdu. Ilk reboot'ta Docker'in kalkma sebebi elle giris
+yapilmasiydi ve o olcum gozetimsiz senaryoyu hic olcmedi (S1).
+Ucuncusu bu kaydin kendisiydi: ilk taslak jeton icin sizinti yok
+diyordu ve kosumdan once duzeltildi. Dorduncusu Blok 13'un
+kapanis notunun hic yazilmamis olmasiydi; capa kapisi yakaladi.
+
+**Jeton sizintisi KAYITLI.** Jeton bir kez, surec listesini basan
+bir arac ciktisiyla oturum kaydina girdi (halka acik depoya
+degil). Panelde yenileme secenegi bulunamadi; mevcut jetonla
+devam edildi ve bu bilincli kabul edilmis bir risktir.
+Hafifleticiler: transkript ozel, panelde tek etkin baglayici,
+jeton artik dosyadan okunuyor ve surec listesinde gorunmuyor.
+**Panel secenek sundugunda rotasyon yapilacaktir.**
+
+**Bilincli odunlesimler:** FileVault kapali (acik olsaydi kesinti
+sonrasi disk kilitli kalirdi), otomatik giris acik (ayni kararin
+devami), restart always (elle durdurulan konteyner de geri gelir).
+
+**Acik:** baglama daraltmasi yapilmadi; izleme yok - servis
+dustugunde kimse haberdar olmuyor; jeton rotasyonu bekliyor.
+
+Ayrinti: docs/blok14-on-kayit-2026-08-12.md,
+docs/blok14-kapanis-2026-08-13.md
+
 ## Blok 12-A, 12-B ve 13 kapandi (12 Agu 2026) - tunel
 
 Backend internetten erisilebilir: api.enflasyoncebimde.com
