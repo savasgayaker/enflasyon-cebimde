@@ -128,6 +128,44 @@ YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 Önceki: `73f7177c…fba888` (1812 karakter, `kdvBlok` yok).
 
 
+## Blok 12-A, 12-B ve 13 kapandi (12 Agu 2026) - tunel
+
+Backend internetten erisilebilir: api.enflasyoncebimde.com
+Cloudflare Tunnel uzerinden localhost:8000'e yonleniyor.
+Yonlendiricide port acilmadi; baglanti disa dogru.
+
+**Uctan uca kanit alindi (Blok 13):** telefon Wi-Fi kapali,
+hucresel veri acik durumda fis okuttu ve dogru okundu; fiste
+indirim de vardi.
+
+Kod degisikligi gerekmedi - config.ts zaten
+EXPO_PUBLIC_BACKEND_URL'e oncelik veriyordu. Degisken
+frontend/.env'e yazildi; yorumlanirsa ev agi moduna doner.
+
+Gelistirmede Metro de tunellenmeli (expo start --tunnel), cunku
+uygulama Metro'dan yukleniyor. TestFlight'ta gerekmez.
+
+**Blok 12-B:** belge uclari kapatildi. docs, redoc ve openapi
+artik 404 donuyor. Kosulsuz kapatma secildi; ortam degiskenli
+kapi elendi cunku degisken yanlis ayarlanirsa uclar sessizce
+acik kalirdi.
+
+**Guvenlik:** Cloudflare Access alan adina KONMADI ve konmayacak
+- konursa uygulamanin her istegi kirilir; korumayi Supabase JWT
+sagliyor (jetonsuz parse-receipt 401 donuyor, olculdu).
+
+**Olcum tuzagi kayda gecti:** Access kontrolu HEAD istegiyle
+yapilirsa 405 doner ve bu Access degil, saglik ucunun yalniz GET
+kabul etmesidir. Dogru olcum GET ile yapilir.
+
+**Acik:** tek isci calisma zamaninda olculmedi (kisit
+Dockerfile'da sabit); baglama daraltmasi yapilmadi.
+
+Ayrinti: docs/blok12a-on-kayit-2026-08-12.md,
+docs/blok12a-kapanis-2026-08-12.md,
+docs/blok12b-on-kayit-2026-08-12.md,
+docs/blok13-kapanis-2026-08-12.md
+
 ## M8 kapandi (11 Agu 2026) - urun adi tekillestirme
 
 K-3'te olculen bolunmeler kapandi. Ayni tekil urunun kayitlari
