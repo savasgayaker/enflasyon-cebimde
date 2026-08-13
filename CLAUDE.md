@@ -128,6 +128,36 @@ YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 Önceki: `73f7177c…fba888` (1812 karakter, `kdvBlok` yok).
 
 
+## Izleme karari (13 Agu 2026) - KURULUM HENUZ YAPILMADI
+
+Dis bir sondaj servisi saglik ucunu bes dakikada bir yoklayacak;
+iki ardisik basarisizlikta e-posta gidecek. Kurulum kullanici
+adimidir ve bu satir yazilirken **henuz yapilmamistir.**
+Makine kendini izleyemez - kapandiginda haber veremez.
+
+**Olculen kor nokta:** saglik ucu hicbir dis bagimliligi kontrol
+etmiyor. Ikiyuz yaniti MiniMax anahtarinin gecerliligini,
+Supabase erisimini veya veritabanini KANITLAMAZ. Docker'in
+saglikli demesi de ayni seyi soyluyor: surec cevap veriyor.
+
+**Izleme uygulama calisiyor demez, surec cevap veriyor der.**
+MiniMax kotasi bittiginde izleme sessiz kalir ve kullanici fis
+okutamadiginda anlar.
+
+Saglik ucu bilincli olarak derinlestirilmedi: derin kontrol her
+sondajda API cagrisi harcar, dis servis yavasladiginda yanlis
+alarm uretir, ve asil ariza sinifi (makine kapanmasi, internet,
+Docker) zaten basit sondajla yakalanir.
+
+**Sondaj GET ile yapilacak.** HEAD istegi dortyuzbes doner ve
+izleme bunu surekli ariza sanardi (Blok 12-A'da olculdu).
+
+**MiniMax kota takibi saglayici panelinden okunur.** Backend
+token sayisini loglamiyor; kodda gecen token rakamlari gecmis bir
+olcumun yorumlaridir.
+
+Ayrinti: docs/blok15-izleme-2026-08-13.md
+
 ## Blok 14 kapandi (13 Agu 2026) - surekli calisma
 
 Mac mini gozetimsiz sunucu olarak calisiyor. Elektrik geldiginde
