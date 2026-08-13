@@ -1,0 +1,76 @@
+# Blok 16 on kayit - EAS build ve TestFlight
+
+Tarih: 13 Agu 2026. Taban: 89ddad5.
+Amac: uygulamanin baskalarinin telefonuna kurulabilmesi.
+Veri uretilmeden once commit'lenmistir.
+
+## Kesifin olctugu zemin
+
+Hazir olanlar: bundle kimligi tanimli, surum bir sifir sifir,
+Turkce izin metinleri yazili, dokuz varlik dosyasinin hepsi
+yerinde, eas-cli calisiyor.
+
+Eksik olanlar: eas.json yok, proje bir EAS projesine bagli degil.
+
+## Uc risk kaydediliyor
+
+**Risk bir - ML Kit build'de baglanacak mi.** Paket hala
+bagimliliktir ve tek kullanicisi emekli bir servistir. Eklenti
+listesinde kayitli degildir; otomatik baglanmaya guveniliyor.
+
+**Dev client'ta calismasi EAS build'de calisacaginin kaniti
+degildir.** Ilk build basarisiz olursa en olasi sebep budur.
+
+Bu tur ML Kit'i cikarmaz - emekli ama silinmez karari
+frontend/CLAUDE.md'de kayitlidir. Ancak build patlarsa cikarma
+karari gundeme gelir.
+
+**Risk iki - ortam degiskenleri build'e girmez.** Uc degisken
+gitignore'lu bir dosyada yasiyor ve EAS onu yuklemez. Ayrica
+tanitilmalari gerekir.
+
+Ucu de gomulmesi guvenli siniftadir: Supabase adresi, herkese
+acik olacak sekilde tasarlanmis anahtar, ve tunel adresi.
+**Sir sinifi hicbir deger frontend'e girmez** - gizli anahtarlar
+ve servis anahtarlari bu listede yoktur ve olmayacaktir.
+
+**Risk uc - build kredisi tuketir.** Her build sayilidir. Bu
+nedenle build komutu **acik onay olmadan kosulmaz**; karar
+frontend/CLAUDE.md'de kayitlidir.
+
+## Turlar
+
+    16-A  eas.json ve proje baglama - kullanici girisi gerekir
+    16-B  ortam degiskenlerinin EAS'a tanitilmasi
+    16-C  ilk build - acik onayla
+    16-D  App Store Connect ve TestFlight dahili test
+
+## Kullanici adimlari - Claude kosamaz
+
+    Expo hesabina giris        etkilesimli kimlik dogrulama
+    Apple hesabina giris       ayni
+    build onayi                kredi tukettigi icin acik onay
+    TestFlight davetleri       App Store Connect arayuzu
+
+## Kabul kurali
+
+    A. eas.json olusturuldu ve proje bagli
+    B. ortam degiskenleri EAS'ta tanimli, sir sinifi deger yok
+    C. build basarili tamamlandi
+    D. uygulama TestFlight'ta gorunuyor
+    E. **telefona TestFlight'tan kurulan uygulama fis okuyor**
+    F. mevcut aletler yesil, tsc tam uc
+
+**Kapi E asil kanittir.** Build'in tamamlanmasi uygulamanin
+calistigini kanitlamaz; Expo Go ile calisan bir sey pakette
+calismayabilir - ozellikle yerli modul baglanmasi nedeniyle.
+
+## Kapsam disi
+
+Android yayini. Izin listesinde eski tip depolama izinleri
+duruyor ve Android gundeme gelirse gozden gecirilir.
+
+Dis testci daveti. Gizlilik politikasi ve uygulama ici hesap
+silme gerektirir; ayri bir istir.
+
+App Store yayini. TestFlight dahili test bu blogun sinusdur.
