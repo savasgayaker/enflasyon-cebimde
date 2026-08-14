@@ -99,3 +99,40 @@ ayni kosum sonrasi tamamlandi ve uc ortamda uc ad olculdu.
 commit mesajina yanlis iddia olarak sizar. Kural 13/h kapinin
 yanlis teshis yazmasiydi; bu onun kardesidir - kapinin yoklugu
 yanlis iddiayi gecirir.
+
+### S2 - Ilk build'in kok nedeni ve kapinin surum tuzagi
+
+Tarih: 14 Agu 2026, ikinci build denemesinden once ilan edildi.
+
+Ilk build bagimlilik kurulumu asamasinda dustu. **Sebep ML Kit'in
+baglanamamasi degildi** - on kayittaki Risk bir henuz sinanmadi
+bile; kurulum asamasi ondan once gelir.
+
+**Gercek sebep: kilit dosyasi npm surumleri arasinda farkli
+yorumlaniyor.** EAS npm onuncu nesli kullaniyor ve kilitte dort
+ic ice kayit ariyor; yerel makinede npm on birinci nesil var ve
+ayni zinciri ic ice kayit uretmeden cozuyor. Iki taraf da kendi
+acisindan tutarli; kilit yerelde gecerli, EAS'ta gecersiz.
+
+Eksik bildirilen dort paket ML Kit'in ic zincirindendir.
+
+**Ilk taslak bunu bayat kilit sandi ve yanlis bir duzeltme
+onerdi.** O taslak kosulsaydi uc sey olurdu: yerel npm kilide
+hicbir satir eklemezdi, kapi duzeltmeden once de yesil yanardi
+(cunku yerel npm kilidi zaten kabul ediyor), ve commit mesaji
+senkronlandi diye yanlis iddia tasirdi. Ikinci build de ayni
+hatayla duserdi.
+
+**Kayda gecirilen sinif:** bir kapi, olculen ortamin kullandigi
+aletin **ayni surumunu** kullanmalidir. Baska surum olcen kapi
+yanlis yesil verir.
+
+Kural 13/m olarak eklenmistir.
+
+## Duzeltilmis mekanik
+
+    kilit EAS ile ayni nesil npm ile yeniden uretilir
+    kapi iki kollu: EAS esdegeri npm ve yerel npm
+    dort paketin kilitte gorunmesi kirmizidan yesile kanit
+    eas.json'a node yirmi iki pini - kilit ureticisiyle EAS'i
+      ayni hizaya getirir ve Supabase uyarisini da kapatir

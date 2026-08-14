@@ -115,6 +115,12 @@ Bunlar tercih değil, bedeli ödenerek öğrenilmiş şartlardır. Gerekçeleri
 - Bu aletin ozet satirinin birebir bicimi: Toplam: <yesil> yesil kontrol, <kirmizi> kirmizi kontrol — senaryo sayisi bu satirda YOKTUR, kaynaktaki senaryo( cagrilarindan ya da DAGILIM etiketlerinden sayilir. Ayristirici yazan her blok bu bicime uyar, tahmin etmez.
 - Ekran metinleri aleti: `frontend/scripts/test-ekran-metinleri.ts` — 27 kontrol, ekranMetinleri.ts'in saf fonksiyonlarini olcer. package.json'da betigi YOK; `npx tsx scripts/test-ekran-metinleri.ts` ile calistirilir. Ozet satiri biçimi yukaridakiyle aynidir.
 frontend/scripts/test-m3-mapper.ts        24 kontrol (npm run test:m3-mapper)
+  (m) Bir kapi, olculen ortamin kullandigi aletin AYNI SURUMUNU
+  kullanmalidir. 16-C'de olculdu: kilit dosyasi yerel npm 11'de
+  gecerli, EAS'in npm 10'unda gecersizdi. Yerel surumle kurulan kapi
+  duzeltmeden once de yesil yanardi ve yanlis bir senkronlandi
+  iddiasini gecirirdi. Surum farki olan yerde kapi hedef surumu
+  acikca cagirir.
   Ozet satiri bicimi digerlerinden FARKLI: Sonuc: P/T kontrol basarili.
   Yesil = P, kirmizi = T eksi P (M7-A/S1 karari).
 backend/test_dogrulama.py                 9 kontrol
