@@ -13,7 +13,8 @@
       "supportsTablet": true,
       "infoPlist": {
         "NSCameraUsageDescription": "Fişlerinizi okuyabilmek için kameraya erişim gerekiyor.",
-        "NSPhotoLibraryUsageDescription": "Galerinizden fiş fotoğrafı seçebilmek için izin gerekiyor."
+        "NSPhotoLibraryUsageDescription": "Galerinizden fiş fotoğrafı seçebilmek için izin gerekiyor.",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
@@ -41,7 +42,8 @@
         "expo-camera",
         {
           "cameraPermission": "Fişlerinizi okuyabilmek için kameraya erişim gerekiyor.",
-          "microphonePermission": false
+          "microphonePermission": false,
+          "recordAudioAndroid": false
         }
       ],
       [
