@@ -87,3 +87,21 @@ App Store yayini.
 kalici hale getirilmeli. Iki acik soru bekliyor: birim alani
 eksik ve K1 geregi sonradan geri getirilemez, ve sunucunun nerede
 duracagi kararlastirilmadi.
+
+## DUZELTME - 14 Agu 2026
+
+Yukaridaki Sirada bolumu birim alaninin **eksik** oldugunu
+yaziyordu. Bu bayat bir devir notuna yaslanmisti.
+
+Asama 4 kesfi olctu: **alan vardir ve zincir boyunca akar.**
+M7-A bu isi kapatmisti; backend uretiyor, esleme duz geciriyor,
+kayit tipinde bulunuyor.
+
+Gecerli olan iki sey sunlardir:
+
+    M7-A oncesi kayitlarda alan bostur ve K1 geregi geri
+      doldurulamaz
+    alanin cihazda fiilen dolu geldigi hic olculmedi - M7-A
+      metinsel kapilarla dogrulanmisti
+
+Duzeltme Asama 4 on kaydinda da kayitlidir.
