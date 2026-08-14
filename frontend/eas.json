@@ -9,19 +9,22 @@
       "distribution": "internal",
       "ios": {
         "simulator": false
-      }
+      },
+      "node": "22.11.0"
     },
     "preview": {
       "distribution": "internal",
       "ios": {
         "simulator": false
-      }
+      },
+      "node": "22.11.0"
     },
     "production": {
       "autoIncrement": true,
       "ios": {
         "simulator": false
-      }
+      },
+      "node": "22.11.0"
     }
   },
   "submit": {
