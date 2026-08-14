@@ -144,6 +144,31 @@ YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 Önceki: `73f7177c…fba888` (1812 karakter, `kdvBlok` yok).
 
 
+## Blok 16 kapandi (14 Agu 2026) - TestFlight
+
+Uygulama TestFlight'tan telefona kuruldu ve **gercek bir fis okudu
+ve kaydetti.** Expo Go degil: Metro yok, kod pakette, ortam
+degiskenleri gomulu, yerli moduller bagli.
+
+ML Kit riski sinandi ve gecti - yerli baglanma sorunsuz.
+
+Uc build harcandi: birincisi Apple hesabindaki bekleyen maddeler
+yuzunden hic baslamadi, ikincisi kilit dosyasi npm surumleri
+arasinda farkli yorumlandigi icin dustu (S2), ucuncusu basarili.
+
+**TESTFLIGHT OPERASYONEL DEMEK DEGILDIR.** Kayitlar hala yalnizca
+telefonda; sunucuya gitmiyor ve ortak fiyat havuzu olusmuyor.
+Testciler fis okuyacak ama o veri hicbir yere ulasmayacak.
+TestFlight arayuz ve okuma testidir, veri toplama degil.
+Operasyonel olma noktasi Asama 4'un sonudur.
+
+**Ogrenilen:** elle silinen bir yapilandirma, onu ureten eklenti
+ayarindan kapatilmazsa arac bir sonraki turetmede geri yazar.
+16-B'de mikrofon izni icin yanlis dugmeye basildi.
+
+Ayrinti: docs/blok16-on-kayit-2026-08-13.md,
+docs/blok16-kapanis-2026-08-14.md
+
 ## Izleme kuruldu (13 Agu 2026)
 
 Dis bir sondaj servisi saglik ucunu bes dakikada bir yokluyor ve
