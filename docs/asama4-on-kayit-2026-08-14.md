@@ -99,3 +99,39 @@ Gizlilik politikasi ve hesap silme - dis testci gerektirdiginde.
 ## Ilan edilmis sapmalar
 
     (bu satir kapanista silinecek; henuz sapma yok)
+
+### S1 - Depoda cakisan iki sema tanimi bulundu
+
+Tarih: 14 Agu 2026, A4-2 kosumundan sonra tespit edildi.
+
+Goc klasorunde 26 Temmuz tarihli dort eski dosya duruyor ve
+**A4-1 kararlariyla dogrudan celisiyorlar:**
+
+    kategori tablosu var        A4-1: kod sabiti, tablo yok
+    tekillestirme tablolari var K4 kural 2: saklanmaz, okuma
+                                aninda hesaplanir
+    magaza tablolari var        A4-1: magaza yalniz metin
+    havuz ayri tablo            A4-1: havuz goruntu
+
+Hicbiri uygulanmamistir; proje o sirada bagli degildi.
+
+**Olculen risk:** Supabase araci bir gun goc dosyalarini toplu
+uygularsa dosyalar **sozluksel sirayla** calisir. Yeni dosyanin
+adi eski dosyalardan once gelir; yani once A4-1 semasi kurulur,
+ardindan eski dokuz tablo ustune yazilir ve kararlar fiilen
+delinir.
+
+Ikinci risk sessizdir: depo hangi tanimin otorite oldugunu
+soylemiyor ve gelecek bir oturum yanlisini secebilir.
+
+**Karar: arsive tasinir, silinmez.**
+
+Silmek yerine tasima secildi cunku o dosyalar bir **dusunce
+kaydidir** - Temmuz'da nasil dusunuldugunu ve K4'un neyi
+reddettigini gosterirler. Ancak goc klasorunde durmalari araca
+verilmis bir emirdir; oradan cikarlar.
+
+Arsiv klasorune bir uyari dosyasi konur.
+
+**Ikinci karar: dosya adi zaman damgali bicime gecer.** Arac
+uyumu icin; ayni sozluksel sira sorununun tersini yasamamak icin.
