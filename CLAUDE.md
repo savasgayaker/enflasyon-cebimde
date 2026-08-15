@@ -135,6 +135,12 @@ backend/test_dogrulama.py                 9 kontrol
   tur celiskisi. Ozet satiri TS aletleriyle ayni bicimde.
 frontend/scripts/test-fis-kalem-kurallari.ts   15 kontrol
   Kosum: npx tsx frontend/scripts/test-fis-kalem-kurallari.ts
+  (o) Satir tabanli bir capa, cok satirli bir yapinin ACILISINI onun
+  sonu sanabilir. A4-3c'de olculdu: son import satiri arandi ve bulunan
+  sey cok satirli bir import'un ilk satiriydi; eklenen satirlar onun
+  icine gomuldu. Ayni tur, parantez denge taramasinin uclu operatorun
+  bir kolunda durmasiyla da yasandi. Capa, yapinin KAPANIS satirina
+  baglanir - 13/f'nin kardesi.
   Fis kalemi kurallari: gecerlilik, serit seviyesi, kayit karari.
 frontend/scripts/test-dedup.ts                29 kontrol
   Urun adi tekillestirme: 22 cift arti 7 gruplama kontrolu.

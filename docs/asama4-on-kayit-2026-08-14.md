@@ -416,3 +416,42 @@ cikar ve kayit yine durur.
 
 **Karar 1 bozulmaz:** kayit gonderimden once yapilir ve gonderim
 basarisizligi kaydi engellemez.
+
+### S6 - Ilk bagla yamasi dort kusurla RET aldi
+
+Tarih: 15 Agu 2026, ikinci bagla kosumundan once ilan edildi.
+
+Ilk yama tsc kapisinda durduruldu. Dort kusur olculdu; ikisi
+yerlestirme, ikisi anlamsal.
+
+**Yerlestirme bir - import capasi cok satirli import'un ORTASINA
+girdi.** Capa satir basindaki import sozcugunu ariyordu ve son
+eslesme, cok satirli bir import'un **acilis satiriydi.** Dort yeni
+import onun icine gomuldu.
+
+Dogru capa: import bolumunun son **kapanis** satiri.
+
+**Yerlestirme iki - urun biriktirme uclu operatorun ortasina
+girdi.** Cagri bir uclu deyimin soru kolundaydi; parantez denge
+taramasi cagri kapanisinda durunca eklenen blok iki kol arasina
+yerlesti.
+
+Dogru capa: deyimin noktali virgulle biten satiri.
+
+**Anlamsal bir - fis toplami gonderilmiyordu.** Alan istege bagli
+oldugu icin derlenirdi ama **sunucuda toplam sifir yazilirdi.**
+Sessiz veri bozulmasi.
+
+**Anlamsal iki - oturum edinimi kendi hatasini yutmuyordu.**
+Oturum fonksiyonu firlatir ve cagri kayit try blogunun icindeydi;
+cevrimdisiyken istisna yerel kayit yakalayicisina duser ve
+**kullaniciya fis kaydedilemedi denirdi** - oysa kayit yapilmisti.
+Karar 1'in dogrudan ihlali.
+
+Duzeltme: oturum edinimi kendi yakalayicisinda yapilir ve
+basarisizlikta kimlik bos gecilir; modul Karar 4 geregi denemeden
+doner.
+
+**Ayrica adlar uydurulmustu.** Gercek adlar olcumle alindi:
+dongu degiskeni, urun nesnesi, kayit nesnesi, magaza ve tarih
+alanlari, oturum fonksiyonunun donus tipi.
