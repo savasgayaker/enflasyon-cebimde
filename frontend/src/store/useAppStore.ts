@@ -19,6 +19,19 @@ export interface Receipt {
   totalAmount: number;
   imageUri?: string;
   createdAt: string;
+  /**
+   * Sunucuya gonderildi mi (A4-3/S3).
+   *
+   * tanimsiz  bilinmiyor - kayit damga eklenmeden once yazildi
+   * false     gonderilmedi
+   * true      gonderildi
+   *
+   * Uc durum ayridir: tanimsiz olanlarin sunucuya gidip
+   * gitmedigi bilinmiyor cunku sunucuya yazma o sirada yoktu.
+   */
+  gonderildi?: boolean;
+  /** Basarili gonderim zamani. */
+  gonderimZamani?: string;
 }
 
 export interface Product {
