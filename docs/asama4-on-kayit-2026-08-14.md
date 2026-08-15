@@ -455,3 +455,27 @@ doner.
 **Ayrica adlar uydurulmustu.** Gercek adlar olcumle alindi:
 dongu degiskeni, urun nesnesi, kayit nesnesi, magaza ve tarih
 alanlari, oturum fonksiyonunun donus tipi.
+
+### S7 - Satir tipi alani null kabul eder
+
+Tarih: 15 Agu 2026, ucuncu bagla kosumundan once ilan edildi.
+
+Ikinci yama tsc kapisinda durduruldu. Sebep tek bir tip
+uyusmazligiydi: modul satir tipini yalnizca metin ya da tanimsiz
+kabul ediyordu; cihaz tarafinda alan **null da olabiliyor.**
+
+**Karar: modul tipi genisletilir ve null kabul eder.**
+
+Gerekce: tip beyani cihaz gercegini yansitmalidir. Modul govdesi
+zaten null toleranslidir - deger yoksa urun varsayilanina duser -
+yani **davranis degismez, yalnizca beyan duzeltilir.**
+
+**Elenen secenek: ekranda null'i tanimsiza cevirmek.** Module
+dokunmazdi ama uyusmazligi gizlerdi ve null sessizce tanimsiza
+donusurdu. Iki deger farkli seylerdir.
+
+**Alet degismez ve on iki kontrol yesil kalir.** Degisen sey
+olcum aleti degil, olculen modulun tip beyanidir.
+
+Ayrica girinti duzeltmesi: urun biriktirme blogu uclu deyimin
+devam girintisini almisti; deyim duzeyine cekilir.
