@@ -299,3 +299,62 @@ kaybolurdu.
 
 **Ikinci alan: gonderim zamani.** Basarili gonderimde yazilir.
 Tanisiz kalabilir ve bu normaldir.
+
+## A4-3b dagilimi - 15 Agu 2026, kosumdan once
+
+Yeni saf modul sunucuYazma.ts ve aleti.
+
+**Modul Supabase'i DOGRUDAN CAGIRMAZ.** Bir yazici arayuzu alir.
+Boylece alet gercek aga cikmadan modulu olcer; bugune kadar
+hicbir saf modul ag cagrisi yapmadi ve desen bozulmuyor.
+
+Modulun isi ikidir: cihaz nesnelerini sunucu satirlarina cevirmek
+ve **sirayi yonetmek.** Urunler once, sonra fis, en son fiyat
+kayitlari - fiyat kayitlari ikisine de basvurur.
+
+**Dagilim: 0 yesil / 12 kirmizi, sonra 12 yesil / 0 kirmizi.**
+
+    Y1   oturum yoksa yazma denenmez
+    Y2   sira dogru: urunler, fis, fiyat kayitlari
+    Y3   her satira kullanici kimligi yazilir
+    Y4   goruntu yolu gonderilmez
+    Y5   para alanlari sayi olarak gider
+    Y6   indirim satirinda urun kimligi bos gider
+    Y7   birim ve kdv orani bos gecilebilir
+    Y8   ham etiket korunur
+    Y9   basarida gonderildi dogru doner
+    Y10  yazici hata atarsa gonderildi yanlis doner
+    Y11  kismi basarisizlikta gonderildi yanlis doner
+    Y12  silme fis ve kayitlarina gider, urunlere GITMEZ
+
+**Kismi basarisizlik onemlidir:** urunler gidip fiyat kayitlari
+gitmezse fis gonderilmis sayilmaz. Yarim gonderimi basarili
+saymak sessiz veri kaybidir.
+
+### S4 - Silme urunlere dokunmaz
+
+Ilk taslak silmenin uc tabloya gitmesini bekliyordu. **Bu veri
+yok ederdi ve kosumdan once yakalandi.**
+
+Iki gerekce olculdu:
+
+**Katalog fisler arasi paylasilir.** Bir fis silinince o
+kullanicinin baska fislerindeki kayitlarin urunu de yok olurdu.
+
+**Cihaz davranisiyla celisirdi.** Cihazdaki silme akisi fisi ve
+fiyat kayitlarini siliyor, urunlere dokunmuyor. Sunucu daha
+fazlasini silseydi iki taraf ayrisirdi.
+
+Ayrica mekanik olarak da imkansizdi: silme fonksiyonu yalnizca
+fis kimligi aliyor ve urun tablosunda fise bagli bir sutun yok.
+
+**Duzeltilmis beklenti: fiyat kayitlari once, sonra fis.**
+
+### S4/a - Kontrol fonksiyonu asenkron olur
+
+Ilk taslakta olcum cagrisi kontrol fonksiyonunun disindaydi;
+iskele istisnasi surecin tamamini oldururdu ve **ozet satiri hic
+basilmazdi.** Ilan edilen dagilim olculemezdi.
+
+Kontrol fonksiyonu asenkron yapilir ve olcum kendi try blogunun
+icine alinir.
