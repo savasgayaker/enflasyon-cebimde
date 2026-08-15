@@ -44,7 +44,7 @@ export interface YazilacakKayit {
   date: string;
   unit?: string | null;
   vatRate?: number | null;
-  satirTipi?: string;
+  satirTipi?: string | null;
   hamEtiket?: string | null;
   createdAt?: string;
 }

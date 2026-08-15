@@ -24,6 +24,10 @@ import {
   seritSeviyesi,
   kayitKarari,
 } from '../src/utils/fisKalemKurallari';
+import { fisiGonder } from '../src/services/sunucuYazma';
+import type { YazilacakKayit, YazilacakUrun } from '../src/services/sunucuYazma';
+import { supabaseYazici } from '../src/services/supabaseYazici';
+import { anonimOturumuGarantile } from '../src/services/supabase';
 
 /**
  * Ekran-içi kalem tipi. Parser `unitPrice/totalPrice: number | null` döner;
@@ -47,7 +51,7 @@ export default function ReceiptPreview() {
   const router = useRouter();
   const params = useLocalSearchParams<{ data: string; imageUri: string }>();
   const { darkMode } = useAppStore((state) => state.settings);
-  const { addReceipt, findOrCreateProduct, addPriceRecord } = useAppStore();
+  const { addReceipt, findOrCreateProduct, addPriceRecord, updateReceipt } = useAppStore();
   const theme = darkMode ? colors.dark : colors.light;
 
   // Parse parser result from params
@@ -189,6 +193,9 @@ export default function ReceiptPreview() {
     try {
       // Create receipt
       const receiptId = Date.now().toString(36) + Math.random().toString(36).substr(2);
+      // A4-3c: sunucuya gonderilecekler dongu icinde birikir.
+      const gonderilecekUrunler = new Map<string, YazilacakUrun>();
+      const gonderilecekKayitlar: YazilacakKayit[] = [];
       const receipt = {
         id: receiptId,
         storeName: storeName.trim(),
@@ -208,6 +215,9 @@ export default function ReceiptPreview() {
         const product = karar.urunOlusturulsunMu
           ? findOrCreateProduct(item.name.trim(), item.categoryId)
           : null;
+        if (product) {
+          gonderilecekUrunler.set(product.id, product);
+        }
         
         const priceRecord = {
           id: Date.now().toString(36) + Math.random().toString(36).substr(2),
@@ -222,8 +232,32 @@ export default function ReceiptPreview() {
         };
         
         addPriceRecord(priceRecord);
+        // A4-3c: sunucuya gonderim icin biriktir.
+        gonderilecekKayitlar.push({ ...priceRecord, productName: item.name });
       }
 
+      // A4-3c: sunucuya gonder ve damgayi yaz (S5 - beklenir).
+      // Kayit zaten yapildi; gonderim basarisizligi onu engellemez.
+      let kullaniciKimligi: string | null = null;
+      try {
+        kullaniciKimligi = await anonimOturumuGarantile();
+      } catch {
+        // S6: oturum alinamazsa gonderim denenmez ve bu hata
+        // yerel kayit yakalayicisina DUSMEZ (Karar 1).
+        kullaniciKimligi = null;
+      }
+      const yazmaSonucu = await fisiGonder(
+        supabaseYazici,
+        kullaniciKimligi,
+        receipt,
+        Array.from(gonderilecekUrunler.values()),
+        gonderilecekKayitlar,
+        new Date().toISOString(),
+      );
+      updateReceipt(receipt.id, {
+        gonderildi: yazmaSonucu.gonderildi,
+        gonderimZamani: yazmaSonucu.gonderimZamani,
+      });
       Alert.alert(tr.success, 'Fiş başarıyla kaydedildi', [
         {
           text: tr.done,
