@@ -358,3 +358,37 @@ basilmazdi.** Ilan edilen dagilim olculemezdi.
 
 Kontrol fonksiyonu asenkron yapilir ve olcum kendi try blogunun
 icine alinir.
+
+## A4-3c ilani - 15 Agu 2026, kosumdan once
+
+Modul uretim yoluna baglanir ve **ilk kez aga cikilir.**
+
+### Adaptor hata YUTMAZ
+
+Supabase istemcisi hata atmaz; sonuc nesnesinde bir hata alani
+dondurur. Adaptor bunu **istisnaya cevirir.**
+
+Aksi halde Y10 ve Y11'in olctugu basarisizlik yolu sessizce oler:
+modul hata gormeden basarili doner ve **gonderilmemis fis
+gonderildi sayilir.** Sessiz veri kaybinin tam tanimi.
+
+### Bu tur uc yerde degisiklik yapar
+
+    yeni dosya   supabase yazici adaptoru
+    kaydetme     gonderim cagrisi ve damga guncellemesi
+    silme        sunucudan silme cagrisi
+
+### Olcu
+
+Adaptorun kendisi birim testiyle olculmez; gercek istemciyi
+sarar. Olcusu **canli ölcumdur** ve kabul maddeleri C, D, E, F
+onu sinar.
+
+Metinsel kapilar: modul cagriliyor mu, hata yutuluyor mu, damga
+yaziliyor mu.
+
+### Kaydetme akisi bozulmaz
+
+Gonderim **kaydetmeden sonra** yapilir ve basarisizligi kaydi
+engellemez (Karar 1). Kullanici fisini her kosulda kaydeder;
+gonderilmemisse damga yanlis kalir.
