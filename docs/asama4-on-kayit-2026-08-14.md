@@ -193,3 +193,83 @@ A4-5'e devredildi.
 
 **Sehir alani da vardi.** Bolgesel fiyat karsilastirmasi ileride
 gundeme gelebilir.
+
+## A4-3 kararlari - 15 Agu 2026, kod yazilmadan once
+
+### Karar 1 - yerel once, sunucu arkadan, ama SESSIZ DEGIL
+
+Kayit her zaman **once cihaza** yazilir. Sunucuya gonderme
+ardindan gelir.
+
+**Elenen secenek: hepsi ya hic.** Sunucu yazmasi basarisiz olunca
+yerel kaydi da geri almak, internet yokken **fis kaydedilemez**
+demektir. Uygulama bugun calisirken yarin calismaz olurdu ve
+kullanici en cok ihtiyac duydugu anda - markette, zayif sebekede -
+engellenirdi.
+
+**Ama sessiz basarisizlik daha kotudur.** Kullanici verisinin
+sunucuda oldugunu saniyorsa ve degilse, telefonunu kaybettiginde
+gecmisi de gider.
+
+**Cozum: kayit yerelde durur, gonderilmedigi GORUNUR.** Fis
+kaydinda bir gonderim damgasi tutulur; gonderilmemis fisler
+kullaniciya isaretle gosterilir.
+
+Damganin kendisi bu turda eklenir; **yeniden gonderme akisi
+kapsam disidir** ve cevrimdisi kuyrukla birlikte ele alinir.
+
+### Karar 2 - silme sunucuya yansir
+
+Cihazda silinen fis sunucudan da silinir. Aksi halde cihaz ve
+sunucu **sessizce ayrisir** ve kullanici sildigini sandigi verinin
+durdugunu bilmez.
+
+Silme de gonderim gibi basarisiz olabilir; ayni damga mantigi
+uygulanir.
+
+### Karar 3 - upsert kullanilir
+
+Sema birincil anahtari kullanici arti kimliktir; ayni kayit iki
+kez gonderilirse ikincisi birincinin uzerine yazar.
+
+Gerekce: yeniden gonderme guvenli olur. Yoksa her yeniden deneme
+catisma hatasi verirdi ve kuyruk mimarisi zorunlu hale gelirdi.
+
+### Karar 4 - kimlik yazma aninda alinir
+
+Semada kullanici sutununun varsayilani yoktur; istemci her satira
+kendi kimligini yazar. Oturum bugun fis okuma zincirinde tembel
+aciliyor ve ayni desen yazmada da kullanilir.
+
+**Oturum yoksa yazma denenmez** ve kayit gonderilmemis olarak
+isaretlenir.
+
+### Kapsam disi
+
+Cevrimdisi kuyruk ve yeniden gonderme akisi. Bu turda yalnizca
+**damga** eklenir; gonderilmemis kayitlarin sonradan
+gonderilmesi ayri bir istir.
+
+Mevcut yerel verinin gocu - A4-4.
+
+Okuma yolu. Uygulama okumayi cihazdan yapmaya devam eder.
+
+### Olculen bir cift kod
+
+Kaydetme ekrani kimlik uretecini store'dan almak yerine ayni
+ifadeyi kopyalayarak kullaniyor. Bu turun konusu degildir ve
+devredilir; ancak sunucu kimlikleri bu ureticten geldigi icin
+kayda gecirilir.
+
+## A4-3 kabul kurali
+
+    A. gonderim damgasi tipe ve persist'e eklendi
+    B. yazma yolu saf modulde, ekran cagirir
+    C. fis kaydedilince sunucuda gorunuyor - canli olculdu
+    D. silme sunucuya yansiyor - canli olculdu
+    E. **iki ayri kullanici birbirinin verisini goremiyor**
+    F. oturum yokken kayit yerelde duruyor ve isaretleniyor
+    G. mevcut aletler yesil, tsc tam uc
+
+**Kapi E pazarliga kapalidir** ve on kayittaki Kapi C'nin canli
+karsiligidir.
