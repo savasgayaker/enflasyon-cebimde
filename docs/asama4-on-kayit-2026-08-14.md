@@ -392,3 +392,27 @@ yaziliyor mu.
 Gonderim **kaydetmeden sonra** yapilir ve basarisizligi kaydi
 engellemez (Karar 1). Kullanici fisini her kosulda kaydeder;
 gonderilmemisse damga yanlis kalir.
+
+### S5 - Gonderim beklenir, Alert'ten once
+
+Tarih: 15 Agu 2026, bagla kosumundan once ilan edildi.
+
+Ilk plan gonderimi **beklemeden** baslatmakti; kullanici
+beklemesin diye. Capa okumasi bunun riskini gosterdi: basari
+uyarisindan sonra ekran degistiriliyor ve **ekran kapaninca
+beklenmeyen bir istek yarida kesilebilir.**
+
+O durumda damga hic yazilmaz ve tanimsiz kalir. S3'te uc durumu
+ayirmak icin ozellikle ugrasmistik: tanimsiz **bilinmiyor**
+demektir, gonderilmedi demek degil. Yarida kesilen bir gonderim
+tanimsiz birakirsa o ayrim bozulur.
+
+**Karar: gonderim beklenir ve damga yazilir, sonra uyari
+gosterilir.**
+
+Bedeli olculebilir bir gecikmedir: uc yazma cagrisi, saniyenin
+altinda. Ag kopuksa modul hata dondurur - firlatmaz - uyari yine
+cikar ve kayit yine durur.
+
+**Karar 1 bozulmaz:** kayit gonderimden once yapilir ve gonderim
+basarisizligi kaydi engellemez.
