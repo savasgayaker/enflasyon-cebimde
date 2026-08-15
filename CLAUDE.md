@@ -125,6 +125,12 @@ frontend/scripts/test-m3-mapper.ts        24 kontrol (npm run test:m3-mapper)
   Yesil = P, kirmizi = T eksi P (M7-A/S1 karari).
 backend/test_dogrulama.py                 9 kontrol
   Kosum: backend/venv/bin/python3 backend/test_dogrulama.py
+  (n) Bir metinde dize sayan kapi, metni once bosluk-normalize
+  etmelidir. A4-2'de olculdu: satir kaydirmasi iki sinif etiketini
+  ortadan bolmustu ve kapi kendi kosumunu haksiz RET etti. Icerik
+  dogruydu; desen metnin gercek bicimine karsi dogrulanmamisti.
+  Blok 14'te ayni sinif bilgi amacli bir sayacta gorulmus ve kosumu
+  etkilememisti.
   Indirim satiri dogrulamasi: tur gecisi, negatif dali,
   tur celiskisi. Ozet satiri TS aletleriyle ayni bicimde.
 frontend/scripts/test-fis-kalem-kurallari.ts   15 kontrol
@@ -143,6 +149,39 @@ frontend/scripts/test-urun-listesi.ts         13 kontrol
 YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 Önceki: `73f7177c…fba888` (1812 karakter, `kdvBlok` yok).
 
+
+## Asama 4 basladi (14-15 Agu 2026) - veri sunucuya
+
+**Karar: veritabani Supabase.** Gerekce dayaniklilik - tek kisilik
+ekipte yedekleme disiplini en cok ihmal edilen sey. Kimlik zaten
+orada. Bedeli: veri yurt disinda, KVKK evraki gerekir. Kilitlenme
+yok, standart Postgres.
+
+**A4-1 sema tasarlandi:** dort tablo, kimlikler metin, birincil
+anahtar kullanici arti kimlik, para numeric on iki virgul iki,
+goruntu yolu semada YOK (K1), urunler kullaniciya ait (K4). Ortak
+havuz tablo degil goruntu.
+
+**A4-2 tablolar kuruldu ve RLS acildi.** Dogrulama on iki satir:
+dort tablo, dort politika hepsi using ve with check dolu, dort
+RLS acik, eski taslaktan sifir nesne.
+
+**Eski Temmuz taslagi veritabaninda FIILEN KURULUYDU** ve
+temizlendi - yirmi yedi nesne. Goc dosyalari supabase/arsiv/
+altina tasindi.
+
+**Bu turun dersi:** bir liste elle yazilirsa eksik olur ve bir
+desen metnin gercek bicimine karsi dogrulanmazsa yaniltir. Ayni
+aileden bes olay yasandi; sonuncusu sayim kapisinin kendisiydi ve
+kendi kosumunu haksiz RET etti (Kural 13/n). Cozum: listeyi
+bagimsiz kaynaktan uret, kapiyi ayni kaynaga karsi kos, sayimi
+bicimden bagimsiz yap.
+
+**Kanitlanmayan:** izolasyon canli sinanmadi - Kapi C, A4-3'te.
+
+Ayrinti: docs/asama4-on-kayit-2026-08-14.md,
+docs/asama4-sema-2026-08-14.md,
+docs/asama4-a2-kapanis-2026-08-15.md
 
 ## Blok 16 kapandi (14 Agu 2026) - TestFlight
 
