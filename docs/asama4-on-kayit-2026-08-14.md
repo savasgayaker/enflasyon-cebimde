@@ -135,3 +135,61 @@ Arsiv klasorune bir uyari dosyasi konur.
 
 **Ikinci karar: dosya adi zaman damgali bicime gecer.** Arac
 uyumu icin; ayni sozluksel sira sorununun tersini yasamamak icin.
+
+### S2 - Eski taslak veritabaninda FIILEN KURULU cikti
+
+Tarih: 15 Agu 2026, temizlik kosumundan once ilan edildi.
+
+S1 eski goc dosyalarini arsive tasimisti ve **hicbirinin
+uygulanmadigi varsayilmisti.** Dogrulama sorgusu bunun yanlis
+oldugunu olctu: eski tablolar veritabaninda duruyor.
+
+Kullanici tablosunda on uc satir, kategori tablosunda on bir
+satir, digerleri bos. RLS hepsinde acik.
+
+**Sayim uyarisi:** dogrulama sorgusu sekiz ad saydi cunku
+listesinde sekiz ad vardi. Arsiv **dokuz tablo** iceriyor; sorgu
+birini hic sormadi. Dusurme dokuzunu da kapsar. Bir sayac kendi
+listesini sayar - Kural 13 ailesi.
+
+**Tehlikeli olan bir tetikleyici:** auth kullanicisi
+olusturuldugunda eski kullanici tablosuna satir yaziyor ve iki
+sayim esit olculdu. Tabloyu once dusurmek yeni kullanici kaydini
+kirardi; sira tersine olmali.
+
+### S2/a - Ilk iki temizlik taslagi da kusurluydu
+
+**Birinci taslak fonksiyon adlarini elle yazmisti** ve ikisi
+arsivdeki gercek adlarla eslesmiyordu; ayrica on kadar fonksiyon
+listede hic yoktu. Silme ifadesi var olmayan adi sessizce yutar;
+oksuz fonksiyonlar kalirdi ve bazilari dusen tablolara
+basvurdugu icin cagrildiginda hata verirdi. Postgres fonksiyon
+govdelerini bagimlilik olarak izlemez.
+
+**Ikinci taslak listeyi arsivden uretti ama imzalari da uretti.**
+Imza cikarimi yorum icindeki parantezlere takiliyordu: bir
+fonksiyonun argüman satirinda parantezli bir aciklama vardi ve
+yakalama orada duruyordu. Uretilen imzaya ayrilmis bir sozcuk
+siziyor ve **sozdizimi hatasi betigi ortasinda durduruyordu** -
+tablolar hic dusmeden. Kismi temizlik en kotu sonuctur.
+
+**Duzeltme: imza hic uretilmez.** Postgres parantezsiz bicimi tek
+tanimli adlarda kabul eder ve arsivdeki adlarin hepsinin tek
+tanimli oldugu olculdu. Kapi ayrica parantezli imza ve supheli
+token arar.
+
+## Karar: eski taslak dusurulur
+
+Kullanilmiyorlar ve A4-1 kararlariyla celisiyorlar. Durmalari iki
+zarar veriyor: hangi semanin otorite oldugu belirsiz kaliyor ve
+gelecekte bir sorgu yanlis tabloyu okuyabiliyor.
+
+## Kaydedilen iki bilgi
+
+**Temmuz taslaginda havuz onayi alanlari vardi** - havuza katilim
+onayi ve onay zamani. Yeni semada yoklar. K3 havuzu ana ozellik
+sayiyor; **havuza veri gonderilmeden once onay tasarlanmalidir.**
+A4-5'e devredildi.
+
+**Sehir alani da vardi.** Bolgesel fiyat karsilastirmasi ileride
+gundeme gelebilir.
