@@ -273,3 +273,29 @@ kayda gecirilir.
 
 **Kapi E pazarliga kapalidir** ve on kayittaki Kapi C'nin canli
 karsiligidir.
+
+### S3 - Damga istege bagli olur, sema surumu birde kalir
+
+Tarih: 15 Agu 2026, A4-3a kosumundan once ilan edildi.
+
+A4-3 kararlari damganin **eklenecegini** yaziyordu ama tipini
+belirtmemisti. Karar: **istege bagli alan, sema surumu birde
+kalir, goc gerekmez.**
+
+Gerekce olgusal durustluktur. Uc durum vardir ve ucu farklidir:
+
+    tanimsiz   bilinmiyor - kayit damga eklenmeden once yazildi
+    yanlis     gonderilmedi - denendi ve olmadi, ya da denenmedi
+    dogru      gonderildi
+
+**Zorunlu alan yapip eski kayitlara yanlis yazmak, goc aninda bir
+olgu uydurmak olurdu.** O kayitlarin sunucuya gidip gitmedigi
+bilinmiyor - cunku sunucuya yazma daha once hic yoktu.
+
+Ayrim ileride ise yarar: cevrimdisi kuyruk yazildiginda
+gonderilmemis kayitlar taranacak ve tanimsiz olanlarin da
+gonderilmesi gerekecek. Ikisi ayni kovaya konsaydi bu ayrim
+kaybolurdu.
+
+**Ikinci alan: gonderim zamani.** Basarili gonderimde yazilir.
+Tanisiz kalabilir ve bu normaldir.
