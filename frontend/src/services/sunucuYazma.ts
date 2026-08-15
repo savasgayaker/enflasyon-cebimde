@@ -57,28 +57,115 @@ export interface YazmaSonucu {
   hata?: string;
 }
 
-const ISKELE = 'A4-3b ikinci yari bekleniyor: govde yazilmadi';
+/** Sayiya cevir; bos veya gecersizse null. */
+function sayi(x: unknown): number | null {
+  if (x === null || x === undefined) return null;
+  const n = Number(x);
+  return Number.isFinite(n) ? n : null;
+}
 
+/** Bos dizeyi null'a cevir; ham ad ve etiketler icin. */
+function metin(x: unknown): string | null {
+  if (x === null || x === undefined) return null;
+  const t = String(x);
+  return t.length > 0 ? t : null;
+}
+
+/**
+ * Fisi, urunlerini ve fiyat kayitlarini sunucuya gonderir.
+ *
+ * Sira onemlidir: urunler once, sonra fis, en son fiyat
+ * kayitlari - sonuncusu ikisine de basvurur.
+ *
+ * Herhangi bir adim basarisiz olursa **fis gonderilmis
+ * sayilmaz.** Yarim gonderimi basarili saymak sessiz veri
+ * kaybidir; yeniden gonderme upsert sayesinde guvenlidir.
+ *
+ * GORUNTU YOLU GONDERILMEZ (K1): sunucu goruntu gormez.
+ */
 export async function fisiGonder(
-  _yazici: Yazici,
-  _kullanici: string | null,
-  _fis: YazilacakFis,
-  _urunler: YazilacakUrun[],
-  _kayitlar: YazilacakKayit[],
-  _simdi: string,
+  yazici: Yazici,
+  kullanici: string | null,
+  fis: YazilacakFis,
+  urunler: YazilacakUrun[],
+  kayitlar: YazilacakKayit[],
+  simdi: string,
 ): Promise<YazmaSonucu> {
-  throw new Error(ISKELE);
+  if (!kullanici) {
+    return { gonderildi: false, hata: 'oturum yok' };
+  }
+
+  try {
+    if (urunler.length > 0) {
+      await yazici.upsert(
+        'urunler',
+        urunler.map((u) => ({
+          kullanici,
+          kimlik: u.id,
+          ad: u.name,
+          kategori: metin(u.categoryId),
+          barkod: metin(u.barcode),
+        })),
+      );
+    }
+
+    await yazici.upsert('fisler', [
+      {
+        kullanici,
+        kimlik: fis.id,
+        magaza: fis.storeName,
+        tarih: fis.date,
+        toplam: sayi(fis.totalAmount) ?? 0,
+      },
+    ]);
+
+    if (kayitlar.length > 0) {
+      await yazici.upsert(
+        'fiyat_kayitlari',
+        kayitlar.map((k) => ({
+          kullanici,
+          kimlik: k.id,
+          urun_kimligi: k.productId ?? null,
+          fis_kimligi: k.receiptId,
+          urun_adi: metin(k.productName),
+          birim_fiyat: sayi(k.unitPrice),
+          miktar: sayi(k.quantity),
+          toplam_fiyat: sayi(k.totalPrice),
+          tarih: k.date,
+          birim: metin(k.unit),
+          kdv_orani: sayi(k.vatRate),
+          satir_tipi: k.satirTipi ?? 'urun',
+          ham_etiket: metin(k.hamEtiket),
+        })),
+      );
+    }
+
+    return { gonderildi: true, gonderimZamani: simdi };
+  } catch (e) {
+    return { gonderildi: false, hata: String(e) };
+  }
 }
 
 /**
  * Fisi ve kayitlarini siler. URUNLERE DOKUNMAZ (S4): katalog
  * fisler arasi paylasilir ve silmek baska fislerin kayitlarini
  * bozardi.
+ *
+ * Sira: once bagimli kayitlar, sonra fis.
  */
 export async function fisiSil(
-  _yazici: Yazici,
-  _kullanici: string | null,
-  _fisId: string,
+  yazici: Yazici,
+  kullanici: string | null,
+  fisId: string,
 ): Promise<YazmaSonucu> {
-  throw new Error(ISKELE);
+  if (!kullanici) {
+    return { gonderildi: false, hata: 'oturum yok' };
+  }
+  try {
+    await yazici.sil('fiyat_kayitlari', kullanici, 'fis_kimligi', fisId);
+    await yazici.sil('fisler', kullanici, 'kimlik', fisId);
+    return { gonderildi: true };
+  } catch (e) {
+    return { gonderildi: false, hata: String(e) };
+  }
 }
