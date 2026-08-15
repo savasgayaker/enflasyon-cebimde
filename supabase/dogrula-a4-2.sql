@@ -1,59 +1,29 @@
--- A4-2 dogrulama: tablolar, RLS ve politikalar
--- Panelde SQL Editor'da calistirilir, sonuc buraya getirilir.
+-- A4-2 temizlik sonrasi dogrulama
+-- Listeler ARSIVDEN URETILDI; elle yazilmadi.
+-- Bir sayac kendi listesini sayar - onceki sorgu bir tabloyu
+-- hic sormamisti.
 
--- 1. Dort tablo olustu mu
-select 'TABLOLAR' as kontrol, table_name
+select 'YENI_TABLO' as ne, table_name as ad, '' as ek
 from information_schema.tables
-where table_schema = 'public'
+where table_schema='public'
   and table_name in ('fisler','urunler','fiyat_kayitlari','kullanici_ayarlari')
-order by table_name;
-
--- 2. Satir duzeyi guvenlik acik mi (dordu de true olmali)
-select 'RLS' as kontrol, tablename, rowsecurity
-from pg_tables
-where schemaname = 'public'
-  and tablename in ('fisler','urunler','fiyat_kayitlari','kullanici_ayarlari')
-order by tablename;
-
--- 3. Politikalar - her tabloda bir tane, hem using hem with check
-select 'POLITIKA' as kontrol, tablename, policyname, cmd,
-       qual is not null as using_var,
-       with_check is not null as with_check_var
-from pg_policies
-where schemaname = 'public'
-order by tablename;
-
--- 4. Para tipleri dogru mu
-select 'TIP' as kontrol, table_name, column_name, data_type,
-       numeric_precision, numeric_scale
-from information_schema.columns
-where table_schema = 'public'
-  and table_name in ('fisler','fiyat_kayitlari')
-  and data_type = 'numeric'
-order by table_name, column_name;
-
--- 5. K1: goruntu yolu alani var mi (BOS DONMELI)
-select 'K1_IHLALI' as kontrol, table_name, column_name
-from information_schema.columns
-where table_schema = 'public'
-  and (column_name ilike '%image%' or column_name ilike '%goruntu%');
-
--- 6. Eski taslak tablolari sizmis mi (BOS DONMELI)
-select 'ESKI_TASLAK' as kontrol, table_name
+union all
+select 'ESKI_TABLO_KALDI', table_name, ''
 from information_schema.tables
-where table_schema = 'public'
-  and table_name in ('canonical_products','product_aliases',
-                     'normalization_runs','stores','store_aliases',
-                     'categories','receipts','receipt_items');
-
--- 7. Birincil anahtarlar kullanici arti kimlik mi
-select 'ANAHTAR' as kontrol, tc.table_name,
-       string_agg(kcu.column_name, ' + ' order by kcu.ordinal_position) as anahtar
-from information_schema.table_constraints tc
-join information_schema.key_column_usage kcu
-  on tc.constraint_name = kcu.constraint_name
-where tc.table_schema = 'public'
-  and tc.constraint_type = 'PRIMARY KEY'
-  and tc.table_name in ('fisler','urunler','fiyat_kayitlari','kullanici_ayarlari')
-group by tc.table_name
-order by tc.table_name;
+where table_schema='public' and table_name in ('canonical_products', 'categories', 'normalization_runs', 'product_aliases', 'receipt_items', 'receipts', 'store_aliases', 'stores', 'users')
+union all
+select 'ESKI_FONKSIYON_KALDI', p.proname, ''
+from pg_proc p join pg_namespace n on n.oid=p.pronamespace
+where n.nspname='public' and p.proname in ('dormant_warning_list', 'handle_auth_user_updated', 'handle_new_auth_user', 'mark_dormant_accounts', 'pool_coverage', 'pool_min_observations', 'pool_min_users', 'pool_prices', 'provider_from_meta', 'purge_deleted_accounts', 'set_updated_at', 'sync_consent_pool_at')
+union all
+select 'ESKI_TETIKLEYICI_KALDI', trigger_name, event_object_table
+from information_schema.triggers
+where trigger_name in ('on_auth_user_created', 'on_auth_user_updated', 'receipt_items_set_updated_at', 'receipts_set_updated_at', 'users_consent_pool_at', 'users_set_updated_at')
+union all
+select 'POLITIKA', tablename || '.' || policyname,
+       (qual is not null)::text || '/' || (with_check is not null)::text
+from pg_policies where schemaname='public'
+union all
+select 'RLS', tablename, rowsecurity::text
+from pg_tables where schemaname='public'
+order by 1, 2;
