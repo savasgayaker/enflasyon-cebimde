@@ -479,3 +479,38 @@ olcum aleti degil, olculen modulun tip beyanidir.
 
 Ayrica girinti duzeltmesi: urun biriktirme blogu uclu deyimin
 devam girintisini almisti; deyim duzeyine cekilir.
+
+### S8 - Silme cevrimici bir islemdir
+
+Tarih: 15 Agu 2026, silme kosumundan once ilan edildi.
+
+Karar 2 silmede de damga mantigini ongoruyordu. **Capa okumasi
+bunun imkansiz oldugunu gosterdi:** damganin yazilacagi nesne
+silme aninda ortadan kalkiyor. Gonderilmemis bir silmeyi
+hatirlayacak yer yok.
+
+Uc yol olculdu:
+
+**Once sunucu, sonra yerel.** Sunucudan silinemezse cihazdan da
+silinmez ve kullanici uyarilir. Iki taraf asla ayrismaz; bedeli
+cevrimdisiyken silememektir.
+
+**Once yerel, sonra sunucu.** Cevrimdisiyken calisir ama sunucuda
+oksuz kayit kalir ve bunu hatirlayacak yer yoktur - **Karar 2'nin
+yasakladigi sessiz ayrisma.**
+
+**Mezar tasi.** Silinen kimlik bir listede tutulur ve kuyrukla
+supurulur. Dogru cozum ama kuyruk mimarisi bu turda kapsam
+disidir.
+
+**Karar: once sunucu, sonra yerel.**
+
+**Karar 1 ile celismez cunku silme kaydetmenin aynasi degildir.**
+Kaydetme veri **uretir**; engellenirse kullanici markette fisini
+kaybeder ve o an bir daha gelmez. Silme veri **yok eder**;
+ertelenmesi kimseyi hicbir seyden mahrum birakmaz. Kullanici
+internete kavustugunda siler.
+
+Asimetri budur ve Karar 1'in gerekcesi silmeye tasinmaz.
+
+**Mezar tasi cozumu cevrimdisi kuyruk turuna devredilir.**
