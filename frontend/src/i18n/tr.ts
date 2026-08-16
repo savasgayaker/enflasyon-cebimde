@@ -12,6 +12,7 @@ export const tr = {
   done: 'Tamam',
   loading: 'Yükleniyor...',
   error: 'Hata',
+  silmeSunucuHatasi: 'Fis sunucudan silinemedi. Baglantinizi kontrol edip tekrar deneyin.',
   success: 'Başarılı',
   search: 'Ara',
   filter: 'Filtrele',

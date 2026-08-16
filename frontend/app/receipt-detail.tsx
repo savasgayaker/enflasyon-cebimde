@@ -15,6 +15,9 @@ import { useAppStore } from '../src/store/useAppStore';
 import { colors, spacing, borderRadius, typography, shadows } from '../src/constants/theme';
 import { tr } from '../src/i18n/tr';
 import { categories } from '../src/constants/categories';
+import { fisiSil } from '../src/services/sunucuYazma';
+import { supabaseYazici } from '../src/services/supabaseYazici';
+import { anonimOturumuGarantile } from '../src/services/supabase';
 
 export default function ReceiptDetail() {
   const router = useRouter();
@@ -50,8 +53,22 @@ export default function ReceiptDetail() {
         {
           text: tr.delete,
           style: 'destructive',
-          onPress: () => {
+          onPress: async () => {
             if (receipt) {
+              // A4-3c/S8: SILME CEVRIMICI ISLEMDIR. Sunucudan
+              // silinemeyen fis cihazdan da silinmez; aksi halde
+              // sunucuda oksuz kayit kalir ve hatirlayacak yer yoktur.
+              let kimlik: string | null = null;
+              try {
+                kimlik = await anonimOturumuGarantile();
+              } catch {
+                kimlik = null;
+              }
+              const silmeSonucu = await fisiSil(supabaseYazici, kimlik, receipt.id);
+              if (!silmeSonucu.gonderildi) {
+                Alert.alert(tr.error, tr.silmeSunucuHatasi);
+                return;
+              }
               deletePriceRecordsByReceipt(receipt.id);
               deleteReceipt(receipt.id);
               router.back();
