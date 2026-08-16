@@ -514,3 +514,50 @@ internete kavustugunda siler.
 Asimetri budur ve Karar 1'in gerekcesi silmeye tasinmaz.
 
 **Mezar tasi cozumu cevrimdisi kuyruk turuna devredilir.**
+
+## Kapi E olcum tasarimi - 15 Agu 2026, kosumdan once
+
+Iki anonim kullanici olusturulur, her biri kendi fisini yazar,
+sonra birbirine dokunmayi dener.
+
+### Uc farkli dogru sinyal
+
+**Tek tip hata bekleyen bir kapi iki denemede yanlis yesil
+verirdi.** Uc inkarin uc ayri isareti vardir:
+
+**Okuma inkari hata degil, BOS SONUCTUR.** Satir duzeyi guvenlik
+okumayi filtreler; baskasinin fisini okumaya calisan istek
+hatasiz bos liste alir.
+
+**Bu yuzden pozitif kontrol sarttir:** kullanicinin kendi fisini
+okuyabildigi ayrica olculur. Aksi halde **hicbir seyin
+okunamadigi bir durum da izolasyon sanilirdi** - baglanti kopuk
+olsa bile sifir satir doner.
+
+**Silme inkari da sessizdir.** Baskasinin fisini silme denemesi
+hata vermeden sifir satir etkiler. Kanit hata almak degil,
+**denemeden sonra fisin hala duruyor olmasidir** - sahibi kendi
+oturumuyla bakip gormelidir.
+
+**Yazma inkari ise gercek hatadir.** Baskasinin kimligiyle satir
+yazmaya calisan istek yazma kontrolu nedeniyle reddedilir ve hata
+doner. Burada hata beklemek dogrudur.
+
+### Anahtar secimi
+
+Olcum **herkese acik anahtarla** yapilir. Gizli anahtar satir
+duzeyi guvenligi baypas eder ve olcumu anlamsiz kilardi; o anahtar
+bu betige hic girmez.
+
+### Artiklar
+
+Iki anonim hesap ve test satirlari olusur. Satirlar sonda her
+kullanicinin kendi oturumuyla silinir; hesaplar panelden
+temizlenir.
+
+### Kabul
+
+Alti kontrol: iki pozitif (herkes kendi fisini gorur), iki okuma
+inkari, bir yazma inkari, bir silme inkari.
+
+**Bir tanesi bile gecerse Kapi E RET'tir ve pazarliga kapalidir.**
