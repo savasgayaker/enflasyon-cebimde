@@ -156,6 +156,41 @@ YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 Önceki: `73f7177c…fba888` (1812 karakter, `kdvBlok` yok).
 
 
+## A4-3 kapandi (15 Agu 2026) - kayitlar sunucuya gidiyor
+
+Fis kaydedilince fis, urunler ve fiyat kayitlari sunucuya
+yaziliyor; fis silinince sunucudan da siliniyor. **Cihaz artik
+tek kopya degil.**
+
+**Canli olculenler:** bir fis okutuldu ve sunucuda bir fis, sekiz
+urun, on iki kayit goruldu. Fis silindi, kayitlar gitti, sekiz
+urun kaldi - S4 dogrulandi. Izolasyon iki anonim kullaniciyla
+alti kontrolde yesil.
+
+**M7-A'nin bekleyen kaniti kapandi:** birim ve KDV alanlari on
+iki kaydin on ikisinde de doluydu. Alan zincirde akiyordu ama
+cihazda fiilen dolu geldigi hic olculmemisti.
+
+**ACIK BORC - Kapi F:** oturumsuz kayit olculmedi. Fis okuma
+internet gerektirdigi icin senaryo bugunku mimaride olusmuyor -
+ama olusmadigini soylemek olculdugunu soylemek degildir. Birim
+duzeyinde kanit var, uctan uca yok.
+
+**Turun dersi:** capa yapinin ACILISINA degil KAPANISINA baglanir
+(Kural 13/o). Bagla yamasi uc kez RET aldi.
+
+**Yapisal duzeltme:** capa dogrulamasi ilan commit'inden ONCE
+kosar. Iki kez sapma ilan edildi sonra yama dustu ve asili bir
+sapma kaydi kaldi.
+
+**Bir sayim daha yakalandi:** kapanisin ilk taslagi sapma sayisini
+bir fazla yazmisti ve kapisi madde saymadigi icin kendi hatasini
+gecirirdi. Sayi artik on kayittan olculuyor.
+
+Yedi ilan edilmis sapma: S3 ile S8.
+
+Ayrinti: docs/asama4-a3-kapanis-2026-08-15.md
+
 ## Asama 4 basladi (14-15 Agu 2026) - veri sunucuya
 
 **Karar: veritabani Supabase.** Gerekce dayaniklilik - tek kisilik
