@@ -156,6 +156,38 @@ YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 Önceki: `73f7177c…fba888` (1812 karakter, `kdvBlok` yok).
 
 
+## Asama 5 karari (23 Agu 2026) - kategori ve enflasyon hesabi
+
+**K6 - kategoriler TUIK sinifi olur.** On bir kategori cok genis;
+agirlik yalnizca TUIK kodlarina tanimli. Iki alan: madde kodu
+(yedi hane, somut, model icin kolay) ve sinif kodu (dort hane,
+agirligi tasir). Ince sakla kaba hesapla - hesap seviyesi
+sonradan degistirilebilir (K4/2).
+
+**Olculen kapsama: yirmi bir sinif, sepetin yaklasik yuzde otuzu.**
+Bu sayi sabit degil, BUYUYEN bir olcu - lokanta ve mobilya
+ileride eklenebilir.
+
+**K7 - ad kalir, kapsama gorunur, aciklama erisilebilir.** Ekranda
+kisisel enflasyon yazar; kapsam genisleyecegi icin ad
+degistirilmez. AMA kapsama satiri ana ekranda kalir - aciklama
+sayfasi tek basina yeterli degildir cunku cogu kullanici onu hic
+acmaz. Mekanizma M6-D'de zaten var; TUIK agirliklariyla yeniden
+anlamlandirilir.
+
+**K8 - model onerir, kullanici duzeltir, surum damgalanir.** Surum
+damgasi zorunlu (K4/1). Kullanici karari surumu yener. Iki cop
+kutusu sinifi icin kural: emin degilsen bos birak.
+
+**K9 - sabit donem, eslesen urun.** Iki yol elendi: gunluk hiza
+bolmek (ayni fiyat degisimi alisveris sikligina gore on kat farkli
+sonuc verir - fiyatlar sicrar, akmaz) ve kategori medyan urunu
+(ikame yanliligi). Secilen: ay ay karsilastirma, urun KENDI
+GECMISIYLE eslesir, sinif orani eslesen ciftlerin medyani, kisisel
+oran veri bulunan siniflar uzerinden yeniden normalize edilir.
+
+Ayrinti: docs/asama5-kategori-karari-2026-08-23.md
+
 ## A4-3 kapandi (15 Agu 2026) - kayitlar sunucuya gidiyor
 
 Fis kaydedilince fis, urunler ve fiyat kayitlari sunucuya
