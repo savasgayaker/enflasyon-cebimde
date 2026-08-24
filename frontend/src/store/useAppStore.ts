@@ -34,12 +34,40 @@ export interface Receipt {
   gonderimZamani?: string;
 }
 
+/** TUIK etiketinin kaynagi; serbest metin DEGIL (Kapi E). */
+export type TuikKaynak = 'model' | 'kural' | 'kullanici';
+
 export interface Product {
   id: string;
   name: string;
   categoryId: string;
   barcode?: string;
   createdAt: string;
+  /**
+   * TUIK siniflandirmasi (A5-1, K6 ile K8).
+   *
+   * Dordu de istege baglidir: tanimsiz BILINMIYOR demektir -
+   * kayit bu alanlar eklenmeden once yazildi. Eski kayitlara
+   * bir deger yazmak olgu uydurmak olurdu.
+   *
+   * Madde kodu somuttur ve model icin kolaydir; sinif kodu
+   * agirligi tasir ve hesap orada yapilir. Sinif maddenin ilk
+   * dort hanesidir - ince sakla, kaba hesapla (K4/2).
+   */
+  /** Yedi haneli TUIK madde kodu. */
+  tuikMaddeKodu?: string;
+  /** Dort haneli TUIK sinif kodu; agirligi tasir. */
+  tuikSinifKodu?: string;
+  /**
+   * Etiketi kim koydu.
+   *
+   * K8: kullanici karari surumu YENER. Bu alan olmadan yeni
+   * surum kosumu kullanici duzeltmesini ayirt edemez ve uzerine
+   * yazar - surum damgasi tek basina yetmez.
+   */
+  tuikKaynak?: TuikKaynak;
+  /** Etiketin hangi kural surumuyle konuldugu. */
+  tuikSurum?: number;
 }
 
 export interface PriceRecord {
