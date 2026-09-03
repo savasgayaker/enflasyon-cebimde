@@ -64,7 +64,10 @@ const FIS: YazilacakFis = {
   createdAt: '2026-08-08T10:00:00.000Z',
 };
 const URUNLER: YazilacakUrun[] = [
-  { id: 'u1', name: 'SAMPUAN', categoryId: 'kisisel' },
+  { id: 'u1', name: 'SAMPUAN', categoryId: 'kisisel',
+    tuikMaddeKodu: '1312001', tuikSinifKodu: '1312',
+    tuikKaynak: 'model', tuikSurum: 1 },
+  { id: 'u2', name: 'ETIKETSIZ URUN', categoryId: 'diger' },
 ];
 const KAYITLAR: YazilacakKayit[] = [
   { id: 'k1', productId: 'u1', receiptId: 'f1', productName: 'SAMPUAN',
@@ -158,6 +161,31 @@ async function calis() {
     const s = await fisiSil(y, 'kul1', 'f1');
     return [s.gonderildi, silmeler.map((x) => x.tablo)];
   }, [true, ['fiyat_kayitlari', 'fisler']]);
+
+  await kontrol('Y13 TUIK alanlari gonderilir', async () => {
+    const { y, cagrilar } = sahteYazici();
+    await fisiGonder(y, 'kul1', FIS, URUNLER, KAYITLAR, SIMDI);
+    const u = cagrilar.find((c) => c.tablo === 'urunler')!.satirlar;
+    const s1 = u.find((x) => x.kimlik === 'u1')!;
+    return [s1.tuik_madde_kodu, s1.tuik_sinif_kodu,
+            s1.tuik_kaynak, s1.tuik_surum];
+  }, ['1312001', '1312', 'model', 1]);
+
+  // Y14: anahtarin VAR OLDUGU ayrica olculur. JSON karsilastirmasi
+  // undefined ile null'u ayirt etmez; anahtar hic uretilmese de
+  // deger karsilastirmasi gecerdi ve kapi bos kalirdi.
+  await kontrol('Y14 etiketsiz urunde anahtar var, deger null', async () => {
+    const { y, cagrilar } = sahteYazici();
+    await fisiGonder(y, 'kul1', FIS, URUNLER, KAYITLAR, SIMDI);
+    const u = cagrilar.find((c) => c.tablo === 'urunler')!.satirlar;
+    const s2 = u.find((x) => x.kimlik === 'u2')!;
+    return [
+      'tuik_madde_kodu' in s2, s2.tuik_madde_kodu,
+      'tuik_sinif_kodu' in s2, s2.tuik_sinif_kodu,
+      'tuik_kaynak' in s2, s2.tuik_kaynak,
+      'tuik_surum' in s2, s2.tuik_surum,
+    ];
+  }, [true, null, true, null, true, null, true, null]);
 
   console.log('');
   console.log('Toplam: ' + yesil + ' yesil kontrol, ' + kirmizi + ' kirmizi kontrol');

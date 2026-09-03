@@ -31,6 +31,14 @@ export interface YazilacakUrun {
   categoryId?: string | null;
   barcode?: string | null;
   createdAt?: string;
+  /** TUIK madde kodu; yedi hane, bos olabilir (A5-1). */
+  tuikMaddeKodu?: string | null;
+  /** TUIK sinif kodu; dort hane, agirligi tasir. */
+  tuikSinifKodu?: string | null;
+  /** Etiketi kim koydu: model, kural veya kullanici. */
+  tuikKaynak?: string | null;
+  /** Etiketin kural surumu. */
+  tuikSurum?: number | null;
 }
 
 export interface YazilacakKayit {
@@ -105,6 +113,10 @@ export async function fisiGonder(
           ad: u.name,
           kategori: metin(u.categoryId),
           barkod: metin(u.barcode),
+          tuik_madde_kodu: metin(u.tuikMaddeKodu),
+          tuik_sinif_kodu: metin(u.tuikSinifKodu),
+          tuik_kaynak: metin(u.tuikKaynak),
+          tuik_surum: sayi(u.tuikSurum),
         })),
       );
     }
