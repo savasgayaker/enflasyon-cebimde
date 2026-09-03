@@ -156,6 +156,37 @@ YAZILIR. Güncel üretim: `ba68058f…8baf08` (2422 karakter, `kdvBlok` var).
 Önceki: `73f7177c…fba888` (1812 karakter, `kdvBlok` yok).
 
 
+## A5-1 kapandi (23 Agu 2026) - TUIK alanlari semada
+
+Dort istege bagli alan cihazda ve sunucuda: madde kodu, sinif
+kodu, kaynak, surum. Sema surumu birde kaldi. Yazma modulu 14/0.
+
+**Kapi C kullanicinin panel gozlemidir** - on uc satir bildirildi
+ve cevap anahtariyla ortustu. Sunucuya yalniz kullanicinin paneli
+erisiyor; gizli anahtar hicbir yere konulmadi ve depodan sorgu
+kosulamaz. Blok on uc, on alti ve A4-3 ile ayni kanit sinifi.
+
+**Kaynak damgasi kesfin getirdigi bir gerekliliktir.** Karar
+belgesi surum damgasini sart kosuyordu ama kaynagi atlamisti;
+kullanici duzeltmesi ayirt edilemezse yeni surum kosumu uzerine
+yazar. Deger kisitli - serbest metin olsaydi kural uygulanamazdi.
+
+**Turun dersi - bos kapi:** etiketsiz urun kontrolu ilk taslakta
+yalniz degeri karsilastiriyordu; kullanilan karsilastirma tanimsiz
+ile bosu ayirt etmiyor ve modul anahtari hic uretmese bile kapi
+gecerdi. Bir kapi, olcmesi gereken seyi olcmuyorsa yesil olmasi
+bir sey kanitlamaz.
+
+**Ikinci ders:** kapanisin ilk taslagi panel sonucunu olmus sayip
+yaziyordu ama o cikti oturum kaydina girmemisti; durduruldu.
+Kapanis, dayandigi olcumun kayda girmesini bekler.
+
+**Alanlar BOS.** M3 TUIK kodu uretmiyor; doldurma prompt turunun
+isi.
+
+Ayrinti: docs/a5-1-on-kayit-2026-08-23.md,
+docs/a5-1-kapanis-2026-08-23.md
+
 ## Asama 5 karari (23 Agu 2026) - kategori ve enflasyon hesabi
 
 **K6 - kategoriler TUIK sinifi olur.** On bir kategori cok genis;
