@@ -19,7 +19,8 @@ RUN pip install --no-cache-dir -r requirements-runtime.txt
 # auth ve kdv_mutabakat modüllerini içe aktarıyor — biri eksik kalırsa kap sorunsuz DERLENİR,
 # sonra ilk çalıştırmada ModuleNotFoundError ile ölür. Yeni bir .py dosyası
 # eklenirse bu satıra da eklenmeli.
-COPY auth.py kdv_mutabakat.py receipt_fields.py receipt_prompt.py server.py ./
+COPY auth.py kdv_mutabakat.py receipt_fields.py receipt_prompt.py server.py tuik_esleme.py ./
+COPY data/tuik-sepeti.json ./data/
 
 # Derleme anında duman testi: yukarıdaki listede eksik bir modül varsa BUILD
 # BURADA PATLAR. Aksi halde hata, kap çalıştırıldığında ortaya çıkardı — yani
